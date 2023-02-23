@@ -19,6 +19,9 @@ import { Dashboard2Component } from './Components/Dhashboards/dashboard2/dashboa
 import { SideBar2Component } from './Components/Dhashboards/side-bar2/side-bar2.component';
 import { DashboardTasksComponent } from './Components/Dossier/manageTasks/dashboard-tasks/dashboard-tasks.component';
 import { TaskComponent } from './Components/Dossier/manageTasks/task/task.component';
+import { TodoDComponent } from './Components/Dossier/manageTasks/todo-d/todo-d.component';
+import { TreeViewModule } from '@progress/kendo-angular-treeview';
+
 
 
 
@@ -32,7 +35,8 @@ import { TaskComponent } from './Components/Dossier/manageTasks/task/task.compon
     Dashboard2Component,
     SideBar2Component,
     DashboardTasksComponent,
-    TaskComponent
+    TaskComponent,
+    TodoDComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +49,7 @@ import { TaskComponent } from './Components/Dossier/manageTasks/task/task.compon
     PopupModule,
     LayoutModule,
     IndicatorsModule,
+    TreeViewModule,
 
   ],
   providers: [],
