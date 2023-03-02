@@ -20,14 +20,14 @@
     font-family: system-ui; 
  }
 .nav-list-item:hover {
-    background-color: #aba8a4;
+    background-color: rgba(73, 91, 233,0.2);
  }
 .nav-list-item  span{
-    color: rgb(255, 255, 255);
+    color: #3899DD;
     padding: 10px 10px 10px 20px;
     margin-right: 10px;
 }
 *{
      text-decoration: none;
-     color: white;
+     color: #3899DD;
  }

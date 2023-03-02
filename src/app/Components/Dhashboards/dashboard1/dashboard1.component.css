@@ -18,20 +18,8 @@ app-side-bar1{
     width:50px;
     margin-top: 3.5rem;
     height: calc(100vh - 3.5rem);
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-    background-color:#342156;
-    border-top: 1px solid;
-    overflow-x:hidden ;
-    white-space: nowrap;
-    transition: width 250ms ease-in ;
-}
-app-side-bar2{
-    height: calc(100vh - 3.5rem);
-    position: fixed;
-    width:100;
-    height: calc(100vh - 3.5rem);
-    box-shadow: 4px 5px   10px rgba(0,0,0,0.5);
-    background-color:#5e5d60;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+    background-color: #3899DD  ;
     border-top: 1px solid;
     overflow-x:hidden ;
     white-space: nowrap;

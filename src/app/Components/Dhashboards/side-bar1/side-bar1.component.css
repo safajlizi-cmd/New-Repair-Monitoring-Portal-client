@@ -1,6 +1,6 @@
 
 .side-nav-content{
-   color:#342156;
+   color:  #3899DD  ;
    width: 60px;
    margin-right: 10px;
    margin-left: 0px;
@@ -22,9 +22,9 @@
 }
 
 .nav-list-item:hover {
-   background-color: #4b453d;
+   background-color: #979595;
    border-radius:50%; 
-   border: solid 1px white;
+   border: solid 1px #c8c8c8;
 
 
 }

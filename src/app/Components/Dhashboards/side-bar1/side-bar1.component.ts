@@ -1,4 +1,5 @@
 import { Component ,Input} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar1',
@@ -8,8 +9,16 @@ import { Component ,Input} from '@angular/core';
 export class SideBar1Component {
  
   @Input() sideNavStatus:boolean=false
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+  }
+  gotoDashboard(){
+    this.router.navigate(['Dashboard'])
+
+  }
+  gotoHome(){
+    this.router.navigate(['Home'])
+
   }
 }
