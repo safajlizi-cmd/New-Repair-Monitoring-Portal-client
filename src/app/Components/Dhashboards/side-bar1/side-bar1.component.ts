@@ -14,11 +14,11 @@ export class SideBar1Component {
   ngOnInit(): void {
   }
   gotoDashboard(){
-    this.router.navigate(['Dashboard'])
+    this.router.navigate(['/Dashboard/Dossiers'])
 
   }
   gotoHome(){
-    this.router.navigate(['Home'])
+    this.router.navigate(['/Dashboard/Home'])
 
   }
 }

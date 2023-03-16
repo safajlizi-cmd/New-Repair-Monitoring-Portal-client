@@ -14,15 +14,20 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 import { IconsModule } from "@progress/kendo-angular-icons";
 import { NavigationModule } from "@progress/kendo-angular-navigation";
 import { LoginComponent } from './Components/Login/login/login.component';
-import { Dashboard1Component } from './Components/Dhashboards/dashboard1/dashboard1.component';
-import { Dashboard2Component } from './Components/Dhashboards/dashboard2/dashboard2.component';
-import { SideBar2Component } from './Components/Dhashboards/side-bar2/side-bar2.component';
-import { DashboardTasksComponent } from './Components/Dossier/manageTasks/dashboard-tasks/dashboard-tasks.component';
-import { TaskComponent } from './Components/Dossier/manageTasks/task/task.component';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
-import { HomeComponent } from './Components/home/home/home.component';
 import { GuideComponent } from './Components/home/guide/guide.component';
-
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
+import { GridModule, ToolbarComponent } from '@progress/kendo-angular-grid';
+import { ListViewModule } from '@progress/kendo-angular-listview';
+import { LabelModule } from '@progress/kendo-angular-label';
+import { CommonModule } from "@angular/common";
+import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
+import { SideNavComponent } from './Components/Dhashboards/side-nav/side-nav.component';
+import { PagerModule } from '@progress/kendo-angular-pager';
+import { Dashboard2Component } from 'src/app/Components/Dhashboards/dashboard2/dashboard2.component';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { HttpClientModule } from '@angular/common/http';
+import { ManageProfileComponent } from './Components/Profile/manage-profile/manage-profile.component';
 
 
 
@@ -32,14 +37,11 @@ import { GuideComponent } from './Components/home/guide/guide.component';
     NavbarComponent,
     SideBar1Component,
     LoginComponent,
-    Dashboard1Component,
-    Dashboard2Component,
-    SideBar2Component,
-    DashboardTasksComponent,
-    TaskComponent,
-    HomeComponent,
     GuideComponent,
-
+    SideNavComponent,
+    Dashboard2Component,
+    ManageProfileComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,16 @@ import { GuideComponent } from './Components/home/guide/guide.component';
     LayoutModule,
     IndicatorsModule,
     TreeViewModule,
+    FormsModule,
+    GridModule,
+    ListViewModule,
+    LabelModule ,
+    CommonModule,
+    ReactiveFormsModule,
+    DateInputsModule,
+    PagerModule,
+    DialogsModule,
+    HttpClientModule,
 
   ],
   providers: [],

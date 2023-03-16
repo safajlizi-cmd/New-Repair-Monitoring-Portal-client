@@ -1,0 +1,26 @@
+
+
+kendo-tabstrip{
+    width: 80%;
+    height: 100%;
+  
+}
+ng-template{
+    width: 100%;
+}
+
+
+  .my-tabstrip {
+    background-color: #ffffff;
+  }
+ 
+.my-custom-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:  system-ui; 
+    font-weight: bold;
+    font-size: 16px;
+    width:150px ;
+    color: rgb(94, 90, 90);
+  }

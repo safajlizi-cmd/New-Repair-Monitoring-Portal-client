@@ -6,12 +6,14 @@ import {
   AfterViewInit,
   ElementRef,
 } from "@angular/core";
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements AfterViewInit {
+
   @ViewChild("anchor", { static: false })
   public anchor: ElementRef<HTMLElement> | undefined;
 
@@ -25,7 +27,7 @@ export class NavbarComponent implements AfterViewInit {
     this.show = !this.show;
   }
 
-  constructor(private zone: NgZone) {}
+  constructor(private zone: NgZone , private router :Router) {}
 
   public ngAfterViewInit(): void {
     this.zone.runOutsideAngular(() => {
@@ -35,5 +37,9 @@ export class NavbarComponent implements AfterViewInit {
         }
       });
     });
+  }
+  logout(){
+        alert("pass")
+       this.router.navigate(['Login'])
   }
 }

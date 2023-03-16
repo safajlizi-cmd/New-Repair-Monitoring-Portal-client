@@ -3,4 +3,9 @@ body {
     padding: 0;
     text-decoration: none;
     list-style: none;
+    overflow-x: hidden;
+
+  }
+  :host {
+    --kendo-theme-primary: #007bff; /* Set the primary color to blue */
   }

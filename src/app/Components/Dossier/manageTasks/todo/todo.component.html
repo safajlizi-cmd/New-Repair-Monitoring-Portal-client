@@ -1,0 +1,65 @@
+    <div cdkDropListGroup>
+        <div class="row">
+            <div class="col-md-4">
+                <!-- todo-->
+                <div class="example-container">
+                    <h2 class="head-title">To do<span *ngIf="todo!.length >0">({{todo!.length}})</span></h2>
+
+                    <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
+                        <div class="example-box" *ngFor="let item of todo ; let i =index" cdkDrag  [cdkDragData]="item">{{item!.title}}
+                            <div class="box">
+                                <button kendoButton (click)="onUpdate(i)">
+                                    <kendo-icon name="edit"></kendo-icon>
+                                </button>
+                                <button kendoButton (click)="onDelete(i)">
+                                    <kendo-icon name="delete"></kendo-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!--inprogress-->
+                <div class="example-container">
+                    <h2 class="head-title">In Progress <span *ngIf="inprogress!.length >0">({{inprogress!.length}})</span>
+                    </h2>
+                    <div cdkDropList [cdkDropListData]="inprogress " class="example-list"
+                        (cdkDropListDropped)="drop($event)">
+                        <div class="example-box" *ngFor="let item of inprogress ;let i =index" cdkDrag  [cdkDragData]="item">{{item!.title}}
+                            <div class="box">
+                                <button kendoButton (click)="onUpdate(i)">
+                                    <kendo-icon name="edit"></kendo-icon>
+                                </button>
+                                <button kendoButton (click)="onDelete(i)">
+                                    <kendo-icon name="delete"></kendo-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!--done-->
+                <div class="example-container">
+                    <h2 class="head-title">Done<span *ngIf="done!.length >0">({{done!.length}})</span> </h2>
+
+                    <div cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
+                        <div class="example-box" *ngFor="let item of done; let i =index" cdkDrag  [cdkDragData]="item">{{item!.title}}
+                            <div class="box">
+                                <button kendoButton (click)="onUpdate(i)">
+                                    <kendo-icon name="edit"></kendo-icon>
+                                </button>
+                                <button kendoButton (click)="onDelete(i)">
+                                    <kendo-icon name="delete"></kendo-icon>
+                                </button>
+                                <kendo-icon name="check" style="color:green"></kendo-icon>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

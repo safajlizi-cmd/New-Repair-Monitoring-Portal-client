@@ -1,1 +1,27 @@
-<p>task works!</p>
+
+<kendo-tabstrip tabAlignment="center" class="my-tabstrip" >
+    <kendo-tabstrip-tab   [selected]="true">
+        <ng-template kendoTabTitle  class="title"let-title>
+            <div class="my-custom-header">To Do</div>
+          </ng-template>
+        <ng-template kendoTabContent>
+            <p>Tab 1 Content</p>
+        </ng-template>
+    </kendo-tabstrip-tab>
+    <kendo-tabstrip-tab >
+        <ng-template kendoTabTitle  class="title" let-title>
+            <div class="my-custom-header">In Progress</div>
+          </ng-template>
+        <ng-template kendoTabContent>
+            <app-task-list></app-task-list>
+        </ng-template>
+    </kendo-tabstrip-tab>
+    <kendo-tabstrip-tab >
+        <ng-template kendoTabTitle  class="title" let-title>
+            <div class="my-custom-header">Done</div>
+          </ng-template>
+        <ng-template kendoTabContent>
+            <p>Tab 3 Content</p>
+        </ng-template>
+    </kendo-tabstrip-tab>
+</kendo-tabstrip>

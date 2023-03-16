@@ -1,17 +1,5 @@
 <kendo-appbar position="top">
-      <kendo-appbar-section class="title">
-      <img src="./../../../../assets/images/logos/logoCED-Tran.png">
-    </kendo-appbar-section>
-
-      <kendo-appbar-spacer width="32px"></kendo-appbar-spacer>
-
-      <kendo-appbar-section class="appbar-items">
-        <ul>
-          <li><span>Home</span></li>
-          <li><span>Dossiers</span></li>
-          <li><span>Contacts</span></li>
-        </ul>
-      </kendo-appbar-section>
+     
 
       <kendo-appbar-spacer></kendo-appbar-spacer>
 
@@ -53,12 +41,12 @@
         <kendo-popup [anchor]="anchor.element" *ngIf="show" [margin]="margin">
           <div class="content">
             <ul>
-              <li class="search">Search...</li>
               <li><span>What's New</span></li>
               <li><span>About</span></li>
-              <li><span>Contacts</span></li>
               <li><span>Notifications</span></li>
               <li><span>My Profile</span></li>
+              <li (click)="logout()"><span>Logout</span></li>
+
             </ul>
           </div>
         </kendo-popup>

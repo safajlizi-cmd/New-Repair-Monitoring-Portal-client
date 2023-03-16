@@ -1,0 +1,66 @@
+<div class="example">
+    <form class="k-form" [formGroup]="form">
+        <h5>BOOK YOUR DREAM VACATION TODAY</h5>
+        <kendo-formfield>
+            <kendo-label [for]="fullName" text="Full Name"></kendo-label>
+            <kendo-textbox formControlName="fullName" [clearButton]="true" #fullName required></kendo-textbox>
+
+            <kendo-formerror>Error: Full Name is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+            <kendo-label [for]="email" text="Email"></kendo-label>
+            <kendo-textbox formControlName="email" [clearButton]="true" #email required></kendo-textbox>
+        </kendo-formfield>
+
+        <kendo-formfield>
+            <kendo-label [for]="dossierNumber" text="Phone Number"></kendo-label>
+            <kendo-maskedtextbox #dossierNumber formControlName="dossierNumber" [mask]="phoneNumberMask"
+                [value]="phoneNumberValue"></kendo-maskedtextbox>
+        </kendo-formfield>
+
+        <div class="wrap">
+            <kendo-formfield class="arrival-date">
+                <kendo-label [for]="arrivalDate" text="Arrival Date"></kendo-label>
+                <kendo-datepicker #arrivalDate formControlName="arrivalDate"></kendo-datepicker>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="numberOfNights" text="Number of Nights"></kendo-label>
+                <kendo-numerictextbox #numberOfNights formControlName="numberOfNights" [min]="0"></kendo-numerictextbox>
+                <kendo-formerror>Error: required</kendo-formerror>
+            </kendo-formfield>
+        </div>
+
+        <kendo-formfield>
+            <kendo-label [for]="numberOfGuests" text="Number of Guests"></kendo-label>
+            <kendo-numerictextbox #numberOfGuests formControlName="numberOfGuests" [min]="0"
+                [max]="5"></kendo-numerictextbox>
+            <kendo-formhint align="start">
+                Maximum 5 guests. Babies (under 2 years old) are not included in the
+                number of guests.
+            </kendo-formhint>
+                </kendo-formfield>
+
+        <kendo-formfield>
+            <div class="k-form-field-checkbox-wrap">
+                <input kendoCheckBox id="terms" type="checkbox" formControlName="terms" />
+                <kendo-label class="k-checkbox-label" for="terms"
+                    text="I agree with Тerms and Conditions"></kendo-label>
+            </div>
+            <kendo-formerror>Error: This field is required</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+            <kendo-label [for]="comments" text="Comments" [optional]="true"></kendo-label>
+            <kendo-textarea #comments formControlName="comments" resizable="vertical"></kendo-textarea>
+        </kendo-formfield>
+
+        <div class="k-form-buttons">
+            <button kendoButton themeColor="primary" (click)="submitForm()">
+                Send Reservation Request
+            </button>
+            <button kendoButton (click)="clearForm()">Clear</button>
+        </div>
+    </form>
+</div>

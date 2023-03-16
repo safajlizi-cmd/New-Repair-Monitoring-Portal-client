@@ -1,0 +1,23 @@
+<kendo-listview
+      [data]="products"
+      containerClass="k-d-flex k-flex-col k-flex-nowrap"
+    >
+      <ng-template kendoListViewHeaderTemplate>
+        <div class="header">
+          <div class="title">Inventory</div>
+          <kendo-textbox
+            class="filter-input"
+            placeholder="Filter items..."
+            (valueChange)="handleFilterChange($event)"
+          >
+            <ng-template kendoTextBoxSuffixTemplate>
+              <span class="k-icon k-i-search"></span>
+            </ng-template>
+          </kendo-textbox>
+        </div>
+      </ng-template>
+      <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
+        
+        <app-task-item class="product" [product]="dataItem"></app-task-item>
+      </ng-template>
+    </kendo-listview>

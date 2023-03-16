@@ -1,5 +1,93 @@
-<div class="split top"> <h1>safa1</h1></div>
-<div class=" split bottom">
-   
+<div class="split">
+  <div class=" top">
+    <kendo-dialog title="Add Task" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250"
+      [width]="450">
+      <form [formGroup]="taskForm">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
+          <div
+            *ngIf="taskForm.controls['title'].invalid && (taskForm.controls['title'].dirty || taskForm.controls['title'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="taskForm.hasError('required','title')">Title is required.</div>
+          </div>
+        </div>
 
-</div>
+        <table style="width:100% " cellspacing="0">
+          <tr>
+            <td style="width:50% ">
+              <div class="form-group">
+                <label for="action">Action:</label>
+                <select class="form-control" id="actionId" formControlName="actionId">
+                  <option *ngFor="let action of actions" [value]="action.id">{{ action.actionName }}</option>
+                </select>
+              </div>
+            </td>
+            <td style="width:50% ">
+              <div class="form-group">
+                <label for="status">Status:</label>
+                <select class="form-control" id="statusId" formControlName="statusId">
+                  <option *ngFor="let status of statuses" [value]="status.id">{{ status.statusId }}</option>
+                </select>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <table style="width:100% " cellspacing="0">
+          <tr>
+            <td style="width:50% ">
+              <div class="form-group">
+                <label for="dossier">Dossier:</label>
+                <select class="form-control" id="dossier" formControlName="dossierId">
+                  <option *ngFor="let dossier of dossiers" [value]="dossier.id">{{ dossier.dossierNumber }}</option>
+                </select>
+              </div>
+            </td>
+            <td style="width:50% ">
+              <div class="form-group">
+                <label for="deadline">Deadline:</label>
+                <input type="date" class="form-control" id="deadline" formControlName="deadline">
+                <div
+                  *ngIf="taskForm.controls['deadline'].invalid && (taskForm.controls['deadline'].dirty || taskForm.controls['deadline'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="taskForm.hasError('required','deadline')">Deadline is required.</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="emergency" formControlName="emergency">
+          <label class="form-check-label" for="emergency">IsEmergency</label>
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+          <div
+            *ngIf="taskForm.controls['description'].invalid && (taskForm.controls['description'].dirty || taskForm.controls['description'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="taskForm.hasError('required','description')">Description is required.</div>
+          </div>
+        </div>
+
+        <kendo-dialog-actions>
+          <button kendoButton (click)="close('no')">Cancel</button>
+          <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
+            [disabled]="taskForm.invalid">
+            Add Task
+          </button>
+        </kendo-dialog-actions>
+      </form>
+
+    </kendo-dialog>
+
+    <div class="dialog-button">
+      <button class="center" kendoButton (click)="open()" style="background-color: #3899DD;color: #fff;margin-top: 20px;margin-bottom: 30px;padding: 4px;">Add
+        Task</button>
+    </div>
+    <div class="bottom">
+      <app-todo></app-todo>
+    </div>
+  </div>
