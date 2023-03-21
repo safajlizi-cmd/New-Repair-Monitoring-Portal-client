@@ -1,0 +1,15 @@
+
+  kendo-card{
+    margin: 5px;
+    background-color: rgba(106, 104, 104, 0.2);
+    border-radius: 12px;
+  }
+ h3{
+  color: rgb(109, 107, 107);
+  font-size: 20px;
+  font-weight: 600;
+ }
+
+  .k-icon{
+    color: black;
+  }

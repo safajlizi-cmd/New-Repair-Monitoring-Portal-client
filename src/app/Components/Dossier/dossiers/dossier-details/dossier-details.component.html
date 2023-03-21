@@ -1,1 +1,55 @@
-<p>dossier-details works!</p>
+<!--<div lass="container">
+    <mat-grid-list cols="4" rowHeight="150px">
+        <mat-grid-tile *ngFor="let equip of equipments">
+            <div class="history" style="padding-bottom:5px;margin: 4px;">
+                <div class="top">
+                    <h3> {{ equip.label}}</h3>
+                </div>
+                <div class="button">
+                    <p tyle="font-weight: lighter;">
+                        <br>
+                        <kendo-svg-icon [icon]="icons.trash"></kendo-svg-icon> Location name
+                        <br>
+                        material name
+                    </p>
+                </div>
+
+                <div class="buttom">
+                    <table style="margin-left:45% ;">
+                        <tr style="width: 30%;">
+                            <td></td>
+                            <td style="width:60%;"></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+</div>-->
+<div class="container">
+    <mat-grid-list cols="4" rowHeight="160px">
+      <mat-grid-tile *ngFor="let equip of equipments">
+        <kendo-card>
+          <kendo-card-header>
+           
+             <h3 kendoCardTitle> <kendo-avatar
+                fillMode="outline"
+                initials="W"
+                size="small"
+                style="background-color:#3899DD; color: #fff;font-size: 5px;"
+         ></kendo-avatar> {{ equip.label }}</h3>
+          </kendo-card-header>
+          <kendo-card-body>
+            <p kendoCardSubtitle>
+              <kendo-svg-icon [icon]="icons.trash"></kendo-svg-icon> Location name
+            </p>
+            <p kendoCardSubtitle>material name</p>
+           
+          </kendo-card-body>
+        </kendo-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>

@@ -4,7 +4,7 @@ import { GuideComponent } from './Components/home/guide/guide.component';
 import { LoginComponent } from './Components/Login/login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/Dossiers', pathMatch: 'full' },
+  { path: '', redirectTo: '/Login', pathMatch: 'full' },
   { path: 'Login', component: LoginComponent },
   { path: 'Guide', component: GuideComponent },
   { path: 'Dossiers',loadChildren:()=>import('./modules/dashbord/dashbord.module').then((m)=>m.DashbordModule)},

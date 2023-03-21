@@ -29,6 +29,9 @@ import { TodoComponent } from 'src/app/Components/Dossier/manageTasks/todo/todo.
 import { ContextMenuModule, MenuModule } from '@progress/kendo-angular-menu';
 import { DossierListComponent } from 'src/app/Components/Dossier/dossiers/dossier-list/dossier-list.component';
 import { DossierDetailsComponent } from 'src/app/Components/Dossier/dossiers/dossier-details/dossier-details.component';
+import { AssignmentComponent } from 'src/app/Components/Dossier/dossiers/assignment/assignment.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { GuideHomeComponent } from 'src/app/Components/home/guide-home/guide-home.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { DossierDetailsComponent } from 'src/app/Components/Dossier/dossiers/dos
     TodoComponent,
     DossierListComponent,
     DossierDetailsComponent,
+    AssignmentComponent,
+    GuideHomeComponent,
+
 
  ],
   imports: [
@@ -67,7 +73,8 @@ import { DossierDetailsComponent } from 'src/app/Components/Dossier/dossiers/dos
     HttpClientModule,
     DragDropModule,
     MenuModule,
-    ContextMenuModule
+    ContextMenuModule,
+    MatGridListModule
 
 
   ]

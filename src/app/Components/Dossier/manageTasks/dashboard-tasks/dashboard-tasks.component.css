@@ -22,3 +22,12 @@ app-task{
    width: 100%;
 }
 
+.center{
+   margin-left: 90%;
+   background-color: #3899DD;
+   color: #fff;
+   width:100px;
+   border: none;
+   border-radius: 12px;  
+   margin-top: 20px;
+}

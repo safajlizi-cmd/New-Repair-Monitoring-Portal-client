@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GenericService } from 'src/app/services/generic.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { GenericService } from 'src/app/services/generic.service';
 })
 export class DossierListComponent implements OnInit {
   public gridData!: any;
-  constructor(private api : GenericService , private router :Router){}
+  constructor(private api : GenericService , private router :Router , private route : ActivatedRoute){}
 
   getDossiers(){
     this.api.getList("Dossier/List").subscribe({
@@ -24,6 +24,7 @@ export class DossierListComponent implements OnInit {
    ngOnInit(): void {
        this.getDossiers();
    }
-   onButtonClick(){
+   onButtonClick(id :any){
+    this.router.navigate(["Details/",id],  {relativeTo: this.route});
    }
 }

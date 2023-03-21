@@ -20,10 +20,8 @@ export class TodoComponent implements OnInit {
   updateStatus(id :any ,status :any){
     this.apiTask.UpdateTaskStatus(id,status).subscribe({
       next: (res) => {
-        alert("done")
       },
       error: (err) => {
-        alert("not done")
 
       },
     });

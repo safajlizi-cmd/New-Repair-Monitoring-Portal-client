@@ -2,7 +2,7 @@
     style="padding-top: 50px; background: rgb(255, 255, 255); border: none;">
     <kendo-grid-column field="dossierNumber" title="Dossier Number" [width]="220" [filterable]="false">
     </kendo-grid-column>
-    <kendo-grid-column field="dateOfOccurance" title="Occurance date">
+    <kendo-grid-column field="dateOfOccurance" title="Created Date">
         <ng-template kendoGridCellTemplate let-dataItem>
             {{ dataItem.dateOfOccurance | date: 'MM/dd/yyyy' }}
         </ng-template>
@@ -11,7 +11,7 @@
     </kendo-grid-column>
     <kendo-grid-column title=" " filter="date" [width]="220">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <button (click)="onButtonClick()" style="border:none">View Details  <span class="k-icon k-i-hyperlink-open-sm"></span></button>
+            <button (click)="onButtonClick( dataItem.id)" style="border:none">View Details  <span class="k-icon k-i-hyperlink-open-sm"></span></button>
         </ng-template>
     </kendo-grid-column>
 </kendo-grid>

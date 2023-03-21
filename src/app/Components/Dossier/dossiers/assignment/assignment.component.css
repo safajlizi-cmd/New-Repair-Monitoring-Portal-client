@@ -1,0 +1,27 @@
+h3 {
+    font-size: 1.2em;
+    padding: 10px;
+  }
+  .title{
+    color: rgb(109, 107, 107);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .bod{
+    color: rgb(109, 107, 107);
+
+  }
+  .button{
+    background-color: #3899DD;
+    color: #fff;
+    width:100%;
+    border: none;
+    border-radius: 12px;  
+    margin-top: 20px;
+  }
+  kendo-splitter-pane{
+    padding: 20px;
+  }
+  tr{
+    padding-top:20px;
+  }

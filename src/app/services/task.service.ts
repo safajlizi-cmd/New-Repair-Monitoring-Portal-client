@@ -20,6 +20,6 @@ export class TaskService {
     return this.http.get<any>(`${this.apiUrl}/Task/ListByStatus?status=${status}` ,this.prepareHeader()).pipe(map(res => res as any)); 
   }
   UpdateTaskStatus( id:any ,status :any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Task/Task/UpdateStatus?taskId=${id}&status=${status}` ,this.prepareHeader()).pipe(map(res => res as any)); 
+    return this.http.post<any>(`${this.apiUrl}/Task/UpdateStatus?taskId=${id}&status=${status}` ,this.prepareHeader()).pipe(map(res => res as any)); 
   }
 }
