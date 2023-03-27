@@ -1,8 +1,11 @@
 
   kendo-card{
-    margin: 5px;
     background-color: rgba(106, 104, 104, 0.2);
     border-radius: 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+
+    width: 800px;
   }
  h3{
   color: rgb(109, 107, 107);
@@ -13,3 +16,4 @@
   .k-icon{
     color: black;
   }
+ 

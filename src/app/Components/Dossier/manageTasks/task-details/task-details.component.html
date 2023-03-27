@@ -1,0 +1,132 @@
+<!--<div class="container">
+    <h1 class="titlle "> Task Details </h1>
+    <div class="split">
+      
+      <div class="left">
+    <table>
+        <tr>
+            <td class="titl">Task Title</td>
+            <td class="des">{{task.title}}</td>
+        </tr>
+        <tr>
+            <td class="titl">Description</td>
+            <td class="des">{{task.description}}</td>
+        </tr>
+        <tr>
+            <td class="titl">Created date</td>
+            <td class="des">{{task.createdDate |date: 'MM/dd/yyyy' }}</td>
+        </tr>
+        <tr>
+            <td class="titl">Created By</td>
+            <td class="des">{{task.createdBy}}</td>
+        </tr>
+    </table>
+    </div>
+    <div class="right">
+        <kendo-listview
+        [data]="subtask"
+        [style.height.px]="280"
+        [itemClass]="{ 'item-border': true }"
+      >
+        <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
+          {{ dataItem.title }}
+        </ng-template>
+      </kendo-listview>
+    </div>
+</div>-->
+<button kendoButton (click)="back()" style="background-color: #3899DD; margin: 20px;color:#fff"> <span
+    class="k-icon k-i-arrow-chevron-left"></span> Back </button>
+<div class="example-wrapper">
+  <div class="page">
+    <div class="grid-container">
+      <div class="box box-1">
+        <h1 class="titlle "> Task Details </h1>
+
+        <table>
+          <tr>
+            <td class="titl">Task Title</td>
+            <td class="des">{{task.title}}</td>
+          </tr>
+          <tr>
+            <td class="titl">Description</td>
+            <td class="des">{{task.description}}</td>
+          </tr>
+          <tr>
+            <td class="titl">Created date</td>
+            <td class="des">{{task.createdDate |date: 'MM/dd/yyyy' }}</td>
+          </tr>
+          <tr>
+            <td class="titl">Created By</td>
+            <td class="des">{{task.createdBy}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="box box-2">
+        <div class="dialog-button">
+          <button class="center" kendoButton (click)="open()"
+            style="background-color: #3899DD;color:#fff ; margin:10px ;margin-left:79.8%"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon>Add
+            Sub-Task</button>
+        </div>
+        <div *ngFor="let item of task.subTasksC ; let i =index"
+          [ngClass]="item.emergency ==true ? 'boxx':'example-boxx'">
+
+          {{item!.title}}
+          <span style="color:#dc5b1b"><kendo-avatar fillMode="outline" class="avatar"><span
+                style="font-size:10px;">SJ</span></kendo-avatar>safa jlizi </span>
+          <span style="color:#dc5b1b"><kendo-svg-icon [icon]="icons.trash" style="color:#3899DD"></kendo-svg-icon>
+            {{item!.deadline| date: 'MM/dd/yyyy' }}
+          </span>
+        
+         <table>
+          <tr>
+            <td>          <button kendoButton (click)="onUpdate(i)" style="background-color:#fff; " ><kendo-svg-icon [icon]="icons.edite"style="color:#3899DD"></kendo-svg-icon></button>
+            </td>
+            <td>
+              <button kendoButton (click)="onDelete(i)"><kendo-svg-icon [icon]="icons.delete" style="color:#3899DD"></kendo-svg-icon></button>
+
+            </td>
+          </tr>
+         </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<kendo-dialog title="Add Task" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250"
+  [width]="450">
+  <form [formGroup]="taskForm">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
+      <div
+        *ngIf="taskForm.controls['title'].invalid && (taskForm.controls['title'].dirty || taskForm.controls['title'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="taskForm.hasError('required','title')">Title is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="deadline">Deadline:</label>
+      <input type="date" class="form-control" id="deadline" formControlName="deadline">
+      <div
+        *ngIf="taskForm.controls['deadline'].invalid && (taskForm.controls['deadline'].dirty || taskForm.controls['deadline'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="taskForm.hasError('required','deadline')">Deadline is required.</div>
+      </div>
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="emergency" formControlName="emergency">
+      <label class="form-check-label" for="emergency">IsEmergency</label>
+    </div>
+
+
+    <kendo-dialog-actions>
+      <button kendoButton (click)="close('no')">Cancel</button>
+      <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
+        [disabled]="taskForm.invalid">
+        Add Task
+      </button>
+    </kendo-dialog-actions>
+  </form>
+
+</kendo-dialog>

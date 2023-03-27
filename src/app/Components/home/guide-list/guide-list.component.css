@@ -1,0 +1,44 @@
+.demo {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .guide-categories{
+    background-color: gray;
+  }
+.container{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    margin-top: 7px;
+}
+
+  .header{
+    background-color: rgb(66, 65, 65);
+    position:fixed;
+    width: 100%;
+    z-index: 2;
+    top: 0;
+
+  }
+  .bottom{
+    margin-top: 100px;
+  }
+  .tittle{
+    padding: 8px;
+    letter-spacing: 4px;
+    color: rgb(207, 197, 197);
+    font-size: 1.4rem;
+    font-weight:bold;
+    padding-top: 9px;
+  }
+  .title2{
+    padding-top: 22px;
+    letter-spacing: 4px;
+    color: rgb(73, 72, 72);
+    font-size: 1.4rem;
+    font-weight:bold;
+  }
+  img{
+    width: 20px;
+    height: auto;
+    margin: 5px;
+}

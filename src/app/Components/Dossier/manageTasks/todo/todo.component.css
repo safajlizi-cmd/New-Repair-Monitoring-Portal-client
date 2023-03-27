@@ -1,11 +1,12 @@
 .example-container {
-    width: 400px;
+    width: 470px;
     max-width: 100%;
     margin: 0 25px 25px 0;
     display: inline-block;
     vertical-align: top;
     overflow-x: hidden;
-
+    font-size: 5px;
+   
   }
   
   .example-list {
@@ -29,11 +30,28 @@
     justify-content: space-between;
     box-sizing: border-box;
     cursor: move;
-    font-size: 14px;
+    font-size: 11px;
     margin-bottom: 10px;
-    font: weight 500px;
+    font: weight 300px;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  .boxx {
+    padding: 20px 10px;
+    color: rgba(19, 18, 18, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    font-size: 11px;
+    margin-bottom: 10px;
+    font: weight 300px;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: red;
+    background-color: rgba(246, 9, 9, 0.2);
   }
   
   .cdk-drag-preview {
@@ -76,4 +94,35 @@
   .head-title span{
     font-weight: normal;
     
+  }
+  ul {
+    font-size: 14px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  li {
+    margin: 0 9px;
+  }
+  li:hover {
+    color: #ffc000;
+    cursor: pointer;
+  }
+  .content li {
+    margin: 0;
+    padding: 6px 5px;
+  }
+  .content ul {
+    display: block;
+  }
+  .content {
+    padding: 4px;
+  }
+  .avatar{
+    background-color:#3899DD; color: #fff;  width: 19px;height: 19px;margin-right: 4px;
+
+  }
+  .navButton{
+    background-color: rgba(0, 0, 0, 0);border: none;color: grey;font-size: 10px;
   }

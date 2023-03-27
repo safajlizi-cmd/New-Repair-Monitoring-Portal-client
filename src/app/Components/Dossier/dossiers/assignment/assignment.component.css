@@ -17,11 +17,23 @@ h3 {
     width:100%;
     border: none;
     border-radius: 12px;  
-    margin-top: 20px;
+    margin-top: 5px;
   }
   kendo-splitter-pane{
-    padding: 20px;
+    padding: 10px;
   }
   tr{
-    padding-top:20px;
+    padding-top:10px;
   }
+  .titlle {
+    padding-top: 22px;
+    letter-spacing: 4px;
+    color: rgb(73, 72, 72);
+    font-size: 1.4rem;
+    font-weight:bold;
+  }
+  .center{
+    width:150px;
+   border: none;
+   border-radius: 12px;   
+ }

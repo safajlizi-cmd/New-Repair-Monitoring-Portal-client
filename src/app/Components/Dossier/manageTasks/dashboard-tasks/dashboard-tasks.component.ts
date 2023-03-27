@@ -1,7 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild , Output, EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DialogAnimation, DialogCloseResult, DialogRef, DialogService, DialogThemeColor } from '@progress/kendo-angular-dialog';
+import { plusIcon } from '@progress/kendo-svg-icons';
 import { GenericService } from 'src/app/services/generic.service';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -10,11 +11,14 @@ import { TaskService } from 'src/app/services/task.service';
   templateUrl: './dashboard-tasks.component.html',
   styleUrls: ['./dashboard-tasks.component.css']
 })
-export class DashboardTasksComponent {
+export class DashboardTasksComponent implements OnInit{
   public opened = false;
   public animation: boolean | DialogAnimation = {};
   public dialogThemeColor:any= "primary";
   taskForm!: FormGroup;
+  public icons = { trash:plusIcon };
+  @Output() taskAdded: EventEmitter<any> = new EventEmitter();
+
   actions: any;
   statuses: any;
   dossiers: any;
@@ -57,6 +61,7 @@ export class DashboardTasksComponent {
       next: (res) => {
         console.log(res);
         alert('task added successfully')
+        this.taskAdded.emit();
         console.log(this.taskForm.value); // you can replace this with your own code to add the task to a database or send it to a server
         this.taskForm.reset(); // reset the task object after submitting the form
         this.opened = false;
@@ -84,16 +89,12 @@ export class DashboardTasksComponent {
     this.AddTask();
    
   }
-  
-
-
   public close(status: string): void {
     console.log(`Dialog result: ${status}`);
     this.opened = false;
   }
-
   public open(): void {
-
     this.opened = true;
   }
+ 
 }

@@ -32,6 +32,7 @@ import { DossierDetailsComponent } from 'src/app/Components/Dossier/dossiers/dos
 import { AssignmentComponent } from 'src/app/Components/Dossier/dossiers/assignment/assignment.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { GuideHomeComponent } from 'src/app/Components/home/guide-home/guide-home.component';
+import { TaskDetailsComponent } from 'src/app/Components/Dossier/manageTasks/task-details/task-details.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { GuideHomeComponent } from 'src/app/Components/home/guide-home/guide-hom
     DossierDetailsComponent,
     AssignmentComponent,
     GuideHomeComponent,
-
+    TaskDetailsComponent,
 
  ],
   imports: [
@@ -74,7 +75,8 @@ import { GuideHomeComponent } from 'src/app/Components/home/guide-home/guide-hom
     DragDropModule,
     MenuModule,
     ContextMenuModule,
-    MatGridListModule
+    MatGridListModule,
+
 
 
   ]

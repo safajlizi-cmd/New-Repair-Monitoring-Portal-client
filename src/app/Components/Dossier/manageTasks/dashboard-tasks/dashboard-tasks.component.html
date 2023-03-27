@@ -82,12 +82,21 @@
       </form>
 
     </kendo-dialog>
-
-    <div class="dialog-button">
-      <button class="center" kendoButton (click)="open()" style="background-color: #3899DD;color: #fff;margin-top: 20px;margin-bottom: 30px;padding: 4px;">Add
-        Task</button>
-    </div>
+    <table>
+      <tr style="width:100% ">
+        <td style="width:90% ">
+          <h1 class="titlle ">Manage Tasks</h1>
+        </td>
+        <td style="width:10% ">
+          <div class="dialog-button">
+            <button class="center" kendoButton (click)="open()"
+             ><kendo-svg-icon [icon]="icons.trash" ></kendo-svg-icon>Add
+              Task</button>
+          </div>
+        </td>
+      </tr>
+    </table>
     <div class="bottom">
-      <app-todo></app-todo>
+      <app-todo ></app-todo>
     </div>
   </div>

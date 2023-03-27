@@ -28,6 +28,8 @@ import { Dashboard2Component } from 'src/app/Components/Dhashboards/dashboard2/d
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { ManageProfileComponent } from './Components/Profile/manage-profile/manage-profile.component';
+import { GuideListComponent } from './Components/home/guide-list/guide-list.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 
@@ -41,6 +43,7 @@ import { ManageProfileComponent } from './Components/Profile/manage-profile/mana
     SideNavComponent,
     Dashboard2Component,
     ManageProfileComponent,
+    GuideListComponent,
    
   ],
   imports: [
@@ -65,6 +68,7 @@ import { ManageProfileComponent } from './Components/Profile/manage-profile/mana
     PagerModule,
     DialogsModule,
     HttpClientModule,
+    MatGridListModule
 
   ],
   providers: [],

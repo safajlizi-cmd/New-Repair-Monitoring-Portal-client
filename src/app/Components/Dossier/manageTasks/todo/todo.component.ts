@@ -1,7 +1,8 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ActionsLayout, Orientation } from '@progress/kendo-angular-layout';
+import { clockIcon } from '@progress/kendo-svg-icons';
 import { GenericService } from 'src/app/services/generic.service';
 import { TaskService } from 'src/app/services/task.service';
 @Component({
@@ -10,9 +11,45 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit {
-  constructor(private api: GenericService, private apiTask: TaskService) { }
-
+  constructor(private api: GenericService, private apiTask: TaskService , private router :Router ,private route :ActivatedRoute) { }
+  @ViewChild("anchor", { static: false })
+  public anchor: ElementRef<HTMLElement> | undefined;
   todo: any = [];
+  public margin = { horizontal: -46, vertical: 7 };
+  showPopupIndextodo: number = -1; // default value to hide all popups
+  showPopupIndexin: number = -1; // default value to hide all popups
+  showPopupIndexdo: number = -1; // default value to hide all popups
+
+  public icons = { trash:clockIcon };
+
+onToggleto(index: number) {
+  if (this.showPopupIndextodo === index) {
+    // if the same button is clicked again, hide the popup
+    this.showPopupIndextodo = -1;
+  } else {
+    // show the popup for the clicked button only
+    this.showPopupIndextodo = index;
+  }
+}
+  onTogglein(index: number) {
+    if (this.showPopupIndexin === index) {
+      // if the same button is clicked again, hide the popup
+      this.showPopupIndexin = -1;
+    } else {
+      // show the popup for the clicked button only
+      this.showPopupIndexin = index;
+    }
+  }
+    onToggledo(index: number) {
+      if (this.showPopupIndexdo === index) {
+        // if the same button is clicked again, hide the popup
+        this.showPopupIndexdo = -1;
+      } else {
+        // show the popup for the clicked button only
+        this.showPopupIndexdo = index;
+      }
+}
+  public show = false;
   inprogress: any = [];
   done: any = [];
   public actionsOrientation: Orientation = "horizontal";
@@ -27,24 +64,8 @@ export class TodoComponent implements OnInit {
     });
   }
   drop(event: CdkDragDrop<any[]>) {
-    let newStatus = '';
-
-    switch (event.container.id) {
-      case 'cdk-drop-list-0':
-        newStatus = 'todo';
-        break;
-      case 'cdk-drop-list-1':
-        newStatus = 'inprog';
-        break;
-      case 'cdk-drop-list-2':
-        newStatus = 'done';
-        break;
-      default:
-        break;
-    }
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -52,10 +73,8 @@ export class TodoComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-      alert(event.item.data!.id)
-      alert(newStatus)
 
-        this.updateStatus( event.item.data!.id ,newStatus)
+      this.updateStatus( event.item.data!.id ,event.container.id)
     }
  
   }
@@ -85,4 +104,15 @@ export class TodoComponent implements OnInit {
     this.getTaskByStauts("done");
 
   }
+  details(id:any){
+    this.router.navigate(["Details/",id],  {relativeTo: this.route});
+  }
+  dossierNav(id:any){
+    this.router.navigate(['/Dossiers/List/Details', id]);
+  }
+  onTaskAdded(): void {
+    // reload the list of tasks
+    this.getTaskByStauts("inprog");
+    this.getTaskByStauts("todo");
+    this.getTaskByStauts("done");  }
 }
