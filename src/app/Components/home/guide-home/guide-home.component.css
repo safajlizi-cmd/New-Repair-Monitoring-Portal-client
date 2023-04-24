@@ -1,31 +1,32 @@
 .split {
   display: flex;
-  flex-direction: row;
-  max-width: 1200px;
-  height: 450px;
-  background-color: rgb(255, 255, 255);
-  flex-wrap: wrap; /* add this */
+ flex-direction: column;
+  height: calc(100vh - 3.5rem);
+
 }
 
-.split .left {
-  width: 60%;
+.top {
+  margin-top:0.5rem;
+  padding: 0 10px 10px;
+  height: 100px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.split .right {
-  padding: 40px;
-  width: 40%;
-  padding-top: 100px;
-}
+.bottom {
+  margin: 20px;
+  flex: 1;
+  overflow-y: auto; 
+  overflow-x: hidden; }
 
 .button {
-  background-color: #3b3c3d;
+  background-color: #3899DD;
   color: #fff;
-  width: 100%;
+  width: 50px;
+  margin-left: 90%;
   border: none;
   border-radius: 12px;
   font-size: 19px;
   font-weight: 400;
-  margin-top: 70px;
 }
 
 p {

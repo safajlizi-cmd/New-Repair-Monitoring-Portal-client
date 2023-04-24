@@ -1,0 +1,8 @@
+<kendo-dialog title="Welcome to our application!" *ngIf="dialogVisible">
+
+    <p>You can easily monitor "new repair" application and access helpful guides for creating dossiers step by step.</p>
+    <button kendoButton (click)="gotoguide()" class="button">View guides !</button>
+    <kendo-dialog-actions>
+      <button kendoButton (click)="closeDialog()">Close</button>
+    </kendo-dialog-actions>
+  </kendo-dialog>

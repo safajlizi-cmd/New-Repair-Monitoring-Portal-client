@@ -1,45 +1,5 @@
-<!--<div class="container">
-    <h1 class="titlle "> Task Details </h1>
-    <div class="split">
-      
-      <div class="left">
-    <table>
-        <tr>
-            <td class="titl">Task Title</td>
-            <td class="des">{{task.title}}</td>
-        </tr>
-        <tr>
-            <td class="titl">Description</td>
-            <td class="des">{{task.description}}</td>
-        </tr>
-        <tr>
-            <td class="titl">Created date</td>
-            <td class="des">{{task.createdDate |date: 'MM/dd/yyyy' }}</td>
-        </tr>
-        <tr>
-            <td class="titl">Created By</td>
-            <td class="des">{{task.createdBy}}</td>
-        </tr>
-    </table>
-    </div>
-    <div class="right">
-        <kendo-listview
-        [data]="subtask"
-        [style.height.px]="280"
-        [itemClass]="{ 'item-border': true }"
-      >
-        <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
-          {{ dataItem.title }}
-        </ng-template>
-      </kendo-listview>
-    </div>
-</div>-->
-<button kendoButton (click)="back()" style="background-color: #3899DD; margin: 20px;color:#fff"> <span
-    class="k-icon k-i-arrow-chevron-left"></span> Back </button>
-<div class="example-wrapper">
-  <div class="page">
-    <div class="grid-container">
-      <div class="box box-1">
+<div class="split">
+  <div class=" top">
         <h1 class="titlle "> Task Details </h1>
 
         <table>
@@ -61,10 +21,11 @@
           </tr>
         </table>
       </div>
-      <div class="box box-2">
+      <div class="bottom">
         <div class="dialog-button">
           <button class="center" kendoButton (click)="open()"
-            style="background-color: #3899DD;color:#fff ; margin:10px ;margin-left:79.8%"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon>Add
+            style="background-color: #3899DD;color:#fff ; margin:10px ;margin-left:79.8%"><kendo-svg-icon
+              [icon]="icons.trashh"></kendo-svg-icon>Add
             Sub-Task</button>
         </div>
         <div *ngFor="let item of task.subTasksC ; let i =index"
@@ -76,24 +37,23 @@
           <span style="color:#dc5b1b"><kendo-svg-icon [icon]="icons.trash" style="color:#3899DD"></kendo-svg-icon>
             {{item!.deadline| date: 'MM/dd/yyyy' }}
           </span>
-        
-         <table>
-          <tr>
-            <td>          <button kendoButton (click)="onUpdate(i)" style="background-color:#fff; " ><kendo-svg-icon [icon]="icons.edite"style="color:#3899DD"></kendo-svg-icon></button>
-            </td>
-            <td>
-              <button kendoButton (click)="onDelete(i)"><kendo-svg-icon [icon]="icons.delete" style="color:#3899DD"></kendo-svg-icon></button>
 
-            </td>
-          </tr>
-         </table>
+          <table>
+            <tr>
+              <td> <button kendoButton (click)="onUpdate(i)" style="background-color:#fff; "><kendo-svg-icon
+                    [icon]="icons.edite" style="color:#3899DD"></kendo-svg-icon></button>
+              </td>
+              <td>
+                <button kendoButton (click)="onDelete(i)"><kendo-svg-icon [icon]="icons.delete"
+                    style="color:#3899DD"></kendo-svg-icon></button>
+              </td>
+            </tr>
+          </table>
 
         </div>
       </div>
     </div>
-  </div>
-</div>
-<kendo-dialog title="Add Task" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250"
+<kendo-dialog title="Add Task" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250"[themeColor]="'dark'"
   [width]="450">
   <form [formGroup]="taskForm">
     <div class="form-group">

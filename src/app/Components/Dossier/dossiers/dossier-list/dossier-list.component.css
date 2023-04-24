@@ -5,3 +5,26 @@
     font-size: 1.4rem;
     font-weight:bold;
   }
+  .split {
+    display: flex;
+   flex-direction: column;
+    height: calc(100vh - 3.5rem);
+ 
+  }
+  .top {
+    margin-top:0.5rem;
+    padding: 0 10px 10px;
+    height: 100px;
+  }
+  .bottom {
+    margin: 20px;
+    flex: 1;
+    overflow-y: auto; 
+    overflow-x: hidden; }
+    .bt{
+      background-color: #3899DD;color: #fff;
+    }
+    .avatar{
+      background-color:#3899DD; color: #fff; width: 18px; height: 18px;
+    }
+   

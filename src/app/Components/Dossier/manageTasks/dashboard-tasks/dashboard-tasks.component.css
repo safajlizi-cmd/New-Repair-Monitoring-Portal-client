@@ -1,23 +1,22 @@
-
 .split {
    display: flex;
-   flex-direction: column;
-   height: calc(100vh -3.5rem);
-}
+  flex-direction: column;
+   height: calc(100vh - 3.5rem);
 
-.split  .top {
-   flex-grow: 1;
-   min-height: 200px;
-   overflow-y: auto;   
-}
-
-.split  .bottom {
-   flex-grow: 0;
-   width: 100%;
-   overflow-y: auto;
-   overflow-x: hidden;
-}
-
+ }
+ 
+ .top {
+   margin-top:0.5rem;
+   padding: 0 10px 10px;
+   height: 100px;
+   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+ }
+ 
+ .bottom {
+   margin: 20px;
+   flex: 1;
+   overflow-y: auto; 
+   overflow-x: hidden; }
 app-task{
    width: 100%;
 }

@@ -1,3 +1,4 @@
+
 .example-container {
     width: 470px;
     max-width: 100%;
@@ -5,8 +6,12 @@
     display: inline-block;
     vertical-align: top;
     overflow-x: hidden;
-    font-size: 5px;
-   
+    font-size: 15px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    background-color: rgba(210, 217, 217, 0.3); 
+    height: 100%;
+    overflow-y: auto;
+
   }
   
   .example-list {
@@ -16,42 +21,44 @@
     display: block;
     gap: 10px;
     padding: 10px;
-    border: solid 1px #ccc;
-    border-radius: 10px;
   }
 
   .example-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(130, 130, 130, 0.87);
+  display: flex;
+  flex-direction: column; /* Changed from row to column */
+  align-items: stretch; /* Changed from center to stretch */
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  font-size: 1.0rem;
+  margin-bottom: 10px;
+  font: weight 400px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  height: 180px;
+  width: 100%;
+
+  }
+  .boxx {
     padding: 20px 10px;
     border-bottom: solid 1px #ccc;
     color: rgba(19, 18, 18, 0.87);
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column; /* Changed from row to column */
+    align-items: stretch; /* Changed from center to stretch */
     justify-content: space-between;
     box-sizing: border-box;
     cursor: move;
-    font-size: 11px;
+    font-size: 16px;
     margin-bottom: 10px;
     font: weight 300px;
-    border-radius: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
-  .boxx {
-    padding: 20px 10px;
-    color: rgba(19, 18, 18, 0.87);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-    cursor: move;
-    font-size: 11px;
-    margin-bottom: 10px;
-    font: weight 300px;
-    border-radius: 10px;
-    border: 1px solid;
-    border-color: red;
-    background-color: rgba(246, 9, 9, 0.2);
+    background-color: #fff;
+    height: 200px;
+    width: 100%;
   }
   
   .cdk-drag-preview {
@@ -84,11 +91,13 @@
   }
   .head-title{
     margin: 0;
-    padding-bottom: 22px;
+    padding: 15px;
+    padding-left: 30px;
     border-radius: 4px;
-    color: rgb(73, 72, 72);
-    font-size: 1.1rem;
-    font-weight:bold;
+    color: rgb(100, 100, 100);
+    font-size: 1.3rem;
+    font-weight:500px;
+
 
   }
   .head-title span{
@@ -124,5 +133,53 @@
 
   }
   .navButton{
-    background-color: rgba(0, 0, 0, 0);border: none;color: grey;font-size: 10px;
+    background-color: rgba(0, 0, 0, 0);border: none;color: rgb(66, 62, 62);font-size: 0.8rem;font-weight: bold;
   }
+ 
+  .headerBox {
+    height: 25%;
+   
+  }
+  
+  .contentBox {
+    height: 30%;
+  }
+  
+  .footerBox {
+    height: 25%;
+  }
+  .footerBox2 {
+    height: 20%;
+  }
+  .title{
+    color: rgb(106, 104, 104);
+    font-size: 1.4rem;
+  }
+  .example-form{
+    border-radius: 12px;
+    
+  }
+  .dateF{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    color:#fff;
+    
+  }
+  .dossierF{
+    border-bottom-right-radius: 12px;
+    border-top-right-radius: 12px;
+    color:#303131;width: 200px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  .keyWordF{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    color:#fff;
+    border-bottom-left-radius: 12px;
+    border-top-left-radius: 12px;
+  }
+  .date{
+    color:#dc5b1b;font-size: 0.8rem;font-weight: bold;
+  }
+  .createdBy{
+    color:#86BC35;font-size: 0.8rem;font-weight: bold;
+
+  }
+  .bt{background-color: #3899DD;color: #fff;}

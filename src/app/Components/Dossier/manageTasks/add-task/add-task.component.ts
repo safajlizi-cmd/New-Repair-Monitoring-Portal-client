@@ -1,5 +1,6 @@
-import { Component , Input, OnInit } from '@angular/core';
-import { DialogService } from '@progress/kendo-angular-dialog';
+import { Component , Input, OnInit,Inject } from '@angular/core';
+import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
@@ -8,8 +9,14 @@ import { DialogService } from '@progress/kendo-angular-dialog';
 export class AddTaskComponent  {
 
 
+  constructor(
+    public dialogRef: DialogRef,
+  ) {}
 
-  constructor(private dialogService: DialogService) {}
+ 
 
+  close() {
+    this.dialogRef.close();
+  }
  
 }

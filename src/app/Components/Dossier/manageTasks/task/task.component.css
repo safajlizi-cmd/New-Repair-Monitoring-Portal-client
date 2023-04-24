@@ -1,26 +1,74 @@
-
-
-kendo-tabstrip{
-    width: 80%;
-    height: 100%;
-  
-}
-ng-template{
-    width: 100%;
+kendo-tabstrip p {
+  margin: 0;
+  padding: 8px;
 }
 
+.restore-button {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
 
-  .my-tabstrip {
-    background-color: #ffffff;
-  }
- 
-.my-custom-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family:  system-ui; 
-    font-weight: bold;
-    font-size: 16px;
-    width:150px ;
-    color: rgb(94, 90, 90);
-  }
+.split {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 3.5rem);
+
+}
+
+.top {
+  margin-top: 0.5rem;
+  padding: 0 10px 10px;
+  height: 30px;
+}
+
+.bottom {
+  margin: 20px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.scrollable {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.a {
+  margin: 10px;
+  height: 650px;
+  padding: 10px;
+  position: fixed;
+}
+
+.tab {
+  background-color: #3899DD
+}
+
+.tabT {
+  background-color: #3899DD
+}
+
+.titlle {
+  letter-spacing: 4px;
+  color: rgb(73, 72, 72);
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+kendo-multicolumncombobox {
+  width: 300px;
+  font-weight: bold;
+  border-color: #303131;
+  color: #303131;
+}
+
+.avatar {
+  background-color: #3899DD;
+  color: #fff;
+}
+
+.tabstrip-container {
+  background-color: #303131;
+
+}

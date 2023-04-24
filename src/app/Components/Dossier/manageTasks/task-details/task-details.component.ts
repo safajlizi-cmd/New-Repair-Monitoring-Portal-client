@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogAnimation } from '@progress/kendo-angular-dialog';
@@ -17,7 +17,8 @@ export class TaskDetailsComponent implements OnInit {
   public dialogThemeColor:any= "primary";
   taskForm!: FormGroup;
  id:any
- task :any
+ task:any
+ @Input() TaskId :any;
  subtask :any
  public icons = { trash:clockIcon,trashh:plusIcon ,delete:trashIcon,edite:pencilIcon };
  public margin = { horizontal: -46, vertical: 7 };
@@ -38,16 +39,15 @@ export class TaskDetailsComponent implements OnInit {
   ngOnInit():void{
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
-      actionId: [''],
       statusId: [''],
       taskId: [''],
-      deadline: ['', Validators.required],
+      deadline: [''],
       emergency :[false]
     });
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-    this.getTaskById(this.id);
+    this.getTaskById(this.TaskId);
   }
   onToggleto(index: number) {
     if (this.showPopupIndextodo === index) {
@@ -81,8 +81,7 @@ export class TaskDetailsComponent implements OnInit {
 
   }
   onSubmit(){
-    this.taskForm.get('taskId')?.setValue(this.id);
-    this.taskForm.get('actionId')?.setValue(this.task.actionId);
+    this.taskForm.get('taskId')?.setValue(this.TaskId);
     this.taskForm.get('statusId')?.setValue(this.task.statusId);
     this.api.add("SubTask/Add",this.taskForm.value).subscribe({
       next: (res) => {

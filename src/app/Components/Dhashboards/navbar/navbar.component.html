@@ -1,55 +1,47 @@
 <kendo-appbar position="top">
-     
+  <kendo-appbar-spacer></kendo-appbar-spacer>
+  <kendo-appbar-section class="search-section">
+    <kendo-textbox [style.width.px]="160" placeholder="Search..." [clearButton]="true">
+      <ng-template kendoTextBoxPrefixTemplate>
+        <kendo-icon name="search"></kendo-icon>
+      </ng-template>
+    </kendo-textbox>
+  </kendo-appbar-section>
+  {{role}}
+  <kendo-appbar-section class="user-actions">
+    <kendo-badge-container>
+      <button kendoButton fillMode="flat">
+        <kendo-icon name="bell"></kendo-icon>
+      </button>
+      <kendo-badge themeColor="info" size="small">12</kendo-badge>
+    </kendo-badge-container>
+    <span class="k-appbar-separator"></span>
+  </kendo-appbar-section>
+  <kendo-appbar-section>
+    <button kendoButton fillMode="flat" (click)="open()" >
+      <kendo-icon name="menu"></kendo-icon>
+    </button>
+    <kendo-avatar fillMode="outline" class="avatar">
+      <span style="font-size:10px;">{{initials}}</span>
+    </kendo-avatar>
+  </kendo-appbar-section>
+</kendo-appbar>
+<kendo-dialog [animation]="animation" *ngIf="opened" (click)="close('cancel')" [minWidth]="338" [width]="338"
+  [minHeight]="270" [height]="280" class="dialog" style="border-radius: 12px;">
+  <div class="first"
+    style="display: flex; justify-content: space-between;background-color: rgba(206, 210, 211,0.2);padding: 10px;border-top-left-radius: 12px; border-top-right-radius: 12px;">
 
-      <kendo-appbar-spacer></kendo-appbar-spacer>
-
-      <kendo-appbar-section class="search-section">
-        <kendo-textbox
-          [style.width.px]="160"
-          placeholder="Search..."
-          [clearButton]="true"
-        >
-          <ng-template kendoTextBoxPrefixTemplate>
-            <kendo-icon name="search"></kendo-icon>
-          </ng-template>
-        </kendo-textbox>
-      </kendo-appbar-section>
-
-      <kendo-appbar-section class="user-actions">
-        <kendo-badge-container>
-          <kendo-icon name="bell"></kendo-icon>
-          <kendo-badge
-            shape="dot"
-            themeColor="warning"
-            size="small"
-            position="inside"
-          ></kendo-badge>
-        </kendo-badge-container>
-        <span class="k-appbar-separator"></span>
-      </kendo-appbar-section>
-
-      <kendo-appbar-section>
-        <button
-          kendoButton
-          fillMode="flat"
-          class="overflow-button"
-          #anchor
-          (click)="onToggle()"
-        >
-          <kendo-icon name="menu"></kendo-icon>
-        </button>
-        <kendo-popup [anchor]="anchor.element" *ngIf="show" [margin]="margin">
-          <div class="content">
-            <ul>
-              <li><span>What's New</span></li>
-              <li><span>About</span></li>
-              <li><span>Notifications</span></li>
-              <li><span>My Profile</span></li>
-              <li (click)="logout()"><span>Logout</span></li>
-
-            </ul>
-          </div>
-        </kendo-popup>
-        <kendo-avatar [imageSrc]="kendokaAvatar" shape="circle"></kendo-avatar>
-      </kendo-appbar-section>
-    </kendo-appbar>
+    <div style="flex-basis: 30%; flex-grow: 1;">
+      <kendo-avatar fillMode="outline" class="avatar1">
+        <span style="font-size:20px;">{{initials}}</span>
+      </kendo-avatar>
+    </div>
+    <div style="flex-basis: 70%; flex-grow: 1;">
+      <span style="Color:black ;font-size: 20px;">Safa Jlizi</span> <br> Safajlizi199@gmail.com
+    </div>
+  </div>
+  <ul class="bt">
+    <li (click)="logout()"><span class="k-icon k-i-cog"></span> Edit Profile</li>
+    <li (click)="logout()"><span class="k-icon k-i-logout"></span> Log out</li>
+  </ul>
+</kendo-dialog>

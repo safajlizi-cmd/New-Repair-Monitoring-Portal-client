@@ -1,23 +1,66 @@
-<h1 class="titlle ">Dossiers List</h1>
-<kendo-grid [kendoGridBinding]="gridData" filterable="menu"
-    style="padding-top: 50px; background: rgb(255, 255, 255); border: none;">
-    <kendo-grid-column field="dossierNumber" title="Dossier Number" [width]="220" [filterable]="false">
-    </kendo-grid-column>
-    <kendo-grid-column field="dateOfOccurance" title="Created Date">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            {{ dataItem.dateOfOccurance | date: 'MM/dd/yyyy' }}
-        </ng-template>
-    </kendo-grid-column>
-    <kendo-grid-column field="tasks" title="Tasks">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            {{ dataItem.tasksC.length  }} Tasks : <span></span>
-        </ng-template>
-    </kendo-grid-column>
-    <kendo-grid-column field="ageBuilding" title="Dossier Status"  filter="numeric">
-    </kendo-grid-column>
-    <kendo-grid-column title=" " filter="date" [width]="220">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            <button (click)="onButtonClick( dataItem.id)" style="border:none">View Details  <span class="k-icon k-i-hyperlink-open-sm"></span></button>
-        </ng-template>
-    </kendo-grid-column>
-</kendo-grid>
+<div class="split">
+    <div class=" top">
+        <h1 class="titlle ">Dossiers List</h1>
+        <button class="bt" kendoButton (click)="open()" style="margin-left:90%">Add new dossier</button>
+    </div>
+    <div class="bottom">
+        <kendo-grid [kendoGridBinding]="gridData" filterable="menu"
+            style=" background: rgb(45, 43, 43); border: none;" [height]="550">
+            <kendo-grid-column field="dossierNumber" title="Dossier Number" [width]="220"  >
+                <ng-template kendoGridCellTemplate let-dataItem >
+                    <p style="color:#86BC35; font-weight: bold;">
+                    {{ dataItem.dossierNumber}}</p>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="createdDate" title="Created Date">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="createdBy." title="CreatedBy">
+                <ng-template kendoGridCellTemplate let-dataItem >
+                    <kendo-avatar fillMode="outline" class="avatar" *ngIf="dataItem.createdBy?.userName != null ">
+                        <span style="font-size:7px;">{{ dataItem.createdBy?.firstName[0] }}{{ dataItem.createdBy?.lastName[0] }}</span>
+                      </kendo-avatar>  {{ dataItem.createdBy?.userName }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="tasks" title="Tasks">
+                <ng-template kendoGridCellTemplate let-dataItem   style=" background: rgb(45, 43, 43); border: none;">
+                    {{ dataItem.tasksC.length }} Tasks : <span></span>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="ageBuilding" title="Dossier Status" filter="numeric">
+            </kendo-grid-column>
+            <kendo-grid-column title=" " filter="date" [width]="150">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <button (click)="onButtonClick( dataItem.id)" style="border:none">View Details <span
+                            class="k-icon k-i-hyperlink-open-sm"></span></button>
+                </ng-template>
+            </kendo-grid-column>
+        </kendo-grid>
+    </div>
+    <kendo-dialog title="Add Dossier" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [themeColor]="'dark'" 
+        [width]="450">
+        <form [formGroup]="dossierForm" >
+            <div class="form-group">
+                <label for="DossierNumber">Title:</label>
+                <input type="text" class="form-control" id="DossierNumber" formControlName="DossierNumber" placeholder="Dossier Number">
+                <div *ngIf="dossierForm.controls['DossierNumber'].invalid && (dossierForm.controls['DossierNumber'].dirty || dossierForm.controls['DossierNumber'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="dossierForm.hasError('required','DossierNumber')">Title is required.</div>
+                </div>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="Assigned" formControlName="Assigned">
+                <label class="form-check-label" for="Assigned"> Would you like to assign all tasks to yourself?</label>
+            </div>
+          
+            <kendo-dialog-actions style="border:none;margin-top: 20px;">
+                <button kendoButton (click)="close('no')">Cancel</button>
+                <button kendoButton (click)="addDossier()" class="bt" [disabled]="dossierForm.invalid">
+                    Add dossier
+                </button>
+            </kendo-dialog-actions>
+        </form>
+
+    </kendo-dialog>

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { SideBar2Component } from '../../Components/Dhashboards/side-bar2/side-bar2.component';
 import { HomeComponent } from '../../Components/home/home/home.component';
 import {DashboardRoutingModule}from './dashboard-routing.module'
 import { DashboardTasksComponent } from 'src/app/Components/Dossier/manageTasks/dashboard-tasks/dashboard-tasks.component';
@@ -8,7 +7,6 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { NavigationModule } from '@progress/kendo-angular-navigation';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { IconsModule } from '@progress/kendo-angular-icons';
-import { PopupModule } from '@progress/kendo-angular-popup';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
@@ -33,10 +31,21 @@ import { AssignmentComponent } from 'src/app/Components/Dossier/dossiers/assignm
 import { MatGridListModule } from '@angular/material/grid-list';
 import { GuideHomeComponent } from 'src/app/Components/home/guide-home/guide-home.component';
 import { TaskDetailsComponent } from 'src/app/Components/Dossier/manageTasks/task-details/task-details.component';
-
+import { NotificationModule } from '@progress/kendo-angular-notification';
+import { AssignmentListComponent } from 'src/app/Components/Dossier/dossiers/assignment-list/assignment-list.component';
+import { PanelBarModule } from '@progress/kendo-angular-layout';
+import { UnassignedTasksComponent } from 'src/app/Components/home/unassigned-tasks/unassigned-tasks.component';
+import { WelcomeDialogComponent } from 'src/app/Components/Dhashboards/welcome-dialog/welcome-dialog.component';
+import { TooltipModule } from '@progress/kendo-angular-tooltip';
+import { DialogProfileComponent } from 'src/app/Components/Dhashboards/profile/dialog-profile/dialog-profile.component';
+import { PasswordComponent } from 'src/app/Components/Dhashboards/profile/seetings/password/password.component';
+import { UsernameComponent } from 'src/app/Components/Dhashboards/profile/seetings/username/username.component';
+import { StatisticsComponent } from 'src/app/Components/Dossier/dossiers/statistics/statistics.component';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { PopupModule } from '@progress/kendo-angular-popup';
+import { ChartsModule } from '@progress/kendo-angular-charts';
 @NgModule({
   declarations: [
-    SideBar2Component,
     HomeComponent,
     DashboardTasksComponent,
     TaskComponent,
@@ -49,6 +58,13 @@ import { TaskDetailsComponent } from 'src/app/Components/Dossier/manageTasks/tas
     AssignmentComponent,
     GuideHomeComponent,
     TaskDetailsComponent,
+    AssignmentListComponent,
+    UnassignedTasksComponent,
+    WelcomeDialogComponent,
+    DialogProfileComponent,
+    UsernameComponent,
+    PasswordComponent,
+    StatisticsComponent,
 
  ],
   imports: [
@@ -76,9 +92,12 @@ import { TaskDetailsComponent } from 'src/app/Components/Dossier/manageTasks/tas
     MenuModule,
     ContextMenuModule,
     MatGridListModule,
-
-
-
+    NotificationModule,
+    PanelBarModule,
+    TooltipModule,
+    DropDownsModule,
+    ChartsModule
+    
   ]
   
 })

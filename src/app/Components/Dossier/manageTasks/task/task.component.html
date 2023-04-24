@@ -1,27 +1,50 @@
+<div class="split">
+  <div class=" top">
+    <table>
+      <tr style="width:100% ">
+        <td style="width:90% ">
+          <h1 class="titlle ">Manage Tasks</h1>
+        </td>
+        <td style="width:10% ">
+          <kendo-multicolumncombobox [data]="data" textField="userName" class="my-combobox" valueField="id" placeholder="Add new collaborator ..."  
+            [filterable]="true" (filterChange)="handleFilterChange($event)" (valueChange)="onSelectedUser($event)">
+            <kendo-combobox-column field="email" title="email" [width]="150">
+            </kendo-combobox-column>
+            <kendo-combobox-column field="firstName" title="Name" [width]="90">
+            </kendo-combobox-column>
+            <kendo-combobox-column field="lastName" title="Title" [width]="90">
+            </kendo-combobox-column>
+          </kendo-multicolumncombobox>
+        </td>
+      </tr>
+    </table>
+   
+  </div>
+  <div class="bottom">
+    <div class="tabstrip-container">
 
-<kendo-tabstrip tabAlignment="center" class="my-tabstrip" >
-    <kendo-tabstrip-tab   [selected]="true">
-        <ng-template kendoTabTitle  class="title"let-title>
-            <div class="my-custom-header">To Do</div>
+      <kendo-tabstrip #tabstrip (tabClose)="onClose($event)" [closable]="true" class="a">
+        <kendo-tabstrip-tab [title]="userName" [selected]="true" class="tab">
+          <ng-template kendoTabTitle class="tabT">
+           <p> <kendo-avatar fillMode="outline" class="avatar">
+              <span style="font-size:9px;">SJ</span>
+            </kendo-avatar>    {{ userName }}</p>
           </ng-template>
-        <ng-template kendoTabContent>
-            <p>Tab 1 Content</p>
-        </ng-template>
-    </kendo-tabstrip-tab>
-    <kendo-tabstrip-tab >
-        <ng-template kendoTabTitle  class="title" let-title>
-            <div class="my-custom-header">In Progress</div>
+          <ng-template kendoTabContent>
+            <app-todo  class="scrollable" [userId]="id"></app-todo>
           </ng-template>
-        <ng-template kendoTabContent>
-            <app-task-list></app-task-list>
-        </ng-template>
-    </kendo-tabstrip-tab>
-    <kendo-tabstrip-tab >
-        <ng-template kendoTabTitle  class="title" let-title>
-            <div class="my-custom-header">Done</div>
+        </kendo-tabstrip-tab>
+        <kendo-tabstrip-tab *ngFor="let tab of tabs" [title]="tab.userName">
+          <ng-template kendoTabTitle>
+          <p>  <kendo-avatar fillMode="outline" class="avatar">
+              <span style="font-size:9px;">{{tab.firstName[0]}}{{tab.lastName[0]}}</span>
+            </kendo-avatar>      {{tab.userName }}</p>
           </ng-template>
-        <ng-template kendoTabContent>
-            <p>Tab 3 Content</p>
-        </ng-template>
-    </kendo-tabstrip-tab>
-</kendo-tabstrip>
+          <ng-template kendoTabContent>
+            <app-todo class="scrollable" [userId]="tab.id"></app-todo>
+          </ng-template>
+        </kendo-tabstrip-tab>
+      </kendo-tabstrip>
+    </div>
+  </div>
+  <div>

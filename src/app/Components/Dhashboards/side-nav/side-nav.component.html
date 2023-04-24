@@ -13,7 +13,8 @@
             routerLinkActive="active"
             [routerLinkActiveOptions] ="{exact:true}"
           >
-              <span class="sidenav-link-icon" [class]="data.icon"></span>
+              <span class="sidenav-link-icon" [class]="data.icon">  <kendo-badge themeColor="info" rounded="large" *ngIf="data.icon == 'k-icon k-i-saturation'"></kendo-badge></span> 
+
               <span class="sidenav-link-text"   *ngIf="collapsed">{{data.label}}</span>
           </a>
       </li>

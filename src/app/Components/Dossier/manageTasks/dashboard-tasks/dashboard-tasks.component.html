@@ -72,7 +72,7 @@
           </div>
         </div>
 
-        <kendo-dialog-actions>
+        <kendo-dialog-actions style="border:none;margin-top: 20px;">
           <button kendoButton (click)="close('no')">Cancel</button>
           <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
             [disabled]="taskForm.invalid">
@@ -96,7 +96,8 @@
         </td>
       </tr>
     </table>
+  </div>
     <div class="bottom">
       <app-todo ></app-todo>
-    </div>
+    
   </div>

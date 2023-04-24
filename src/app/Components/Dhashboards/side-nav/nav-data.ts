@@ -15,14 +15,19 @@ export const navbarData =[
         label :'Dossiers'
     },
     {
-        routeLink : 'cff',
+        routeLink : 'UnassignedTasks',
         icon : 'k-icon k-i-saturation',
+        label :'Unassigned Tasks'
+    },
+    {
+        routeLink : 'Statistics',
+        icon : 'k-icon k-i-align-bottom-elements',
         label :'Statistics'
     },
     {
-        routeLink : 'hh',
-        icon : 'k-icon k-i-folder-more k-i-fields-more',
-        label :'Dashboards'
+        routeLink : 'Profile',
+        icon : 'k-icon k-i-gear',
+        label :'Profile'
     },
 ]
 

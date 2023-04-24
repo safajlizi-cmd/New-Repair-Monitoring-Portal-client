@@ -123,7 +123,9 @@ export class GuideListComponent {
     
     }
   ];
-  
+  goto(){
+    window.open(' Guide/Item','_blank')
+  }
   navigateToVideoPage(url :any){
 
   }

@@ -1,16 +1,4 @@
-<div class="header">
-    <table>
-        <tr style="width:100% ">
-            <td style="width:10% ">
-                <img src="../../../../assets/images/logos/logo2-removebg-preview22.png" alt="CED logo">
-            </td>
-            <td style="width:90% ">
-                <h1 class="tittle">Guides categories </h1>
-            </td>
-
-        </tr>
-    </table>
-</div>
+<app-navbar-guide></app-navbar-guide>
 <div class="bottom">
 <div *ngFor="let category of categories">
     <div class="container">
@@ -23,7 +11,7 @@
                         <div style="font-weight:bold;">{{ card.description }}</div>
                         <p style="font-size: 10px;">{{ card.des }}</p>
                     </kendo-card-body>
-                    <kendo-card-actions [actions]="card.actionButtons" [layout]="'start'"></kendo-card-actions>
+                    <kendo-card-actions [actions]="card.actionButtons" (click)="goto()" [layout]="'start'"></kendo-card-actions>
                 </kendo-card>
             </mat-grid-tile>
         </mat-grid-list>
