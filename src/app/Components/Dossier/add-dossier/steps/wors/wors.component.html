@@ -1,0 +1,48 @@
+<form [formGroup]="WOForm">
+    <div class="form-group">
+        <label for="title">Working Order Number:</label>
+        <input type="text" class="form-control" id="woNumber" formControlName="woNumber"
+            placeholder="Working Order">
+        <div *ngIf="WOForm.controls['woNumber'].invalid && (WOForm.controls['woNumber'].dirty || WOForm.controls['woNumber'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="WOForm.hasError('required','woNumber')">Working order is required.</div>
+        </div>
+    </div>
+
+    <table style="width:100% " cellspacing="0">
+        <tr>
+            <td style="width:50% ">
+                <div class="form-group">
+                    <label for="DamageType">DamageType:</label>
+                    <select class="form-control" id="damageTypeId" formControlName="damageTypeId">
+                        <option *ngFor="let item of damageTypes" [value]=" item.id">{{ item.longName }}
+                        </option>
+                    </select>
+                </div>
+            </td>
+            <td style="width:50% ">
+                <div class="form-group">
+                    <label for="Material">Material:</label>
+                    <select class="form-control" id="materialId" formControlName="materialId">
+                        <option *ngFor="let  item of Materials" [value]=" item.id">{{ item.longName }}
+                        </option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <label for="dossier">Location:</label>
+        <select class="form-control" id="locationId" formControlName="locationId">
+            <option *ngFor="let  item of Locations" [value]=" item.id">{{ item.longName }}
+            </option>
+        </select>
+    </div>
+
+    <kendo-dialog-actions style="border:none;margin-top: 20px;">
+        <button kendoButton (click)="AddWorkingOrder()" style="background-color: #3899DD;color: #fff;"
+            [disabled]="WOForm.invalid">
+            Add Working Order
+        </button>
+    </kendo-dialog-actions>
+</form>

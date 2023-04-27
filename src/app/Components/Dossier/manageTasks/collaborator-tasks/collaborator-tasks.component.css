@@ -17,11 +17,13 @@
   .example-list {
     min-height: 60px;
     border-radius: 4px;
+    overflow: hidden;
     display: block;
     gap: 10px;
     padding: 10px;
   }
-    .example-box {
+
+  .example-box {
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;
   color: rgba(130, 130, 130, 0.87);
@@ -30,7 +32,6 @@
   align-items: stretch; /* Changed from center to stretch */
   justify-content: space-between;
   box-sizing: border-box;
-  cursor: move;
   font-size: 1.0rem;
   margin-bottom: 10px;
   font: weight 400px;
@@ -40,25 +41,6 @@
   width: 100%;
 
   }
-  .boxx {
-    padding: 20px 10px;
-    border-bottom: solid 1px #ccc;
-    color: rgba(19, 18, 18, 0.87);
-    display: flex;
-    flex-direction: column; /* Changed from row to column */
-    align-items: stretch; /* Changed from center to stretch */
-    justify-content: space-between;
-    box-sizing: border-box;
-    cursor: move;
-    font-size: 16px;
-    margin-bottom: 10px;
-    font: weight 300px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    background-color: #fff;
-    height: 200px;
-    width: 100%;
-  }
-  
   .cdk-drag-preview {
     box-sizing: border-box;
     border-radius: 4px;

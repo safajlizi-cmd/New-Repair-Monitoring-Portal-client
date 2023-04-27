@@ -1,39 +1,10 @@
-h3 {
-    font-size: 1.2em;
-    padding: 10px;
-  }
-  .title{
-    color: rgb(109, 107, 107);
-    font-size: 14px;
-    font-weight: 500;
-  }
-  .bod{
-    color: rgb(109, 107, 107);
-
-  }
-  .button{
-    background-color: #3899DD;
-    color: #fff;
-    width:100%;
-    border: none;
-    border-radius: 12px;  
-    margin-top: 5px;
-  }
-  kendo-splitter-pane{
-    padding: 10px;
-  }
-  tr{
-    padding-top:10px;
-  }
-  .titlle {
-    padding-top: 22px;
-    letter-spacing: 4px;
-    color: rgb(73, 72, 72);
-    font-size: 1.4rem;
-    font-weight:bold;
-  }
-  .center{
-    width:150px;
-   border: none;
-   border-radius: 12px;   
- }
+.split{
+   height: 100%;
+}
+.left{
+  width: 30%;
+  background-color: beige;
+}
+.right{
+  width: 70%;
+}

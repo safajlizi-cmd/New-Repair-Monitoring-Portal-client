@@ -18,11 +18,9 @@
         </td>
       </tr>
     </table>
-   
   </div>
   <div class="bottom">
     <div class="tabstrip-container">
-
       <kendo-tabstrip #tabstrip (tabClose)="onClose($event)" [closable]="true" class="a">
         <kendo-tabstrip-tab [title]="userName" [selected]="true" class="tab">
           <ng-template kendoTabTitle class="tabT">
@@ -41,7 +39,7 @@
             </kendo-avatar>      {{tab.userName }}</p>
           </ng-template>
           <ng-template kendoTabContent>
-            <app-todo class="scrollable" [userId]="tab.id"></app-todo>
+            <app-collaborator-tasks class="scrollable" [userId]="tab.id"></app-collaborator-tasks>
           </ng-template>
         </kendo-tabstrip-tab>
       </kendo-tabstrip>

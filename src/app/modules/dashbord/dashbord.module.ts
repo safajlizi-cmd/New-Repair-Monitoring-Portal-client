@@ -44,6 +44,13 @@ import { StatisticsComponent } from 'src/app/Components/Dossier/dossiers/statist
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { ChartsModule } from '@progress/kendo-angular-charts';
+import { CollaboratorTasksComponent } from 'src/app/Components/Dossier/manageTasks/collaborator-tasks/collaborator-tasks.component';
+import { AddDossierComponent } from 'src/app/Components/Dossier/add-dossier/add-dossier.component';
+import { AssignmentsComponent } from 'src/app/Components/Dossier/add-dossier/steps/assignments/assignments.component';
+import { WORSComponent } from 'src/app/Components/Dossier/add-dossier/steps/wors/wors.component';
+import { CreateDossierComponent } from 'src/app/Components/Dossier/add-dossier/steps/create-dossier/create-dossier.component';
+import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -65,6 +72,12 @@ import { ChartsModule } from '@progress/kendo-angular-charts';
     UsernameComponent,
     PasswordComponent,
     StatisticsComponent,
+    CollaboratorTasksComponent,
+    AddDossierComponent,
+    CreateDossierComponent,
+    AssignmentsComponent,
+    WORSComponent,
+    
 
  ],
   imports: [
@@ -96,7 +109,8 @@ import { ChartsModule } from '@progress/kendo-angular-charts';
     PanelBarModule,
     TooltipModule,
     DropDownsModule,
-    ChartsModule
+    ChartsModule ,
+    ProgressBarModule
     
   ]
   

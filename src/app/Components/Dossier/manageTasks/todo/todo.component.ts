@@ -65,29 +65,6 @@ export class TodoComponent implements OnInit {
       },
     });
   }
-
-  //task details
-  openDetails(id: any) {
-    /*const dialogOptions ={
-      title: 'Details',
-      content:TaskItemComponent,
-      width: 450,
-      height: 250,
-
-    };
-    const dialogRef = this.dialogService.open(dialogOptions); 
-    appendTo: document.querySelector('kendo-dialog-container')
-    dialogRef.result.subscribe((result) => {
-      if (result instanceof DialogCloseResult) {
-        console.log('close');
-      } else {
-        console.log(result); // log the data returned from dialog
-      }
-    });*/
-
-  }
-
-  //open togell
   onToggleto(index: number) {
     if (this.showPopupIndextodo === index) {
       this.showPopupIndextodo = -1;
@@ -222,6 +199,9 @@ export class TodoComponent implements OnInit {
     this.opened = false;
     this.openedAssign = false
     this.opened2=false
+    this.showPopupIndextodo = -1;
+    this.showPopupIndexin = -1;
+    this.showPopupIndexdo = -1;
   }
   onUpdate(i: any) {
     this.taskForm.controls['id'].setValue(i.id);
@@ -236,21 +216,7 @@ export class TodoComponent implements OnInit {
 
     console.log(i)
   }
-  AssignTaskToMe(id: any) { }
-  addAssign() {
-    this.task.UpdateTaskAssign(this.assignedTask, this.id,).subscribe({
-      next: (res) => {
-        this.getTasks()
-        this.openedAssign = false
-        console.log(res);
-      },
-      error: (err) => {
-        this.openedAssign = false
-        this.getTasks()
-
-      },
-    });
-  }
+  
   openAssign(id: any) {
     this.openedAssign = true;
     this.assignedTask = id;

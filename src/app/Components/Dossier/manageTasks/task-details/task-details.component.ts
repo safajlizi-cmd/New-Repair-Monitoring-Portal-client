@@ -24,8 +24,8 @@ export class TaskDetailsComponent implements OnInit {
  public margin = { horizontal: -46, vertical: 7 };
 
  showPopupIndextodo =-1
- getTaskById(id:any){
-  this.api.getById("Task/GetById",id).subscribe({
+ getTaskById(){
+  this.api.getById("Task/GetById",this.TaskId).subscribe({
     next: (res) => {
       this.task =res;
       this.subtask =res.subTaskC
@@ -37,6 +37,7 @@ export class TaskDetailsComponent implements OnInit {
 }
   constructor(private router :Router, private route : ActivatedRoute , private api :GenericService ,private fb:FormBuilder, private location: Location){}
   ngOnInit():void{
+    this.getTaskById();
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       statusId: [''],
@@ -47,7 +48,6 @@ export class TaskDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-    this.getTaskById(this.TaskId);
   }
   onToggleto(index: number) {
     if (this.showPopupIndextodo === index) {
@@ -88,7 +88,7 @@ export class TaskDetailsComponent implements OnInit {
         console.log(res);
         alert('subtask added successfully')
         console.log(this.taskForm.value);
-        this.getTaskById(this.id);
+        this.getTaskById();
          // you can replace this with your own code to add the task to a database or send it to a server
         this.taskForm.reset(); // reset the task object after submitting the form
         this.opened = false;

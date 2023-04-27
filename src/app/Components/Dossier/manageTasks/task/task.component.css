@@ -25,18 +25,19 @@ kendo-tabstrip p {
 .bottom {
   margin: 20px;
   flex: 1;
-  overflow: hidden;
+  overflow-x: auto;
+
 }
 
 .scrollable {
   height: 100%;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 .a {
   margin: 10px;
-  height: 650px;
+  height: 100%;
   padding: 10px;
   position: fixed;
 }

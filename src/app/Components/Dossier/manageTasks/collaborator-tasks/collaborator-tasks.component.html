@@ -37,27 +37,19 @@
                 <h2 class="head-title">To do<span *ngIf="todo!.length >0"> {{todo!.length}} </span></h2>
 
                 <div cdkDropList [cdkDropListData]="todo" class="example-list" cdkDropListId="cdk-drop-list-todo"
-                    id="todo" (cdkDropListDropped)="drop($event)">
-                    <div *ngFor="let item of todo ; let i =index" cdkDrag [cdkDragData]="item"
+                    id="todo" >
+                    <div *ngFor="let item of todo ; let i =index"  
                         [ngStyle]="{ border: item.emergency == true ? '1px solid red' : 'none' }" class="example-box">
                         <div class="headerBox" class="title" style="display: flex; justify-content: space-between;">
                             <div style="flex-basis: 99%; flex-grow: 1;">
                                 {{item!.title}} [{{item!.taskNumber}} ]
                             </div>
                             <div style="flex-basis:1%; flex-grow: 1;">
-                            <button kendoButton #anchor (click)="onToggleto(i)"
-                                style="background-color: #fff;border: none;" >
-                                <span class="k-icon  k-i-more-vertical" style="color:#303131"></span>
+                                <button kendoButton (click)="openAssign(item.id)"
+                                style="background-color: #fff;border: none;" *ngIf="id != item.assignedToId">
+                                <span class="k-icon k-i-reset-sm" style="color:#303131"></span>
                             </button>
-                                <kendo-popup [anchor]="anchor.element" *ngIf="showPopupIndextodo === i"
-                                    [margin]="margin">
-                                    <div class="content">
-                                        <ul>
-                                            <li (click)="onUpdate(item)"><span>Update</span></li>
-                                            <li (click)="details(item.id)"><span>View Details</span></li>
-                                        </ul>
-                                    </div>
-                                </kendo-popup>
+                          
                             </div>
 
                         </div>
@@ -94,29 +86,19 @@
                 <h2 class="head-title">In Progress <span *ngIf="inprogress!.length >0">({{inprogress!.length}})</span>
                 </h2>
                 <div cdkDropList [cdkDropListData]="inprogress " class="example-list"
-                    cdkDropListId="cdk-drop-list-inprog" id="inprog" (cdkDropListDropped)="drop($event)">
-                    <div *ngFor="let item of inprogress ;let i =index" cdkDrag [cdkDragData]="item"
+                    cdkDropListId="cdk-drop-list-inprog" id="inprog" >
+                    <div *ngFor="let item of inprogress ;let i =index" 
                         [ngStyle]="{ border: item.emergency == true ? '1px solid red' : 'none' }" class="example-box">
                         <div class="headerBox" class="title" style="display: flex; justify-content: space-between;">
                             <div style="flex-basis: 99%; flex-grow: 1;">
                                 {{item!.title}} [{{item!.taskNumber}} ]
                             </div>
                             <div style="flex-basis:1%; flex-grow: 1;">
-                                <button kendoButton #anchor (click)="onTogglein(i)"
-                                    style="background-color: #fff;border: none;">
-                                    <span class="k-icon  k-i-more-vertical" style="color:#303131"></span>
+                                <button kendoButton (click)="openAssign(item.id)"
+                                    style="background-color: #fff;border: none;" *ngIf="id != item.assignedToId">
+                                    <span class="k-icon k-i-reset-sm" style="color:#303131"></span>
                                 </button>
-                                <kendo-popup [anchor]="anchor.element" *ngIf="showPopupIndexin  === i"
-                                    [margin]="margin">
-                                    <div class="content">
-                                        <ul>
-                                            <li (click)="onUpdate(item)"><span>Update</span></li>
-                                            <li (click)="details(item.id)"><span>View Details</span></li>
-                                        </ul>
-                                    </div>
-                                </kendo-popup>
                             </div>
-
                         </div>
                         <div class="contentBox">
                             {{item.description}}<br>
@@ -152,7 +134,7 @@
                 <h2 class="head-title">Done<span *ngIf="done!.length >0">({{done!.length}})</span> </h2>
 
                 <div cdkDropList [cdkDropListData]="done" class="example-list" cdkDropListId="cdk-drop-list-done"
-                    id="done" (cdkDropListDropped)="drop($event)">
+                    id="done" >
                     <div *ngFor="let item of done; let i =index" cdkDrag [cdkDragData]="item"
                         [ngStyle]="{ border: item.emergency == true ? '1px solid red' : 'none' }" class="example-box">
                         <div class="headerBox" class="title" style="display: flex; justify-content: space-between;">
@@ -160,17 +142,10 @@
                                 {{item!.title}} [{{item!.taskNumber}} ]
                             </div>
                             <div style="flex-basis:1%; flex-grow: 1;">
-                            <button kendoButton #anchor (click)="onToggledo(i)"
-                                style="background-color: #fff;border: none;" >
-                                <span class="k-icon  k-i-more-vertical" style="color:#303131"></span>
+                                <button kendoButton (click)="openAssign(item.id)"
+                                style="background-color: #fff;border: none;" *ngIf="id != item.assignedToId">
+                                <span class="k-icon k-i-reset-sm" style="color:#303131"></span>
                             </button>
-                                <kendo-popup [anchor]="anchor.element" *ngIf="showPopupIndexdo === i" [margin]="margin">
-                                    <div class="content">
-                                        <ul>
-                                            <li (click)="details(item.id)"><span>View Details</span></li>
-                                        </ul>
-                                    </div>
-                                </kendo-popup>
                             </div>
                         </div>
                         <div class="contentBox">
@@ -204,51 +179,26 @@
         </div>
     </div>
 </div>
-<kendo-dialog title="Update Task" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [themeColor]="'dark'"
-      [width]="450">
-      <form [formGroup]="taskForm">
-        <div class="form-group">
-          <label for="title">Title:</label>
-          <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
-          <div
-            *ngIf="taskForm.controls['title'].invalid && (taskForm.controls['title'].dirty || taskForm.controls['title'].touched)"
-            class="alert alert-danger">
-            <div *ngIf="taskForm.hasError('required','title')">Title is required.</div>
-          </div>
-        </div>
-              <div class="form-group">
-                <label for="deadline">Deadline:</label>
-                <input type="date" class="form-control" id="deadline" formControlName="deadline">
-                <div
-                  *ngIf="taskForm.controls['deadline'].invalid && (taskForm.controls['deadline'].dirty || taskForm.controls['deadline'].touched)"
-                  class="alert alert-danger">
-                  <div *ngIf="taskForm.hasError('required','deadline')">Deadline is required.</div>
-                </div>
-              </div>
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="emergency" formControlName="emergency">
-          <label class="form-check-label" for="emergency">IsEmergency</label>
-        </div>
-        <div class="form-group">
-          <label for="description">Description:</label>
-          <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
-          <div
-            *ngIf="taskForm.controls['description'].invalid && (taskForm.controls['description'].dirty || taskForm.controls['description'].touched)"
-            class="alert alert-danger">
-            <div *ngIf="taskForm.hasError('required','description')">Description is required.</div>
-          </div>
-        </div>
-
-        <kendo-dialog-actions style="border:none;margin-top: 20px;">
-          <button kendoButton (click)="close('no')">Cancel</button>
-          <button kendoButton (click)="onSubmit()" class="bt" [disabled]="taskForm.invalid"> 
-           Update Task
-          </button>
-        </kendo-dialog-actions>
-      </form>
-
+    <kendo-dialog
+      title="Please confirm"
+      *ngIf="openedAssign"
+      (close)="close('cancel')"
+      [minWidth]="250"
+      [width]="450"
+      [themeColor]="'dark'"
+    >
+      <p style="margin: 30px; text-align: center;">
+        Are you sure you want to Assign a task to yoursel?
+      </p>
+      <kendo-dialog-actions>
+        <button kendoButton (click)="close('no')">No</button>
+        <button kendoButton (click)="addAssign()" class="bt">
+          Yes
+        </button>
+      </kendo-dialog-actions>
     </kendo-dialog>
- <kendo-dialog title="Task Details" [animation]="animation" *ngIf="opened2" (close)="close('cancel')" [width]="800" [height]="600" [themeColor]="'dark'" style="background-color:rgba(0,0,0,0.2)"> <app-task-details [TaskId]="taskId" 
-    ></app-task-details>
+    <kendo-dialog title="Task Details" [animation]="animation" *ngIf="opened2" (close)="close('cancel')" [width]="800" [height]="600" [themeColor]="'dark'"
+>
+  <app-task-details [TaskId]="taskId"></app-task-details>
 </kendo-dialog>
    
