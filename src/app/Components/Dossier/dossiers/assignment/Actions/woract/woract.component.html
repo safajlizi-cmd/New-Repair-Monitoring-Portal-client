@@ -1,0 +1,15 @@
+<kendo-tabstrip [ngStyle]="{ width: '100%' ,height:'100%'}">
+    <kendo-tabstrip-tab
+      *ngFor="let item of items; let i = index"
+      [title]="item.city"
+      [selected]="i === selected"
+      [disabled]="item.disabled"
+    >
+      <ng-template kendoTabContent>
+        <div class="weather">
+          <h4>{{ item.temp }}<span>&ordm;C</span></h4>
+          <p>Weather in {{ item.city }} is {{ item.weather }}.</p>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+  </kendo-tabstrip>

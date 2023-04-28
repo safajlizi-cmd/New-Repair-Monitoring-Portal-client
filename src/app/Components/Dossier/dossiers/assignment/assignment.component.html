@@ -1,15 +1,96 @@
-<div class="split">
-   <div class="left">
-    <kendo-treeview
-    [nodes]="treeNodes"
-    [textField]="['categoryName', 'subCategoryName']"
-    kendoTreeViewExpandable
-    kendoTreeViewHierarchyBinding
-    childrenField="subCategories"
-  >
-  </kendo-treeview>
-   </div>
-   <div class="right">
-
+<div class="example-wrapper">
+   <div style="display: flex; justify-content: space-between;">
+      <div style="flex-basis:30%; flex-grow: 1;">
+         <kendo-avatar fillMode="outline" initials="D"
+            style="background-color:#3899DD; color: #fff;"></kendo-avatar>{{dossier?.dossierNumber}}
+      </div>
+      <div style="flex-basis:30%; flex-grow: 1;">
+         Created Date : <span class="date"><kendo-svg-icon [icon]="icons.trash"></kendo-svg-icon> {{dossier?.createdDate
+            |date: 'MM/dd/yyyy' }} </span>
+      </div>
+      <div style="flex-basis:30%; flex-grow: 1;">
+         Created By : <span class="date"><kendo-avatar fillMode="outline" class="avatar"
+               *ngIf="dossier?.createdBy?.userName != null ">
+               <span style="font-size:7px;">{{ dossier?.createdBy?.firstName[0] }}{{
+                  dossier?.createdBy?.lastName[0] }}</span>
+            </kendo-avatar> {{ dossier?.createdBy?.userName }}</span>
+      </div>
+      <div style="flex-basis:10%; flex-grow: 1;">
+         <button kendoButton (click)="open()"
+            style="background-color:#3899DD; margin-right: 10px;border:none; color: #fff;justify-self: end;">
+            <kendo-svg-icon [icon]="icons.plus"></kendo-svg-icon> Add Assignment
+         </button>
+      </div>
    </div>
 </div>
+
+<div class="split">
+   <div class="left">
+      <kendo-textbox #customInput (valueChange)="filterTerm = $event" [clearButton]="true" placeholder="Filter...">
+         <ng-template kendoTextBoxPrefixTemplate>
+            <span class="k-input-icon k-icon k-i-search"></span>
+         </ng-template>
+      </kendo-textbox>
+      <hr />
+      <kendo-label [for]="treeview" [style.display]="'block'" text="Assignments List :" class="title">
+      </kendo-label>
+      <p c class="title2" *ngIf="Assignments.length ==0 ">No Assignments available ...</p>
+      <kendo-treeview #treeview [nodes]="Assignments" [textField]="['assignmentNumber', 'woNumber']"
+         [filter]="filterTerm" kendoTreeViewExpandable kendoTreeViewHierarchyBinding childrenField="workingOrdersC">
+         <ng-template kendoTreeViewNodeTemplate let-dataItem>
+            <kendo-avatar fillMode="outline" class="avatar" *ngIf="dataItem.woNumber !='No working orders...'">
+               <span style="font-size:7px;">{{ dataItem.woNumber ?'W' : 'A' }} </span>
+            </kendo-avatar>
+            <span *ngIf="dataItem.woNumber != 'No working orders...'" (click)="onAssignmentClick(dataItem)">
+               {{ dataItem.woNumber ? dataItem.woNumber : dataItem.assignmentNumber }}
+            </span>
+            <span *ngIf="dataItem.woNumber == 'No working orders...'">
+               {{ dataItem.woNumber ? dataItem.woNumber : dataItem.assignmentNumber }}
+            </span> </ng-template>
+      </kendo-treeview>
+   </div>
+   <div class="right">
+      <app-assignment-act *ngIf="showAct =='assynment'" [id]="selectedAct"></app-assignment-act>
+      <app-woract *ngIf="showAct=='work'" [id]="selectedAct"></app-woract>
+   </div>
+</div>
+<kendo-dialog title="Add Assignment"*ngIf="opened" (close)="close('cancel')" [themeColor]="'dark'" [minWidth]="250" [width]="450">
+<form [formGroup]="AssignForm">
+    <div class="form-group">
+        <label for="title">Assignment Number:</label>
+        <input type="text" class="form-control" id="assignmentNumber" formControlName="assignmentNumber"
+            placeholder="Title">
+        <div *ngIf="AssignForm.controls['assignmentNumber'].invalid && (AssignForm.controls['assignmentNumber'].dirty || AssignForm.controls['assignmentNumber'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="AssignForm.hasError('required','assignmentNumber')">Assignment Number is required.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title">Cause:</label>
+        <input type="text" class="form-control" id="cause" formControlName="cause" placeholder="Cause">
+        <div *ngIf="AssignForm.controls['cause'].invalid && (AssignForm.controls['cause'].dirty || AssignForm.controls['cause'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="AssignForm.hasError('required','cause')">Cause Number is required.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title">DupedName:</label>
+        <input type="text" class="form-control" id="dupedName" formControlName="dupedName"
+            placeholder="Duped Name">
+        <div *ngIf="AssignForm.controls['dupedName'].invalid && (AssignForm.controls['dupedName'].dirty || AssignForm.controls['dupedName'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="AssignForm.hasError('required','dupedName')">Duped Name is required.</div>
+        </div>
+    </div>
+
+    <kendo-dialog-actions style="border:none;margin-top: 20px;">
+        <button kendoButton (click)="close('no')">Cancel</button>
+        <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
+            [disabled]="AssignForm.invalid">
+            Add Assignment
+        </button>
+    </kendo-dialog-actions>
+</form>
+
+</kendo-dialog>

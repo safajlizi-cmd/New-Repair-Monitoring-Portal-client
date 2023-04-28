@@ -4,12 +4,12 @@
         <button class="bt" kendoButton (click)="open()" style="margin-left:90%">Add new dossier</button>
     </div>
     <div class="bottom">
-        <kendo-grid [kendoGridBinding]="gridData" filterable="menu"
-            style=" background: rgb(45, 43, 43); border: none;" [height]="550">
-            <kendo-grid-column field="dossierNumber" title="Dossier Number" [width]="220"  >
-                <ng-template kendoGridCellTemplate let-dataItem >
+        <kendo-grid [kendoGridBinding]="gridData" filterable="menu" style=" background: rgb(45, 43, 43); border: none;"
+            [height]="550">
+            <kendo-grid-column field="dossierNumber" title="Dossier Number" [width]="220">
+                <ng-template kendoGridCellTemplate let-dataItem>
                     <p style="color:#86BC35; font-weight: bold;">
-                    {{ dataItem.dossierNumber}}</p>
+                        {{ dataItem.dossierNumber}}</p>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="createdDate" title="Created Date">
@@ -18,15 +18,24 @@
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="createdBy." title="CreatedBy">
-                <ng-template kendoGridCellTemplate let-dataItem >
+                <ng-template kendoGridCellTemplate let-dataItem>
                     <kendo-avatar fillMode="outline" class="avatar" *ngIf="dataItem.createdBy?.userName != null ">
-                        <span style="font-size:7px;">{{ dataItem.createdBy?.firstName[0] }}{{ dataItem.createdBy?.lastName[0] }}</span>
-                      </kendo-avatar>  {{ dataItem.createdBy?.userName }}
+                        <span style="font-size:7px;">{{ dataItem.createdBy?.firstName[0] }}{{
+                            dataItem.createdBy?.lastName[0] }}</span>
+                    </kendo-avatar> {{ dataItem.createdBy?.userName }}
                 </ng-template>
             </kendo-grid-column>
-            <kendo-grid-column field="tasks" title="Tasks">
-                <ng-template kendoGridCellTemplate let-dataItem   style=" background: rgb(45, 43, 43); border: none;">
-                    <kendo-progressbar [value]="50"></kendo-progressbar> 
+            <kendo-grid-column field="tasks" title="Progress">
+                <ng-template kendoGridCellTemplate let-dataItem style="background: rgb(45, 43, 43); border: none;">
+                    <div class="project-progress pull-left">
+                        <span class="task-title" style="width: auto;">Have created:
+                            <span class="percentage">{{dataItem.progress | number}}%</span>
+                        </span>
+                    </div>
+                    <br>
+                        <div class="progress">
+                            <div class="analytics-line" role="progressbar" aria-valuemin="0" aria-valuemax="100"  [style.width.%]="dataItem.progress"></div>
+                    </div>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="ageBuilding" title="Dossier Status" filter="numeric">
@@ -39,9 +48,9 @@
             </kendo-grid-column>
         </kendo-grid>
     </div>
-    <kendo-dialog title="Add Dossier" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [themeColor]="'dark'" style="background-color:rgba(0,0,0,0.2)"
-        [width]="490">
-       <!-- <form [formGroup]="dossierForm" >
+    <kendo-dialog title="Add Dossier" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250"
+        [themeColor]="'dark'" style="background-color:rgba(0,0,0,0.2)" [width]="490">
+        <!-- <form [formGroup]="dossierForm" >
             <div class="form-group">
                 <label for="DossierNumber">Title:</label>
                 <input type="text" class="form-control" id="DossierNumber" formControlName="DossierNumber" placeholder="Dossier Number">

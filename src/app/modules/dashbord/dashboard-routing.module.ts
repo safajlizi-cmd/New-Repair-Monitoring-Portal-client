@@ -24,7 +24,7 @@ const routes: Routes = [
     { path: 'Profile',component :DialogProfileComponent},
     { path: 'Statistics',component :StatisticsComponent},
     { path: 'UnassignedTasks',component :UnassignedTasksComponent},
-    { path: 'List/Details/:id',component :AssignmentListComponent},
+    { path: 'List/Details/:id',component :AssignmentComponent},
     { path: 'ManageTasks/Details/:id',component :TaskDetailsComponent},
 
     {path :'',component:DashboardTasksComponent},

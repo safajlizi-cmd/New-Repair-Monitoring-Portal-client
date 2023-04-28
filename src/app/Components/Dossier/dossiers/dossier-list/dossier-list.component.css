@@ -27,4 +27,19 @@
     .avatar{
       background-color:#3899DD; color: #fff; width: 18px; height: 18px;
     }
-   
+    .analytics-line {
+      border-radius: 10px;
+      background-color: #86BC35;
+      position: relative;
+       animation: animateLine 2s ease;
+      }
+  
+      .analytics-line .percentage {
+      position: absolute;
+      top: -25px;
+      right: 0;
+      font-size: 12px;
+      font-weight: bold;
+      color: #36a2eb;
+      }
+     

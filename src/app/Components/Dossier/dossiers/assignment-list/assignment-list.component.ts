@@ -81,7 +81,7 @@ getDamageTypes(){
   });
 }
 getAssignments(){
-  this.api.getList("Assignment/List").subscribe({
+  this.api.getList("Assignment/List/"+this.id).subscribe({
     next: (res) => {
       this.Assignments =res;
       console.log(res);

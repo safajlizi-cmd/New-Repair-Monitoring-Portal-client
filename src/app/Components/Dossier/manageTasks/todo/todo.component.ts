@@ -26,7 +26,6 @@ export class TodoComponent implements OnInit {
   taskId:any
   public opened = false;
   public opened2 = false;
-
   public animation: boolean | DialogAnimation = {};
   public dialogThemeColor: any = "primary";
   taskForm!: FormGroup;

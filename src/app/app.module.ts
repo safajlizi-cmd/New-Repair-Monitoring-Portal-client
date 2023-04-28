@@ -32,7 +32,6 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
 import { GuideItemComponent } from './Components/home/guide-item/guide-item.component';
 import { NavbarGuideComponent } from './Components/home/navbar-guide/navbar-guide.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +44,7 @@ import { NavbarGuideComponent } from './Components/home/navbar-guide/navbar-guid
     GuideListComponent,
     GuideItemComponent,
     NavbarGuideComponent,
+   
   ],
   imports: [
     BrowserModule,
