@@ -28,5 +28,8 @@ export class GenericService {
    add(url:any ,data:any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${url}` ,data, this.prepareHeader()).pipe(map(res => res as any));
    }
+   update(url:any ,data:any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${url}` ,data, this.prepareHeader()).pipe(map(res => res as any));
+   }
 
 }

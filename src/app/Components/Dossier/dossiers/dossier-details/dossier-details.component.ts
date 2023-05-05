@@ -3,7 +3,7 @@ import { GenericService } from 'src/app/services/generic.service';
 @Component({
   selector: 'app-dossier-details',
   templateUrl: './dossier-details.component.html',
-  styleUrls: ['./dossier-details.component.css']
+  styleUrls: ['./dossier-details.component.scss']
 })
 export class DossierDetailsComponent implements OnInit {
   

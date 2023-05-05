@@ -1,1 +1,55 @@
-<p>{{id}}</p>
+<p class="title" > Assignment details </p>
+<kendo-card class="card">
+    <kendo-card-header class="header">
+        <button kendoButton (click)="onEdit()" class="bt">Edit</button>
+    </kendo-card-header>
+    <kendo-card-body  class="body">
+        <p> Assignment number:<br><span>{{ assignment.assignmentNumber }}</span></p>
+      <div>
+        <p>Cause: <br><span>{{ assignment.cause }}</span></p>
+        <p>Duped Name:<br><span> {{ assignment.dupedName }}</span></p>
+      </div>
+    </kendo-card-body>
+  </kendo-card>
+  <kendo-dialog title="Update Assignment" *ngIf="opened" (close)="close('cancel')" [themeColor]="'dark'" 
+  [minWidth]="250" [width]="450">
+  <form [formGroup]="AssignForm">
+      <div class="form-group">
+          <label for="title">Assignment Number:</label>
+          <input type="text" class="form-control" id="assignmentNumber" formControlName="assignmentNumber"
+              placeholder="Title">
+          <div *ngIf="AssignForm.controls['assignmentNumber'].invalid && (AssignForm.controls['assignmentNumber'].dirty || AssignForm.controls['assignmentNumber'].touched)"
+              class="alert alert-danger">
+              <div *ngIf="AssignForm.hasError('required','assignmentNumber')">Assignment Number is required.
+              </div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="title">Cause:</label>
+          <input type="text" class="form-control" id="cause" formControlName="cause" placeholder="Cause">
+          <div *ngIf="AssignForm.controls['cause'].invalid && (AssignForm.controls['cause'].dirty || AssignForm.controls['cause'].touched)"
+              class="alert alert-danger">
+              <div *ngIf="AssignForm.hasError('required','cause')">Cause Number is required.</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="title">DupedName:</label>
+          <input type="text" class="form-control" id="dupedName" formControlName="dupedName"
+              placeholder="Duped Name">
+          <div *ngIf="AssignForm.controls['dupedName'].invalid && (AssignForm.controls['dupedName'].dirty || AssignForm.controls['dupedName'].touched)"
+              class="alert alert-danger">
+              <div *ngIf="AssignForm.hasError('required','dupedName')">Duped Name is required.</div>
+          </div>
+      </div>
+
+      <kendo-dialog-actions style="border:none;margin-top: 20px;">
+          <button kendoButton (click)="close('no')">Cancel</button>
+          <button kendoButton (click)="OnSubmit()" style="background-color: #3899DD;color: #fff;"
+              [disabled]="AssignForm.invalid">
+              Add Assignment
+          </button>
+      </kendo-dialog-actions>
+  </form>
+
+</kendo-dialog>
+  

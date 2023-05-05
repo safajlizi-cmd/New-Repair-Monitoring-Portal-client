@@ -22,6 +22,9 @@ export class TaskService {
   getListByStatusAndAssy( status :any , Assign:any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/Task/GetBySA?status=${status}&Assigned=${Assign}` ,this.prepareHeader()).pipe(map(res => res as any)); 
   }
+ getListBykeyword( status :any , Assign:any,keyword:any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/Task/GetBykeyword?status=${status}&Assigned=${Assign}&keyword=${keyword}` ,this.prepareHeader()).pipe(map(res => res as any)); 
+  }
   getListByAssy(  Assign:any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/Task/GetByAssy?Assigned=${Assign}` ,this.prepareHeader()).pipe(map(res => res as any)); 
   }

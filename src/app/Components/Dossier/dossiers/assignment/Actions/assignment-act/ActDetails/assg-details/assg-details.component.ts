@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { GenericService } from 'src/app/services/generic.service';
 
 @Component({
@@ -7,19 +9,59 @@ import { GenericService } from 'src/app/services/generic.service';
   styleUrls: ['./assg-details.component.css']
 })
 export class AssgDetailsComponent implements OnInit {
-  @Input() id :any;
+id :any;
   assignment:any
-  constructor(private api :GenericService){}
+  opened =false
   getAssignment(){
     this.api.getById("Assignment/GetById",this.id).subscribe({
       next: (res) => {
-        this.assignment =res;
+       console.log(res)
+        this.assignment =res.assignment;
+        console.log(this.assignment)
+
       },
       error: (err) => {
+        alert("error")
       },
     });
   }
-  ngOnInit(): void {
-    this.getAssignment();
+  AssignForm!: FormGroup;
+  constructor(private api :GenericService,private fb: FormBuilder,private route:ActivatedRoute ){}
+
+  ngOnInit() {
+    console.log("safaaaaaaa")
+    this.route.params.subscribe(params => {
+      this.id = params['Id'];
+      this.getAssignment() 
+    }); 
+    this.AssignForm = this.fb.group({
+      assignmentNumber: ['', Validators.required],
+      cause: ['', Validators.required],
+      dupedName: ['', Validators.required],
+      id: []
+    });
   }
+ 
+  onEdit() {
+    this.AssignForm.controls['id'].setValue(this.assignment.id);
+    this.AssignForm.controls['assignmentNumber'].setValue(this.assignment.assignmentNumber);
+    this.AssignForm.controls['cause'].setValue(this.assignment.cause);
+    this.AssignForm.controls['dupedName'].setValue(this.assignment.dupedName);
+    this.opened = true;
+  }
+  public close(status: string): void {
+    this.opened = false;}
+  OnSubmit(){
+    this.api.update("Assignment/Update",this.AssignForm.value).subscribe({
+      next: (res) => {
+        this.getAssignment();
+        this.AssignForm.reset();  
+        this.opened = false;
+      },
+      error: (err) => {
+        alert("error")
+      },
+    });
+  }  
+
 }

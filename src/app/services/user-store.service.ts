@@ -21,6 +21,14 @@ export class UserStoreService {
    public getFullNameFromStore(){
       return  this.fullName$.asObservable();
    }
+   public setDossierId(value :any){
+    localStorage.setItem('dossierId',value)
+  }
+
+  public getDossierId(){
+     return     localStorage.getItem('dossierId')
+
+  }
    public setFullNameForStore(fullName : string){
      this.fullName$.next(fullName)
    }

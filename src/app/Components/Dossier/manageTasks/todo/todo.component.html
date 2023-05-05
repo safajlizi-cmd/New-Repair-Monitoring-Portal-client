@@ -2,7 +2,7 @@
     <table style="margin-top:10px;margin-bottom:10px;margin-left:30%;">
         <tr>
             <td style="width:40%;">
-                <kendo-formgroup [formGroup]="historySearchForm" class="example-form">
+                <kendo-formgroup [formGroup]="taskSearchForm" class="example-form">
                     <kendo-formfield appearance="outline">
                         <kendo-textbox formControlName="keyword" (keyup)="onChange($event)"
                             placeholder="search by taskName or description ..." class="keyWordF"></kendo-textbox>
@@ -54,7 +54,7 @@
                                     <div class="content">
                                         <ul>
                                             <li (click)="onUpdate(item)"><span>Update</span></li>
-                                            <li (click)="details(item.id)"><span>View Details</span></li>
+                                            <li (click)="details(item)"><span>View Details</span></li>
                                         </ul>
                                     </div>
                                 </kendo-popup>
@@ -111,7 +111,7 @@
                                     <div class="content">
                                         <ul>
                                             <li (click)="onUpdate(item)"><span>Update</span></li>
-                                            <li (click)="details(item.id)"><span>View Details</span></li>
+                                            <li (click)="details(item)"><span>View Details</span></li>
                                         </ul>
                                     </div>
                                 </kendo-popup>
@@ -167,7 +167,7 @@
                                 <kendo-popup [anchor]="anchor.element" *ngIf="showPopupIndexdo === i" [margin]="margin">
                                     <div class="content">
                                         <ul>
-                                            <li (click)="details(item.id)"><span>View Details</span></li>
+                                            <li (click)="details(item)"><span>View Details</span></li>
                                         </ul>
                                     </div>
                                 </kendo-popup>
@@ -248,7 +248,7 @@
       </form>
 
     </kendo-dialog>
- <kendo-dialog title="Task Details" [animation]="animation" *ngIf="opened2" (close)="close('cancel')" [width]="800" [height]="600" [themeColor]="'dark'" style="background-color:rgba(0,0,0,0.2)"> <app-task-details [TaskId]="taskId" 
+ <kendo-dialog title="{{title}}" [animation]="animation" *ngIf="opened2" (close)="close('cancel')"  [height]="500" [themeColor]="'dark'" style="background-color:rgba(0,0,0,0.2);  z-index: 500 !important;" > <app-task-details [TaskId]="taskId" 
     ></app-task-details>
 </kendo-dialog>
    

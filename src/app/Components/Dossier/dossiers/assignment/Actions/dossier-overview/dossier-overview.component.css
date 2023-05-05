@@ -1,4 +1,11 @@
-.card{
+.weather {
+    margin: 30px;
+    text-align: left;
+  }
+  kendo-tabstrip-tab{
+    width: calc(100% / 7);
+  }
+  .card{
     color:#7e807a;font-size: 0.7rem;
     width: 100%;
 }
@@ -11,11 +18,4 @@
 .bt{
     color: #3899DD;
     border-color: #3899DD;
-}
-.title{
-    color:#343532;font-size: 1.2rem;font-weight: bold;  
-    text-align: left;
-}
-span{
-    font-weight: bold;
 }

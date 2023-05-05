@@ -12,31 +12,33 @@ import { Location } from '@angular/common';
   styleUrls: ['./task-details.component.css']
 })
 export class TaskDetailsComponent implements OnInit {
-  public opened = false;
+  opened = false;
+  openedNo =false ;
   public animation: boolean | DialogAnimation = {};
   public dialogThemeColor:any= "primary";
   taskForm!: FormGroup;
- id:any
- task:any
- @Input() TaskId :any;
- subtask :any
+  noteForm!: FormGroup;
+  notes:any[]=[]
+    id:any
+  task:any
+  @Input() TaskId :any;
+  subtask :any
  public icons = { trash:clockIcon,trashh:plusIcon ,delete:trashIcon,edite:pencilIcon };
  public margin = { horizontal: -46, vertical: 7 };
-
  showPopupIndextodo =-1
  getTaskById(){
   this.api.getById("Task/GetById",this.TaskId).subscribe({
     next: (res) => {
       this.task =res;
       this.subtask =res.subTaskC
-    },
+     },
     error: (err) => {
       alert("error get Task")
     },
   });
 }
-  constructor(private router :Router, private route : ActivatedRoute , private api :GenericService ,private fb:FormBuilder, private location: Location){}
-  ngOnInit():void{
+constructor(private router :Router, private route : ActivatedRoute , private api :GenericService ,private fb:FormBuilder, private location: Location){}
+ngOnInit():void{
     this.getTaskById();
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
@@ -45,17 +47,20 @@ export class TaskDetailsComponent implements OnInit {
       deadline: [''],
       emergency :[false]
     });
+    this.noteForm = this.fb.group({
+      title: ['', Validators.required],
+      description: [''],
+      taskId: [''],
+      dossierId: [''],
+    });
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
   }
   onToggleto(index: number) {
     if (this.showPopupIndextodo === index) {
-      // if the same button is clicked again, hide the popup
       this.showPopupIndextodo = -1;
-    } else {
-      // show the popup for the clicked button only
-      this.showPopupIndextodo = index;
+    } else {      this.showPopupIndextodo = index;
     }
   }
   onDelete(i: any) {
@@ -66,19 +71,18 @@ export class TaskDetailsComponent implements OnInit {
     alert(i)
     alert('delete Task');
   }
-  
   public close(status: string): void {
-    console.log(`Dialog result: ${status}`);
     this.opened = false;
+    this.openedNo = false;
+  }
+  public open( status:any): void {
+    if(status =='note'){this.openedNo = true; this.noteForm.reset}
+    else{
+    this.opened = true;}
   }
 
-  public open(): void {
-
-    this.opened = true;
-  }
   public back(){
     this.location.back();
-
   }
   onSubmit(){
     this.taskForm.get('taskId')?.setValue(this.TaskId);
@@ -98,5 +102,9 @@ export class TaskDetailsComponent implements OnInit {
 
       },
     });
+  }
+  addNote(){
+    this.noteForm.get('taskId')?.setValue(this.task.id);
+    this.noteForm.get('dossierId')?.setValue(this.task.dossierId);
   }
 }

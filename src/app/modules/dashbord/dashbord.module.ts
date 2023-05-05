@@ -50,9 +50,9 @@ import { AssignmentsComponent } from 'src/app/Components/Dossier/add-dossier/ste
 import { WORSComponent } from 'src/app/Components/Dossier/add-dossier/steps/wors/wors.component';
 import { CreateDossierComponent } from 'src/app/Components/Dossier/add-dossier/steps/create-dossier/create-dossier.component';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
-import { AssignmentActComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/assignment-act/assignment-act.component';
-import { WORActComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/woract/woract.component';
-import { AssgDetailsComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/assignment-act/ActDetails/assg-details/assg-details.component';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -80,9 +80,6 @@ import { AssgDetailsComponent } from 'src/app/Components/Dossier/dossiers/assign
     CreateDossierComponent,
     AssignmentsComponent,
     WORSComponent,
-    AssignmentActComponent,
-    WORActComponent,
-    AssgDetailsComponent,
 
 
  ],
@@ -116,8 +113,11 @@ import { AssgDetailsComponent } from 'src/app/Components/Dossier/dossiers/assign
     TooltipModule,
     DropDownsModule,
     ChartsModule ,
-    ProgressBarModule
-    
+    ProgressBarModule,
+    MatTreeModule,
+    MatIconModule,
+    TreeViewModule,
+    MatButtonModule
   ]
   
 })

@@ -1,7 +1,8 @@
 .weather {
     margin: 30px;
-    text-align: center;
+    text-align: left;
   }
   kendo-tabstrip-tab{
     width: calc(100% / 7);
   }
+ 

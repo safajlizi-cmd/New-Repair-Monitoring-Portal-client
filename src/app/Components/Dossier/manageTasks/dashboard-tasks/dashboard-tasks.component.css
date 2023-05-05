@@ -16,7 +16,7 @@
    margin: 20px;
    flex: 1;
    overflow-y: auto; 
-   overflow-x: hidden; }
+    }
 app-task{
    width: 100%;
 }

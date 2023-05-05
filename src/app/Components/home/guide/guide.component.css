@@ -29,7 +29,6 @@
     margin: auto;
     position: relative;
     border-radius: 6px;
-    overflow: hidden;
 }
 
 .small-img-row {
@@ -38,7 +37,6 @@
     margin: 20px 0;
     align-items: center;
     border-radius: 6px;
-    overflow: hidden;
     width: 85%;
 }
 

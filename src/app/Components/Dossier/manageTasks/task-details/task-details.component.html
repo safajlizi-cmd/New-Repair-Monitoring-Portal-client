@@ -1,60 +1,67 @@
-<div class="split">
-  <div class=" top">
-        <h1 class="titlle "> Task Details </h1>
-
-        <table>
-          <tr>
-            <td class="titl">Task Title</td>
-            <td class="des">{{task.title}}</td>
-            <td class="titl">Description</td>
-            <td class="des">{{task.description}}</td>
-          </tr>
-          <tr>
-            <td class="titl">Created date</td>
-            <td class="des">{{task.createdDate |date: 'MM/dd/yyyy' }}</td>
-            <td class="titl">Created By</td>
-            <td class="des">{{task.createdBy}}</td>
-          </tr>
-        </table>
-      </div>
-      <div class="bottom">
-        <div class="dialog-button">
-          <button class="center" kendoButton (click)="open()" 
-            style="background-color: #3899DD;color:#fff ; margin:10px ;margin-left:79.8%"><kendo-svg-icon
-              [icon]="icons.trashh"></kendo-svg-icon>Add
-            Sub-Task</button>
-        </div>
-        <div *ngFor="let item of task.subTasksC ; let i =index"
-          [ngClass]="item.emergency ==true ? 'boxx':'example-boxx'">
-
-          {{item!.title}}
-          <span style="color:#dc5b1b"><kendo-avatar fillMode="outline" class="avatar"><span
-                style="font-size:10px;">SJ</span></kendo-avatar>safa jlizi </span>
-          <span style="color:#dc5b1b"><kendo-svg-icon [icon]="icons.trash" style="color:#3899DD"></kendo-svg-icon>
-            {{item!.deadline| date: 'MM/dd/yyyy' }}
-          </span>
-          <table>
-            <tr>
-              <td> <button kendoButton (click)="onUpdate(i)" style="background-color:#fff; "><kendo-svg-icon
-                    [icon]="icons.edite" style="color:#3899DD"></kendo-svg-icon></button>
-              </td>
-              <td>
-                <button kendoButton (click)="onDelete(i)"><kendo-svg-icon [icon]="icons.delete"
-                    style="color:#3899DD"></kendo-svg-icon></button>
-              </td>
-            </tr>
-          </table>
-
-        </div>
-      </div>
+<div class="row">
+  <div class="row" style="padding:10px ;background-color:rgb(155, 148, 148) ;width:100%">
+    <div class="col-lg-5">Description: <span class="titl">{{task?.description != null ?task?.description : "no Description.."}}</span></div>
+    <div class="col-lg-5">Deadline: <span class="titl">{{task?.deadline != null ?task.deadline : "deadline no defined.."}}</span></div>
+    <div class="col-lg-2">Created By :<span class="titl">{{task.createdBy?.userName }}</span></div>
+  </div>
+  <div class="col-lg-6">
+    <div class="dialog-button">
+      <button class="center" kendoButton (click)="open('subtask')"
+        style="background-color: #3899DD;color:#fff ; margin:10px"><kendo-svg-icon
+          [icon]="icons.trashh"></kendo-svg-icon>Add
+        Sub-Task</button>
     </div>
-<kendo-dialog title="Add Task" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250"[themeColor]="'dark'"
-  [width]="450">
+    <div class="box" *ngIf="task.subTasksC.length == 0">
+      No sub-tasks available ..
+    </div>
+    <div *ngFor="let item of task.subTasksC ; let i =index" [ngClass]="item.emergency ==true ? 'Emergency':'box'">
+
+      {{item!.title}}
+      <span style="color:#dc5b1b"><kendo-avatar fillMode="outline" class="avatar"><span
+            style="font-size:10px;">SJ</span></kendo-avatar>safa jlizi </span>
+      <span style="color:#dc5b1b"><kendo-svg-icon [icon]="icons.trash" style="color:#3899DD"></kendo-svg-icon>
+        {{item!.deadline| date: 'MM/dd/yyyy' }}
+      </span>
+      <table>
+        <tr>
+          <td> <button kendoButton (click)="onUpdate(i)" style="background-color:#fff; "><kendo-svg-icon
+                [icon]="icons.edite" style="color:#3899DD"></kendo-svg-icon></button>
+          </td>
+          <td>
+            <button kendoButton (click)="onDelete(i)"><kendo-svg-icon [icon]="icons.delete"
+                style="color:#3899DD"></kendo-svg-icon></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="dialog-button">
+      <button class="center" kendoButton (click)="open('note')"
+        style="background-color: #3899DD;color:#fff ; margin:10px"><kendo-svg-icon
+          [icon]="icons.trashh"></kendo-svg-icon>Add
+        Notes</button>
+    </div>
+    <div class="box" *ngIf="notes.length == 0">
+      No notes available ..
+    </div>
+    <div class="box" *ngFor="let item of notes ; let i =index" >
+           <p><span style="font-weight:bold">{{item.title}}</span> {{item.description}}</p> </div> 
+    <div>
+    </div>
+  </div>
+</div>
+
+
+<kendo-dialog title="Add Task" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250"
+  [themeColor]="'dark'" [width]="450">
   <form [formGroup]="taskForm">
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
-      <div *ngIf="taskForm.controls['title'].invalid && (taskForm.controls['title'].dirty || taskForm.controls['title'].touched)"   class="alert alert-danger">
+      <div
+        *ngIf="taskForm.controls['title'].invalid && (taskForm.controls['title'].dirty || taskForm.controls['title'].touched)"
+        class="alert alert-danger">
         <div *ngIf="taskForm.hasError('required','title')">Title is required.</div>
       </div>
     </div>
@@ -71,12 +78,38 @@
       <input type="checkbox" class="form-check-input" id="emergency" formControlName="emergency">
       <label class="form-check-label" for="emergency">IsEmergency</label>
     </div>
-
-
     <kendo-dialog-actions>
       <button kendoButton (click)="close('no')">Cancel</button>
       <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
         [disabled]="taskForm.invalid">
+        Add Task
+      </button>
+    </kendo-dialog-actions>
+  </form>
+</kendo-dialog>
+
+<kendo-dialog title="Add note" [animation]="animation" *ngIf="openedNo" (close)="close('cancel')" [minWidth]="250"
+  [themeColor]="'dark'" [width]="450">
+  <form [formGroup]="noteForm">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
+      <div
+        *ngIf="noteForm.controls['title'].invalid && (noteForm.controls['title'].dirty || noteForm.controls['title'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="noteForm.hasError('required','title')">Title is required.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+    </div>
+
+    <kendo-dialog-actions>
+      <button kendoButton (click)="close('no')">Cancel</button>
+      <button kendoButton (click)="addNote()" style="background-color: #3899DD;color: #fff;"
+        [disabled]="noteForm.invalid">
         Add Task
       </button>
     </kendo-dialog-actions>

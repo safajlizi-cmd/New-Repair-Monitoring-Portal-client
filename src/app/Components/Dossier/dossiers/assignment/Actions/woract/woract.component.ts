@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { TabAlignment } from '@progress/kendo-angular-layout';
 
 @Component({
   selector: 'app-woract',
@@ -6,50 +8,40 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./woract.component.css']
 })
 export class WORActComponent {
-  @Input() id :any;
+   id :any;
   public selected = 1;
   public items = [
     {
       disabled: false,
-      city: "Contact Information2",
-      temp: 17,
-      weather: "rainy",
-    },
-    {
-      disabled: false,
-      city: "Policy Information2",
-      temp: 29,
-      weather: "sunny",
-    },
-    {
-      disabled: false,
-      city: "Communication2",
-      temp: 23,
+      city: "Informations",
+      temp: 19,
       weather: "cloudy",
     },
     {
       disabled: false,
       city: "Documents",
-      temp: 19,
-      weather: "cloudy",
+      temp: 17,
+      weather: "rainy",
     },
     {
       disabled: false,
-      city: "Financial",
-      temp: 19,
-      weather: "cloudy",
+      city: "Notes",
+      temp: 29,
+      weather: "sunny",
     },
     {
       disabled: false,
-      city: "Expertise",
-      temp: 19,
+      city: "Email",
+      temp: 23,
       weather: "cloudy",
-    },
-    {
-      disabled: false,
-      city: "Status",
-      temp: 19,
-      weather: "cloudy",
-    },
+    }
   ];
+  public alignment: TabAlignment = "center";
+
+  constructor(private route:ActivatedRoute ){}
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.id = params['Id'];
+    });   
+  }
 }

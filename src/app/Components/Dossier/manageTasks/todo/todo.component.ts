@@ -31,8 +31,9 @@ export class TodoComponent implements OnInit {
   taskForm!: FormGroup;
   assignedTask: any
   openedAssign = false
-  historySearchForm!: FormGroup;
+  taskSearchForm!: FormGroup;
   historydateForm!: FormGroup;
+  title!:any
   @Input() userId!: any;
   @ViewChild("anchor", { static: false })
   public anchor: ElementRef<HTMLElement> | undefined;
@@ -124,8 +125,10 @@ export class TodoComponent implements OnInit {
     });
   }
 
-  details(id: any) {
-  this.taskId = id
+  details(item: any) {
+  this.taskId = item.id
+  this.title = item.title+"/["+item.taskNumber+"]"
+
   this.opened2=true
    // this.router.navigate(["Details/", id], { relativeTo: this.route });
   }
@@ -156,7 +159,7 @@ export class TodoComponent implements OnInit {
       description: [''],
       emergency: [false, Validators.required]
     });
-    this.historySearchForm = this.formBuilder.group({
+    this.taskSearchForm = this.formBuilder.group({
       keyword: [''],
     });
     this.historydateForm = this.formBuilder.group({
@@ -166,7 +169,29 @@ export class TodoComponent implements OnInit {
     this.getDossiers()
   }
   onChange(event: any) {
-
+    console.log(event)
+    this.apiTask.getListBykeyword("inprog", this.userId,this.taskSearchForm.get('keyword')!.value).subscribe({
+      next: (res) => {
+        this.inprogress = res;
+      },
+      error: (err) => {
+        alert(err)
+      },
+    });
+    this.apiTask.getListByDossier("todo", this.userId,this.taskSearchForm.get('keyword')!.value).subscribe({
+      next: (res) => {
+        this.todo = res;
+      },
+      error: (err) => {
+      },
+    });
+    this.apiTask.getListByDossier("done", this.userId,this.taskSearchForm.get('keyword')!.value).subscribe({
+      next: (res) => {
+        this.done = res;
+      },
+      error: (err) => {
+      },
+    });
   }
   onChangeDate(event: any) { }
   onActionButtonClick(event: any) {
@@ -212,10 +237,8 @@ export class TodoComponent implements OnInit {
     this.showPopupIndextodo = -1;
     this.showPopupIndexin = -1;
     this.showPopupIndexdo = -1;
-
     console.log(i)
   }
-  
   openAssign(id: any) {
     this.openedAssign = true;
     this.assignedTask = id;

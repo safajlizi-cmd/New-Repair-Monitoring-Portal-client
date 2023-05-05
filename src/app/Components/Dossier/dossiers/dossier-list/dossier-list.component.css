@@ -20,7 +20,7 @@
     margin: 20px;
     flex: 1;
     overflow-y: auto; 
-    overflow-x: hidden; }
+    }
     .bt{
       background-color: #3899DD;color: #fff;
     }

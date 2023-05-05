@@ -31,6 +31,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { GuideItemComponent } from './Components/home/guide-item/guide-item.component';
 import { NavbarGuideComponent } from './Components/home/navbar-guide/navbar-guide.component';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -70,8 +72,8 @@ import { NavbarGuideComponent } from './Components/home/navbar-guide/navbar-guid
     HttpClientModule,
     MatGridListModule,
     NotificationModule,
-
-
+    MatTreeModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

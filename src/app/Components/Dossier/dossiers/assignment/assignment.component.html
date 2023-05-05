@@ -1,96 +1,156 @@
-<div class="example-wrapper">
-   <div style="display: flex; justify-content: space-between;">
-      <div style="flex-basis:30%; flex-grow: 1;">
-         <kendo-avatar fillMode="outline" initials="D"
-            style="background-color:#3899DD; color: #fff;"></kendo-avatar>{{dossier?.dossierNumber}}
+<div class="row p-2">
+   <div class="col-lg-4" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);  overflow-y: auto;">
+      <div class="treeview js-treeview">
+         <ul>
+           <li>
+             <div class="treeview__level" data-level="D">
+               <span class="level-title" routerLinkActive="active" routerLink="./Overview"
+               [routerLinkActiveOptions] ="{exact:true}" >{{dossier.dossierNumber}}</span>
+               <div class="treeview__level-btns">
+                  <span kendoTooltip title="Add Assignment">
+                 <div class="btn btn-default btn-sm level-add" (click)="open()"><span class="fa fa-plus"></span></div></span>
+               </div>
+             </div>
+             <ul>
+       
+               <li *ngFor="let item of Assignments">
+                 <div class="treeview__level" data-level="A">
+                   <span class="level-title" routerLinkActive="active" routerLink="./Assignment/{{item.id}}"
+                   [routerLinkActiveOptions] ="{exact:true}" >{{item.assignmentNumber}}</span>
+                   <div class="treeview__level-btns">
+                     <span kendoTooltip title="Add WorkingOrder">
+                     <div class="btn btn-default btn-sm level-add" (click)="openWo()"><span class="fa fa-plus"></span></div></span>
+                   </div>
+                 </div>
+                 <ul>
+                   <li  *ngFor="let itemW of item.workingOrdersC">
+                     <div class="treeview__level" data-level="W">
+                       <span class="level-title" routerLinkActive="active" routerLink="./Word/{{itemW.id}}"
+                       [routerLinkActiveOptions] ="{exact:true}">{{itemW.woNumber}}</span>
+                     </div>
+                   </li>
+                 </ul>
+               </li>
+       
+             </ul>
+           </li>
+         </ul>
+       </div>
+   </div>
+<div class="col-lg-8" style="overflow-y: auto;">  
+   <div class="row" >
+      <div class="example-wrapper">
+         <div style="display: flex; justify-content: space-between;">
+            <div style="flex-basis:30%; flex-grow: 1;">
+               <kendo-avatar fillMode="outline" initials="D"
+                  style="background-color:#3899DD; color: #fff;"></kendo-avatar>{{dossier?.dossierNumber}}</div>
+            <div style="flex-basis:30%; flex-grow: 1;">
+               Created Date : <span class="date"><kendo-svg-icon [icon]="icons.trash"></kendo-svg-icon> {{dossier?.createdDate|date: 'MM/dd/yyyy' }} </span>
+            </div>
+            <div style="flex-basis:30%; flex-grow: 1;">
+               Created By : <span class="date"><kendo-avatar fillMode="outline" class="avatar"
+                     *ngIf="dossier?.createdBy?.userName != null ">
+                     <span style="font-size:7px;">{{ dossier?.createdBy?.firstName[0] }}{{dossier?.createdBy?.lastName[0] }}</span>
+                  </kendo-avatar> {{ dossier?.createdBy?.userName }}</span>
+            </div>
+         </div>
       </div>
-      <div style="flex-basis:30%; flex-grow: 1;">
-         Created Date : <span class="date"><kendo-svg-icon [icon]="icons.trash"></kendo-svg-icon> {{dossier?.createdDate
-            |date: 'MM/dd/yyyy' }} </span>
-      </div>
-      <div style="flex-basis:30%; flex-grow: 1;">
-         Created By : <span class="date"><kendo-avatar fillMode="outline" class="avatar"
-               *ngIf="dossier?.createdBy?.userName != null ">
-               <span style="font-size:7px;">{{ dossier?.createdBy?.firstName[0] }}{{
-                  dossier?.createdBy?.lastName[0] }}</span>
-            </kendo-avatar> {{ dossier?.createdBy?.userName }}</span>
-      </div>
-      <div style="flex-basis:10%; flex-grow: 1;">
-         <button kendoButton (click)="open()"
-            style="background-color:#3899DD; margin-right: 10px;border:none; color: #fff;justify-self: end;">
-            <kendo-svg-icon [icon]="icons.plus"></kendo-svg-icon> Add Assignment
-         </button>
-      </div>
+   </div>    
+      <router-outlet></router-outlet>
    </div>
 </div>
-
-<div class="split">
-   <div class="left">
-      <kendo-textbox #customInput (valueChange)="filterTerm = $event" [clearButton]="true" placeholder="Filter...">
-         <ng-template kendoTextBoxPrefixTemplate>
-            <span class="k-input-icon k-icon k-i-search"></span>
-         </ng-template>
-      </kendo-textbox>
-      <hr />
-      <kendo-label [for]="treeview" [style.display]="'block'" text="Assignments List :" class="title">
-      </kendo-label>
-      <p c class="title2" *ngIf="Assignments.length ==0 ">No Assignments available ...</p>
-      <kendo-treeview #treeview [nodes]="Assignments" [textField]="['assignmentNumber', 'woNumber']"
-         [filter]="filterTerm" kendoTreeViewExpandable kendoTreeViewHierarchyBinding childrenField="workingOrdersC">
-         <ng-template kendoTreeViewNodeTemplate let-dataItem>
-            <kendo-avatar fillMode="outline" class="avatar" *ngIf="dataItem.woNumber !='No working orders...'">
-               <span style="font-size:7px;">{{ dataItem.woNumber ?'W' : 'A' }} </span>
-            </kendo-avatar>
-            <span *ngIf="dataItem.woNumber != 'No working orders...'" (click)="onAssignmentClick(dataItem)">
-               {{ dataItem.woNumber ? dataItem.woNumber : dataItem.assignmentNumber }}
-            </span>
-            <span *ngIf="dataItem.woNumber == 'No working orders...'">
-               {{ dataItem.woNumber ? dataItem.woNumber : dataItem.assignmentNumber }}
-            </span> </ng-template>
-      </kendo-treeview>
-   </div>
-   <div class="right">
-      <app-assignment-act *ngIf="showAct =='assynment'" [id]="selectedAct"></app-assignment-act>
-      <app-woract *ngIf="showAct=='work'" [id]="selectedAct"></app-woract>
-   </div>
-</div>
-<kendo-dialog title="Add Assignment"*ngIf="opened" (close)="close('cancel')" [themeColor]="'dark'" [minWidth]="250" [width]="450">
-<form [formGroup]="AssignForm">
-    <div class="form-group">
-        <label for="title">Assignment Number:</label>
-        <input type="text" class="form-control" id="assignmentNumber" formControlName="assignmentNumber"
+<kendo-dialog title="Add Assignment" *ngIf="openedassy" (close)="close('cancel')" [themeColor]="'dark'" [minWidth]="250"
+   [width]="450">
+   <form [formGroup]="AssignForm">
+      <div class="form-group">
+         <label for="title">Assignment Number:</label>
+         <input type="text" class="form-control" id="assignmentNumber" formControlName="assignmentNumber"
             placeholder="Title">
-        <div *ngIf="AssignForm.controls['assignmentNumber'].invalid && (AssignForm.controls['assignmentNumber'].dirty || AssignForm.controls['assignmentNumber'].touched)"
+         <div
+            *ngIf="AssignForm.controls['assignmentNumber'].invalid && (AssignForm.controls['assignmentNumber'].dirty || AssignForm.controls['assignmentNumber'].touched)"
             class="alert alert-danger">
             <div *ngIf="AssignForm.hasError('required','assignmentNumber')">Assignment Number is required.
             </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="title">Cause:</label>
-        <input type="text" class="form-control" id="cause" formControlName="cause" placeholder="Cause">
-        <div *ngIf="AssignForm.controls['cause'].invalid && (AssignForm.controls['cause'].dirty || AssignForm.controls['cause'].touched)"
+         </div>
+      </div>
+      <div class="form-group">
+         <label for="title">Cause:</label>
+         <input type="text" class="form-control" id="cause" formControlName="cause" placeholder="Cause">
+         <div
+            *ngIf="AssignForm.controls['cause'].invalid && (AssignForm.controls['cause'].dirty || AssignForm.controls['cause'].touched)"
             class="alert alert-danger">
             <div *ngIf="AssignForm.hasError('required','cause')">Cause Number is required.</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="title">DupedName:</label>
-        <input type="text" class="form-control" id="dupedName" formControlName="dupedName"
-            placeholder="Duped Name">
-        <div *ngIf="AssignForm.controls['dupedName'].invalid && (AssignForm.controls['dupedName'].dirty || AssignForm.controls['dupedName'].touched)"
+         </div>
+      </div>
+      <div class="form-group">
+         <label for="title">DupedName:</label>
+         <input type="text" class="form-control" id="dupedName" formControlName="dupedName" placeholder="Duped Name">
+         <div
+            *ngIf="AssignForm.controls['dupedName'].invalid && (AssignForm.controls['dupedName'].dirty || AssignForm.controls['dupedName'].touched)"
             class="alert alert-danger">
             <div *ngIf="AssignForm.hasError('required','dupedName')">Duped Name is required.</div>
-        </div>
-    </div>
+         </div>
+      </div>
 
-    <kendo-dialog-actions style="border:none;margin-top: 20px;">
-        <button kendoButton (click)="close('no')">Cancel</button>
-        <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
+      <kendo-dialog-actions style="border:none;margin-top: 20px;">
+         <button kendoButton (click)="close('no')">Cancel</button>
+         <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
             [disabled]="AssignForm.invalid">
             Add Assignment
+         </button>
+      </kendo-dialog-actions>
+   </form>
+
+</kendo-dialog>
+<kendo-dialog title="Add Working Order" *ngIf="opened" (close)="close('cancel')" [themeColor]="'dark'"
+  [minWidth]="250" [width]="450">
+  <form [formGroup]="WOForm">
+    <div class="form-group">
+        <label for="title">Working Order Number:</label>
+        <input type="text" class="form-control" id="woNumber" formControlName="woNumber" placeholder="Working Order">
+        <div
+           *ngIf="WOForm.controls['woNumber'].invalid && (WOForm.controls['woNumber'].dirty || WOForm.controls['woNumber'].touched)"
+           class="alert alert-danger">
+           <div *ngIf="WOForm.hasError('required','woNumber')">Working order is required.</div>
+        </div>
+     </div>
+     <table style="width:100% " cellspacing="0">
+        <tr>
+           <td style="width:50% ">
+              <div class="form-group">
+                 <label for="DamageType">DamageType:</label>
+                 <select class="form-control" id="damageTypeId" formControlName="damageTypeId">
+                    <option *ngFor="let item of damageTypes" [value]=" item.id">{{ item.longName }}
+                    </option>
+                 </select>
+              </div>
+           </td>
+           <td style="width:50% ">
+              <div class="form-group">
+                 <label for="Material">Material:</label>
+                 <select class="form-control" id="materialId" formControlName="materialId">
+                    <option *ngFor="let  item of Materials" [value]=" item.id">{{ item.longName }}
+                    </option>
+                 </select>
+              </div>
+           </td>
+        </tr>
+     </table>
+     <div class="form-group">
+        <label for="dossier">Location:</label>
+        <select class="form-control" id="locationId" formControlName="locationId">
+           <option *ngFor="let  item of Locations" [value]=" item.id">{{ item.longName }}
+           </option>
+        </select>
+     </div>
+
+     <kendo-dialog-actions style="border:none;margin-top: 20px;">
+        <button kendoButton (click)="close('no')">Cancel</button>
+        <button kendoButton (click)="AddWorkingOrder()" style="background-color: #3899DD;color: #fff;"
+           [disabled]="WOForm.invalid">
+           Add Working Order
         </button>
-    </kendo-dialog-actions>
-</form>
+     </kendo-dialog-actions>
+  </form>
 
 </kendo-dialog>
