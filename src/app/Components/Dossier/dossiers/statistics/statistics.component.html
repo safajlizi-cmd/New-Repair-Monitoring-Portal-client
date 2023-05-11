@@ -1,51 +1,48 @@
-<kendo-chart  >
-    <kendo-chart-title text="Dossier Tasks" font="color: rgb(66, 62, 62);font-size: 1.8rem;font-weight: bold"></kendo-chart-title>
-    <kendo-chart-category-axis>
-      <kendo-chart-category-axis-item [categories]="['Dossier 1', 'Dossier 2', 'Dossier 3', 'Dossier 4']" >
-        <kendo-chart-series-item-labels font="color: rgb(66, 62, 62);font-size: 0.8rem;font-weight: bold"></kendo-chart-series-item-labels>
-      </kendo-chart-category-axis-item>
-    </kendo-chart-category-axis>
-    <kendo-chart-series >
-        <kendo-chart-series-item name="Done Tasks" type="bar" [data]="[60, 40, 80, 90]" color="#86BC35" >
-          <kendo-chart-tooltip [shared]="true">
-            <ng-template
-              kendoChartSharedTooltipTemplate
-              let-category="category"
-              let-points="points"
-            >
-              <div>{{ category }}</div>
-              <div *ngFor="let point of points">
-                {{ point.series.name }} : {{ point.value }}
-              </div>
-            </ng-template>
-          </kendo-chart-tooltip>
-    </kendo-chart-series-item>
-        <kendo-chart-series-item name="In Progress Tasks" type="bar" [data]="[20, 30, 10, 5]" color="#3899DD" font="color: rgb(66, 62, 62);font-size: 0.8rem;font-weight: bold">
-          <kendo-chart-tooltip [shared]="true">
-            <ng-template
-              kendoChartSharedTooltipTemplate
-         
-            >
-              <div>safa</div>
-              <div>safa2</div>
-              <div>safa3</div>
+    <div class="row">
+      <h1 class="title mt-1">Dossiers Progresses</h1>
+      <kendo-tabstrip [ngStyle]="{ width: '100%' ,height:'100%'}"[tabAlignment]="alignment">
+   <kendo-tabstrip-tab
+      *ngFor="let item of items; let i = index"
+      [title]="item.city"
+      [selected]="i === selected"
+      [disabled]="item.disabled"
+    >
+      <ng-template kendoTabContent>
+        <div class="weather">
+          <div *ngIf="item.city=='InExecution'">
+             <app-tasks-chart></app-tasks-chart>
+          </div>
+          <div *ngIf="item.city=='Completed'">
+             <app-completedchart></app-completedchart>
+          </div>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+  </kendo-tabstrip>
+    </div> 
+    <div class="row mt-5">
 
-            </ng-template>
-          </kendo-chart-tooltip>
-        </kendo-chart-series-item>
-        <kendo-chart-series-item name="Not Started Tasks" type="bar" [data]="[20, 30, 10, 5]" color="#56248C" font="color: rgb(66, 62, 62);font-size: 0.8rem;font-weight: bold">
-          <kendo-chart-tooltip [shared]="true">
-            <ng-template
-              kendoChartSharedTooltipTemplate
-              let-category="category"
-              let-points="points"
-            >
-              <div>{{ category }}</div>
-              <div *ngFor="let point of points">
-                {{ point.series.name }} : {{ point.value }}
-              </div>
-            </ng-template>
-          </kendo-chart-tooltip>
-        </kendo-chart-series-item>
-      </kendo-chart-series>
-  </kendo-chart>
+      <h1 class="title mt-1">Top 5 Dossiers </h1>
+       <kendo-tabstrip [ngStyle]="{ width: '100%' ,height:'100%'}"[tabAlignment]="alignment">
+   <kendo-tabstrip-tab
+      *ngFor="let item of top5; let i = index"
+      [title]="item.city"
+      [selected]="i === selected2"
+      [disabled]="item.disabled"
+    >
+      <ng-template kendoTabContent>
+        <div class="weather">
+          <div *ngIf="item.city=='Longest Creation Period'">
+            <app-top5-chart></app-top5-chart>
+          </div>
+          <div *ngIf="item.city=='Lowest Creation Period'">
+            <app-lowest-dossier></app-lowest-dossier>
+          </div>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+  </kendo-tabstrip>
+    </div> 
+
+
+

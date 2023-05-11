@@ -86,3 +86,30 @@ kendo-appbar{
     background-color: rgba(206, 210, 211,0.4);
     cursor: pointer;
   }
+
+.content li {
+  margin: 0;
+  padding: 6px 5px;
+}
+.content ul {
+  display: block;
+}
+.box {
+  padding: 10px 10px;
+  color: #303131;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  font-size: 15x;
+  font: weight 300px;
+  width: 100%;
+}
+.contain{
+  background-color: #303131;
+}
+.sbt{
+  border: none;
+  padding: 0;
+  margin: 0;
+}

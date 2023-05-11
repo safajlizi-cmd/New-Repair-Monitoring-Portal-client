@@ -12,8 +12,6 @@ const routes: Routes = [
   { path: 'Guide', component: GuideListComponent },
   { path: 'Guide/Item', component: GuideItemComponent },
   { path: 'Dossiers',loadChildren:()=>import('./modules/dashbord/dashbord.module').then((m)=>m.DashbordModule),canActivate:[AuthGuard]},
-
-
 ];
 
 @NgModule({

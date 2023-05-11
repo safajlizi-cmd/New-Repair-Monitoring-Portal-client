@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TabAlignment } from '@progress/kendo-angular-layout';
+import { clockIcon } from '@progress/kendo-svg-icons';
 import { GenericService } from 'src/app/services/generic.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 
@@ -12,7 +13,27 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 export class DossierOverviewComponent {
    id:any
    dossier:any;
+   notes:any[]=[]
    public selected = 1;
+   public icons = {  trash: clockIcon}
+   public value = `
+   <p>
+       The Kendo Angular UI Editor allows your users to edit HTML in a familiar, user-friendly way.<br />
+       In this version, the Editor provides the core HTML editing engine, which includes basic text formatting, hyperlinks and lists.
+       The widget <strong>outputs identical HTML</strong> across all major browsers, follows
+       accessibility standards, and provides API for content manipulation.
+   </p>
+   <p>Features include:</p>
+   <ul>
+       <li>Text formatting</li>
+       <li>Bulleted and numbered lists</li>
+       <li>Hyperlinks</li>
+       <li>Cross-browser support</li>
+       <li>Identical HTML output across browsers</li>
+   </ul>
+`;
+   uploadSaveUrl = "saveUrl"; 
+   uploadRemoveUrl = "removeUrl"; 
    public items = [
     {
       disabled: false,
@@ -39,18 +60,18 @@ export class DossierOverviewComponent {
       weather: "cloudy",
     }
   ];
-  public alignment: TabAlignment = "center";
+  public alignment: TabAlignment = "start";
 
   constructor(private route:ActivatedRoute , private api :GenericService, private userStore:UserStoreService){}
   getDossier() {
     this.api.getById("Dossier/GetById", this.id).subscribe({
       next: (res) => {
         this.dossier = res.dossier;
+        this.notes =res.dossier.notes
         console.log("this.dossier");
-        console.log(this.dossier);
       },
       error: (err) => {
-        alert("error1")
+        alert("errordetDossier")
       },
     });
   }

@@ -43,7 +43,6 @@ import { UsernameComponent } from 'src/app/Components/Dhashboards/profile/seetin
 import { StatisticsComponent } from 'src/app/Components/Dossier/dossiers/statistics/statistics.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { PopupModule } from '@progress/kendo-angular-popup';
-import { ChartsModule } from '@progress/kendo-angular-charts';
 import { CollaboratorTasksComponent } from 'src/app/Components/Dossier/manageTasks/collaborator-tasks/collaborator-tasks.component';
 import { AddDossierComponent } from 'src/app/Components/Dossier/add-dossier/add-dossier.component';
 import { AssignmentsComponent } from 'src/app/Components/Dossier/add-dossier/steps/assignments/assignments.component';
@@ -53,7 +52,12 @@ import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-
+import { ChartsModule } from '@progress/kendo-angular-charts';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { Top5ChartComponent } from 'src/app/Components/Dossier/dossiers/statistics/charts/top5-chart/top5-chart.component';
+import { TasksChartComponent } from 'src/app/Components/Dossier/dossiers/statistics/charts/tasks-chart/tasks-chart.component';
+import { CompletedchartComponent } from 'src/app/Components/Dossier/dossiers/statistics/charts/completedchart/completedchart.component';
+import { LowestDossierComponent } from 'src/app/Components/Dossier/dossiers/statistics/charts/lowest-dossier/lowest-dossier.component';import { UploadsModule } from '@progress/kendo-angular-upload';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -80,7 +84,10 @@ import {MatButtonModule} from '@angular/material/button';
     CreateDossierComponent,
     AssignmentsComponent,
     WORSComponent,
-
+    Top5ChartComponent,
+    TasksChartComponent,
+    CompletedchartComponent,
+    LowestDossierComponent,
 
  ],
   imports: [
@@ -112,13 +119,15 @@ import {MatButtonModule} from '@angular/material/button';
     PanelBarModule,
     TooltipModule,
     DropDownsModule,
-    ChartsModule ,
     ProgressBarModule,
     MatTreeModule,
     MatIconModule,
     TreeViewModule,
-    MatButtonModule
-  ]
-  
+    MatButtonModule,
+    MatSnackBarModule,
+    UploadsModule,
+    ChartsModule 
+   ],
+
 })
 export class DashbordModule { }

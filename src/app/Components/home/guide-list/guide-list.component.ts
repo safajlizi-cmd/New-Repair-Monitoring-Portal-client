@@ -83,17 +83,6 @@ export class GuideListComponent {
       },
       {
         description:
-          "PDC Portal",
-          des:"PDC Portal Settings Guide",
-
-        actionButtons: [{ text: "View details!", flat: true, primary: true }],
-        actionsLayout: "start",
-        videoSrc: this.sanitizer.bypassSecurityTrustResourceUrl(
-          "https://www.youtube.com/embed/tgbNymZ7vqY"
-        ),
-      },
-      {
-        description:
           "Configuration",
           des:"Configuration Settings Guide",
 
@@ -107,7 +96,7 @@ export class GuideListComponent {
     
     },
     {
-      title: 'Configuration',
+      title: 'Accounts',
       cards:[{
         description:
           "Accounts",

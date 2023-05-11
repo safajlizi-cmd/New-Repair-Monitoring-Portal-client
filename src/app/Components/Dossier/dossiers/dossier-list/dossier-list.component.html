@@ -1,7 +1,7 @@
 <div class="split">
     <div class=" top">
         <h1 class="titlle ">Dossiers List</h1>
-        <button class="bt" kendoButton (click)="open()" style="margin-left:90%">Add new dossier</button>
+        <button class="bt" kendoButton (click)="open('dossier')" style="margin-left:90%">Add new dossier</button>
     </div>
     <div class="bottom">
         <kendo-grid [kendoGridBinding]="gridData" filterable="menu" style=" background: rgb(45, 43, 43); border: none;"
@@ -38,7 +38,15 @@
                     </div>
                 </ng-template>
             </kendo-grid-column>
-            <kendo-grid-column field="ageBuilding" title="Dossier Status" filter="numeric">
+            <kendo-grid-column field="dossierStatus.longName" title="Dossier Status">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span kendoTooltip title="Update dossier status">
+                    <button (click)="open(dataItem.id)" style="border:none"><span
+                            class="k-icon k-i-edit k-i-pencil"></span></button>
+                            </span>
+                            {{dataItem?.dossierStatus?.longName}}
+
+                </ng-template>
             </kendo-grid-column>
             <kendo-grid-column title=" " filter="date" [width]="150">
                 <ng-template kendoGridCellTemplate let-dataItem>
@@ -72,3 +80,23 @@
         </form>-->
         <app-add-dossier></app-add-dossier>
     </kendo-dialog>
+    <kendo-dialog title="Update dossier status" *ngIf="openedStatus" (close)="close('cancel')" [themeColor]="'dark'"
+  [minWidth]="250" [width]="450">
+  <form [formGroup]="StatusForm">       
+     <div class="form-group">
+        <label for="dossier">Location:</label>
+        <select class="form-control" id="dossierStatus" formControlName="dossierStatus">
+           <option *ngFor="let  item of Status" [value]=" item.id">{{ item.longName }}
+           </option>
+        </select>
+     </div>
+     <kendo-dialog-actions style="border:none;margin-top: 20px;">
+        <button kendoButton (click)="close('no')">Cancel</button>
+        <button kendoButton (click)="updateStatus()" style="background-color: #3899DD;color: #fff;"
+           [disabled]="StatusForm.invalid">
+           Update 
+        </button>
+     </kendo-dialog-actions>
+  </form>
+
+</kendo-dialog>

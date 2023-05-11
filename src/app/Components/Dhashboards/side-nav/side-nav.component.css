@@ -2,7 +2,6 @@
     background-color: #303131;
     transition: all .5s ease;
     position: fixed ;
-    z-index: 1;
     top: 0;
     width: 16.5625 rem;
     height: 100vh;

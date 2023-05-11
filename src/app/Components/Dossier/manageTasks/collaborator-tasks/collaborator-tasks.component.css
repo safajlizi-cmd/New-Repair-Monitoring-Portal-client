@@ -108,21 +108,16 @@
   }
   .avatar{
     background-color:#3899DD; color: #fff;  width: 19px;height: 19px;margin-right: 4px;
-
   }
   .navButton{
     background-color: rgba(0, 0, 0, 0);border: none;color: rgb(66, 62, 62);font-size: 0.8rem;font-weight: bold;
   }
- 
   .headerBox {
     height: 25%;
-   
   }
-  
   .contentBox {
     height: 30%;
   }
-  
   .footerBox {
     height: 25%;
   }
@@ -135,7 +130,6 @@
   }
   .example-form{
     border-radius: 12px;
-    
   }
   .dateF{
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -161,3 +155,8 @@
 
   }
   .bt{background-color: #3899DD;color: #fff;}
+  .dossierF2{
+    border-bottom-left-radius: 12px;
+    border-top-left-radius: 12px;
+    color:#303131;width: 200px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }

@@ -1,25 +1,16 @@
-:host{
-  
-}
-.split {
-  display: flex;
- flex-direction: row;
-  height: calc(100vh - 8.5rem);
 
-}
-.left {
-  margin-top:0.5rem;
-  padding: 0 10px 10px;
-  width: 20%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+.row{
   height: 100%;
 }
-.right {
-  height: 100%;
-  margin: 20px;
-  width:80%;
-  overflow-y: auto; 
-  overflow-x: auto; }
+.diag{
+  background-color: rgba(30, 29, 29, 0.2)
+}
+.row2{box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);  overflow-y: auto;}
+.header{
+  display: flex; justify-content: space-between;
+}
+.split1{flex-basis:10%; flex-grow: 1;color:#86BC35; font-weight: bold; }
+.split2{flex-basis:20%; flex-grow: 1;}
 kendo-tabstrip p {
   margin: 0;
   padding: 8px;
@@ -45,7 +36,7 @@ kendo-textbox {
   color:#868282;font-size: 0.7rem;font-weight: bold;
 }
 .avatar{
-  background-color:#3899DD; color: #fff; width: 18px; height: 18px;  
+  background-color:#3899DD; color: #fff; width: 22px; height: 22px;  
 }
 .active {
  color: #3899DD;
@@ -53,18 +44,19 @@ kendo-textbox {
 .example-wrapper {
   margin-top:5rem;
   padding:10px;
-   height: 50px;
+  padding-top:22px;
+   height: 80px;
    width: 100%;
   margin: 0 auto;
-  background-color: #303131;
+  background-color: #d1d8d8;
   border:solid 0.5px #3899DD;
-  color:#fff;
+  color:#564f4f;
   right: 0;
   display: flex; flex-direction: column;
-  font-size: 0.9rem;font-weight: bold;
+  font-size: 1.1rem;font-weight: bold;
 }
 .date{
-  color:#abafa5;font-size: 0.8rem;font-weight: bold;
+  color:#1e1f1d;font-size: 0.9rem;font-weight: bold;
 }
 
 .mat-tree-node {

@@ -11,7 +11,7 @@
       </div>
     </kendo-card-body>
   </kendo-card>
-  <kendo-dialog title="Update Assignment" *ngIf="opened" (close)="close('cancel')" [themeColor]="'dark'" 
+  <kendo-dialog title="Update Assignment" *ngIf="opened" (close)="close('cancel')" [themeColor]="'dark'" class="diag"
   [minWidth]="250" [width]="450">
   <form [formGroup]="AssignForm">
       <div class="form-group">
@@ -32,16 +32,6 @@
               <div *ngIf="AssignForm.hasError('required','cause')">Cause Number is required.</div>
           </div>
       </div>
-      <div class="form-group">
-          <label for="title">DupedName:</label>
-          <input type="text" class="form-control" id="dupedName" formControlName="dupedName"
-              placeholder="Duped Name">
-          <div *ngIf="AssignForm.controls['dupedName'].invalid && (AssignForm.controls['dupedName'].dirty || AssignForm.controls['dupedName'].touched)"
-              class="alert alert-danger">
-              <div *ngIf="AssignForm.hasError('required','dupedName')">Duped Name is required.</div>
-          </div>
-      </div>
-
       <kendo-dialog-actions style="border:none;margin-top: 20px;">
           <button kendoButton (click)="close('no')">Cancel</button>
           <button kendoButton (click)="OnSubmit()" style="background-color: #3899DD;color: #fff;"

@@ -33,7 +33,7 @@ historydateForm!: FormGroup;
 todo: any = [];
 dossiers: any;
 public margin = { horizontal: -46, vertical: 7 };
-
+tasks=[{title :'Task 1'},{title :'Task 2'},{title :'Task 3'},{title :'Task 4'},{title :'Task 5'}]
 public show = false;
 inprogress: any = [];
 done: any = [];
@@ -91,10 +91,30 @@ ngOnInit(): void {
   this.getTasks()
   this.getDossiers()
 }
-onChange(event: any) {
-
+onSelectTask(event: any) {
+  this.apiTask.getListByTask("inprog", this.userId, event.title).subscribe({
+    next: (res) => {
+      this.inprogress = res;
+    },
+    error: (err) => {
+      alert(err)
+    },
+  });
+  this.apiTask.getListByTask("todo", this.userId, event.title).subscribe({
+    next: (res) => {
+      this.todo = res;
+    },
+    error: (err) => {
+    },
+  });
+  this.apiTask.getListByTask("done", this.userId, event.title).subscribe({
+    next: (res) => {
+      this.done = res;
+    },
+    error: (err) => {
+    },
+  });
 }
-onChangeDate(event: any) { }
 onActionButtonClick(event: any) {
   this.apiTask.getListByDossier("inprog", this.userId, event.id).subscribe({
     next: (res) => {

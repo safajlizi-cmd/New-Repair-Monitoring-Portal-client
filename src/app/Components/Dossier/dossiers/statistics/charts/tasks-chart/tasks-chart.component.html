@@ -1,0 +1,42 @@
+
+  <kendo-chart   >
+    <kendo-chart-title text="In Execution Dossiers" font="color: rgba(66, 62, 62,0.5);font-size: 1.7rem;font-weight: bold"></kendo-chart-title>
+    <kendo-chart-category-axis>
+      <kendo-chart-category-axis-item [categories]="dossierList" >
+        <kendo-chart-series-item-labels font="color: rgb(66, 62, 62);font-size: 0.8rem;font-weight: bold"></kendo-chart-series-item-labels>
+      </kendo-chart-category-axis-item>
+    </kendo-chart-category-axis>
+    <kendo-chart-series >
+        <kendo-chart-series-item name="Done Tasks" [data]="done" color="#d1d8d8" >
+          <kendo-chart-series-item-tooltip>
+            <ng-template let-value="value">
+              <ul>
+                <li >task1</li>
+                <li>task2</li>
+                <li>task3</li>
+               </ul>            </ng-template>
+          </kendo-chart-series-item-tooltip>
+    </kendo-chart-series-item>
+        <kendo-chart-series-item name="In Progress Tasks"  [data]="inprog" color="#F5F5DC" font="color: rgb(66, 62, 62);font-size: 0.8rem;font-weight: bold">
+          <kendo-chart-series-item-tooltip>
+            <ng-template let-value="value">
+              <ul>
+                <li >task1</li>
+                <li>task2</li>
+                <li>task3</li>
+               </ul>            </ng-template>
+          </kendo-chart-series-item-tooltip>
+        </kendo-chart-series-item>
+        <kendo-chart-series-item name="Not Started Tasks" [data]="todo" color="#FAEBD7" font="color: rgb(66, 62, 62);font-size: 0.8rem;font-weight: bold">
+          <kendo-chart-series-item-tooltip>
+            <ng-template let-value="value">
+             <ul>
+              <li >task1</li>
+              <li>task2</li>
+              <li>task3</li>
+             </ul>
+            </ng-template>
+          </kendo-chart-series-item-tooltip>
+        </kendo-chart-series-item>
+      </kendo-chart-series>
+  </kendo-chart>

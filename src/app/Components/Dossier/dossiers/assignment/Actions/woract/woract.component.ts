@@ -36,8 +36,9 @@ export class WORActComponent {
       weather: "cloudy",
     }
   ];
-  public alignment: TabAlignment = "center";
-
+  public alignment: TabAlignment = "start";
+  uploadSaveUrl = "saveUrl"; 
+  uploadRemoveUrl = "removeUrl"; 
   constructor(private route:ActivatedRoute ){}
   ngOnInit(): void {
     this.route.params.subscribe(params => {

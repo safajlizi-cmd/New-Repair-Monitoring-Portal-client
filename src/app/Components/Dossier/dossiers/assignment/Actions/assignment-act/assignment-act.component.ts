@@ -11,10 +11,8 @@ import { GenericService } from 'src/app/services/generic.service';
 })
 export class AssignmentActComponent implements OnInit {
    id :any;
-   public alignment: TabAlignment = "center";
+   public alignment: TabAlignment = "start";
    public selected = 1;
-   WOForm!: FormGroup
-   openedWO = false
   
   public items = [
     {
@@ -42,28 +40,14 @@ export class AssignmentActComponent implements OnInit {
       weather: "cloudy",
     }
   ];
-
+  uploadSaveUrl = "saveUrl"; 
+  uploadRemoveUrl = "removeUrl"; 
   constructor(private route:ActivatedRoute , private api :GenericService , private fb:FormBuilder){}
   
   ngOnInit() {
-    this.WOForm = this.fb.group({
-      woNumber: ['', Validators.required],
-      locationId: ['', Validators.required],
-      materialId: ['', Validators.required],
-      damageTypeId: ['', Validators.required],
-      assignmentId: ['']
-    });
     this.route.params.subscribe(params => {
       this.id = params['Id'];
     });  
-  }
-  public openWO(): void {
-    this.openedWO = true;
-  }
-
-
-  public close(status: string): void {
-    this.openedWO = false;
   }
 }
 

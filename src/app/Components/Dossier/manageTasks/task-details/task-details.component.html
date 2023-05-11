@@ -1,60 +1,67 @@
 <div class="row">
-  <div class="row" style="padding:10px ;background-color:rgb(155, 148, 148) ;width:100%">
-    <div class="col-lg-5">Description: <span class="titl">{{task?.description != null ?task?.description : "no Description.."}}</span></div>
-    <div class="col-lg-5">Deadline: <span class="titl">{{task?.deadline != null ?task.deadline : "deadline no defined.."}}</span></div>
-    <div class="col-lg-2">Created By :<span class="titl">{{task.createdBy?.userName }}</span></div>
+  <div class="row">
+    <div class="col-lg-4">Description :<b> {{task?.description != null ?task?.description : "no Description.."}}</b>
+    </div>
+    <div class="col-lg-4">Expiration at :<b>{{task?.deadline != null ?task.deadline : "deadline no defined.."}}</b></div>
+    <div class="col-lg-4">Created By :<b>{{task.createdByC?.userName }}</b></div>
   </div>
-  <div class="col-lg-6">
+  <div class="row mt-5">
     <div class="dialog-button">
       <button class="center" kendoButton (click)="open('subtask')"
-        style="background-color: #3899DD;color:#fff ; margin:10px"><kendo-svg-icon
-          [icon]="icons.trashh"></kendo-svg-icon>Add
+        style="background-color: #3899DD;color:#fff ; margin:10px"
+        [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon>Add
         Sub-Task</button>
     </div>
-    <div class="box" *ngIf="task.subTasksC.length == 0">
-      No sub-tasks available ..
-    </div>
-    <div *ngFor="let item of task.subTasksC ; let i =index" [ngClass]="item.emergency ==true ? 'Emergency':'box'">
-
-      {{item!.title}}
-      <span style="color:#dc5b1b"><kendo-avatar fillMode="outline" class="avatar"><span
-            style="font-size:10px;">SJ</span></kendo-avatar>safa jlizi </span>
-      <span style="color:#dc5b1b"><kendo-svg-icon [icon]="icons.trash" style="color:#3899DD"></kendo-svg-icon>
-        {{item!.deadline| date: 'MM/dd/yyyy' }}
-      </span>
-      <table>
-        <tr>
-          <td> <button kendoButton (click)="onUpdate(i)" style="background-color:#fff; "><kendo-svg-icon
-                [icon]="icons.edite" style="color:#3899DD"></kendo-svg-icon></button>
-          </td>
-          <td>
-            <button kendoButton (click)="onDelete(i)"><kendo-svg-icon [icon]="icons.delete"
-                style="color:#3899DD"></kendo-svg-icon></button>
-          </td>
-        </tr>
-      </table>
-    </div>
   </div>
-  <div class="col-lg-6">
-    <div class="dialog-button">
-      <button class="center" kendoButton (click)="open('note')"
-        style="background-color: #3899DD;color:#fff ; margin:10px"><kendo-svg-icon
-          [icon]="icons.trashh"></kendo-svg-icon>Add
-        Notes</button>
+  <div class="row">
+    <div class="col-lg-7 border-right">
+      <div class="box" *ngIf="task.subTasksC.length == 0">
+        No sub-tasks available ..
+      </div>
+      <div *ngFor="let item of task.subTasksC ; let i =index" [ngClass]="item.emergency ==true ? 'Emergency':'box'">
+        <b>{{item!.title}} </b>
+        <span style="color:#dc5b1b"><kendo-svg-icon [icon]="icons.trash" class="blue"></kendo-svg-icon>  {{item!.deadline| date: 'MM/dd/yyyy' }} </span>
+        <span class="blue"*ngIf="item!.option"> {{item!.option}} :{{item!.optionName}}</span>
+        <table>
+              <tr> 
+                 <td> <button kendoButton (click)="onUpdate(i)" style="background-color:#fff; "><kendo-svg-icon
+                  [icon]="icons.edite"class="blue"> </kendo-svg-icon></button>
+                </td>
+                <td>
+                    <button kendoButton (click)="onDelete(i)"><kendo-svg-icon [icon]="icons.delete" class="blue"></kendo-svg-icon></button>
+                </td>
+             </tr>
+        </table>
+      </div>
     </div>
-    <div class="box" *ngIf="notes.length == 0">
-      No notes available ..
-    </div>
-    <div class="box" *ngFor="let item of notes ; let i =index" >
-           <p><span style="font-weight:bold">{{item.title}}</span> {{item.description}}</p> </div> 
-    <div>
+    <div class="col-lg-5 ">
+      <kendo-panelbar style="border:none ;">
+        <kendo-panelbar-item [expanded]="false" class="bb">
+          <ng-template kendoPanelBarItemTitle>
+            <button class="center" kendoButton (click)="open('note')"
+              [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon></button>
+            Note List
+          </ng-template>
+          <ng-template kendoPanelBarContent>
+            <div class="childs">
+              <div class="teamMate" *ngIf="notes.length == 0">
+                <span class="mate-info">
+                  <p> There are no Notes now !</p>
+                </span>
+              </div>
+              <div class="teamMate" *ngFor="let item of notes" style="display: flex; justify-content: space-between;">
+                <div style="flex-basis:30%; flex-grow: 1;"> <b>Title :</b> {{ item.title }}  </div>
+                <div style="flex-basis:30%; flex-grow: 1;"> <b>Description :</b> {{ item.description }} </div>
+              </div>
+            </div>
+          </ng-template>
+        </kendo-panelbar-item>
+      </kendo-panelbar>
     </div>
   </div>
 </div>
-
-
-<kendo-dialog title="Add Task" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250"
-  [themeColor]="'dark'" [width]="450">
+<kendo-dialog title="Add sub-Task" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250"
+  [themeColor]="'dark'" [width]="450" class="diag">
   <form [formGroup]="taskForm">
     <div class="form-group">
       <label for="title">Title:</label>
@@ -65,6 +72,37 @@
         <div *ngIf="taskForm.hasError('required','title')">Title is required.</div>
       </div>
     </div>
+    <div class="form-group">
+      <label for="title">Assign to :</label>
+      <label> <input type="radio" value="dossier" formControlName="option">  Dossier</label>
+      <label> <input type="radio" value="assignment" formControlName="option"> Assignment </label>
+      <label>  <input type="radio" value="workingOrder" formControlName="option"> Working Order</label>
+      <div *ngIf="taskForm.get('option')!.value === 'assignment'">
+        <div *ngIf="assignments.length ==0"> <b class="small"> No Assignment available!</b> </div>
+        <div *ngIf="assignments.length >0">
+                   <label for="title">Select Assignment :</label>
+                   <kendo-multicolumncombobox class="kendo" [data]="assignments" textField="assignmentNumber" class="my-combobox"
+                      valueField="id" placeholder="Select AssignmentNumber ..." formControlName="optionId" [filterable]="true"
+                     (valueChange)="onSelected($event)">
+                                <kendo-combobox-column field="assignmentNumber" title="Assignment Number" [width]="150">
+                                </kendo-combobox-column>
+                    </kendo-multicolumncombobox>
+        </div>
+      </div>
+      <div *ngIf="taskForm.get('option')!.value === 'workingOrder'">
+           <div *ngIf="word.length ==0"> <b class="small"> No working order available!</b></div>
+           <div *ngIf="word.length >0">
+                     <label for="title">Select WorkingOrder :</label>
+                     <kendo-multicolumncombobox class="kendo" [data]="word" textField="woNumber" class="my-combobox"
+                         valueField="id" placeholder="Select WorkingOrder Number ..." formControlName="optionId" [filterable]="true"
+                         (valueChange)="onSelected($event)">
+                         <kendo-combobox-column field="woNumber" title="WorkingOrder Number" [width]="150">
+                         </kendo-combobox-column>
+                      </kendo-multicolumncombobox>
+        </div>
+      </div>
+    </div>
+
     <div class="form-group">
       <label for="deadline">Deadline:</label>
       <input type="date" class="form-control" id="deadline" formControlName="deadline">
@@ -89,7 +127,7 @@
 </kendo-dialog>
 
 <kendo-dialog title="Add note" [animation]="animation" *ngIf="openedNo" (close)="close('cancel')" [minWidth]="250"
-  [themeColor]="'dark'" [width]="450">
+  class="diag" [themeColor]="'dark'" [width]="450" class="diag">
   <form [formGroup]="noteForm">
     <div class="form-group">
       <label for="title">Title:</label>

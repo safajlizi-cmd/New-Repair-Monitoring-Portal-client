@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { GenericService } from 'src/app/services/generic.service';
 
@@ -18,7 +19,6 @@ id :any;
        console.log(res)
         this.assignment =res.assignment;
         console.log(this.assignment)
-
       },
       error: (err) => {
         alert("error")
@@ -26,10 +26,9 @@ id :any;
     });
   }
   AssignForm!: FormGroup;
-  constructor(private api :GenericService,private fb: FormBuilder,private route:ActivatedRoute ){}
+  constructor(private api :GenericService,private fb: FormBuilder,private route:ActivatedRoute,private _snackBar: MatSnackBar){}
 
   ngOnInit() {
-    console.log("safaaaaaaa")
     this.route.params.subscribe(params => {
       this.id = params['Id'];
       this.getAssignment() 
@@ -37,7 +36,6 @@ id :any;
     this.AssignForm = this.fb.group({
       assignmentNumber: ['', Validators.required],
       cause: ['', Validators.required],
-      dupedName: ['', Validators.required],
       id: []
     });
   }
@@ -46,7 +44,6 @@ id :any;
     this.AssignForm.controls['id'].setValue(this.assignment.id);
     this.AssignForm.controls['assignmentNumber'].setValue(this.assignment.assignmentNumber);
     this.AssignForm.controls['cause'].setValue(this.assignment.cause);
-    this.AssignForm.controls['dupedName'].setValue(this.assignment.dupedName);
     this.opened = true;
   }
   public close(status: string): void {
@@ -57,9 +54,15 @@ id :any;
         this.getAssignment();
         this.AssignForm.reset();  
         this.opened = false;
+        this._snackBar.open('Assignment updated successfully','',{ 
+          duration: 3000
+      })
+
       },
       error: (err) => {
-        alert("error")
+        this._snackBar.open('Error while updating Assignment','',{ 
+          duration: 3000
+      })
       },
     });
   }  

@@ -2,7 +2,7 @@ app-navbar{
     position:fixed;
     width:100%;
     height: 2rem;
-    z-index: 2;
+    Z-index:15
 }
 .body{
     width: calc(100% -5rem);

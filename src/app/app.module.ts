@@ -33,6 +33,12 @@ import { GuideItemComponent } from './Components/home/guide-item/guide-item.comp
 import { NavbarGuideComponent } from './Components/home/navbar-guide/navbar-guide.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
+import { UploadsModule } from '@progress/kendo-angular-upload';
+import { EditorModule } from "@progress/kendo-angular-editor";
+import { ChartsModule } from '@progress/kendo-angular-charts';
 
 @NgModule({
   declarations: [
@@ -46,6 +52,7 @@ import { MatIconModule } from '@angular/material/icon';
     GuideListComponent,
     GuideItemComponent,
     NavbarGuideComponent,
+    
    
   ],
   imports: [
@@ -73,7 +80,17 @@ import { MatIconModule } from '@angular/material/icon';
     MatGridListModule,
     NotificationModule,
     MatTreeModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule,
+    PopupModule,
+    MatButtonModule,
+    MatIconModule,
+    MatBadgeModule,
+    UploadsModule,
+    EditorModule,
+    ChartsModule 
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

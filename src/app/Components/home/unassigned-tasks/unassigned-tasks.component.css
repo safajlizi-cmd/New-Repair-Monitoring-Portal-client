@@ -10,3 +10,7 @@
     background-color:#3899DD; color: #fff; width: 18px; height: 18px;
   }
  .bt{background-color: #3899DD;color: #fff;}
+  ::ng-deep .custom-snackbar {
+     background-color: #ff9800; 
+  }
+  

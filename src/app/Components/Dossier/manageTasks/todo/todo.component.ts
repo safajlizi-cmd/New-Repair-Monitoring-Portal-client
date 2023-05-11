@@ -46,6 +46,7 @@ export class TodoComponent implements OnInit {
   public show = false;
   inprogress: any = [];
   done: any = [];
+  tasks=[{title :'Task 1'},{title :'Task 2'},{title :'Task 3'},{title :'Task 4'},{title :'Task 5'}]
   public actionsOrientation: Orientation = "horizontal";
   public actionsLayout: ActionsLayout = "end";
   public icons = { trash: clockIcon };
@@ -159,18 +160,11 @@ export class TodoComponent implements OnInit {
       description: [''],
       emergency: [false, Validators.required]
     });
-    this.taskSearchForm = this.formBuilder.group({
-      keyword: [''],
-    });
-    this.historydateForm = this.formBuilder.group({
-      date: [''],
-    });
     this.getTasks()
     this.getDossiers()
   }
-  onChange(event: any) {
-    console.log(event)
-    this.apiTask.getListBykeyword("inprog", this.userId,this.taskSearchForm.get('keyword')!.value).subscribe({
+  onSelectTask(event: any) {
+    this.apiTask.getListByTask("inprog", this.userId, event.title).subscribe({
       next: (res) => {
         this.inprogress = res;
       },
@@ -178,14 +172,14 @@ export class TodoComponent implements OnInit {
         alert(err)
       },
     });
-    this.apiTask.getListByDossier("todo", this.userId,this.taskSearchForm.get('keyword')!.value).subscribe({
+    this.apiTask.getListByTask("todo", this.userId, event.title).subscribe({
       next: (res) => {
         this.todo = res;
       },
       error: (err) => {
       },
     });
-    this.apiTask.getListByDossier("done", this.userId,this.taskSearchForm.get('keyword')!.value).subscribe({
+    this.apiTask.getListByTask("done", this.userId, event.title).subscribe({
       next: (res) => {
         this.done = res;
       },
@@ -193,7 +187,6 @@ export class TodoComponent implements OnInit {
       },
     });
   }
-  onChangeDate(event: any) { }
   onActionButtonClick(event: any) {
     this.apiTask.getListByDossier("inprog", this.userId, event.id).subscribe({
       next: (res) => {

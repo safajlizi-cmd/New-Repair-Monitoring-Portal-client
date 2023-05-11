@@ -10,6 +10,7 @@ import { DrawerMode } from '@progress/kendo-angular-layout';
 import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener, MatTreeNestedDataSource } from '@angular/material/tree';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-assignment',
@@ -34,7 +35,7 @@ export class AssignmentComponent implements OnInit {
   showAct: any
   public filterTerm = "";
   public icons = { plus: plusIcon, trash: clockIcon, delete: trashIcon, edite: pencilIcon };
-  constructor(private route : ActivatedRoute, private api: GenericService, private fb: FormBuilder, private router: Router , private userStore:UserStoreService) {
+  constructor(private _snackBar: MatSnackBar,private route : ActivatedRoute, private api: GenericService, private fb: FormBuilder, private router: Router , private userStore:UserStoreService) {
   }
   getDossier() {
     this.api.getById("Dossier/GetById", this.id).subscribe({
@@ -98,16 +99,11 @@ export class AssignmentComponent implements OnInit {
     this.AssignForm = this.fb.group({
       assignmentNumber: ['', Validators.required],
       cause: ['', Validators.required],
-      dupedName: ['', Validators.required],
       dossierId: ['']
     });
     this.route.params.subscribe(params => {
       this.id = params['id'];
       this.userStore.setDossierId(this.id)
-      console.log("params[id]")
-      console.log(params['id']);
-      console.log("params[Id]")
-      console.log(params['Id'])
     });
     this.getDossier();
     this.getAssignments();
@@ -139,11 +135,12 @@ export class AssignmentComponent implements OnInit {
     this.AssignForm.get('dossierId')?.setValue(this.id);
     this.api.add("Assignment/Add", this.AssignForm.value).subscribe({
       next: (res) => {
-        alert('Assignment added successfully')
         this.AssignForm.reset(); // reset the task object after submitting the form
         this.getAssignments();  
-         this.opened = false;
-
+        this.openedassy = false; 
+        this._snackBar.open('Assignment added successfully','',{ 
+          duration: 3000
+      })
       },
       error: (err) => {
         alert("error adding ")
@@ -154,9 +151,12 @@ export class AssignmentComponent implements OnInit {
     this.WOForm.get('assignmentId')?.setValue(this.id);
     this.api.add("WorkingOrder/Add", this.WOForm.value).subscribe({
       next: (res) => {
-        alert('Working Order added successfully')
         this.WOForm.reset(); 
-        this.opened = false;
+        this.opened = false;  
+        this._snackBar.open('Working Order added successfully','',{ 
+          duration: 3000
+      })
+
       },
       error: (err) => {
         alert("error adding ")

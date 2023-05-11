@@ -18,6 +18,7 @@ export class CreateDossierComponent implements OnInit {
    ngOnInit(): void {
     this.dossierForm = this.fb.group({
       DossierNumber: ['', Validators.required],
+      dupedName: ['', Validators.required],
       Assigned: [false],
       CreatedById :['']
     });

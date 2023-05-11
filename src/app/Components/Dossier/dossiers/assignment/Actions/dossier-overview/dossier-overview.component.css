@@ -1,16 +1,16 @@
-.weather {
+
+ .weather {
     margin: 30px;
     text-align: left;
   }
   kendo-tabstrip-tab{
-    width: calc(100% / 7);
-  }
+padding: 10px;  }
   .card{
     color:#7e807a;font-size: 0.7rem;
     width: 100%;
 }
 .header{
-    text-align: right;
+    text-align: left;
 }
 .body{
     text-align: left;
@@ -18,4 +18,36 @@
 .bt{
     color: #3899DD;
     border-color: #3899DD;
+}
+.box {
+  padding: 10px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(19, 18, 18, 0.87);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  font-size: 15x;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  font: weight 300px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+}
+.title{
+ color:#7e807a;font-size: 1.2rem;font-weight: bold;  
+  text-align: left;
+  margin-top: 20px;
+}
+::ng-deep .k-tabstrip .k-item.k-state-active > .k-link,
+::ng-deep .k-tabstrip .k-item > .k-link {
+    color: #3899DD;
+    font-weight: bold;
+}
+span{
+  font-weight: bold;
+}
+.date{
+  color:#545554;font-size: 0.7rem;font-weight: bold;
 }

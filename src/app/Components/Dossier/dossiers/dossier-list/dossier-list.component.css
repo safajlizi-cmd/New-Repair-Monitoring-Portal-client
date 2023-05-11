@@ -42,4 +42,7 @@
       font-weight: bold;
       color: #36a2eb;
       }
-     
+      .my-snackbar{
+        background-color: darkblue !important;
+        /* Add more styles */
+    }

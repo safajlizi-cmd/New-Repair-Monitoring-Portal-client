@@ -7,12 +7,27 @@
       class="tab-title"
     >
     <ng-template kendoTabContent>
-        <div class="weather">
-          <button kendoButton (click)="openWO()"class="bt"  *ngIf="item.city=='Assignment details'">Add Working order</button>
            <app-assg-details  *ngIf="item.city=='Informations'" ></app-assg-details> 
-           <div *ngIf="item.city!='Informations'" >
-          <h4>{{ item.temp }}<span>&ordm;C</span></h4>
-          <p>Weather in {{ item.city }} is {{ item.weather }}.</p></div>
+           <div *ngIf="item.city=='Documents'" class="row" >
+            <span style=" color:#7e807a;font-size: 0.7rem;"> Add Document :</span>
+             <kendo-upload
+           [saveUrl]="uploadSaveUrl"
+           [removeUrl]="uploadRemoveUrl"
+           [batch]="true"
+         >
+         </kendo-upload>
+           <p class="title" >Documents List : </p>
+     
+           <div class="box row" >
+             No Documents available ..
+           </div>
+           
+         </div>
+         <div *ngIf="item.city=='Notes'" class="row">
+        </div>
+         <div *ngIf="item.city=='Email'" class="row">
+          <p class="title" >Emails List : </p>
+              <app-send-email></app-send-email>
         </div>
       </ng-template>
     </kendo-tabstrip-tab>

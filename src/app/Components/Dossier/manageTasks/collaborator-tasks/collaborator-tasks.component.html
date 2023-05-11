@@ -1,27 +1,19 @@
 <div class="container">
     <table style="margin-top:10px;margin-bottom:10px;margin-left:30%;">
         <tr>
-            <td style="width:40%;">
-                <kendo-formgroup [formGroup]="historySearchForm" class="example-form">
-                    <kendo-formfield appearance="outline">
-                        <kendo-textbox formControlName="keyword" (keyup)="onChange($event)"
-                            placeholder="search by taskName or description ..." class="keyWordF"></kendo-textbox>
-                    </kendo-formfield>
-                </kendo-formgroup>
+            <td style="width:60%;">      
             </td>
-            <td style="width:40%;">
-                <kendo-formgroup [formGroup]="historydateForm" class="example-form">
-                    <kendo-formfield appearance="outline" style="width:400px">
-                        <kendo-datepicker formControlName="date" (valueChange)="onChangeDate($event)"
-                            placeholder="search by date" class="dateF"></kendo-datepicker>
-                    </kendo-formfield>
-                </kendo-formgroup>
+            <td style="width:20%;">
+                <span kendoTooltip title="Filter By Task Name">
+                    <kendo-dropdownlist [data]="tasks" [textField]="'title'" [valueField]="'title'"
+                        class="dossierF2" placeholder="Select a dossier" (valueChange)="onSelectTask($event)">
+                    </kendo-dropdownlist>
+                </span>
             </td>
             <td style="width:30%;">
                 <span kendoTooltip title="Filter By DossierNumber">
                     <kendo-dropdownlist [data]="dossiers" [textField]="'dossierNumber'" [valueField]="'dossierNumber'"
                         class="dossierF" placeholder="Select a dossier" (valueChange)="onActionButtonClick($event)">
-
                     </kendo-dropdownlist>
                 </span>
             </td>
@@ -60,9 +52,9 @@
                         </div>
                         <div class="footerBox2" style="display: flex; justify-content: space-between;">
                             <div style="flex-basis: 33%; flex-grow: 1;">
-                                <span class="createdBy"><kendo-avatar fillMode="outline" class="avatar" *ngIf="item.createdBy?.userName != null ">
-                                    <span style="font-size:7px;">{{ item.createdBy?.firstName[0] }}{{ item.createdBy?.lastName[0] }}</span>
-                                  </kendo-avatar>  {{ item.createdBy?.userName }} </span>
+                                <span class="createdBy"><kendo-avatar fillMode="outline" class="avatar" *ngIf="item.createdByC?.userName != null ">
+                                    <span style="font-size:7px;">{{ item.createdByC?.firstName[0] }}{{ item.createdByC?.lastName[0] }}</span>
+                                  </kendo-avatar>  {{ item.createdByC?.userName }} </span>
                             </div>
 
                             <div style="flex-basis:33%; flex-grow: 1;">
@@ -107,9 +99,9 @@
                         </div>
                         <div class="footerBox2" style="display: flex; justify-content: space-between;">
                             <div style="flex-basis: 33%; flex-grow: 1;">
-                                <span  class="createdBy"><kendo-avatar fillMode="outline" class="avatar" *ngIf="item.createdBy?.userName != null ">
-                                    <span style="font-size:7px;">{{ item.createdBy?.firstName[0] }}{{ item.createdBy?.lastName[0] }}</span>
-                                  </kendo-avatar>  {{ item.createdBy?.userName }}</span>
+                                <span  class="createdBy"><kendo-avatar fillMode="outline" class="avatar" *ngIf="item.createdByC?.userName != null ">
+                                    <span style="font-size:7px;">{{ item.createdByC?.firstName[0] }}{{ item.createdByC?.lastName[0] }}</span>
+                                  </kendo-avatar>  {{ item.createdByC?.userName }}</span>
                             </div>
 
                             <div style="flex-basis:33%; flex-grow: 1;">
@@ -154,9 +146,9 @@
                         </div>
                         <div class="footerBox2" style="display: flex; justify-content: space-between;">
                             <div style="flex-basis: 33%; flex-grow: 1;">
-                                <span  class="createdBy"><kendo-avatar fillMode="outline" class="avatar" *ngIf="item.createdBy?.userName != null ">
-                                    <span style="font-size:7px;">{{ item.createdBy?.firstName[0] }}{{ item.createdBy?.lastName[0] }}</span>
-                                  </kendo-avatar>  {{ item.createdBy?.userName }} </span>
+                                <span  class="createdBy"><kendo-avatar fillMode="outline" class="avatar" *ngIf="item.createdByC?.userName != null ">
+                                    <span style="font-size:7px;">{{ item.createdByC?.firstName[0] }}{{ item.createdByC?.lastName[0] }}</span>
+                                  </kendo-avatar>  {{ item.createdByC?.userName }} </span>
                             </div>
 
                             <div style="flex-basis:33%; flex-grow: 1;">

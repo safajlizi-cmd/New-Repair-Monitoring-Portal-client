@@ -23,7 +23,7 @@ const routes: Routes = [
     {path:  'List',component: DossierListComponent},
     { path: 'ManageTasks',component :TaskComponent},
     { path: 'Profile',component :DialogProfileComponent},
-    { path: 'Statistics',component :DossierDetailsComponent},
+    { path: 'Statistics',component :StatisticsComponent},
     { path: 'UnassignedTasks',component :UnassignedTasksComponent},
     { path: 'List/Details/:id',loadChildren:()=>import('../dossier-details/dossier-details.module').then((m)=>m.DossierDetailsModule)},
     { path: 'ManageTasks/Details/:id',component :TaskDetailsComponent},

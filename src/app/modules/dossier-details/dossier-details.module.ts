@@ -12,8 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavigationModule } from '@progress/kendo-angular-navigation';
 import { WordDetailsComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/woract/Act details/word-details/word-details.component';
 import { DossierOverviewComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/dossier-overview/dossier-overview.component';
-
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { UploadsModule } from '@progress/kendo-angular-upload';
+import { EditorModule } from "@progress/kendo-angular-editor";
+import { SendEmailComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/send-email/send-email.component';
+import { GridModule } from '@progress/kendo-angular-grid';
+import { IconsModule } from '@progress/kendo-angular-icons';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,7 @@ import { DossierOverviewComponent } from 'src/app/Components/Dossier/dossiers/as
     AssgDetailsComponent,
     WordDetailsComponent,
     DossierOverviewComponent,
+    SendEmailComponent,
 
   ],
   imports: [
@@ -34,9 +39,12 @@ import { DossierOverviewComponent } from 'src/app/Components/Dossier/dossiers/as
     DialogsModule,
     HttpClientModule,
     NavigationModule,
-    ReactiveFormsModule
-
-    
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    UploadsModule,
+    EditorModule ,
+    GridModule ,
+    IconsModule,
   ]
 })
 export class DossierDetailsModule { }

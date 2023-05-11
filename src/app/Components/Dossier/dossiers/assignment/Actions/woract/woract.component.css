@@ -2,7 +2,9 @@
     margin: 30px;
     text-align: left;
   }
-  kendo-tabstrip-tab{
-    width: calc(100% / 7);
+
+  ::ng-deep .k-tabstrip .k-item.k-state-active > .k-link,
+  ::ng-deep .k-tabstrip .k-item > .k-link {
+      color: #3899DD;
+      font-weight: bold;
   }
- 

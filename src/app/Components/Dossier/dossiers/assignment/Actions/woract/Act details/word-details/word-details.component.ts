@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { GenericService } from 'src/app/services/generic.service';
 
@@ -17,7 +18,7 @@ export class WordDetailsComponent implements OnInit{
   opened =false
 
   WOForm!: FormGroup;
-  constructor(private api :GenericService,private fb: FormBuilder,private route:ActivatedRoute ){}
+  constructor(private api :GenericService,private fb: FormBuilder,private route:ActivatedRoute,private _snackBar: MatSnackBar ){}
   getLocations() {
     this.api.getList("Location/List").subscribe({
       next: (res) => {
@@ -54,10 +55,15 @@ export class WordDetailsComponent implements OnInit{
        console.log(res)
         this.workingOrder =res.assignment;
         console.log(this.workingOrder)
+        this._snackBar.open('Work order updated successfully','',{ 
+          duration: 3000
+      })
 
       },
       error: (err) => {
-        alert("error")
+        this._snackBar.open('Error while updating Work order','',{ 
+          duration: 3000
+      })
       },
     });
   }
@@ -70,7 +76,6 @@ export class WordDetailsComponent implements OnInit{
       damageTypeId: ['', Validators.required],
       id: ['']
     });
-    console.log("safaaaaaaa")
     this.route.params.subscribe(params => {
       this.id = params['Id'];
       this.getWORD() 

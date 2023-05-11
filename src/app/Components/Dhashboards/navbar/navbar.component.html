@@ -8,15 +8,21 @@
     </kendo-textbox>
   </kendo-appbar-section>
   {{role}}
-  <kendo-appbar-section class="user-actions">
-    <kendo-badge-container>
-      <button kendoButton fillMode="flat">
-        <kendo-icon name="bell"></kendo-icon>
-      </button>
-      <kendo-badge themeColor="info" size="small">12</kendo-badge>
-    </kendo-badge-container>
-    <span class="k-appbar-separator"></span>
+  <kendo-appbar-section class="user-actions" >
+    <kendo-dropdownbutton [data]="notifications" >
+      <kendo-badge-container class="sbt">
+          <kendo-icon name="bell"></kendo-icon>
+        <kendo-badge themeColor="info" size="small">{{notifications.length}}</kendo-badge>
+      </kendo-badge-container >
+      <ng-template kendoDropDownButtonItemTemplate let-dataItem   style="  width: 250px;background-color: #d1d8d8; " >
+        <div *ngIf="notifications.length === 0" class="box">No new notifications.</div>
+
+        <span class="box"><b> {{ dataItem.description}} <span style="color:brown">{{ dataItem.days}} days</span></b></span>
+      </ng-template>
+    </kendo-dropdownbutton>
   </kendo-appbar-section>
+      <span class="k-appbar-separator"></span>
+
   <kendo-appbar-section>
     <button kendoButton fillMode="flat" (click)="open()" >
       <kendo-icon name="menu"></kendo-icon>
@@ -45,3 +51,8 @@
     <li (click)="logout()"><span class="k-icon k-i-logout"></span> Log out</li>
   </ul>
 </kendo-dialog>
+<kendo-popup [anchor]="anchor.element" [popupClass]="'notification-popup'"  (close)="onPopupClose()" [margin]="margin3"  class="popup" *ngIf="showPopup">
+  <div *ngIf="notifications.length === 0" class="box">No new notifications.</div>
+  <div *ngFor="let notification of notifications"  class="box">
+    <p><span style="font-weight:bold">title :</span> {{ notification }}</p> </div>      
+</kendo-popup>

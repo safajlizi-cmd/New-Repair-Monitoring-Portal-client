@@ -156,6 +156,9 @@
     border-radius: 12px;
     
   }
+  .dig{
+    background-color:rgba(0,0,0,0.2);
+  }
   .dateF{
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     color:#fff;
@@ -164,6 +167,11 @@
   .dossierF{
     border-bottom-right-radius: 12px;
     border-top-right-radius: 12px;
+    color:#303131;width: 200px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  } 
+  .dossierF2{
+    border-bottom-left-radius: 12px;
+    border-top-left-radius: 12px;
     color:#303131;width: 200px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
   .keyWordF{
