@@ -1,67 +1,150 @@
-<div class="treeview js-treeview">
-    <ul>
-      <li>
-        <div class="treeview__level" data-level="D">
-          <span class="level-title">Dossier</span>
-          <div class="treeview__level-btns">
-            <div class="btn btn-default btn-sm level-add"><span class="fa fa-plus"></span></div>
-            <div class="btn btn-default btn-sm level-remove"><span class="fa fa-trash text-danger"></span></div>
-            <div class="btn btn-default btn-sm level-same"><span>Add Same Level</span></div>
-            <div class="btn btn-default btn-sm level-sub"><span>Add Sub Level</span></div>
-          </div>
+<div class="row" >
+  <div class="example-wrapper">
+     <div  class="header">
+        <div class="split1"> <p [ngClass]="dossier?.dossierStatus?.longName=='InPreparation' ? 'primary':dossier?.dossierStatus?.longName=='Completed'?'done2':'inprog'"> {{dossier?.dossierStatus.longName}}</p> </div>
+        <div class="split2"> Duped Name :  {{dossier?.dupedName}} </div>
+        <div  class="split2"> {{dossier?.dossierNumber}}</div>
+        <div  class="split2">  Created at : <span class="date"><kendo-svg-icon [icon]="icons.trash"></kendo-svg-icon> {{dossier?.createdDate|date: 'MM/dd/yyyy' }} </span>
         </div>
-        <ul>
-  
-          <li>
-            <div class="treeview__level" data-level="A">
-              <span class="level-title">Assignment</span>
-              <div class="treeview__level-btns">
-                <div class="btn btn-default btn-sm level-add"><span class="fa fa-plus"></span></div>
-                <div class="btn btn-default btn-sm level-remove"><span class="fa fa-trash text-danger"></span></div>
-                <div class="btn btn-default btn-sm level-same"><span>Add Same Level</span></div>
-                <div class="btn btn-default btn-sm level-sub"><span>Add Sub Level</span></div>
-              </div>
-            </div>
-            <ul>
-  
-              <li>
-                <div class="treeview__level" data-level="W">
-                  <span class="level-title">workingOrder</span>
-                </div>
-              </li>
-  
-  
-              <li>
-                <div class="treeview__level" data-level="C">
-                  <span class="level-title">Level A</span>
-                  <div class="treeview__level-btns">
-                    <div class="btn btn-default btn-sm level-add"><span class="fa fa-plus"></span></div>
-                    <div class="btn btn-default btn-sm level-remove"><span class="fa fa-trash text-danger"></span></div>
-                    <div class="btn btn-default btn-sm level-same"><span>Add Same Level</span></div>
-                    <div class="btn btn-default btn-sm level-sub"><span>Add Sub Level</span></div>
-                  </div>
-                </div>
-                <ul>
-                </ul>
-              </li>
-            </ul>
-          </li>
-  
-          <li>
-            <div class="treeview__level" data-level="B">
-              <span class="level-title">Level A</span>
-              <div class="treeview__level-btns">
-                <div class="btn btn-default btn-sm level-add"><span class="fa fa-plus"></span></div>
-                <div class="btn btn-default btn-sm level-remove"><span class="fa fa-trash text-danger"></span></div>
-                <div class="btn btn-default btn-sm level-same"><span>Add Same Level</span></div>
-                <div class="btn btn-default btn-sm level-sub"><span>Add Sub Level</span></div>
-              </div>
-            </div>
-            <ul>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
+        <div class="split2">
+           Created By : <span class="date"><kendo-avatar fillMode="outline" class="avatar"
+                 *ngIf="dossier?.createdBy?.userName != null ">
+                 <span style="font-size:9px;">{{ dossier?.createdBy?.firstName[0] }}{{dossier?.createdBy?.lastName[0] }}</span>
+              </kendo-avatar> {{ dossier?.createdBy?.userName }}</span>
+        </div>
+     </div>
   </div>
- 
+</div>
+<div class="row p-2 ">
+<div class="col-lg-4 row2">
+  <div class="treeview js-treeview">
+     <ul>
+       <li>
+         <div class="treeview__level" data-level="D">
+           <span class="level-title" routerLinkActive="active" routerLink="./Overview"
+           [routerLinkActiveOptions] ="{exact:true}" >{{dossier.dossierNumber}} DN: Safa Jlizi </span>
+           <div class="treeview__level-btns">
+              <span kendoTooltip title="Add Assignment">
+             <div class="btn btn-default btn-sm level-add" (click)="open()"><span class="k-icon k-i-plus-circle"></span></div></span>
+           </div>
+         </div>
+         <ul>
+           <li *ngIf="Assignments.length == 0">
+              <div class="treeview__level" data-level="A">
+                <span class="level-title" >No Details available</span>
+                </div>
+            </li>
+           <li *ngFor="let item of Assignments">
+             <div class="treeview__level" data-level="A">
+               <span class="level-title" routerLinkActive="active" routerLink="./Assignment/{{item.id}}"
+               [routerLinkActiveOptions] ="{exact:true}" >{{item.assignmentNumber}} {{item.cause}} </span>
+               <div class="treeview__level-btns">
+                 <span kendoTooltip title="Add WorkingOrder">
+                 <div class="btn btn-default btn-sm level-add" (click)="openWo()"><span class="k-icon k-i-plus-circle"></span></div></span>
+               </div>
+             </div>
+             <ul>
+               <li  *ngFor="let itemW of item.workingOrdersC">
+                 <div class="treeview__level" data-level="W">
+                   <span class="level-title" routerLinkActive="active" routerLink="./Word/{{itemW.id}}"
+                   [routerLinkActiveOptions] ="{exact:true}">{{itemW.woNumber}}</span>
+                 </div>
+               </li>
+             </ul>
+           </li>
+   
+         </ul>
+       </li>
+     </ul>
+   </div>
+</div>
+<div class="col-lg-8" style="overflow-y: auto;">  
+   
+  <router-outlet></router-outlet>
+</div>
+</div>
+<kendo-dialog title="Add Assignment" *ngIf="openedassy" (close)="close('cancel')" [themeColor]="'dark'" [minWidth]="250" class="diag"
+[width]="450">
+<form [formGroup]="AssignForm">
+  <div class="form-group">
+     <label for="title">Assignment Number:</label>
+     <input type="text" class="form-control" id="assignmentNumber" formControlName="assignmentNumber"
+        placeholder="Title">
+     <div
+        *ngIf="AssignForm.controls['assignmentNumber'].invalid && (AssignForm.controls['assignmentNumber'].dirty || AssignForm.controls['assignmentNumber'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="AssignForm.hasError('required','assignmentNumber')">Assignment Number is required.
+        </div>
+     </div>
+  </div>
+  <div class="form-group">
+     <label for="title">Cause:</label>
+     <input type="text" class="form-control" id="cause" formControlName="cause" placeholder="Cause">
+     <div
+        *ngIf="AssignForm.controls['cause'].invalid && (AssignForm.controls['cause'].dirty || AssignForm.controls['cause'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="AssignForm.hasError('required','cause')">Cause Number is required.</div>
+     </div>
+  </div>
+  <kendo-dialog-actions style="border:none;margin-top: 20px;">
+     <button kendoButton (click)="close('no')">Cancel</button>
+     <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
+        [disabled]="AssignForm.invalid">
+        Add Assignment
+     </button>
+  </kendo-dialog-actions>
+</form>
+
+</kendo-dialog>
+<kendo-dialog title="Add Working Order" *ngIf="opened" (close)="close('cancel')" [themeColor]="'dark'"class="diag"
+[minWidth]="250" [width]="450">
+<form [formGroup]="WOForm">
+<div class="form-group">
+    <label for="title">Working Order Number:</label>
+    <input type="text" class="form-control" id="woNumber" formControlName="woNumber" placeholder="Working Order">
+    <div
+       *ngIf="WOForm.controls['woNumber'].invalid && (WOForm.controls['woNumber'].dirty || WOForm.controls['woNumber'].touched)"
+       class="alert alert-danger">
+       <div *ngIf="WOForm.hasError('required','woNumber')">Working order is required.</div>
+    </div>
+ </div>
+ <table style="width:100% " cellspacing="0">
+    <tr>
+       <td style="width:50% ">
+          <div class="form-group">
+             <label for="DamageType">DamageType:</label>
+             <select class="form-control" id="damageTypeId" formControlName="damageTypeId">
+                <option *ngFor="let item of damageTypes" [value]=" item.id">{{ item.longName }}
+                </option>
+             </select>
+          </div>
+       </td>
+       <td style="width:50% ">
+          <div class="form-group">
+             <label for="Material">Material:</label>
+             <select class="form-control" id="materialId" formControlName="materialId">
+                <option *ngFor="let  item of Materials" [value]=" item.id">{{ item.longName }}
+                </option>
+             </select>
+          </div>
+       </td>
+    </tr>
+ </table>
+ <div class="form-group">
+    <label for="dossier">Location:</label>
+    <select class="form-control" id="locationId" formControlName="locationId">
+       <option *ngFor="let  item of Locations" [value]=" item.id">{{ item.longName }}
+       </option>
+    </select>
+ </div>
+
+ <kendo-dialog-actions style="border:none;margin-top: 20px;">
+    <button kendoButton (click)="close('no')">Cancel</button>
+    <button kendoButton (click)="AddWorkingOrder()" style="background-color: #3899DD;color: #fff;"
+       [disabled]="WOForm.invalid">
+       Add Working Order
+    </button>
+ </kendo-dialog-actions>
+</form>
+
+</kendo-dialog>

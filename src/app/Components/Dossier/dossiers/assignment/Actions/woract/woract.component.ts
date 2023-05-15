@@ -5,7 +5,7 @@ import { TabAlignment } from '@progress/kendo-angular-layout';
 @Component({
   selector: 'app-woract',
   templateUrl: './woract.component.html',
-  styleUrls: ['./woract.component.css']
+  styleUrls: ['./woract.component.css','./../../../../../../../assets/sharedCss/SharedStyle.scss']
 })
 export class WORActComponent {
    id :any;

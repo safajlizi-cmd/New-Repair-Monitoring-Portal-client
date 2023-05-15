@@ -11,6 +11,19 @@
     height: calc(100vh - 3.5rem);
  
   }
+  .k-grid-header .my-custom-class {
+    font-weight: bold;
+    color: #333;
+  }
+  a:hover {
+    border-bottom: 1px solid#0fbfcc;
+  }
+  
+  .dossier-link-line {
+    border-top: 1px solid black;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
   .top {
     margin-top:0.5rem;
     padding: 0 10px 10px;

@@ -1,5 +1,5 @@
 .sidenav{
-    background-color: #303131;
+    background-color: #3899DD;
     transition: all .5s ease;
     position: fixed ;
     top: 0;
@@ -90,20 +90,20 @@
     background-color: #fff;
 }
 .sidenav-nav-item :hover .sidenav-link-icon{
-    color:#303131 ;
+    color:#3899DD ;
 }
 .sidenav-nav-item :hover .sidenav-link-text{
-    color:#303131 ;
+    color:#3899DD;
 }
 .active {
     background-color: #fff;
 }
 .active  .sidenav-link-text {
-    color:#303131 ;
+    color:#3899DD ;
 
 }
 .active  .sidenav-link-icon {
-    color:#303131 ;
+    color:#3899DD ;
 
 }
 img{

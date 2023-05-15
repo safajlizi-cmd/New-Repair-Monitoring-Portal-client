@@ -16,7 +16,6 @@ import { ListViewModule } from '@progress/kendo-angular-listview';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { TaskListComponent} from 'src/app/Components/Dossier/manageTasks/task-list/task-list.component';
-import { TaskItemComponent } from 'src/app/Components/Dossier/manageTasks/task-item/task-item.component';
 import { CommonModule } from '@angular/common';
 import { PagerModule } from '@progress/kendo-angular-pager';
 import { AddTaskComponent } from '../../Components/Dossier/manageTasks/add-task/add-task.component';
@@ -27,7 +26,6 @@ import { TodoComponent } from 'src/app/Components/Dossier/manageTasks/todo/todo.
 import { ContextMenuModule, MenuModule } from '@progress/kendo-angular-menu';
 import { DossierListComponent } from 'src/app/Components/Dossier/dossiers/dossier-list/dossier-list.component';
 import { DossierDetailsComponent } from 'src/app/Components/Dossier/dossiers/dossier-details/dossier-details.component';
-import { AssignmentComponent } from 'src/app/Components/Dossier/dossiers/assignment/assignment.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { GuideHomeComponent } from 'src/app/Components/home/guide-home/guide-home.component';
 import { TaskDetailsComponent } from 'src/app/Components/Dossier/manageTasks/task-details/task-details.component';
@@ -57,19 +55,22 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { Top5ChartComponent } from 'src/app/Components/Dossier/dossiers/statistics/charts/top5-chart/top5-chart.component';
 import { TasksChartComponent } from 'src/app/Components/Dossier/dossiers/statistics/charts/tasks-chart/tasks-chart.component';
 import { CompletedchartComponent } from 'src/app/Components/Dossier/dossiers/statistics/charts/completedchart/completedchart.component';
-import { LowestDossierComponent } from 'src/app/Components/Dossier/dossiers/statistics/charts/lowest-dossier/lowest-dossier.component';import { UploadsModule } from '@progress/kendo-angular-upload';
+import { LowestDossierComponent } from 'src/app/Components/Dossier/dossiers/statistics/charts/lowest-dossier/lowest-dossier.component';
+import { UploadsModule } from '@progress/kendo-angular-upload';
+import {AddNoteComponent} from  'src/app/Components/Dossier/manageTasks/dialogs/add-note/add-note.component';
+import { AddSubTaskComponent } from 'src/app/Components/Dossier/manageTasks/dialogs/add-sub-task/add-sub-task.component';
+import { UsersComponent } from 'src/app/Components/users/users.component';
+import { MatMenuModule } from '@angular/material/menu';
 @NgModule({
   declarations: [
     HomeComponent,
     DashboardTasksComponent,
     TaskComponent,
     TaskListComponent,
-    TaskItemComponent,
     AddTaskComponent,
     TodoComponent,
     DossierListComponent,
     DossierDetailsComponent,
-    AssignmentComponent,
     GuideHomeComponent,
     TaskDetailsComponent,
     AssignmentListComponent,
@@ -88,7 +89,9 @@ import { LowestDossierComponent } from 'src/app/Components/Dossier/dossiers/stat
     TasksChartComponent,
     CompletedchartComponent,
     LowestDossierComponent,
-
+    AddNoteComponent,
+    AddSubTaskComponent,
+    UsersComponent
  ],
   imports: [
     CommonModule,
@@ -126,8 +129,9 @@ import { LowestDossierComponent } from 'src/app/Components/Dossier/dossiers/stat
     MatButtonModule,
     MatSnackBarModule,
     UploadsModule,
-    ChartsModule 
+    ChartsModule,
+    MatMenuModule
    ],
-
+   providers: [Location,],
 })
 export class DashbordModule { }

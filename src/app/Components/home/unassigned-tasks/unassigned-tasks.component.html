@@ -1,44 +1,45 @@
-<div style="border:none">
-    <div class="card" style="border:none">
-        <div class="card-block k-form">
-            <fieldset>
-                <legend class="titlle">Unassigned tasks</legend>
-                <div class="k-form-field">
-                </div>
-            </fieldset>
-        </div>
-    </div>
-</div>
-<kendo-grid [data]="tasks" [selectable]="selectableSettings" [navigable]="true" [height]="600"
-    (selectionChange)="onSelectionChange($event)">
+<div class="split">
+    <div class=" top">
+        <h1 class="titlle ">
+            Unassigned tasks</h1>
+            <div>
+                <span kendoTooltip title="Confirm  the tasks you want to assigned to yourself">
+                <button kendoButton class="bt" (click)="confirmSelection()" style="margin-left:90%">Confirm  Selection</button></span>
+      </div>  </div>
+<div class="bottom">
+<kendo-grid [data]="tasks" [selectable]="selectableSettings" filterable="menu" [navigable]="true" [height]="600"   (selectionChange)="onSelectionChange($event)">
     <kendo-grid-checkbox-column title="Select Tasks">
         <ng-template kendoGridHeaderTemplate>
-            <span kendoTooltip title="Confirm  the tasks you want to assigned to yourself">
-                <button kendoButton class="button" (click)="confirmSelection()">Confirm
-                    Selection</button></span>
+           
         </ng-template>
     </kendo-grid-checkbox-column>
     <kendo-grid-column field="taskNumber" title="Task number">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <p style="color:#86BC35; font-weight: bold;">
+            <p class="primary">
                 {{ dataItem.taskNumber}}</p>
         </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="dossierC.dossierNumber" title="Dossier number">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <p style="color:#49651e; font-weight: bold;">
+            <p class="inprog">
                 {{ dataItem.dossierC.dossierNumber}}</p>
         </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="title" title="Task title"></kendo-grid-column>
+    <kendo-grid-column field="title" title="Task title">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <p  class="date">
+                {{ dataItem.title }}
+            </p>
+        </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="createdDate" title="Created Date">
         <ng-template kendoGridCellTemplate let-dataItem>
-            <p style="color:#cdc66f">
+            <p  class="date">
                 {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}
             </p>
         </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="createdBy." title="CreatedBy">
+    <kendo-grid-column field="createdBy?.userName" title="CreatedBy">
         <ng-template kendoGridCellTemplate let-dataItem>
             <kendo-avatar fillMode="outline" class="avatar" *ngIf="dataItem.createdBy?.userName != null ">
                 <span style="font-size:7px;">{{ dataItem.createdBy?.firstName[0] }}{{ dataItem.createdBy?.lastName[0]
@@ -47,6 +48,9 @@
         </ng-template>
     </kendo-grid-column>
 </kendo-grid>
+</div>
+</div>
+
 <kendo-dialog title="Assign Task to" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450" [themeColor]="'dark'" >
     <form [formGroup]="AssigForm" >
         <div class="form-group form-check">

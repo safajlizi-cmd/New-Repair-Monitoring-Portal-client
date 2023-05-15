@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { Dashboard2Component } from 'src/app/Components/Dhashboards/dashboard2/dashboard2.component';
 import { DialogProfileComponent } from 'src/app/Components/Dhashboards/profile/dialog-profile/dialog-profile.component';
 import { AssignmentListComponent } from 'src/app/Components/Dossier/dossiers/assignment-list/assignment-list.component';
-import { AssignmentComponent } from 'src/app/Components/Dossier/dossiers/assignment/assignment.component';
 import { DossierDetailsComponent } from 'src/app/Components/Dossier/dossiers/dossier-details/dossier-details.component';
 import { DossierListComponent } from 'src/app/Components/Dossier/dossiers/dossier-list/dossier-list.component';
 import { StatisticsComponent } from 'src/app/Components/Dossier/dossiers/statistics/statistics.component';
@@ -13,7 +12,8 @@ import { TaskComponent } from 'src/app/Components/Dossier/manageTasks/task/task.
 import { GuideHomeComponent } from 'src/app/Components/home/guide-home/guide-home.component';
 import { HomeComponent } from 'src/app/Components/home/home/home.component';
 import { UnassignedTasksComponent } from 'src/app/Components/home/unassigned-tasks/unassigned-tasks.component';
-
+import { UsersComponent } from 'src/app/Components/users/users.component';
+   
 const routes: Routes = [
    
    {path:'',component:Dashboard2Component,
@@ -21,6 +21,7 @@ const routes: Routes = [
     { path: '',   redirectTo: 'Home', pathMatch: 'full' },
     {path:  'Home',component: HomeComponent},
     {path:  'List',component: DossierListComponent},
+    {path:  'Users',component: UsersComponent},
     { path: 'ManageTasks',component :TaskComponent},
     { path: 'Profile',component :DialogProfileComponent},
     { path: 'Statistics',component :StatisticsComponent},

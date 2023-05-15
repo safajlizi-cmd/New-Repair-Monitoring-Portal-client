@@ -9,7 +9,7 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 @Component({
   selector: 'app-unassigned-tasks',
   templateUrl: './unassigned-tasks.component.html',
-  styleUrls: ['./unassigned-tasks.component.css']
+  styleUrls: ['./unassigned-tasks.component.css','./../../../../assets/sharedCss/SharedStyle.scss']
 })
 export class UnassignedTasksComponent implements OnInit {
   // dialog space

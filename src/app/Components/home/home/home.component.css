@@ -17,17 +17,28 @@
   padding-top: 100px;
 }
 
-.button {
-  background-color: #3b3c3d;
-  color: #fff;
-  width: 100%;
+button {
+  font-size: 20px;
+  color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 19px;
-  font-weight: 400;
-  margin-top: 70px;
+  border-radius: 5em;
+  background-size: 200% 100%;
+  background-image: linear-gradient(145deg, #888587, #2e839a, #22c2c8);
+  box-shadow: 3px 3px 10px 2px #8bb3e0, -3px -3px 10px 2px #666667;
+  transition: 0.5s;
+  width:100%;
+  align-items: center;
 }
 
+button:hover {
+  background-position: 99%;
+  box-shadow: 3px 3px 10px 2px #5de7ff, -3px -3px 10px 2px #2e839a;
+}
+
+button:active {
+  transform: scale(0.8) rotate(5deg);
+  box-shadow: 3px 3px 15px 3px #260a33, -3px -3px 15px 3px #1f9ac7;
+}
 p {
   color: rgb(109, 107, 107);
   font-size: 19px;
@@ -38,4 +49,9 @@ p {
 .container{
   padding-top: 70px;
   padding-left: 50px;
+}
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }

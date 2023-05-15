@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ButtonFillMode } from '@progress/kendo-angular-buttons';
 import { DialogAnimation } from '@progress/kendo-angular-dialog';
 import { plusIcon } from '@progress/kendo-svg-icons';
 import { DossierService } from 'src/app/services/dossier.service';
@@ -11,7 +12,7 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 @Component({
   selector: 'app-dossier-list',
   templateUrl: './dossier-list.component.html',
-  styleUrls: ['./dossier-list.component.css']
+  styleUrls: ['./dossier-list.component.css','./../../../../../assets/sharedCss/SharedStyle.scss']
 })
 export class DossierListComponent implements OnInit {
   public opened = false;
@@ -28,7 +29,8 @@ export class DossierListComponent implements OnInit {
     duration: 3000,
     panelClass: 'my-snackbar',
     };
-    
+    public fillMode: ButtonFillMode = "flat";
+
   constructor(private _snackBar: MatSnackBar ,private dossierService : DossierService, private api : GenericService , private router :Router , private route : ActivatedRoute , private fb : FormBuilder, private auth :UserStoreService){}
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message);
@@ -92,9 +94,10 @@ export class DossierListComponent implements OnInit {
     this.router.navigate(["Details/",id],  {relativeTo: this.route});
    }
    public close(status: string): void {
-    this.opened = false;
     this.getDossiers()
-    this.openedStatus= false;
+    this.openedStatus= false; 
+     this.opened = false;
+
   }
   public open(Stat:any): void {
     if(Stat == "dossier"){this.opened =true}

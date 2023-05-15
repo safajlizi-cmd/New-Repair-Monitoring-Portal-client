@@ -40,11 +40,10 @@ padding: 10px;  }
   text-align: left;
   margin-top: 20px;
 }
-::ng-deep .k-tabstrip .k-item.k-state-active > .k-link,
-::ng-deep .k-tabstrip .k-item > .k-link {
-    color: #3899DD;
-    font-weight: bold;
+.p{
+  padding: 10px;
 }
+
 span{
   font-weight: bold;
 }

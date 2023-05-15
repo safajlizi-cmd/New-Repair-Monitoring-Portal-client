@@ -7,7 +7,7 @@ import { AssignmentActComponent } from 'src/app/Components/Dossier/dossiers/assi
 import { DossierOverviewComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/dossier-overview/dossier-overview.component';
 import { WordDetailsComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/woract/Act details/word-details/word-details.component';
 import { WORActComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/woract/woract.component';
-import { AssignmentComponent } from 'src/app/Components/Dossier/dossiers/assignment/assignment.component';
+import { DossierDetailsComponent } from 'src/app/Components/Dossier/dossiers/dossier-details/dossier-details.component';
 import { DossierListComponent } from 'src/app/Components/Dossier/dossiers/dossier-list/dossier-list.component';
 import { StatisticsComponent } from 'src/app/Components/Dossier/dossiers/statistics/statistics.component';
 import { DashboardTasksComponent } from 'src/app/Components/Dossier/manageTasks/dashboard-tasks/dashboard-tasks.component';
@@ -19,7 +19,7 @@ import { UnassignedTasksComponent } from 'src/app/Components/home/unassigned-tas
 
 const routes: Routes = [
    
-   {path:'',component:AssignmentComponent,
+   {path:'',component:DossierDetailsComponent,
    children:[
     { path: '',   redirectTo: 'Overview', pathMatch: 'full' },
     { path: 'Overview',component :DossierOverviewComponent},

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { WindowComponent } from '@progress/kendo-angular-dialog';
 import { navbarData} from './nav-data'
 import { SideNavToggle } from './sidebarToggle';
+import { UserStoreService } from 'src/app/services/user-store.service';
 
 
 @Component({
@@ -40,7 +41,8 @@ export class SideNavComponent implements OnInit{
  collapsed = false ; 
  navData = navbarData;
  screenWidth =0 
- constructor(private router :Router){
+ role:  any
+ constructor(private router :Router,private auth:UserStoreService ){
 
  }
  @HostListener('window:resize',['$event'])
@@ -54,6 +56,8 @@ export class SideNavComponent implements OnInit{
  }
  ngOnInit(): void {
      this.screenWidth = window.innerWidth;
+     this.role= this.auth.getRole()
+
    }
 
  toggleCollapse():void{

@@ -29,7 +29,7 @@
         <div class="col-md-4 colonne">
             <!-- todo-->
             <div class="example-container">
-                <h2 class="head-title">To do<span *ngIf="todo!.length >0"> {{todo!.length}} </span></h2>
+                <h2 class="head-title">To do<span *ngIf="todo!.length >0"> ({{todo!.length}}) </span></h2>
 
                 <div cdkDropList [cdkDropListData]="todo" class="example-list" cdkDropListId="cdk-drop-list-todo"
                     id="todo" (cdkDropListDropped)="drop($event)">
@@ -58,7 +58,7 @@
                         </div>
                         <div class="contentBox">
                             {{item.description}}<br>
-                            To Do
+                           <span class="todo"> To Do</span>
 
                         </div>
                         <div class="footerBox2" style="display: flex; justify-content: space-between;">
@@ -115,7 +115,7 @@
                         </div>
                         <div class="contentBox">
                             {{item.description}}<br>
-                            InProgress
+                            <span class="inprogress">  InProgress</span>
 
                         </div>
                         <div class="footerBox2" style="display: flex; justify-content: space-between;">
@@ -170,7 +170,7 @@
                         </div>
                         <div class="contentBox">
                             {{item.description}}<br>
-                            Done
+                            <span class="done">   Done</span>
                         </div>
                         <div class="footerBox2" style="display: flex; justify-content: space-between;">
                             <div style="flex-basis: 33%; flex-grow: 1;">

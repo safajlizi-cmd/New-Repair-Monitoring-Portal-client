@@ -1,12 +1,13 @@
 <div class="container">
-<div class="split">
-    <!-- Horizontal Card -->
-  <div class="left">
-    <iframe width="100%" height="450" src="https://www.youtube.com/embed/Jox6R5-rIH0?start=15" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <div class="row">
+        <iframe width="50%" height="450" src="https://www.youtube.com/embed/Jox6R5-rIH0?start=15" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   </div>
-  <div class="right">
-    <p>Welcome to our application! You can easily monitor "new repair" application and access helpful guides for creating dossiers step by step.<br><br> Click to access all the details . </p>
-    <button kendoButton (click)="gotoguide()" class="button">View guides !</button>
+  <div class="row mt-2">
+        <p > Welcome to our application!<br> You can easily monitor "New Repair" application and access helpful guides for creating dossiers step by step.  </p>
+    </div>
+    <div class="row">
+    <button (click)=" gotoguide()">
+      VIEW GUIDES
+    </button>
   </div>
   </div>
-</div>

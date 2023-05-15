@@ -1,11 +1,11 @@
 <kendo-tabstrip [ngStyle]="{ width: '100%' ,height:'100%', color:'blue'}" [tabAlignment]="alignment" >
   <kendo-tabstrip-tab
     *ngFor="let item of items; let i = index"
-    [title]="item.city"
     [selected]="i === selected"
     [disabled]="item.disabled"
     class="tab-title"
   >
+  <ng-template kendoTabTitle ><p [ngClass]="i === selected ? 'primary':'date'" (click)="selected = i" > {{item.city}}</p></ng-template>
   <ng-template kendoTabContent>
     <div *ngIf="item.city=='Informations'" >
       <p class="title" > Dossier details </p>
@@ -37,12 +37,7 @@
           </div>
       <div *ngIf="item.city=='Documents'" class="row" >
        <span style=" color:#7e807a;font-size: 0.7rem;"> Add Document :</span>
-        <kendo-upload
-      [saveUrl]="uploadSaveUrl"
-      [removeUrl]="uploadRemoveUrl"
-      [batch]="true"
-    >
-    </kendo-upload>
+      
       <p class="title" >Documents List : </p>
 
       <div class="box row" >

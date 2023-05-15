@@ -26,6 +26,7 @@ kendo-tabstrip p {
   margin: 20px;
   flex: 1;
   overflow-x: auto;
+  overflow-y: hidden;
 
 }
 
@@ -40,6 +41,8 @@ kendo-tabstrip p {
   height: 100%;
   padding: 10px;
   position: fixed;
+  width: 90%;
+
 }
 
 .tab {
@@ -70,6 +73,6 @@ kendo-multicolumncombobox {
 }
 
 .tabstrip-container {
-  background-color: #303131;
-
+  align-items: center;
+  width:100%
 }

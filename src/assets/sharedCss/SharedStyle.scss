@@ -1,0 +1,52 @@
+
+.primary{
+    color: rgb(32, 175, 222);
+    font-weight:bold;
+    font-size: 15px;
+}
+.inprog{
+  color: #efa016;  font-weight:bold;
+}
+.done2{
+  color: rgb(106, 199, 30);
+  font-weight:bold;
+  
+}
+.todo{
+ color: rgb(32, 175, 222);
+ padding: 1px;
+ padding-left: 6px;
+ padding-right:6px;
+ background-color: rgba(102, 196, 224, 0.349);
+ border-radius: 6px;
+ font-weight:bold;
+}
+.inprogress{
+ color: #efa016;
+ padding: 1px;
+ padding-left: 6px;
+ padding-right:6px;
+  background-color: rgba(236, 156, 7, 0.349);
+ border-radius: 6px;
+ font-weight:bold;
+}
+.date{
+  font-weight: bold;
+  color: rgb(98, 104, 104);
+  font-size: 15px;
+}
+.done{
+  color: rgb(106, 199, 30);
+  padding: 1px;
+  padding-left: 6px;
+  padding-right:6px;  background-color: rgba(145, 231, 188, 0.349);
+  border-radius: 6px;
+  font-weight:bold;
+}
+.titleSpace{
+    padding-top: 22px;
+    letter-spacing: 4px;
+    color: rgb(73, 72, 72);
+    font-size: 1.4rem;
+    font-weight:bold;
+}

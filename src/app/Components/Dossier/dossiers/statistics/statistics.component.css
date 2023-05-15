@@ -11,6 +11,6 @@
   }
   ::ng-deep .k-tabstrip .k-item.k-state-active > .k-link,
   ::ng-deep .k-tabstrip .k-item > .k-link {
-    color: #3899DD;
+    color: #48494a;
     font-weight: bold;
 }

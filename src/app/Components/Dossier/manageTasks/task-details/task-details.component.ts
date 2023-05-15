@@ -7,6 +7,10 @@ import { GenericService } from 'src/app/services/generic.service';
 import { Location } from '@angular/common';
 import { SelectAllCheckboxDirective } from '@progress/kendo-angular-grid';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
+import { DialogService,DialogRef,DialogCloseResult} from "@progress/kendo-angular-dialog";
+import {AddNoteComponent} from  'src/app/Components/Dossier/manageTasks/dialogs/add-note/add-note.component';
+import { AddSubTaskComponent } from '../dialogs/add-sub-task/add-sub-task.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-task-details',
@@ -44,7 +48,9 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
               private route: ActivatedRoute,
               private api: GenericService,
               private fb: FormBuilder, 
-              private location: Location) { }
+              private location: Location,
+              private dialogService: DialogService
+              ) { }
   
   getTaskById() {
    this.subscription = this.api.getById("Task/GetById", this.TaskId).subscribe({
@@ -75,7 +81,7 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
       },
     });
   }
-
+    
   onPanelBarItemClicked() {
     this.clicked = !this.clicked;
   }
@@ -128,7 +134,6 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
       this.opened = true;
     }
   }
-
   public back() {
     this.location.back();
   }
@@ -143,7 +148,7 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
     {   this.taskForm.get('optionId')?.setValue(this.option.id);
     this.taskForm.get('optionName')?.setValue(this.option.woNumber);
   }
-    else{
+   else{
       this.taskForm.get('optionId')?.setValue(this.option.id);
       this.taskForm.get('optionName')?.setValue(this.option.assignmentNumber);
     }
@@ -156,7 +161,6 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
       },
       error: (err) => {
         this._snackBar.open("Error while adding new Sub-task", '', this.snackbarConfig)
-
       },
     });
   }
@@ -168,12 +172,10 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
     this.noteForm.get('dossierId')?.setValue(this.task.dossierId);
     this.api.add("Note", this.noteForm.value).subscribe({
       next: (res) => {
-
         this.getTaskById();
         this.noteForm.reset();
         this.openedNo = false;
         this._snackBar.open("Note added successfully", '', this.snackbarConfig)
-
       },
 
       error: (err) => {
@@ -181,4 +183,25 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
       },
     });
   }
-}
+  public result:any;
+  addSubTask(){
+    const dialog: DialogRef = this.dialogService.open({
+      content:AddSubTaskComponent ,
+      width: 450,
+      minWidth: 250,
+    });
+    const addSubTask = dialog.content.instance as AddSubTaskComponent;
+    addSubTask.task = this.task;
+    dialog.result.pipe(take(1)).subscribe((r) => {
+     if (!(r instanceof DialogCloseResult)) {
+       if (addSubTask.taskForm.valid) {
+        
+      }
+ }
+                  
+      })
+
+    }
+  }
+  
+

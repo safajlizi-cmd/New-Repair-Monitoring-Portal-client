@@ -8,13 +8,13 @@
             [height]="550">
             <kendo-grid-column field="dossierNumber" title="Dossier Number" [width]="220">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <p style="color:#86BC35; font-weight: bold;">
-                        {{ dataItem.dossierNumber}}</p>
+                    <a routerLink="./Details/{{dataItem.id}}" class="primary">
+                        {{ dataItem.dossierNumber}}</a>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="createdDate" title="Created Date">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}
+                   <p class="date"> {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}</p>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="createdBy." title="CreatedBy">
@@ -33,24 +33,27 @@
                         </span>
                     </div>
                     <br>
-                        <div class="progress">
-                            <div class="analytics-line" role="progressbar" aria-valuemin="0" aria-valuemax="100"  [style.width.%]="dataItem.progress"></div>
+                    <div class="progress">
+                        <div class="analytics-line" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                            [style.width.%]="dataItem.progress"></div>
                     </div>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="dossierStatus.longName" title="Dossier Status">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <span kendoTooltip title="Update dossier status">
-                    <button (click)="open(dataItem.id)" style="border:none"><span
-                            class="k-icon k-i-edit k-i-pencil"></span></button>
-                            </span>
-                            {{dataItem?.dossierStatus?.longName}}
-
+                    <div
+                        [ngClass]="dataItem?.dossierStatus?.longName=='InPreparation' ? 'primary':dataItem?.dossierStatus?.longName=='Completed'?'done2':'inprog'">
+                        <span kendoTooltip title="Update dossier status">
+                            <button kendoButton (click)="open(dataItem.id)"
+                                [fillMode]="fillMode"><span class="k-icon k-i-edit k-i-pencil"></span></button>
+                        </span>
+                        {{dataItem?.dossierStatus?.longName}}
+                    </div>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column title=" " filter="date" [width]="150">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <button (click)="onButtonClick( dataItem.id)" style="border:none">View Details <span
+                    <button kendoButton (click)="onButtonClick( dataItem.id)" [fillMode]="fillMode" class="date" >View Details <span
                             class="k-icon k-i-hyperlink-open-sm"></span></button>
                 </ng-template>
             </kendo-grid-column>
@@ -81,22 +84,22 @@
         <app-add-dossier></app-add-dossier>
     </kendo-dialog>
     <kendo-dialog title="Update dossier status" *ngIf="openedStatus" (close)="close('cancel')" [themeColor]="'dark'"
-  [minWidth]="250" [width]="450">
-  <form [formGroup]="StatusForm">       
-     <div class="form-group">
-        <label for="dossier">Location:</label>
-        <select class="form-control" id="dossierStatus" formControlName="dossierStatus">
-           <option *ngFor="let  item of Status" [value]=" item.id">{{ item.longName }}
-           </option>
-        </select>
-     </div>
-     <kendo-dialog-actions style="border:none;margin-top: 20px;">
-        <button kendoButton (click)="close('no')">Cancel</button>
-        <button kendoButton (click)="updateStatus()" style="background-color: #3899DD;color: #fff;"
-           [disabled]="StatusForm.invalid">
-           Update 
-        </button>
-     </kendo-dialog-actions>
-  </form>
+        [minWidth]="250" [width]="450">
+        <form [formGroup]="StatusForm">
+            <div class="form-group">
+                <label for="dossier">Location:</label>
+                <select class="form-control" id="dossierStatus" formControlName="dossierStatus">
+                    <option *ngFor="let  item of Status" [value]=" item.id">{{ item.longName }}
+                    </option>
+                </select>
+            </div>
+            <kendo-dialog-actions style="border:none;margin-top: 20px;">
+                <button kendoButton (click)="close('no')">Cancel</button>
+                <button kendoButton (click)="updateStatus()" style="background-color: #3899DD;color: #fff;"
+                    [disabled]="StatusForm.invalid">
+                    Update
+                </button>
+            </kendo-dialog-actions>
+        </form>
 
-</kendo-dialog>
+    </kendo-dialog>

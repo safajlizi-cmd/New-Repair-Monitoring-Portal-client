@@ -1,58 +1,32 @@
 <kendo-appbar position="top">
   <kendo-appbar-spacer></kendo-appbar-spacer>
   <kendo-appbar-section class="search-section">
-    <kendo-textbox [style.width.px]="160" placeholder="Search..." [clearButton]="true">
-      <ng-template kendoTextBoxPrefixTemplate>
-        <kendo-icon name="search"></kendo-icon>
-      </ng-template>
-    </kendo-textbox>
+    <p class="date"> {{role}}</p>
   </kendo-appbar-section>
-  {{role}}
+ 
   <kendo-appbar-section class="user-actions" >
-    <kendo-dropdownbutton [data]="notifications" >
+    <kendo-dropdownbutton [data]="notifications" [fillMode]="fillMode">
       <kendo-badge-container class="sbt">
           <kendo-icon name="bell"></kendo-icon>
         <kendo-badge themeColor="info" size="small">{{notifications.length}}</kendo-badge>
       </kendo-badge-container >
       <ng-template kendoDropDownButtonItemTemplate let-dataItem   style="  width: 250px;background-color: #d1d8d8; " >
         <div *ngIf="notifications.length === 0" class="box">No new notifications.</div>
-
-        <span class="box"><b> {{ dataItem.description}} <span style="color:brown">{{ dataItem.days}} days</span></b></span>
+        <span class="box"><b> {{ dataItem.description}}<br> <span style="color:brown">{{ dataItem.days}} days</span></b></span>
       </ng-template>
     </kendo-dropdownbutton>
   </kendo-appbar-section>
       <span class="k-appbar-separator"></span>
-
-  <kendo-appbar-section>
-    <button kendoButton fillMode="flat" (click)="open()" >
-      <kendo-icon name="menu"></kendo-icon>
-    </button>
-    <kendo-avatar fillMode="outline" class="avatar">
-      <span style="font-size:10px;">{{initials}}</span>
-    </kendo-avatar>
-  </kendo-appbar-section>
+      <kendo-appbar-section>
+        <kendo-dropdownbutton [data]="data"  [fillMode]="fillMode" [popupSettings]="{ align: 'left'}" >
+          <kendo-avatar fillMode="outline" class="avatar">
+            <span style="font-size:10px;">{{initials}}</span>
+          </kendo-avatar>  
+          <ng-template kendoDropDownButtonItemTemplate let-dataItem >
+            <div style="padding:15px;padding-right: 40px;" (click)="logout(dataItem.text)" >
+            <span class="k-icon k-i-{{ dataItem.icon }}" style="padding-right:20px;"></span>
+            <span>{{ dataItem.text }}</span></div>
+          </ng-template>
+        </kendo-dropdownbutton>
+      </kendo-appbar-section>
 </kendo-appbar>
-<kendo-dialog [animation]="animation" *ngIf="opened" (click)="close('cancel')" [minWidth]="338" [width]="338"
-  [minHeight]="270" [height]="280" class="dialog" style="border-radius: 12px;">
-  <div class="first"
-    style="display: flex; justify-content: space-between;background-color: rgba(206, 210, 211,0.2);padding: 10px;border-top-left-radius: 12px; border-top-right-radius: 12px;">
-
-    <div style="flex-basis: 30%; flex-grow: 1;">
-      <kendo-avatar fillMode="outline" class="avatar1">
-        <span style="font-size:20px;">{{initials}}</span>
-      </kendo-avatar>
-    </div>
-    <div style="flex-basis: 70%; flex-grow: 1;">
-      <span style="Color:black ;font-size: 20px;">Safa Jlizi</span> <br> Safajlizi199@gmail.com
-    </div>
-  </div>
-  <ul class="bt">
-    <li (click)="logout()"><span class="k-icon k-i-cog"></span> Edit Profile</li>
-    <li (click)="logout()"><span class="k-icon k-i-logout"></span> Log out</li>
-  </ul>
-</kendo-dialog>
-<kendo-popup [anchor]="anchor.element" [popupClass]="'notification-popup'"  (close)="onPopupClose()" [margin]="margin3"  class="popup" *ngIf="showPopup">
-  <div *ngIf="notifications.length === 0" class="box">No new notifications.</div>
-  <div *ngFor="let notification of notifications"  class="box">
-    <p><span style="font-weight:bold">title :</span> {{ notification }}</p> </div>      
-</kendo-popup>

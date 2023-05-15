@@ -113,3 +113,11 @@ kendo-appbar{
   padding: 0;
   margin: 0;
 }
+.bb{
+  border: none;
+  color: #fff;
+  background-color: #fff;
+  border-radius: 12px;}
+  .my-popup-class .k-list-container {
+    margin-right: 10px;
+  }

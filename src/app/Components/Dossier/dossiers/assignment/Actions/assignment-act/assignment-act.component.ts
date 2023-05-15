@@ -7,7 +7,7 @@ import { GenericService } from 'src/app/services/generic.service';
 @Component({
   selector: 'app-assignment-act',
   templateUrl: './assignment-act.component.html',
-  styleUrls: ['./assignment-act.component.css']
+  styleUrls: ['./assignment-act.component.css','./../../../../../../../assets/sharedCss/SharedStyle.scss']
 })
 export class AssignmentActComponent implements OnInit {
    id :any;

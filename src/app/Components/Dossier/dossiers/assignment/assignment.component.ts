@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-assignment',
   templateUrl: './assignment.component.html',
-  styleUrls: ['./assignment.component.scss']
+  styleUrls: ['./assignment.component.scss','./../../../../../assets/sharedCss/SharedStyle.scss']
 })
 export class AssignmentComponent implements OnInit {
   id: any

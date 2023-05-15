@@ -2,10 +2,11 @@
 >
    <kendo-tabstrip-tab
       *ngFor="let item of items; let i = index"
-      [title]="item.city"
       [selected]="i === selected"
       [disabled]="item.disabled"
     >
+    <ng-template kendoTabTitle ><p [ngClass]="i === selected ? 'primary':'date'" (click)="selected = i" class="p" > {{item.city}}</p></ng-template>
+
       <ng-template kendoTabContent>
         <div  *ngIf="item.city=='Informations'" >
           <app-word-details  *ngIf="item.city=='Informations'" ></app-word-details > 

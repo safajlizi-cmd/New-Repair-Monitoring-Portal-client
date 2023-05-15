@@ -9,7 +9,6 @@ import { DialogAnimation, DialogCloseResult, DialogRef, DialogService } from '@p
 import { TaskDetailsComponent } from '../task-details/task-details.component';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TaskItemComponent } from '../task-item/task-item.component';
 import { DialItemClickEvent } from '@progress/kendo-angular-buttons';
 import { UserStoreService } from 'src/app/services/user-store.service';@Component({
   selector: 'app-collaborator-tasks',

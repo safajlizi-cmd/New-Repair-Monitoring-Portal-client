@@ -1,22 +1,14 @@
-import {
-  Component,
-  ViewEncapsulation,
-  ViewChild,
-  NgZone,
-  AfterViewInit,
-  ElementRef,
-  OnInit,
-} from "@angular/core";
+import { Component, ViewChild,NgZone,OnInit,} from "@angular/core";
 import { Router } from "@angular/router";
 import { UserStoreService } from "src/app/services/user-store.service";
 import { DialogAnimation, DialogRef, DialogService } from "@progress/kendo-angular-dialog";
-import { DialogProfileComponent } from "../profile/dialog-profile/dialog-profile.component";
 import { GenericService } from "src/app/services/generic.service";
 import { Align, PopupRef } from "@progress/kendo-angular-popup";
+import { ButtonFillMode } from "@progress/kendo-angular-buttons";
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css','./../../../../assets/sharedCss/SharedStyle.scss']
 })
 export class NavbarComponent implements OnInit {
   public animation: boolean | DialogAnimation = {};
@@ -27,48 +19,35 @@ export class NavbarComponent implements OnInit {
   public name ="Safa Jlizi"
   notifList:any
   fullName:any
-  public kendokaAvatar =
-    "https://www.telerik.com/kendo-angular-ui-develop/components/navigation/appbar/assets/kendoka-angular.png";
+    public fillMode: ButtonFillMode = "flat";
 
   public margin = { horizontal: -96, vertical: 8 };
   public show = false;
+  public data = [
+    {
+      text: "Settings",
+      icon: "gear",
+    },
+    {
+      text: "Log Out",
+      icon: "logout",
 
+    },
+  ];
   notifications: any[] =[];
   anchor: any = { element: undefined };
-  popupRef: PopupRef | undefined;
   margin2 = 4;
   showPopup = false;
   public margin3 = { horizontal: -96, vertical: 8 };
-
   @ViewChild('anchorElement') anchorElement: any;
-
-  togglePopup() {
-    this.showPopup = !this.showPopup;
-    if (this.showPopup) {
-      this.anchor = { element: this.anchorElement.nativeElement };
-      this.popupRef = this.anchorElement.kendoPopupAnchor(this.anchor, {
-        popupClass: 'notification-popup',
-        animation: { open: { effects: 'scale' } },
-        position: { horizontal: 'right', vertical: 'top' },
-        margin: this.margin2,
-        anchorAlign: 'right',
-        popupAlign: 'right'
-      });
-    } else {
-      this.popupRef!.close();
-    }
-  }
-
   notificationClicked(notification: string) {
     const index = this.notifications.indexOf(notification);
     this.notifications.splice(index, 1);
   }
-
   onPopupClose() {
     this.showPopup = false;
   }
   constructor(private dialogService: DialogService ,private zone: NgZone , private router :Router , private auth :UserStoreService, private api :GenericService) {}
-  
   geNotifications(){
     this.api.getList("Notification/List?id="+this.auth.getId()).subscribe({
       next: (res) => {
@@ -77,7 +56,6 @@ export class NavbarComponent implements OnInit {
       },
       error: (err) => {
       alert("error get notifications")
-
       },
     });
   }
@@ -94,8 +72,12 @@ public close(status: string): void {
 public open(): void {
   this.opened = ! this.opened;
 }
-logout(){
-  this.auth.signOut()
+logout(string:any){
+  if(string == 'Log Out')
+     {this.auth.signOut()}
+   else{
+    this.router.navigate(['Dossiers/Profile'])
+   }  
 }
 
 }

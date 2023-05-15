@@ -39,6 +39,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { UploadsModule } from '@progress/kendo-angular-upload';
 import { EditorModule } from "@progress/kendo-angular-editor";
 import { ChartsModule } from '@progress/kendo-angular-charts';
+import { Location } from '@angular/common';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
@@ -52,8 +55,6 @@ import { ChartsModule } from '@progress/kendo-angular-charts';
     GuideListComponent,
     GuideItemComponent,
     NavbarGuideComponent,
-    
-   
   ],
   imports: [
     BrowserModule,
@@ -88,11 +89,12 @@ import { ChartsModule } from '@progress/kendo-angular-charts';
     MatBadgeModule,
     UploadsModule,
     EditorModule,
-    ChartsModule 
+    ChartsModule,
+    MatMenuModule
 
 
   ],
-  providers: [],
+  providers: [Location,],
   bootstrap: [AppComponent]
 })
 
