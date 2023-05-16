@@ -18,6 +18,7 @@ import { EditorModule } from "@progress/kendo-angular-editor";
 import { SendEmailComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/send-email/send-email.component';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { IconsModule } from '@progress/kendo-angular-icons';
+import { saveAs, encodeBase64 } from '@progress/kendo-file-saver';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { IconsModule } from '@progress/kendo-angular-icons';
     EditorModule ,
     GridModule ,
     IconsModule,
+    
   ]
 })
 export class DossierDetailsModule { }

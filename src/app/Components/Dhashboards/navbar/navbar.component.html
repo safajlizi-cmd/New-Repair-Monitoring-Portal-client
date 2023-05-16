@@ -1,7 +1,7 @@
 <kendo-appbar position="top">
   <kendo-appbar-spacer></kendo-appbar-spacer>
   <kendo-appbar-section class="search-section">
-    <p class="date"> {{role}}</p>
+    <p class="role"> {{role}}</p>
   </kendo-appbar-section>
  
   <kendo-appbar-section class="user-actions" >
@@ -20,7 +20,7 @@
       <kendo-appbar-section>
         <kendo-dropdownbutton [data]="data"  [fillMode]="fillMode" [popupSettings]="{ align: 'left'}" >
           <kendo-avatar fillMode="outline" class="avatar">
-            <span style="font-size:10px;">{{initials}}</span>
+            <span style="font-size:14px;">{{initials}}</span>
           </kendo-avatar>  
           <ng-template kendoDropDownButtonItemTemplate let-dataItem >
             <div style="padding:15px;padding-right: 40px;" (click)="logout(dataItem.text)" >

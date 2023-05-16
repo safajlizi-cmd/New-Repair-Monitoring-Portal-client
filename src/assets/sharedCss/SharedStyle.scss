@@ -12,6 +12,17 @@
   font-weight:bold;
   
 }
+.delete{
+  color: crimson;
+}
+.bt{
+  background-color: #3899DD;color: #fff;
+}
+.dialog{
+  background-color:rgba(0,0,0,0.2);
+
+}
+
 .todo{
  color: rgb(32, 175, 222);
  padding: 1px;
@@ -34,6 +45,13 @@
   font-weight: bold;
   color: rgb(98, 104, 104);
   font-size: 15px;
+}
+.role{
+  font-weight: bold;
+  color: rgb(98, 104, 104);
+  font-size: 17px;
+  letter-spacing: 4px;
+  padding-top: 8px;
 }
 .done{
   color: rgb(106, 199, 30);

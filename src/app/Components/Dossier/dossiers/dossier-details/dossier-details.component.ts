@@ -116,7 +116,8 @@ export class DossierDetailsComponent implements OnInit {
   }
   public open(): void {
     this.openedassy = true;}
-  public openWo(): void {
+  public openWo(id:any): void {
+    this.assignId = id
     this.opened = true;}
   onAssignmentClick(dataItem: any) {
     
@@ -148,11 +149,12 @@ export class DossierDetailsComponent implements OnInit {
     });
   }
   AddWorkingOrder() {
-    this.WOForm.get('assignmentId')?.setValue(this.id);
+    this.WOForm.get('assignmentId')?.setValue(this.assignId);
     this.api.add("WorkingOrder/Add", this.WOForm.value).subscribe({
       next: (res) => {
         this.WOForm.reset(); 
         this.opened = false;  
+        this.getAssignments()
         this._snackBar.open('Working Order added successfully','',{ 
           duration: 3000
       })
