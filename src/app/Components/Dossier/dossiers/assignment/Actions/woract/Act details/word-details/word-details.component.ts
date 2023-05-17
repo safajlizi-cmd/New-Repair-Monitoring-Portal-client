@@ -55,13 +55,9 @@ export class WordDetailsComponent implements OnInit{
        console.log(res)
         this.workingOrder =res.assignment;
         console.log(this.workingOrder)
-        this._snackBar.open('Work order updated successfully','',{ 
-          duration: 3000
-      })
-
       },
       error: (err) => {
-        this._snackBar.open('Error while updating Work order','',{ 
+        this._snackBar.open('Error while getting working order','',{ 
           duration: 3000
       })
       },

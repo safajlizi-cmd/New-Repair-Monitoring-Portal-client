@@ -35,7 +35,12 @@
                     {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}
                 </ng-template>
             </kendo-grid-column>
-          
+            <kendo-grid-column title=" " filter="date" >
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <button kendoButton (click)="viewHistory(dataItem.id)" [fillMode]="fillMode" class="date" >View History <span
+                            class="k-icon k-i-hyperlink-open-sm"></span></button>
+                </ng-template>
+            </kendo-grid-column>
         </kendo-grid>
     </div>
        <kendo-dialog title="AddUser" [animation]="animation" *ngIf="opened" (close)="close()" [minWidth]="250"

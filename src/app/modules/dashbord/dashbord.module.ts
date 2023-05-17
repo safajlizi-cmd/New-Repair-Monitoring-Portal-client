@@ -61,6 +61,7 @@ import {AddNoteComponent} from  'src/app/Components/Dossier/manageTasks/dialogs/
 import { AddSubTaskComponent } from 'src/app/Components/Dossier/manageTasks/dialogs/add-sub-task/add-sub-task.component';
 import { UsersComponent } from 'src/app/Components/users/users.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { HistoryComponent } from 'src/app/Components/users/history/history.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -91,7 +92,8 @@ import { MatMenuModule } from '@angular/material/menu';
     LowestDossierComponent,
     AddNoteComponent,
     AddSubTaskComponent,
-    UsersComponent
+    UsersComponent,
+    HistoryComponent
  ],
   imports: [
     CommonModule,

@@ -12,6 +12,7 @@ import { TaskComponent } from 'src/app/Components/Dossier/manageTasks/task/task.
 import { GuideHomeComponent } from 'src/app/Components/home/guide-home/guide-home.component';
 import { HomeComponent } from 'src/app/Components/home/home/home.component';
 import { UnassignedTasksComponent } from 'src/app/Components/home/unassigned-tasks/unassigned-tasks.component';
+import { HistoryComponent } from 'src/app/Components/users/history/history.component';
 import { UsersComponent } from 'src/app/Components/users/users.component';
    
 const routes: Routes = [
@@ -26,6 +27,8 @@ const routes: Routes = [
     { path: 'Profile',component :DialogProfileComponent},
     { path: 'Statistics',component :StatisticsComponent},
     { path: 'UnassignedTasks',component :UnassignedTasksComponent},
+    { path: 'Users/History/:id',component :HistoryComponent},
+
     { path: 'List/Details/:id',loadChildren:()=>import('../dossier-details/dossier-details.module').then((m)=>m.DossierDetailsModule)},
     { path: 'ManageTasks/Details/:id',component :TaskDetailsComponent},
    ]},
