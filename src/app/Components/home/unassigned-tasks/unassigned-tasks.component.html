@@ -2,12 +2,12 @@
     <div class=" top">
         <h1 class="titlle ">
             Unassigned tasks</h1>
-            <div>
+            <div style="margin-left:90%">
                 <span kendoTooltip title="Confirm  the tasks you want to assigned to yourself">
-                <button kendoButton class="bt" (click)="confirmSelection()" style="margin-left:90%">Confirm  Selection</button></span>
+                <button kendoButton class="bt" (click)="confirmSelection()" >Confirm  Selection</button></span>
       </div>  </div>
 <div class="bottom">
-<kendo-grid [data]="tasks" [selectable]="selectableSettings" filterable="menu" [navigable]="true" [height]="600"   (selectionChange)="onSelectionChange($event)">
+<kendo-grid [data]="tasks" [selectable]="selectableSettings" filterable="menu" [navigable]="true" [height]="700"   (selectionChange)="onSelectionChange($event)">
     <kendo-grid-checkbox-column title="Select Tasks">
         <ng-template kendoGridHeaderTemplate>
            

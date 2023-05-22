@@ -1,23 +1,52 @@
 <div class="row">
   <div class="row">
-    <div class="col-lg-4">Description :<b> {{task?.description != null ?task?.description : "no Description.."}}</b>
-    </div>
-    <div class="col-lg-4">Expiration at :<b>{{task?.deadline != null ?task.deadline : "deadline no defined.."}}</b></div>
-    <div class="col-lg-4">Created By :<b>{{task.createdByC?.userName }}</b></div>
+    <table >
+      <tr>
+          <td style="width:33%;"> 
+            Description :  <br><b> {{task?.description != null ?task?.description : "no Description.."}}</b>
+          </td>
+          <td style="width:33%;">
+            Expiration at :<br><b>{{task?.deadline != null ?task.deadline : "deadline no defined.."}}</b>
+          </td>
+          <td style="width:33%;">
+            Created By :<br><b>{{task.createdByC?.userName }}</b>
+          </td>
+      </tr>
+  </table>
   </div>
-  <div class="row mt-5">
-    <div class="dialog-button">
-      <button class="center" kendoButton (click)="open('addSubtask')"
-        style="background-color: #3899DD;color:#fff ; margin:10px"
-        [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon>Add
-        Sub-Task</button>
-    </div>
+  <div class="row mt-4">
+    <kendo-panelbar style="border:none ;">
+      <kendo-panelbar-item [expanded]="false" class="bb">
+        <ng-template kendoPanelBarItemTitle>
+          <button class="center" kendoButton (click)="open('note')"
+            [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon></button>
+          Note List
+        </ng-template>
+        <ng-template kendoPanelBarContent>
+          <div class="childs">
+            <div class="teamMate" *ngIf="notes.length == 0">
+              <span class="mate-info">
+                <p> There are no Notes now !</p>
+              </span>
+            </div>
+            <div class="teamMate" *ngFor="let item of notes" style="display: flex; justify-content: space-between;">
+              <div style="flex-basis:30%; flex-grow: 1;"> <b>Title :</b> {{ item.title }}  </div>
+              <div style="flex-basis:30%; flex-grow: 1;"> <b>Description :</b> {{ item.description }} </div>
+            </div>
+          </div>
+        </ng-template>
+      </kendo-panelbar-item>
+    </kendo-panelbar>
   </div>
-  <div class="row">
-    <div class="col-lg-7 border-right">
-      <div class="box" *ngIf="task.subTasksC.length == 0">
-        No sub-tasks available ..
-      </div>
+ 
+  <div class="row mt-4">
+         <button  kendoButton (click)="open('addSubtask')"   style="width:150px;background-color: #3899DD;color:#fff ; margin:10px"
+           [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon>Add
+          Sub-Task</button>
+
+       <div class="box" *ngIf="task.subTasksC.length == 0">
+               No sub-tasks available ..
+       </div>
       <div *ngFor="let item of task.subTasksC ; let i =index" [ngClass]="item.emergency ==true ? 'Emergency':'box'">
         <b>{{item!.title}} </b>
         <span style="color:#dc5b1b"><kendo-svg-icon [icon]="icons.trash" class="blue"></kendo-svg-icon>  {{item!.deadline| date: 'MM/dd/yyyy' }} </span>
@@ -32,34 +61,12 @@
                 </td>
              </tr>
         </table>
-      </div>
     </div>
-    <div class="col-lg-5 ">
-      <kendo-panelbar style="border:none ;">
-        <kendo-panelbar-item [expanded]="false" class="bb">
-          <ng-template kendoPanelBarItemTitle>
-            <button class="center" kendoButton (click)="open('note')"
-              [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon></button>
-            Note List
-          </ng-template>
-          <ng-template kendoPanelBarContent>
-            <div class="childs">
-              <div class="teamMate" *ngIf="notes.length == 0">
-                <span class="mate-info">
-                  <p> There are no Notes now !</p>
-                </span>
-              </div>
-              <div class="teamMate" *ngFor="let item of notes" style="display: flex; justify-content: space-between;">
-                <div style="flex-basis:30%; flex-grow: 1;"> <b>Title :</b> {{ item.title }}  </div>
-                <div style="flex-basis:30%; flex-grow: 1;"> <b>Description :</b> {{ item.description }} </div>
-              </div>
-            </div>
-          </ng-template>
-        </kendo-panelbar-item>
-      </kendo-panelbar>
-    </div>
+   
   </div>
 </div>
+
+
 <kendo-dialog title="Add sub-Task" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [themeColor]="'dark'" [width]="450" class="diag">
   <form [formGroup]="taskForm">
     <div class="form-group">

@@ -5,12 +5,23 @@ import { DialogAnimation, DialogRef, DialogService } from "@progress/kendo-angul
 import { GenericService } from "src/app/services/generic.service";
 import { Align, PopupRef } from "@progress/kendo-angular-popup";
 import { ButtonFillMode } from "@progress/kendo-angular-buttons";
+import { environment } from "src/environments/environment";
+import { HubConnection, HubConnectionBuilder } from "@aspnet/signalr";
+import { HttpClient } from "@angular/common/http";
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css','./../../../../assets/sharedCss/SharedStyle.scss']
 })
 export class NavbarComponent implements OnInit {
+  //configure signalR
+  private apiUrl = environment.apiUrl;
+  private _hubConnection !: HubConnection;
+  showImage = false
+  signalData :any[]=[]
+
+
+
   public animation: boolean | DialogAnimation = {};
   public dialogThemeColor:any= "primary";
   public opened =false
@@ -47,11 +58,16 @@ export class NavbarComponent implements OnInit {
   onPopupClose() {
     this.showPopup = false;
   }
-  constructor(private dialogService: DialogService ,private zone: NgZone , private router :Router , private auth :UserStoreService, private api :GenericService) {}
+  constructor(private dialogService: DialogService 
+             ,private zone: NgZone
+             , private router :Router 
+             , private auth :UserStoreService
+             , private api :GenericService
+             , private http : HttpClient ) {}
   geNotifications(){
     this.api.getList("Notification/List?id="+this.auth.getId()).subscribe({
       next: (res) => {
-        this.notifications = res;
+        this.signalData = res;
         console.log(res);
       },
       error: (err) => {
@@ -59,16 +75,28 @@ export class NavbarComponent implements OnInit {
       },
     });
   }
-  ngOnInit(): void {
-   this.role= this.auth.getRole()
-   this.fullName = this.auth.getUserName()
-  this.geNotifications()
-  const names = this.name.split(' ');
-  this.initials = names[0].charAt(0) + names[names.length - 1].charAt(0);
-}
+ ngOnInit(): void {
+      this.role= this.auth.getRole()
+      this.fullName = this.auth.getUserName()
+      this.geNotifications()
+      const names = this.name.split(' ');
+      this.initials = names[0].charAt(0) + names[names.length - 1].charAt(0);
+
+      //signalR
+      this._hubConnection = new HubConnectionBuilder().withUrl(this.apiUrl+'/notify').build();
+      this._hubConnection.start()
+              .then(()=> console.log('connection start'))
+              .catch( err => { console.log('error while establishing the connection')})
+         this._hubConnection.on('SendMessage',(message)=>{
+        this.signalData.push(message);
+        
+      })        
+    }
+
 public close(status: string): void {
   this.opened = false;
 }
+
 public open(): void {
   this.opened = ! this.opened;
 }

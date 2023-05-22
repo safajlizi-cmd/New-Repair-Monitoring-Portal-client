@@ -78,8 +78,6 @@ export class UsersComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       userName: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
       email: ['', Validators.required],
       role: ['Coordinator'],
       createdById: ['']

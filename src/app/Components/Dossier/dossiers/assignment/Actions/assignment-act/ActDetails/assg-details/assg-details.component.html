@@ -15,12 +15,12 @@
   [minWidth]="250" [width]="450">
   <form [formGroup]="AssignForm">
       <div class="form-group">
-          <label for="title">Assignment Number:</label>
-          <input type="text" class="form-control" id="assignmentNumber" formControlName="assignmentNumber"
+          <label for="title">Product Name:</label>
+          <input type="text" class="form-control" id="product" formControlName="product"
               placeholder="Title">
-          <div *ngIf="AssignForm.controls['assignmentNumber'].invalid && (AssignForm.controls['assignmentNumber'].dirty || AssignForm.controls['assignmentNumber'].touched)"
+          <div *ngIf="AssignForm.controls['product'].invalid && (AssignForm.controls['product'].dirty || AssignForm.controls['product'].touched)"
               class="alert alert-danger">
-              <div *ngIf="AssignForm.hasError('required','assignmentNumber')">Assignment Number is required.
+              <div *ngIf="AssignForm.hasError('required','product')">ProductName is required.
               </div>
           </div>
       </div>

@@ -34,7 +34,7 @@ id :any;
       this.getAssignment() 
     }); 
     this.AssignForm = this.fb.group({
-      assignmentNumber: ['', Validators.required],
+      product: ['', Validators.required],
       cause: ['', Validators.required],
       id: []
     });
@@ -42,7 +42,7 @@ id :any;
  
   onEdit() {
     this.AssignForm.controls['id'].setValue(this.assignment.id);
-    this.AssignForm.controls['assignmentNumber'].setValue(this.assignment.assignmentNumber);
+    this.AssignForm.controls['product'].setValue(this.assignment.productName);
     this.AssignForm.controls['cause'].setValue(this.assignment.cause);
     this.opened = true;
   }

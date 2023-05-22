@@ -93,31 +93,6 @@
                 </div>
                 </div>
              </div>
-             <div class="form-group">
-                <label for="DamageType">Password :</label>
-                <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                <div
-                   *ngIf="UserForm.controls['password'].invalid && (UserForm.controls['password'].dirty || UserForm.controls['password'].touched)"
-                   class="alert alert-danger">
-                   <div *ngIf="UserForm.hasError('required','password')">Password is required.</div>
-                    <div [hidden]="UserForm.controls['password'].errors?.['pattern'].invalid">
-                    Invalid pattern
-                  </div>
-                </div>
-             </div>
-             <div class="form-group">
-                <label for="DamageType">Confirm Password:</label>
-                <input type="password" class="form-control" id="Password" formControlName="confirmPassword" placeholder="UserName">
-                <div *ngIf="UserForm.controls['confirmPassword'].value !== UserForm.controls['password'].value"  class="alert alert-danger">
-                    Passwords do not match.
-                  </div>
-                <div *ngIf="UserForm.controls['confirmPassword'].invalid && (UserForm.controls['confirmPassword'].dirty || UserForm.controls['confirmPassword'].touched)"
-                     class="alert alert-danger">
-                  <div *ngIf="UserForm.controls['confirmPassword'].value !== UserForm.controls['password'].value">
-                    Passwords do not match.
-                  </div>
-                </div>
-              </div>
             <div class="flex">
                 <button kendoButton (click)="close()" class="cancel">Cancel</button>
                 <button kendoButton (click)="addUser()"  [disabled]="UserForm.invalid" class="submit">Submit</button>

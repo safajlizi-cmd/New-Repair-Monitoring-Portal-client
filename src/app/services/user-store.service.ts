@@ -44,6 +44,12 @@ export class UserStoreService {
   getRole() {
     return localStorage.getItem('role')
   }
+  storeToken(Value: string) {
+    localStorage.setItem('token', Value)
+  }
+  getToken() {
+    return localStorage.getItem('token')
+  }
   storeId(Value: string) {
     localStorage.setItem('id', Value)
   }
@@ -57,7 +63,7 @@ export class UserStoreService {
     return localStorage.getItem('user')
   }
   isLoggedIn():boolean{
-    return !!localStorage.getItem('user')
+    return !!localStorage.getItem('token')
   }
   signOut(){
     localStorage.clear();

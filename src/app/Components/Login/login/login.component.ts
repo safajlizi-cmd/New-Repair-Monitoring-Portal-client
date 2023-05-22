@@ -13,7 +13,7 @@ import { NotificationService } from '@progress/kendo-angular-notification';
 })
 export class LoginComponent implements OnInit {
   loginForm!:FormGroup;
-  public errorMessage!: string;
+  public errorMessage="";
   constructor(private fb : FormBuilder , private router : Router ,private api :GenericService,private userStore :UserStoreService ,private user :UserStoreService ,private notificationService: NotificationService ){
   }
 
@@ -28,6 +28,7 @@ onLogin(){
               this.api.add("User/authentificate",this.loginForm.value).subscribe({
                 next:(res)=>{
                  this.router.navigate(['Dossiers'])
+                 this.user.storeToken(res.token)
                   this.user.storeUser(res.user)
                   this.user.storeRole(res.user.role)
                   this.user.storeId(res.user.id)
@@ -37,7 +38,7 @@ onLogin(){
                   this.userStore.setRoleForStore(res.user.role)
                   this.notificationService.show({
                     content: res.message,
-                    animation: {
+                    animation: { 
                       type:"slide",
                       duration:500,
                     },
@@ -45,15 +46,8 @@ onLogin(){
                   });            
                 },
                 error:(err)=>{
-                  this.notificationService.show({
-                    content: err.error.message,
-                    cssClass: 'my-custom-notification',
-                    animation: {
-                      type:"slide",
-                      duration: 500,
-                    },
-                    type: { style: "error" },
-                  });
+                  console.log(err.response)
+                    
                 }
 
               })

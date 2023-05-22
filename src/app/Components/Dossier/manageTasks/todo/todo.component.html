@@ -1,9 +1,10 @@
 <div class="container">
     <table style="margin-top:10px;margin-bottom:10px;margin-left:30%;">
         <tr>
-            <td style="width:60%;">      
+            <td style="width:60%;">   
             </td>
             <td style="width:20%;">
+                Filter By taskName : 
                 <span kendoTooltip title="Filter By Task Name">
                     <kendo-dropdownlist [data]="tasks" [textField]="'title'" [valueField]="'title'"
                         class="dossierF2" placeholder="Select a dossier" (valueChange)="onSelectTask($event)">
@@ -13,6 +14,7 @@
 
             </td>
             <td style="width:30%;">
+                Filter By dossierNumber : 
                 <span kendoTooltip title="Filter By DossierNumber">
                     <kendo-dropdownlist [data]="dossiers" [textField]="'dossierNumber'" [valueField]="'dossierNumber'"
                         class="dossierF" placeholder="Select a dossier" (valueChange)="onActionButtonClick($event)">
@@ -243,7 +245,7 @@
       </form>
 
     </kendo-dialog>
- <kendo-dialog title="{{title}}" [animation]="animation" *ngIf="opened2" (close)="close('cancel')"  [height]="500" [themeColor]="'dark'" class="dig" > <app-task-details [TaskId]="taskId" 
+ <kendo-dialog title="{{title}}" [animation]="animation" *ngIf="opened2" (close)="close('cancel')"  [height]="500" [width]="600" [themeColor]="'dark'" class="dig" > <app-task-details [TaskId]="taskId" 
     ></app-task-details>
 </kendo-dialog>
    

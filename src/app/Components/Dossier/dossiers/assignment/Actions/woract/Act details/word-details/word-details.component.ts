@@ -66,7 +66,6 @@ export class WordDetailsComponent implements OnInit{
 
   ngOnInit() {
     this.WOForm = this.fb.group({
-      woNumber: ['', Validators.required],
       locationId: ['', Validators.required],
       materialId: ['', Validators.required],
       damageTypeId: ['', Validators.required],
@@ -87,7 +86,6 @@ export class WordDetailsComponent implements OnInit{
     this.WOForm.controls['locationId'].setValue(this.workingOrder.locationId);
     this.WOForm.controls['materialId'].setValue(this.workingOrder.materialId);
     this.WOForm.controls['damageTypeId'].setValue(this.workingOrder.damageTypeId);
-    this.WOForm.controls['woNumber'].setValue(this.workingOrder.woNumber);
 
     this.opened = true;
   }

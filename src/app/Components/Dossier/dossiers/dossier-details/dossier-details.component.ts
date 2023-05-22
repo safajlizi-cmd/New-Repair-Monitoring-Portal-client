@@ -90,14 +90,13 @@ export class DossierDetailsComponent implements OnInit {
   }
   ngOnInit() {
     this.WOForm = this.fb.group({
-      woNumber: ['', Validators.required],
       locationId: ['', Validators.required],
       materialId: ['', Validators.required],
       damageTypeId: ['', Validators.required],
       assignmentId: ['']
     });
     this.AssignForm = this.fb.group({
-      assignmentNumber: ['', Validators.required],
+      product: ['', Validators.required],
       cause: ['', Validators.required],
       dossierId: ['']
     });

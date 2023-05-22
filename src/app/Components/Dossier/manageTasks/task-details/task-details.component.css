@@ -58,7 +58,6 @@ table {
   margin-top: 10px;
   font: weight 300px;
   border-radius: 10px;
-  max-width: 500px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 .Emergency {
@@ -73,7 +72,6 @@ table {
   margin-top: 10px;
   font: weight 300px;
   border-radius: 10px;
-  max-width: 500px;
   border: 1px solid;
   border-color: red;
   background-color: rgba(246, 9, 9, 0.2);
@@ -98,7 +96,7 @@ table {
   height: 55px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  max-width: 400px;
+  width: 100%;
 
 }
 .childs{

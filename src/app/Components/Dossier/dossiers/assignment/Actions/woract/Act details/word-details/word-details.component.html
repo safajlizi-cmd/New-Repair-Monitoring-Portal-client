@@ -15,16 +15,7 @@
  <kendo-dialog title="Update Working Order" *ngIf="opened" (close)="close('cancel')" class="diag" [themeColor]="'dark'"
   [minWidth]="250" [width]="450">
   <form [formGroup]="WOForm">
-     <div class="form-group">
-        <label for="title">Working Order Number:</label>
-        <input type="text" class="form-control" id="woNumber" formControlName="woNumber" placeholder="Working Order">
-        <div
-           *ngIf="WOForm.controls['woNumber'].invalid && (WOForm.controls['woNumber'].dirty || WOForm.controls['woNumber'].touched)"
-           class="alert alert-danger">
-           <div *ngIf="WOForm.hasError('required','woNumber')">Working order is required.</div>
-        </div>
-     </div>
-
+   
      <table style="width:100% " cellspacing="0">
         <tr>
            <td style="width:50% ">

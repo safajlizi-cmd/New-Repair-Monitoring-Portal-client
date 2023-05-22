@@ -24,7 +24,7 @@ import { SideNavComponent } from './Components/Dhashboards/side-nav/side-nav.com
 import { PagerModule } from '@progress/kendo-angular-pager';
 import { Dashboard2Component } from 'src/app/Components/Dhashboards/dashboard2/dashboard2.component';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ManageProfileComponent } from './Components/Profile/manage-profile/manage-profile.component';
 import { GuideListComponent } from './Components/home/guide-list/guide-list.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -41,6 +41,7 @@ import { EditorModule } from "@progress/kendo-angular-editor";
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import { Location } from '@angular/common';
 import {MatMenuModule} from '@angular/material/menu';
+import { TokenInterceptor } from './Components/Interceptor/token.interceptor';
 
 
 @NgModule({
@@ -95,7 +96,10 @@ import {MatMenuModule} from '@angular/material/menu';
 
 
   ],
-  providers: [Location,],
+  providers: [Location,
+  {provide:HTTP_INTERCEPTORS,
+  useClass : TokenInterceptor,
+  multi:true}],
   bootstrap: [AppComponent]
 })
 
