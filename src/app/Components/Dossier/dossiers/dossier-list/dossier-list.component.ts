@@ -17,6 +17,7 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 export class DossierListComponent implements OnInit {
   public opened = false;
   public openedStatus = false
+  activateDos =false
   public animation: boolean | DialogAnimation = {};
   public dialogThemeColor:any= "primary";
   dossierForm!: FormGroup;
@@ -97,6 +98,7 @@ export class DossierListComponent implements OnInit {
     this.getDossiers()
     this.openedStatus= false; 
      this.opened = false;
+     this.activateDos = false
 
   }
   public open(Stat:any): void {
@@ -106,6 +108,30 @@ export class DossierListComponent implements OnInit {
 
       this.openedStatus = true;
     }
+  }
+  Activate()
+  {
+    this.dossierService.ActivateDos(this.SelectedDossier.id).subscribe({
+      next: (res) => {
+        alert("dossier activated successfully")
+        this.getDossiers()
+        this.activateDos=false
+        this._snackBar.open("Dossier Activated successfully","",this.snackbarConfig)
+
+      },
+      error: (err) => {
+        this.getDossiers()
+        this.activateDos=false 
+        this._snackBar.open("Dossier status updated successfully","",this.snackbarConfig)
+
+      },
+    });
+  }
+  activateDossier(doss:any)
+  {
+    this.activateDos = true
+    this.SelectedDossier = doss
+    
   }
   updateStatus()
   {

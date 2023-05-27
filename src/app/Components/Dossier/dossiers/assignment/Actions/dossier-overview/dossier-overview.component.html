@@ -1,115 +1,113 @@
-<kendo-tabstrip [ngStyle]="{ width: '100%' ,height:'100%', color:'blue'}" [tabAlignment]="alignment" >
-  <kendo-tabstrip-tab
-    *ngFor="let item of items; let i = index"
-    [selected]="i === selected"
-    [disabled]="item.disabled"
-    class="tab-title"
-  >
-  <ng-template kendoTabTitle ><p [ngClass]="i === selected ? 'primary':'date'" (click)="selected = i" > {{item.city}}</p></ng-template>
-  <ng-template kendoTabContent>
-    <div *ngIf="item.city=='Informations'" >
-      <p class="title" > Dossier details </p>
-      <kendo-card class="card">
+<kendo-tabstrip [ngStyle]="{ width: '100%' ,height:'100%', color:'blue'}" [tabAlignment]="alignment">
+  <kendo-tabstrip-tab *ngFor="let item of items; let i = index" [selected]="i === selected" [disabled]="item.disabled"
+    class="tab-title">
+    <ng-template kendoTabTitle>
+      <p [ngClass]="i === selected ? 'primary':'date'" (click)="selected = i"> {{item.city}}</p>
+    </ng-template>
+    <ng-template kendoTabContent>
+      <div *ngIf="item.city=='Informations'">
+        <p class="title"> Dossier details </p>
+        <kendo-card class="card">
           <kendo-card-header class="header">
-              General details
+            General details
           </kendo-card-header>
-          <kendo-card-body  class="body">
-              <p> Dossier number :<br><span>{{ dossier.dossierNumber }}</span></p>
-              <p> Duped Name :<br><span>Safa Jlizi</span></p>
-              <p>Created date: <br><span>{{dossier?.createdDate|date: 'MM/dd/yyyy' }}</span></p>
-              <p>Created by :<br><span> {{ dossier?.createdBy?.userName }}</span></p>
-            
+          <kendo-card-body class="body">
+            <p> Dossier number :<br><span>{{ dossier.dossierNumber }}</span></p>
+            <p> Duped Name :<br><span>Safa Jlizi</span></p>
+            <p>Created date: <br><span>{{dossier?.createdDate|date: 'MM/dd/yyyy' }}</span></p>
+            <p>Created by :<br><span> {{ dossier?.createdBy?.userName }}</span></p>
+
           </kendo-card-body>
         </kendo-card>
       </div>
 
-      <div *ngIf="item.city=='Notes'" class="row" >
-        <p class="title" > Notes List : </p>
+      <div *ngIf="item.city=='Notes'" class="row">
+        <p class="title"> Notes List : </p>
 
-        <div class="box row" *ngIf="notes.length == 0" >
+        <div class="box row" *ngIf="notes.length == 0">
           No notes available ..
         </div>
-        <div class="box row" *ngFor="let item of notes ; let i =index" >
-             <div class="col-lg-7"> <b>Title : {{item.title}} </b></div>
-             <div class="col-lg-5 date">   Created at : <kendo-svg-icon [icon]="icons.trash"></kendo-svg-icon> {{item?.createdDate|date: 'MM/dd/yyyy' }}</div>
-              <div class="des"> {{item.description}} </div>
-          </div>
-          </div>
-      <div *ngIf="item.city=='Documents'" class="row" >
-       <span style=" color:#7e807a;font-size: 0.7rem;"> Add Document :</span>
-       <div class="row">
-        <div class="col-8">
-          <label class="btn btn-default p-0">
-            <input type="file" (change)="selectFile($event)" />
-          </label>
-        </div>
-        <div class="col-4">
-          <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
-            Upload
-          </button>
+        <div class="box row" *ngFor="let item of notes ; let i =index">
+          <div class="col-lg-7"> <b>Title : {{item.title}} </b></div>
+          <div class="col-lg-5 date"> Created at : <kendo-svg-icon [icon]="icons.trash"></kendo-svg-icon>
+            {{item?.createdDate|date: 'MM/dd/yyyy' }}</div>
+          <div class="des"> {{item.description}} </div>
         </div>
       </div>
-      <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
-      <p class="title" >List of Files : </p>
-      <kendo-grid [kendoGridBinding]="fileInfos" filterable="menu" 
-      [height]="550">
-      <kendo-grid-column field="fileName" title="FileName" [width]="220" >
-          <ng-template kendoGridCellTemplate let-dataItem>
-                  {{ dataItem.fileName}}
-          </ng-template>
-      </kendo-grid-column>
-      <kendo-grid-column field="createdDate" title="Created Date"[width]="220" >
-          <ng-template kendoGridCellTemplate let-dataItem>
-              {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}
-          </ng-template>
-      </kendo-grid-column>
-      <kendo-grid-column field="documentType" title="Document Type"[width]="220" >
-          <ng-template kendoGridCellTemplate let-dataItem>
-              {{ dataItem.documentType }}
-          </ng-template>
-      </kendo-grid-column>
-      <kendo-grid-column title=" " filter="date" [width]="250">
-          <ng-template kendoGridCellTemplate let-dataItem>
-            <span kendoTooltip title="Download file">
-              <button kendoButton (click)="saveByteArray(dataItem)" [fillMode]="fillMode">
-                     <span class="k-icon k-i-upload"></span></button>
-            </span>
-            <span kendoTooltip title="Open file">         
-              <button kendoButton (click)="openfile(dataItem)" [fillMode]="fillMode">  <span
-                        class="k-icon k-i-hyperlink-open"></span></button>
-            </span>
-            <span kendoTooltip title="Delete file">         
-              <button kendoButton (click)="delete(dataItem.id)"[fillMode]="fillMode" class="delete" >  <span
-                        class="k-icon k-i-delete"></span></button>
-            </span>
-          </ng-template>
-      </kendo-grid-column>
-  </kendo-grid>
-
-    </div>
-        <div *ngIf="item.city=='Email'" class="row">
-          <p class="title" >Emails List : </p>
-              <app-send-email></app-send-email>
+      <div *ngIf="item.city=='Documents'" class="row">
+        <span style=" color:#7e807a;font-size: 0.7rem;"> Add Document :</span>
+        <div class="row">
+          <div class="col-8">
+            <label class="btn btn-default p-0">
+              <input type="file" (change)="selectFile($event)" />
+            </label>
+          </div>
+          <div class="col-4">
+            <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+              Upload
+            </button>
+          </div>
         </div>
+        <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
+        <p class="title">List of Files : </p>
+        <kendo-grid [kendoGridBinding]="fileInfos" filterable="menu" [height]="550">
+          <kendo-grid-column field="fileName" title="FileName" [width]="220">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              {{ dataItem.fileName}}
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="createdDate" title="Created Date" [width]="220">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="documentType" title="Document Type" [width]="220">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              {{ dataItem.documentType }}
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column title=" " filter="date" [width]="250">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <span kendoTooltip title="Download file">
+                <button kendoButton (click)="saveByteArray(dataItem)" [fillMode]="fillMode">
+                  <span class="k-icon k-i-upload"></span></button>
+              </span>
+              <span kendoTooltip title="Open file">
+                <button kendoButton (click)="openfile(dataItem)" [fillMode]="fillMode"> <span
+                    class="k-icon k-i-hyperlink-open"></span></button>
+              </span>
+              <span kendoTooltip title="Delete file">
+                <button kendoButton (click)="delete(dataItem.id)" [fillMode]="fillMode" class="delete"> <span
+                    class="k-icon k-i-delete"></span></button>
+              </span>
+            </ng-template>
+          </kendo-grid-column>
+        </kendo-grid>
+
+      </div>
+      <div *ngIf="item.city=='Email'" class="row">
+        <p class="title">Emails List : </p>
+        <app-send-email></app-send-email>
+      </div>
+      <div *ngIf="item.city =='History'">
+        <p class="title ml-2">History List : </p>
+        <app-dos-history></app-dos-history>
+      </div>
     </ng-template>
   </kendo-tabstrip-tab>
 </kendo-tabstrip>
-<kendo-dialog
-title="Please confirm"
-*ngIf="openedDelete"
-(close)="close()"
-[minWidth]="250"
-[width]="450"
-[themeColor]="'dark'"
-class="dialog"
->
-<p style="margin: 30px; text-align: center;">
-  Are you sure you want to Delete a file?
-</p>
-<kendo-dialog-actions>
-  <button kendoButton (click)="close()">No</button>
-  <button kendoButton (click)="deleteDocument()" class="bt">
-    Yes
-  </button>
-</kendo-dialog-actions>
+
+
+
+<kendo-dialog title="Please confirm" *ngIf="openedDelete" (close)="close()" [minWidth]="250" [width]="450"
+  [themeColor]="'dark'" class="dialog">
+  <p style="margin: 30px; text-align: center;">
+    Are you sure you want to Delete a file?
+  </p>
+  <kendo-dialog-actions>
+    <button kendoButton (click)="close()">No</button>
+    <button kendoButton (click)="deleteDocument()" class="bt">
+      Yes
+    </button>
+  </kendo-dialog-actions>
 </kendo-dialog>

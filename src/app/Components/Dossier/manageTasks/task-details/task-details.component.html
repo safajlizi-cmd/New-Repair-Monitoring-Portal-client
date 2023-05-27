@@ -14,37 +14,13 @@
       </tr>
   </table>
   </div>
-  <div class="row mt-4">
-    <kendo-panelbar style="border:none ;">
-      <kendo-panelbar-item [expanded]="false" class="bb">
-        <ng-template kendoPanelBarItemTitle>
-          <button class="center" kendoButton (click)="open('note')"
-            [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon></button>
-          Note List
-        </ng-template>
-        <ng-template kendoPanelBarContent>
-          <div class="childs">
-            <div class="teamMate" *ngIf="notes.length == 0">
-              <span class="mate-info">
-                <p> There are no Notes now !</p>
-              </span>
-            </div>
-            <div class="teamMate" *ngFor="let item of notes" style="display: flex; justify-content: space-between;">
-              <div style="flex-basis:30%; flex-grow: 1;"> <b>Title :</b> {{ item.title }}  </div>
-              <div style="flex-basis:30%; flex-grow: 1;"> <b>Description :</b> {{ item.description }} </div>
-            </div>
-          </div>
-        </ng-template>
-      </kendo-panelbar-item>
-    </kendo-panelbar>
-  </div>
- 
-  <div class="row mt-4">
-         <button  kendoButton (click)="open('addSubtask')"   style="width:150px;background-color: #3899DD;color:#fff ; margin:10px"
+  <div class="row mt-4 bottom">
+  <div class="col-lg-6 ">
+         <button  kendoButton (click)="open('addSubtask')"   class="bt"
            [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon>Add
           Sub-Task</button>
 
-       <div class="box" *ngIf="task.subTasksC.length == 0">
+       <div class="box " *ngIf="task.subTasksC.length == 0">
                No sub-tasks available ..
        </div>
       <div *ngFor="let item of task.subTasksC ; let i =index" [ngClass]="item.emergency ==true ? 'Emergency':'box'">
@@ -64,6 +40,18 @@
     </div>
    
   </div>
+  <div class="col-lg-6 card ">
+    <button  kendoButton (click)="open('note')" class="bt" 
+      [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon>Add
+     Note</button>
+     <div class="box row" *ngFor="let item of notes ; let i =index" >
+      <div class="col-lg-6"> <b>Title : {{item.title}} </b></div>
+      <div class="col-lg-6 date"> Related to :{{item!.optionName}} </div>
+       <div class="des"> {{item.description}} </div>
+   </div>
+</div>
+
+</div>
 </div>
 
 
@@ -78,7 +66,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="title">Assign to :</label>
+      <label for="title">Related to :</label>
       <label> <input type="radio" value="dossier" formControlName="option">  Dossier</label>
       <label> <input type="radio" value="assignment" formControlName="option"> Assignment </label>
       <label>  <input type="radio" value="workingOrder" formControlName="option"> Working Order</label>
@@ -143,12 +131,42 @@
         <div *ngIf="noteForm.hasError('required','title')">Title is required.</div>
       </div>
     </div>
+    <div class="form-group">
+      <label for="title">Related to :</label>
+      <label> <input type="radio" value="dossier" formControlName="option">  Dossier</label>
+      <label> <input type="radio" value="assignment" formControlName="option"> Assignment </label>
+      <label>  <input type="radio" value="workingOrder" formControlName="option"> Working Order</label>
+      <div *ngIf="noteForm.get('option')!.value === 'assignment'">
+        <div *ngIf="assignments.length ==0"> <b class="small"> No Assignment available!</b> </div>
+        <div *ngIf="assignments.length >0">
+                   <label for="title">Select Assignment :</label>
+                   <kendo-multicolumncombobox class="kendo" [data]="assignments" textField="assignmentNumber" class="my-combobox"
+                      valueField="id" placeholder="Select AssignmentNumber ..." formControlName="optionId" [filterable]="true"
+                     (valueChange)="onSelected($event)">
+                                <kendo-combobox-column field="assignmentNumber" title="Assignment Number" [width]="150">
+                                </kendo-combobox-column>
+                    </kendo-multicolumncombobox>
+        </div>
+      </div>
+      <div *ngIf="noteForm.get('option')!.value === 'workingOrder'">
+           <div *ngIf="word.length ==0"> <b class="small"> No working order available!</b></div>
+           <div *ngIf="word.length >0">
+                     <label for="title">Select WorkingOrder :</label>
+                     <kendo-multicolumncombobox class="kendo" [data]="word" textField="woNumber" class="my-combobox"
+                         valueField="id" placeholder="Select WorkingOrder Number ..." formControlName="optionId" [filterable]="true"
+                         (valueChange)="onSelected($event)">
+                         <kendo-combobox-column field="woNumber" title="WorkingOrder Number" [width]="150">
+                         </kendo-combobox-column>
+                      </kendo-multicolumncombobox>
+        </div>
+      </div>
+    </div>
 
     <div class="form-group">
       <label for="description">Description:</label>
       <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
     </div>
-
+  
     <kendo-dialog-actions>
       <button kendoButton (click)="close('no')">Cancel</button>
       <button kendoButton (click)="addNote()" style="background-color: #3899DD;color: #fff;"

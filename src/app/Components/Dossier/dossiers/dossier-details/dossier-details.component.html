@@ -1,7 +1,7 @@
 <div class="row" >
   <div class="example-wrapper">
      <div  class="header">
-        <div class="split1"> <p [ngClass]="dossier?.dossierStatus?.longName=='InPreparation' ? 'primary':dossier?.dossierStatus?.longName=='Completed'?'done2':'inprog'"> {{dossier?.dossierStatus.longName}}</p> </div>
+        <div class="split1"> <p [ngClass]="dossier?.dossierStatus?.longName=='InPreparation' ? 'primary':dossier?.dossierStatus?.longName=='Completed'?'done2':'inprog'"> {{dossier?.dossierStatus.longName}}<span class="inactive" *ngIf="dossier.active== false"> [Inactive]</span></p>  </div>
         <div class="split2"> Duped Name :  {{dossier?.dupedName}} </div>
         <div  class="split2"> {{dossier?.dossierNumber}}</div>
         <div  class="split2">  Created at : <span class="date"><kendo-svg-icon [icon]="icons.trash"></kendo-svg-icon> {{dossier?.createdDate|date: 'MM/dd/yyyy' }} </span>

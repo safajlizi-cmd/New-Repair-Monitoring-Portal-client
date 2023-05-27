@@ -19,6 +19,7 @@ import { SendEmailComponent } from 'src/app/Components/Dossier/dossiers/assignme
 import { GridModule } from '@progress/kendo-angular-grid';
 import { IconsModule } from '@progress/kendo-angular-icons';
 import { saveAs, encodeBase64 } from '@progress/kendo-file-saver';
+import { DosHistoryComponent } from 'src/app/Components/Dossier/dossiers/dos-history/dos-history.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { saveAs, encodeBase64 } from '@progress/kendo-file-saver';
     WordDetailsComponent,
     DossierOverviewComponent,
     SendEmailComponent,
-
+    DosHistoryComponent,
   ],
   imports: [
     CommonModule,

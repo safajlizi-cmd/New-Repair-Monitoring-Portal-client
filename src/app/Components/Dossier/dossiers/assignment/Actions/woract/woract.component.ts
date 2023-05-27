@@ -6,7 +6,10 @@ import { TabAlignment } from '@progress/kendo-angular-layout';
 import { saveAs } from '@progress/kendo-file-saver';
 import { Observable } from 'rxjs';
 import { DocumentService } from 'src/app/services/document.service';
+import { GenericService } from 'src/app/services/generic.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { tabs } from '../../tabs';
+import { clockIcon } from '@progress/kendo-svg-icons';
 
 @Component({
   selector: 'app-woract',
@@ -17,39 +20,16 @@ export class WORActComponent {
    id :any;
   public selected = 1;
   openedDelete=false
-  public items = [
-    {
-      disabled: false,
-      city: "Informations",
-      temp: 19,
-      weather: "cloudy",
-    },
-    {
-      disabled: false,
-      city: "Documents",
-      temp: 17,
-      weather: "rainy",
-    },
-    {
-      disabled: false,
-      city: "Notes",
-      temp: 29,
-      weather: "sunny",
-    },
-    {
-      disabled: false,
-      city: "Email",
-      temp: 23,
-      weather: "cloudy",
-    }
-  ];
+  public items = tabs
   public alignment: TabAlignment = "start";
   selectedFiles?: FileList;
   currentFile?: File;
   progress = 0;
   deleteID :any
   message = '';
+  notes:any;
   fileInfos?:any;
+  public icons = { trash: clockIcon }
   public fillMode: ButtonFillMode = "flat";
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
@@ -118,6 +98,15 @@ export class WORActComponent {
             this.deleteID = id;
             this.openedDelete=true    
     } 
+    getNotes() {
+      this.api.getById("Note/WorkingOrder", this.id).subscribe({
+        next: (res) => {
+          this.notes = res },
+        error: (err) => {
+          alert("error get notes")
+        },
+      });
+    }
   deleteDocument() {
          this.uploadService.delete( this.deleteID).subscribe({
          next: (res) => {  
@@ -132,7 +121,8 @@ export class WORActComponent {
   }
   constructor(private route:ActivatedRoute,
               private uploadService:DocumentService,
-              private userStore:UserStoreService ){}
+              private userStore:UserStoreService ,
+              private api:GenericService){}
   close(){
     this.openedDelete=false
   }
@@ -140,6 +130,7 @@ export class WORActComponent {
     this.route.params.subscribe(params => {
       this.id = params['Id'];
     });   
-    this.getDocuments()
+    this.getDocuments();
+    this.getNotes()
   }
 }

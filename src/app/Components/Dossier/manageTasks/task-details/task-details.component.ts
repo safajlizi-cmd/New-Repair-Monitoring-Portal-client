@@ -101,6 +101,9 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
       title: ['', Validators.required],
       description: [''],
       taskId: [''],
+      option: ['dossier'],
+      optionId: [''],
+      optionName: [''],
       dossierId: [''],
     });
   }
@@ -127,6 +130,7 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
   public close(status: string): void {
     this.opened = false;
     this.openedNo = false;
+    this
   }
   public open(status: any): void {
     if (status == 'note') { this.openedNo = true; this.noteForm.reset }
@@ -161,6 +165,7 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
       },
       error: (err) => {
         this._snackBar.open("Error while adding new Sub-task", '', this.snackbarConfig)
+        this.opened =false
       },
     });
   }
@@ -170,6 +175,18 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
   addNote() {
     this.noteForm.get('taskId')?.setValue(this.task.id);
     this.noteForm.get('dossierId')?.setValue(this.task.dossierId);
+    if (this.noteForm.get('option')?.value == 'dossier') {
+      this.noteForm.get('optionName')?.setValue(this.task.dossierC.dossierNumber);
+      this.noteForm.get('optionId')?.setValue(this.task.dossierC.id);
+    }
+    else if( this.noteForm.get('option')?.value == 'workingOrder')
+    {   this.noteForm.get('optionId')?.setValue(this.option.id);
+    this.noteForm.get('optionName')?.setValue(this.option.woNumber);
+  }
+   else{
+      this.noteForm.get('optionId')?.setValue(this.option.id);
+      this.noteForm.get('optionName')?.setValue(this.option.assignmentNumber);
+    }
     this.api.add("Note", this.noteForm.value).subscribe({
       next: (res) => {
         this.getTaskById();
@@ -180,6 +197,7 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
 
       error: (err) => {
         this._snackBar.open("Error while adding new note", '', this.snackbarConfig)
+        this.openedNo =false
       },
     });
   }

@@ -12,4 +12,19 @@
     color: #48494a;
     font-weight: bold;
 }
-
+.box {
+    padding: 10px 10px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(19, 18, 18, 0.87);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-size: 15x;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font: weight 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+  }

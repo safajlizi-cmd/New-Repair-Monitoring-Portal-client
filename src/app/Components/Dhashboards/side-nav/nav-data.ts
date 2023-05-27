@@ -27,6 +27,13 @@ export const navbarData =[
 
     },
     {
+        routeLink : 'Calendar',
+        icon : 'k-icon k-i-calendar',
+        label :'Calendar',
+        role:'T'
+
+    },
+    {
         routeLink : 'Statistics',
         icon : 'k-icon k-i-align-bottom-elements',
         label :'Statistics',

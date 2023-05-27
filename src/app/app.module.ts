@@ -42,7 +42,8 @@ import { ChartsModule } from '@progress/kendo-angular-charts';
 import { Location } from '@angular/common';
 import {MatMenuModule} from '@angular/material/menu';
 import { TokenInterceptor } from './Components/Interceptor/token.interceptor';
-
+import { SchedulerModule } from '@progress/kendo-angular-scheduler';
+import { SigninComponent } from './Components/Login/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,8 @@ import { TokenInterceptor } from './Components/Interceptor/token.interceptor';
     GuideListComponent,
     GuideItemComponent,
     NavbarGuideComponent,
+    SigninComponent,
+    
     
   ],
   imports: [
@@ -92,7 +95,8 @@ import { TokenInterceptor } from './Components/Interceptor/token.interceptor';
     UploadsModule,
     EditorModule,
     ChartsModule,
-    MatMenuModule
+    MatMenuModule,
+    SchedulerModule 
 
 
   ],

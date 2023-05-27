@@ -30,7 +30,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { GuideHomeComponent } from 'src/app/Components/home/guide-home/guide-home.component';
 import { TaskDetailsComponent } from 'src/app/Components/Dossier/manageTasks/task-details/task-details.component';
 import { NotificationModule } from '@progress/kendo-angular-notification';
-import { AssignmentListComponent } from 'src/app/Components/Dossier/dossiers/assignment-list/assignment-list.component';
 import { PanelBarModule } from '@progress/kendo-angular-layout';
 import { UnassignedTasksComponent } from 'src/app/Components/home/unassigned-tasks/unassigned-tasks.component';
 import { WelcomeDialogComponent } from 'src/app/Components/Dhashboards/welcome-dialog/welcome-dialog.component';
@@ -62,6 +61,12 @@ import { AddSubTaskComponent } from 'src/app/Components/Dossier/manageTasks/dial
 import { UsersComponent } from 'src/app/Components/users/users.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { HistoryComponent } from 'src/app/Components/users/history/history.component';
+import { EventsComponent } from 'src/app/Components/events/events.component';
+import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+import { SchedulerModule } from '@progress/kendo-angular-scheduler';
+import { DosHistoryComponent } from 'src/app/Components/Dossier/dossiers/dos-history/dos-history.component';
+
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -74,7 +79,6 @@ import { HistoryComponent } from 'src/app/Components/users/history/history.compo
     DossierDetailsComponent,
     GuideHomeComponent,
     TaskDetailsComponent,
-    AssignmentListComponent,
     UnassignedTasksComponent,
     WelcomeDialogComponent,
     DialogProfileComponent,
@@ -93,7 +97,10 @@ import { HistoryComponent } from 'src/app/Components/users/history/history.compo
     AddNoteComponent,
     AddSubTaskComponent,
     UsersComponent,
-    HistoryComponent
+    HistoryComponent,
+    EventsComponent,
+
+
  ],
   imports: [
     CommonModule,
@@ -132,7 +139,10 @@ import { HistoryComponent } from 'src/app/Components/users/history/history.compo
     MatSnackBarModule,
     UploadsModule,
     ChartsModule,
-    MatMenuModule
+    MatMenuModule,
+    ScheduleModule,
+    SchedulerModule
+
    ],
    providers: [Location,],
 })

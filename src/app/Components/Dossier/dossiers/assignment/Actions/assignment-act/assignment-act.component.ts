@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { DocumentService } from 'src/app/services/document.service';
 import { GenericService } from 'src/app/services/generic.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { tabs } from '../../tabs';
+import { clockIcon } from '@progress/kendo-svg-icons';
 
 @Component({
   selector: 'app-assignment-act',
@@ -18,34 +20,10 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 export class AssignmentActComponent implements OnInit {
    id :any;
    public alignment: TabAlignment = "start";
+   public icons = { trash: clockIcon }
    public selected = 1;
-  
-  public items = [
-    {
-      disabled: false,
-      city: "Informations",
-      temp: 19,
-      weather: "cloudy",
-    },
-    {
-      disabled: false,
-      city: "Documents",
-      temp: 17,
-      weather: "rainy",
-    },
-    {
-      disabled: false,
-      city: "Notes",
-      temp: 29,
-      weather: "sunny",
-    },
-    {
-      disabled: false,
-      city: "Email",
-      temp: 23,
-      weather: "cloudy",
-    }
-  ];
+   notes:any
+  public items = tabs;
   public fillMode: ButtonFillMode = "flat";
   fileInfos?: any;
   selectedFiles?: FileList;
@@ -120,15 +98,10 @@ export class AssignmentActComponent implements OnInit {
 
   getDocuments() {
          this.uploadService.getByAssignment( this.id).subscribe({
-          next: (res) => {
-                this.fileInfos = res;
-           },
-          error: (err) => {
-                alert("error get Documents")
-           },
+          next: (res) => { this.fileInfos = res;  },
+          error: (err) => { alert("error get Documents") },
           });
      }
-
   delete(id:any){
             this.deleteID = id;
             this.openedDelete=true    
@@ -146,14 +119,23 @@ export class AssignmentActComponent implements OnInit {
           },
      });
   }
-
+  getNotes() {
+    this.api.getById("Note/Assignment", this.id).subscribe({
+      next: (res) => {
+        this.notes = res },
+      error: (err) => {
+        alert("error get notes")
+      },
+    });
+  }
  close(){ this.openedDelete=false }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params['Id'];
     }); 
-    this.getDocuments() 
+    this.getDocuments() ;
+    this.getNotes();
   }
 }
 

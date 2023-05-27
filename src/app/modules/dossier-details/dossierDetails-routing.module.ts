@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Dashboard2Component } from 'src/app/Components/Dhashboards/dashboard2/dashboard2.component';
 import { DialogProfileComponent } from 'src/app/Components/Dhashboards/profile/dialog-profile/dialog-profile.component';
-import { AssignmentListComponent } from 'src/app/Components/Dossier/dossiers/assignment-list/assignment-list.component';
 import { AssignmentActComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/assignment-act/assignment-act.component';
 import { DossierOverviewComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/dossier-overview/dossier-overview.component';
 import { WordDetailsComponent } from 'src/app/Components/Dossier/dossiers/assignment/Actions/woract/Act details/word-details/word-details.component';

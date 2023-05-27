@@ -39,7 +39,7 @@
                         [ngStyle]="{ border: item.emergency == true ? '1px solid red' : 'none' }" class="example-box">
                         <div class="headerBox" class="title" style="display: flex; justify-content: space-between;">
                             <div style="flex-basis: 99%; flex-grow: 1;">
-                                <kendo-avatar fillMode="outline" >{{item!.priority}}</kendo-avatar>  {{item!.title}} [{{item!.taskNumber}} ]
+                                <kendo-avatar fillMode="outline" >{{item!.priority}}</kendo-avatar>  {{item!.title}} <br>[{{item!.taskNumber}} ]
                             </div>
                             <div style="flex-basis:1%; flex-grow: 1;">
                             <button kendoButton #anchor (click)="onToggleto(i)"
@@ -96,7 +96,7 @@
                         [ngStyle]="{ border: item.emergency == true ? '1px solid red' : 'none' }" class="example-box">
                         <div class="headerBox" class="title" style="display: flex; justify-content: space-between;">
                             <div style="flex-basis: 99%; flex-grow: 1;">
-                                <kendo-avatar fillMode="outline" >{{item!.priority}}</kendo-avatar> {{item!.title}} [{{item!.taskNumber}} ]
+                                <kendo-avatar fillMode="outline" >{{item!.priority}}</kendo-avatar> {{item!.title}} <br>[{{item!.taskNumber}} ]
                             </div>
                             <div style="flex-basis:1%; flex-grow: 1;">
                                 <button kendoButton #anchor (click)="onTogglein(i)"
@@ -154,7 +154,7 @@
                         [ngStyle]="{ border: item.emergency == true ? '1px solid red' : 'none' }" class="example-box">
                         <div class="headerBox" class="title" style="display: flex; justify-content: space-between;">
                             <div style="flex-basis: 99%; flex-grow: 1;">
-                                <kendo-avatar fillMode="outline" >{{item!.priority}}</kendo-avatar> {{item!.title}} [{{item!.taskNumber}} ]
+                                <kendo-avatar fillMode="outline" >{{item!.priority}}</kendo-avatar> {{item!.title}} <br>[{{item!.taskNumber}} ]
                             </div>
                             <div style="flex-basis:1%; flex-grow: 1;">
                             <button kendoButton #anchor (click)="onToggledo(i)"
@@ -245,7 +245,7 @@
       </form>
 
     </kendo-dialog>
- <kendo-dialog title="{{title}}" [animation]="animation" *ngIf="opened2" (close)="close('cancel')"  [height]="500" [width]="600" [themeColor]="'dark'" class="dig" > <app-task-details [TaskId]="taskId" 
+ <kendo-dialog title="{{title}}" [animation]="animation" *ngIf="opened2" (close)="close('cancel')"  [height]="500"  [themeColor]="'dark'" class="dig" > <app-task-details [TaskId]="taskId" 
     ></app-task-details>
 </kendo-dialog>
    

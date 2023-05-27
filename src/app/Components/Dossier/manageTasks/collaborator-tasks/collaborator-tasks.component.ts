@@ -10,7 +10,8 @@ import { TaskDetailsComponent } from '../task-details/task-details.component';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialItemClickEvent } from '@progress/kendo-angular-buttons';
-import { UserStoreService } from 'src/app/services/user-store.service';@Component({
+import { UserStoreService } from 'src/app/services/user-store.service';
+@Component({
   selector: 'app-collaborator-tasks',
   templateUrl: './collaborator-tasks.component.html',
   styleUrls: ['./collaborator-tasks.component.css']
@@ -32,7 +33,7 @@ historydateForm!: FormGroup;
 todo: any = [];
 dossiers: any;
 public margin = { horizontal: -46, vertical: 7 };
-tasks=[{title :'Task 1'},{title :'Task 2'},{title :'Task 3'},{title :'Task 4'},{title :'Task 5'}]
+tasks=[{title :'Manage Work Orders'},{title :'Validate Calculations'},{title :'Create Invoice'},{title :'Upload Required Documents/Photos'},{title :'Send Email'}]
 public show = false;
 inprogress: any = [];
 done: any = [];

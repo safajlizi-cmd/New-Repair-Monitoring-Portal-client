@@ -1,0 +1,73 @@
+
+  <button class="bt" kendoButton (click)="open()" >Add Event</button>
+
+  <kendo-scheduler
+  [kendoSchedulerBinding]="Events"
+  [selectedDate]="selectedDate"
+  [selectedViewIndex]="0"
+  style="height: 650px; color:rgb(58, 59, 59);"
+>
+  <ng-template
+        kendoSchedulerEventTemplate
+        let-event="event" 
+       
+      >
+      <div>  {{ event.title }} <br> <b> {{ event.description }}</b></div>
+
+        
+      </ng-template>
+  <kendo-scheduler-month-view [eventHeight]="50" >
+  </kendo-scheduler-month-view>     
+  <kendo-scheduler-agenda-view > </kendo-scheduler-agenda-view>
+
+</kendo-scheduler>
+
+<kendo-dialog title="Add Event"  *ngIf="opened" (close)="close()" [minWidth]="250"
+    [themeColor]="'dark'" style="background-color:rgba(0,0,0,0.2)" [width]="500">
+    <form [formGroup]="eventForm">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
+          <div
+            *ngIf="eventForm.controls['title'].invalid && (eventForm.controls['title'].dirty || eventForm.controls['title'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="eventForm.hasError('required','title')">Title is required.</div>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="deadline">Start:</label>
+            <input type="date" class="form-control" id="start" formControlName="start">
+            <div
+              *ngIf="eventForm.controls['start'].invalid && (eventForm.controls['start'].dirty || eventForm.controls['start'].touched)"
+              class="alert alert-danger">
+              <div *ngIf="eventForm.hasError('required','start')">start day is required.</div>
+            </div>
+          </div>     
+        <div class="form-group">
+            <label for="deadline">End:</label>
+            <input type="date" class="form-control" id="end" formControlName="end">
+            <div
+              *ngIf="eventForm.controls['end'].invalid && (eventForm.controls['end'].dirty || eventForm.controls['end'].touched)"
+              class="alert alert-danger">
+              <div *ngIf="eventForm.hasError('required','end')">End day is required.</div>
+            </div>
+          </div>
+       
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+          <div
+            *ngIf="eventForm.controls['description'].invalid && (eventForm.controls['description'].dirty || eventForm.controls['description'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="eventForm.hasError('required','description')">Description is required.</div>
+          </div>
+        </div>
+
+        <kendo-dialog-actions style="border:none;margin-top: 20px;">
+          <button kendoButton (click)="close()">Cancel</button>
+          <button kendoButton (click)="onSubmit()" class="bt" [disabled]="eventForm.invalid"> 
+          Add event
+          </button>
+        </kendo-dialog-actions>
+        </form>
+</kendo-dialog>

@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { DocumentService } from 'src/app/services/document.service';
 import { GenericService } from 'src/app/services/generic.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { tabs } from '../../tabs';
 
 @Component({
   selector: 'app-dossier-overview',
@@ -109,32 +110,10 @@ export class DossierOverviewComponent {
           },
      });
   }
-  public items = [
-   {
-      disabled: false,
-      city: "Informations",
-      temp: 19,
-      weather: "cloudy",
-    },
-    {
-      disabled: false,
-      city: "Documents",
-      temp: 17,
-      weather: "rainy",
-    },
-    {
-      disabled: false,
-      city: "Notes",
-      temp: 29,
-      weather: "sunny",
-    },
-    {
-      disabled: false,
-      city: "Email",
-      temp: 23,
-      weather: "cloudy",
-    }
-  ];
+  public items =[...tabs, {
+    disabled: false,
+    city: "History"
+  }]
   public alignment: TabAlignment = "start";
   documentForm!: FormGroup;
   constructor(private route: ActivatedRoute,
@@ -146,11 +125,19 @@ export class DossierOverviewComponent {
   close(){
     this.openedDelete=false
   }
+  getNotes() {
+    this.api.getById("Note/Dossier", this.id).subscribe({
+      next: (res) => {
+        this.notes = res },
+      error: (err) => {
+        alert("error get notes")
+      },
+    });
+  }
   getDossier() {
     this.api.getById("Dossier/GetById", this.id).subscribe({
       next: (res) => {
         this.dossier = res.dossier;
-        this.notes = res.dossier.notes
         console.log("this.dossier");
         this.openedDelete=false
       },
@@ -163,6 +150,7 @@ export class DossierOverviewComponent {
     this.id = this.userStore.getDossierId()
     this.getDocuments()
     this.getDossier();
+    this.getNotes();
   }
   onSubmit(): void { }
 }

@@ -45,7 +45,7 @@ export class TodoComponent implements OnInit {
   public show = false;
   inprogress: any = [];
   done: any = [];
-  tasks=[{title :'Task 1'},{title :'Task 2'},{title :'Task 3'},{title :'Task 4'},{title :'Task 5'}]
+  tasks=[{title :'Manage Work Orders'},{title :'Validate Calculations'},{title :'Create Invoice'},{title :'Upload Required Documents/Photos'},{title :'Send Email'}]
   public actionsOrientation: Orientation = "horizontal";
   public actionsLayout: ActionsLayout = "end";
   public icons = { trash: clockIcon };

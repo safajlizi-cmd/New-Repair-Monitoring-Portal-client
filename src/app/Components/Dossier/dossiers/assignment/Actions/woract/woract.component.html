@@ -63,8 +63,17 @@
          </kendo-grid-column>
      </kendo-grid>
    </div>
-       <div *ngIf="item.city=='Notes'" class="row">
-       
+   <div *ngIf="item.city=='Notes'" class="row" >
+    <p class="title" > Notes List : </p>
+
+    <div class="box row" *ngIf="notes.length == 0" >
+      No notes available ..
+    </div>
+    <div class="box row" *ngFor="let item of notes ; let i =index" >
+         <div class="col-lg-7"> <b>Title : {{item.title}} </b></div>
+         <div class="col-lg-5 date">   Created at : <kendo-svg-icon [icon]="icons.trash"></kendo-svg-icon> {{item?.createdDate|date: 'MM/dd/yyyy' }}</div>
+          <div class="des"> {{item.description}} </div>
+      </div>
       </div>
        <div *ngIf="item.city=='Email'" class="row">
         <p class="title" >Emails List : </p>

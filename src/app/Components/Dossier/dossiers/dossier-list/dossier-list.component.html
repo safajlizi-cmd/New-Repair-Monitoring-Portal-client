@@ -8,19 +8,19 @@
             [height]="700">
             <kendo-grid-column field="dossierNumber" title="Dossier Number" [width]="220">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <a routerLink="./Details/{{dataItem.id}}" class="primary">
+                    <a routerLink="./Details/{{dataItem.id}}" [ngClass]="dataItem.active == true ? 'primary':'grey'">
                         {{ dataItem.dossierNumber}}</a>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="createdDate" title="Created Date">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                   <p class="date"> {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}</p>
+                   <span  [ngClass]="dataItem.active == true ? 'date':'grey'" > {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}</span>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="createdBy." title="CreatedBy">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <kendo-avatar fillMode="outline" class="avatar" *ngIf="dataItem.createdBy?.userName != null ">
-                        <span style="font-size:7px;">{{ dataItem.createdBy?.firstName[0] }}{{
+                    <kendo-avatar fillMode="outline" [ngClass]="dataItem.active == true ?'avatar':'avatarComp'" *ngIf="dataItem.createdBy?.userName != null ">
+                        <span style="font-size:9px;">{{ dataItem.createdBy?.firstName[0] }}{{
                             dataItem.createdBy?.lastName[0] }}</span>
                     </kendo-avatar> {{ dataItem.createdBy?.userName }}
                 </ng-template>
@@ -34,20 +34,28 @@
                     </div>
                     <br>
                     <div class="progress">
-                        <div class="analytics-line" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                        <div [ngClass]="dataItem.active == true ?'analytics-line':'analytics-lineComp'" role="progressbar" aria-valuemin="0" aria-valuemax="100"
                             [style.width.%]="dataItem.progress"></div>
                     </div>
                 </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="dossierStatus.longName" title="Dossier Status">
                 <ng-template kendoGridCellTemplate let-dataItem>
-                    <div
-                        [ngClass]="dataItem?.dossierStatus?.longName=='InPreparation' ? 'primary':dataItem?.dossierStatus?.longName=='Completed'?'done2':'inprog'">
-                        <span kendoTooltip title="Update dossier status">
-                            <button kendoButton (click)="open(dataItem.id)"
-                                [fillMode]="fillMode"><span class="k-icon k-i-edit k-i-pencil"></span></button>
-                        </span>
-                        {{dataItem?.dossierStatus?.longName}}
+                    <div *ngIf="dataItem.active == true" 
+                    style="display: flex; justify-content: space-between;">
+                            <span  [ngClass]="dataItem?.dossierStatus?.longName=='InPreparation' ? 'primary':dataItem?.dossierStatus?.longName=='Completed'?'done2':'inprog'" style="flex-basis: 99%; flex-grow: 1;">
+                             {{dataItem?.dossierStatus?.longName}}
+                         </span>
+                          <span kendoTooltip title="Deactivate dossier"> 
+                                  <button kendoButton (click)="activateDossier( dataItem)" [fillMode]="fillMode" class="date " *ngIf="dataItem?.dossierStatus?.longName=='Completed'" > <span class="k-icon k-i-non-recurrence"></span>
+                                  </button>
+                           </span> 
+                          
+                    </div>
+                    <div *ngIf="dataItem.active == false" style="display: flex; justify-content: space-between;">
+                          <span style="flex-basis: 99%; flex-grow: 1;" class="inactive" >Inactive</span>
+                        <span kendoTooltip title="Activate dossier">
+                               <button kendoButton (click)="activateDossier( dataItem)" [fillMode]="fillMode" class="date" > <span class="k-icon k-i-reset"></span></button> </span> 
                     </div>
                 </ng-template>
             </kendo-grid-column>
@@ -103,3 +111,22 @@
         </form>
 
     </kendo-dialog>
+    <kendo-dialog
+title="Please confirm"
+*ngIf="activateDos"
+(close)="close('cancel')"
+[minWidth]="250"
+[width]="450"
+[themeColor]="'dark'"
+class="dialog"
+>
+<p style="margin: 30px; text-align: center;">
+  Are you sure you want to {{SelectedDossier.active == true ? 'Activate' :'Deactivate'}} a dossier?
+</p>
+<kendo-dialog-actions>
+  <button kendoButton (click)="close('cancel')">No</button>
+  <button kendoButton (click)="Activate()" class="bt">
+    Yes
+  </button>
+</kendo-dialog-actions>
+</kendo-dialog>
