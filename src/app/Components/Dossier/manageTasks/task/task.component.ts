@@ -80,7 +80,6 @@ export class TaskComponent implements  AfterViewInit , OnInit {
         this.data =res;
       },
       error: (err) => {
-        alert('error get users')
       },
     });
   }

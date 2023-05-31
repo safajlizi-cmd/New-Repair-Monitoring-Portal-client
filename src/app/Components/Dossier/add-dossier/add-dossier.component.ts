@@ -89,7 +89,6 @@ export class AddDossierComponent {
       this.stepper.validateSteps();
     }
     if (this.form.valid) {
-      console.log("Submitted data", this.form.value);
     }
   }
 

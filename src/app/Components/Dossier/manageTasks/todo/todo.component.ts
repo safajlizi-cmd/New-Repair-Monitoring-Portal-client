@@ -11,6 +11,7 @@ import { AddTaskComponent } from '../add-task/add-task.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialItemClickEvent } from '@progress/kendo-angular-buttons';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 
 @Component({
@@ -51,12 +52,18 @@ export class TodoComponent implements OnInit {
   public icons = { trash: clockIcon };
   popupService: any;
 
-  constructor(private fb:FormBuilder,private task: TaskService, private auth: UserStoreService, private dialogService: DialogService, private api: GenericService, private apiTask: TaskService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
+  constructor(private notificationService :NotificationService,private fb:FormBuilder,private task: TaskService, private auth: UserStoreService, private dialogService: DialogService, private api: GenericService, private apiTask: TaskService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
   onSubmit() {
     this.api.add("Task/Update", this.taskForm.value).subscribe({
       next: (res) => {
-        console.log(res);
-        alert('task added successfully')
+        this.notificationService.show({
+          content: 'task added successfully',
+          animation: { 
+            type:"slide",
+            duration:500,
+          },
+          type: { style: "success" },
+        });    
         this.getTasks()
         this.taskForm.reset(); // reset the task object after submitting the form
         this.opened = false;
@@ -109,8 +116,7 @@ export class TodoComponent implements OnInit {
     }
   }
   onDelete(i: any) {
-    alert(i)
-    alert('delete Task');
+   
   }
   getTaskByStautsAndAss(status: any, assign: any) {
     this.apiTask.getListByStatusAndAssy(status, assign).subscribe({
@@ -118,7 +124,6 @@ export class TodoComponent implements OnInit {
         if (status == "inprog") { this.inprogress = res; }
         else if (status == "todo") { this.todo = res; }
         else if (status == "done") { this.done = res; }
-        console.log(res);
       },
       error: (err) => {
       },
@@ -139,7 +144,6 @@ export class TodoComponent implements OnInit {
     this.api.getList("Dossier/List").subscribe({
       next: (res) => {
         this.dossiers =res;
-        console.log(res);
       },
       error: (err) => {
       },
@@ -168,7 +172,6 @@ export class TodoComponent implements OnInit {
         this.inprogress = res;
       },
       error: (err) => {
-        alert(err)
       },
     });
     this.apiTask.getListByTask("todo", this.userId, event.title).subscribe({
@@ -192,7 +195,6 @@ export class TodoComponent implements OnInit {
         this.inprogress = res;
       },
       error: (err) => {
-        alert(err)
       },
     });
     this.apiTask.getListByDossier("todo", this.userId, event.id).subscribe({
@@ -211,7 +213,6 @@ export class TodoComponent implements OnInit {
     });
   }
   close(status: string): void {
-    console.log(`Dialog result: ${status}`);
     this.opened = false;
     this.openedAssign = false
     this.opened2=false
@@ -229,7 +230,6 @@ export class TodoComponent implements OnInit {
     this.showPopupIndextodo = -1;
     this.showPopupIndexin = -1;
     this.showPopupIndexdo = -1;
-    console.log(i)
   }
   openAssign(id: any) {
     this.openedAssign = true;

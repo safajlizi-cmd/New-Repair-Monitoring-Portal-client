@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from '@progress/kendo-angular-notification';
 import { GenericService } from 'src/app/services/generic.service';
 
 @Component({
@@ -12,12 +13,11 @@ export class WORSComponent implements OnInit {
   Materials: any;
   Locations: any;
   damageTypes: any;
-  constructor( private fb : FormBuilder  , private api :GenericService ){ }
+  constructor( private fb : FormBuilder ,private notificationService :NotificationService , private api :GenericService ){ }
   getLocations(){
     this.api.getList("Location/List").subscribe({
       next: (res) => {
         this.Locations =res;
-        console.log(res);
       },
       error: (err) => {
       },
@@ -27,7 +27,6 @@ export class WORSComponent implements OnInit {
     this.api.getList("Material/List").subscribe({
       next: (res) => {
         this.Materials =res;
-        console.log(res);
       },
       error: (err) => {
       },
@@ -38,7 +37,6 @@ export class WORSComponent implements OnInit {
     this.api.getList("DamageType/List").subscribe({
       next: (res) => {
         this.damageTypes =res;
-        console.log(res);
       },
       error: (err) => {
       },
@@ -59,12 +57,26 @@ export class WORSComponent implements OnInit {
    AddWorkingOrder() {
     this.api.add("WorkingOrder/Add",this.WOForm.value).subscribe({
       next: (res) => {
-        alert('Working Order added successfully')
+        this.notificationService.show({
+          content: 'Working Order added successfully',
+          animation: {
+            type: "slide",
+            duration: 500,
+          },
+          type: { style: "success" },
+        });
         this.WOForm.reset(); // reset the task object after submitting the form
       },
       error: (err) => {
-        alert("error adding ")
-      },
-    });
-  }
+        this.notificationService.show({
+          content: "Error occurred while geeting buildings",
+          animation: {
+            type: "slide",
+            duration: 500,
+          },
+          type: { style: "error" },
+        });
+      }, 
+      });
+ }
 }

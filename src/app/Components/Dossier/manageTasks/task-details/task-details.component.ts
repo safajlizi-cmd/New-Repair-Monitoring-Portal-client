@@ -11,6 +11,7 @@ import { DialogService,DialogRef,DialogCloseResult} from "@progress/kendo-angula
 import {AddNoteComponent} from  'src/app/Components/Dossier/manageTasks/dialogs/add-note/add-note.component';
 import { AddSubTaskComponent } from '../dialogs/add-sub-task/add-sub-task.component';
 import { take } from 'rxjs';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Component({
   selector: 'app-task-details',
@@ -49,6 +50,7 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
               private api: GenericService,
               private fb: FormBuilder, 
               private location: Location,
+              private notificationService :NotificationService,
               private dialogService: DialogService
               ) { }
   
@@ -73,8 +75,7 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
         this.assignments.forEach((assignment: any) => {
           this.word.push(...assignment.workingOrdersC);
         });
-        console.log("this.word");
-        console.log(this.word);
+
       },
       error: (err) => {
         this._snackBar.open("Error get Assignments", '', this.snackbarConfig)
@@ -120,12 +121,10 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
     }
   }
   onDelete(i: any) {
-    alert(i)
-    alert('delete Task');
+   
   }
   onUpdate(i: any) {
-    alert(i)
-    alert('delete Task');
+
   }
   public close(status: string): void {
     this.opened = false;
@@ -161,7 +160,14 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
         this.getTaskById();
         this.opened = false;
         this.taskForm.reset();
-        this._snackBar.open("Subtask added successfully", '', this.snackbarConfig)
+        this.notificationService.show({
+          content: "Subtask added successfully",
+          animation: { 
+            type:"slide",
+            duration:500,
+          },
+          type: { style: "success" },
+        });    
       },
       error: (err) => {
         this._snackBar.open("Error while adding new Sub-task", '', this.snackbarConfig)
@@ -192,7 +198,14 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
         this.getTaskById();
         this.noteForm.reset();
         this.openedNo = false;
-        this._snackBar.open("Note added successfully", '', this.snackbarConfig)
+        this.notificationService.show({
+          content: "Note added successfully",
+          animation: { 
+            type:"slide",
+            duration:500,
+          },
+          type: { style: "success" },
+        });    
       },
 
       error: (err) => {

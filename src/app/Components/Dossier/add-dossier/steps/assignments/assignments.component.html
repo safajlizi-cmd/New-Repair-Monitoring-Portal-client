@@ -1,34 +1,42 @@
 <form [formGroup]="AssignForm">
     <div class="form-group">
-        <label for="title">Assignment Number:</label>
-        <input type="text" class="form-control" id="assignmentNumber" formControlName="assignmentNumber"
-            placeholder="Title">
-        <div *ngIf="AssignForm.controls['assignmentNumber'].invalid && (AssignForm.controls['assignmentNumber'].dirty || AssignForm.controls['assignmentNumber'].touched)"
-            class="alert alert-danger">
-            <div *ngIf="AssignForm.hasError('required','assignmentNumber')">Assignment Number is required.
-            </div>
-        </div>
+       <label for="title">Product Name:</label>
+       <input type="text" class="form-control" id="product" formControlName="product"
+          placeholder="Title">
+       <div
+          *ngIf="AssignForm.controls['product'].invalid && (AssignForm.controls['product'].dirty || AssignForm.controls['product'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="AssignForm.hasError('required','product')">ProductName is required.
+          </div>
+       </div>
     </div>
-    <div class="form-group">
-        <label for="title">Cause:</label>
-        <input type="text" class="form-control" id="cause" formControlName="cause" placeholder="Cause">
-        <div *ngIf="AssignForm.controls['cause'].invalid && (AssignForm.controls['cause'].dirty || AssignForm.controls['cause'].touched)"
-            class="alert alert-danger">
-            <div *ngIf="AssignForm.hasError('required','cause')">Cause Number is required.</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="title">DupedName:</label>
-        <input type="text" class="form-control" id="dupedName" formControlName="dupedName"
-            placeholder="Duped Name">
-        <div *ngIf="AssignForm.controls['dupedName'].invalid && (AssignForm.controls['dupedName'].dirty || AssignForm.controls['dupedName'].touched)"
-            class="alert alert-danger">
-            <div *ngIf="AssignForm.hasError('required','dupedName')">Duped Name is required.</div>
-        </div>
-    </div>
-
-        <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
-            [disabled]="AssignForm.invalid">
-            Add Assignment
-        </button>
-</form>
+    
+    <table style="width:100% " cellspacing="0">
+     <tr>
+        <td style="width:50% ">
+           <div class="form-group">
+              <label for="²e">Cause:</label>
+              <select class="form-control" id="cause" formControlName="cause">
+                 <option *ngFor="let item of causes" [value]=" item.longName">{{ item.longName }}
+                 </option>
+              </select>
+           </div>
+        </td>
+        <td style="width:50% ">
+           <div class="form-group">
+              <label for="Building type">Building type:</label>
+              <select class="form-control" id="buildingType" formControlName="buildingType">
+                 <option *ngFor="let  item of bts" [value]=" item.longName">{{ item.longName }}
+                 </option>
+              </select>
+           </div>
+        </td>
+     </tr>
+  </table>
+    <kendo-dialog-actions style="border:none;margin-top: 20px;">
+       <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
+          [disabled]="AssignForm.invalid">
+          Add Assignment
+       </button>
+    </kendo-dialog-actions>
+  </form>

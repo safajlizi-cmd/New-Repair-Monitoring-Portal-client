@@ -46,7 +46,6 @@ onLogin(){
                   });            
                 },
                 error:(err)=>{
-                  console.log(err.response)
                     
                 }
 

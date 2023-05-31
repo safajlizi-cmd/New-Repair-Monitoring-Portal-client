@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TabAlignment } from '@progress/kendo-angular-layout';
 import { GenericService } from 'src/app/services/generic.service';
+import { PagerSettings } from "@progress/kendo-angular-listview";
 
 @Component({
   selector: 'app-tasks-chart',
@@ -16,12 +17,16 @@ export class TasksChartComponent implements OnInit{
   public inprogList: string[]=[];
   public doneList: string[]=[];
   dossierList :any
-
+  public pagerSettings: PagerSettings = {
+    previousNext: false,
+    pageSizeValues: false,
+    buttonCount: 9,
+  };
+  public pageSize = 6;
   constructor(private api:GenericService){}
   getDossiers(){
     this.api.getList("List").subscribe({
       next: (res) => {
-        console.log(res);
         this.ChartList =res
         this.dossierList= res.map((item:any) => item.dossier.dossierNumber);
         this.todo= res.map((item:any) => item.todo);

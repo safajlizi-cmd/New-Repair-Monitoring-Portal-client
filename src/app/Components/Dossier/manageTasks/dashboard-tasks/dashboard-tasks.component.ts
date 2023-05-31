@@ -29,7 +29,6 @@ export class DashboardTasksComponent implements OnInit{
     this.api.getList("Dossier/List").subscribe({
       next: (res) => {
         this.dossiers =res;
-        console.log(res);
       },
       error: (err) => {
       },
@@ -39,7 +38,6 @@ export class DashboardTasksComponent implements OnInit{
     this.api.getList("Status/List").subscribe({
       next: (res) => {
         this.statuses =res;
-        console.log(res);
       },
       error: (err) => {
       },
@@ -49,7 +47,6 @@ export class DashboardTasksComponent implements OnInit{
     this.api.getList("Action/List").subscribe({
       next: (res) => {
         this.actions =res;
-        console.log(res);
       },
       error: (err) => {
       },
@@ -59,10 +56,7 @@ export class DashboardTasksComponent implements OnInit{
   AddTask(){
       this.api.add("Task/Add",this.taskForm.value).subscribe({
       next: (res) => {
-        console.log(res);
-        alert('task added successfully')
         this.taskAdded.emit();
-        console.log(this.taskForm.value); // you can replace this with your own code to add the task to a database or send it to a server
         this.taskForm.reset(); // reset the task object after submitting the form
         this.opened = false;
       },
@@ -90,7 +84,6 @@ export class DashboardTasksComponent implements OnInit{
    
   }
   public close(status: string): void {
-    console.log(`Dialog result: ${status}`);
     this.opened = false;
   }
   public open(): void {

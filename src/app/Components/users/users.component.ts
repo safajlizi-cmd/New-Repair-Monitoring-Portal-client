@@ -4,6 +4,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonFillMode } from '@progress/kendo-angular-buttons';
 import { DialogAnimation } from '@progress/kendo-angular-dialog';
+import { NotificationService } from '@progress/kendo-angular-notification';
 import { DossierService } from 'src/app/services/dossier.service';
 import { GenericService } from 'src/app/services/generic.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
@@ -33,6 +34,7 @@ export class UsersComponent implements OnInit {
     private api: GenericService,
     private router:Router,
     private route :ActivatedRoute,
+    private notificationService :NotificationService,
     private fb: FormBuilder) { }
 
   addUser() {
@@ -42,9 +44,15 @@ export class UsersComponent implements OnInit {
         this.getUsers();
         this.UserForm.reset();
         this.opened = false;
-        this._snackBar.open("User  added successfully", '', {
-          duration: 3000
-        })
+        this.notificationService.show({
+          content: "User  added successfully",
+          animation: { 
+            type:"slide",
+            duration:500,
+          },
+          type: { style: "success" },
+        });            
+      
       },
       error: (err) => {
         this._snackBar.open("Error while adding new user", '', {
@@ -57,7 +65,6 @@ export class UsersComponent implements OnInit {
     this.api.getList("User/List").subscribe({
       next: (res) => {
         this.gridData = res;
-        console.log(res);
       },
       error: (err) => {
         this._snackBar.open("Error while getting the dossiers", '', {

@@ -1,11 +1,90 @@
-<button kendoButton (click)="open()" class="bt">Add new</button>
-<kendo-dialog title="Please confirm" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450"
+<button kendoButton (click)="open()" class="bt">Send Email</button>
+<p class="title">List of Emails : </p>
+<kendo-grid [kendoGridBinding]="Email" filterable="menu" [height]="550">
+  <kendo-grid-column field="name" title="Name" [width]="220">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      {{ dataItem.name}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="subject" title="Subject" [width]="220">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      {{ dataItem.subject}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="email" title="Email" [width]="220">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      {{ dataItem.email}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="optionName" title="Related to" [width]="220">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      {{ dataItem.optionName }}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="createdDate" title="createdDate" [width]="220">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}
+    </ng-template>
+  </kendo-grid-column>
+</kendo-grid>
+<kendo-dialog title="Send Email" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450"
   [themeColor]="'dark'" class="dialog">
- 
-  <kendo-dialog-actions>
-    <button kendoButton (click)="close()">No</button>
-    <button kendoButton class="bt">
-      Yes
-    </button>
-  </kendo-dialog-actions>
+  <form [formGroup]="noteForm">
+      <div class="form-group">
+        <label for="title">Name :</label>
+        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name">
+        <div
+          *ngIf="noteForm.controls['name'].invalid && (noteForm.controls['name'].dirty || noteForm.controls['name'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="noteForm.hasError('required','name')">name is required.</div>
+        </div>
+      </div>
+       <div class="form-group">
+        <label for="title">Related to :</label>
+        <label> <input type="radio" value="dossier" formControlName="option">  Dossier</label>
+        <label> <input type="radio" value="assignment" formControlName="option"> Assignment </label>
+        <label>  <input type="radio" value="workingOrder" formControlName="option"> Working Order</label>
+        <div *ngIf="noteForm.get('option')!.value === 'assignment'">
+          <div *ngIf="assignments.length ==0"> <b class="small"> No Assignment available!</b> </div>
+          <div *ngIf="assignments.length >0">
+                     <label for="title">Select Assignment :</label>
+                  
+                       <select class="form-control" id="optionId" formControlName="optionName">
+                        <option *ngFor="let  item of assignments" [value]=" item.assignmentNumber">{{ item.assignmentNumber }}
+                        </option>
+                     </select>
+          </div>
+        </div>
+        <div *ngIf="noteForm.get('option')!.value === 'workingOrder'">
+             <div *ngIf="word.length ==0"> <b class="small"> No working order available!</b></div>
+             <div *ngIf="word.length >0">
+                       <label for="title">Select WorkingOrder :</label>
+                      <select class="form-control" id="optionId" formControlName="optionName">
+                        <option *ngFor="let  item of word" [value]=" item.woNumber">{{ item.woNumber }}
+                        </option>
+                     </select>
+            </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email :</label>
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="email">Subject :</label>
+        <input type="text" class="form-control" id="Subject" formControlName="subject" placeholder="Email Subject">
+      </div>
+      <div class="form-group">
+        <label for="message">Message :</label>
+        <textarea class="form-control" id="description" rows="3" formControlName="message"></textarea>
+      </div> 
+    
+      <kendo-dialog-actions>
+        <button kendoButton (click)="close()">Cancel</button>
+        <button kendoButton (click)="sendEmail()" style="background-color: #3899DD;color: #fff;"
+          [disabled]="noteForm.invalid">
+          Add Task
+        </button>
+      </kendo-dialog-actions>
+    </form>
 </kendo-dialog>

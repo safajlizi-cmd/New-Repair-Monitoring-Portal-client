@@ -17,7 +17,6 @@ export class LowestDossierComponent  implements OnInit{
         this.lowest5 =res;
         this.dossierList= res.map((item:any) => item.dossierNumber);
         this.progress= res.map((item:any) => item.creationPeriode != null? item.creationPeriode :0 );
-        console.log(res);
       },
       error: (err) => {
 

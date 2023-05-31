@@ -39,7 +39,7 @@
         <div class="row">
           <div class="col-8">
             <label class="btn btn-default p-0">
-              <input type="file" (change)="selectFile($event)" />
+              <input type="file" (change)="selectFile($event)"  placeholder="Select file"/>
             </label>
           </div>
           <div class="col-4">
@@ -85,7 +85,7 @@
         </kendo-grid>
 
       </div>
-      <div *ngIf="item.city=='Email'" class="row">
+      <div *ngIf="item.city=='Emails'" class="row">
         <p class="title">Emails List : </p>
         <app-send-email></app-send-email>
       </div>

@@ -11,6 +11,7 @@ import { GenericService } from 'src/app/services/generic.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { tabs } from '../../tabs';
 import { clockIcon } from '@progress/kendo-svg-icons';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Component({
   selector: 'app-assignment-act',
@@ -35,6 +36,7 @@ export class AssignmentActComponent implements OnInit {
 
    constructor(private route:ActivatedRoute 
             , private api :GenericService ,
+            private notificationService :NotificationService,
              private fb:FormBuilder,
              private uploadService : DocumentService ,
              private userStore:UserStoreService){}
@@ -99,7 +101,15 @@ export class AssignmentActComponent implements OnInit {
   getDocuments() {
          this.uploadService.getByAssignment( this.id).subscribe({
           next: (res) => { this.fileInfos = res;  },
-          error: (err) => { alert("error get Documents") },
+          error: (err) => {  this.notificationService.show({
+            content: "Error occurred while geeting Documents",
+            animation: {
+              type: "slide",
+              duration: 500,
+            },
+            type: { style: "error" },
+          });
+          }, 
           });
      }
   delete(id:any){
@@ -110,22 +120,45 @@ export class AssignmentActComponent implements OnInit {
   deleteDocument() {
          this.uploadService.delete( this.deleteID).subscribe({
          next: (res) => {  
-               alert("file deleted successfully")
+                this.notificationService.show({
+          content:"file deleted successfully",
+          animation: {
+            type: "slide",
+            duration: 500,
+          },
+          type: { style: "success" },
+        });
+  
                this.openedDelete =false
                this.getDocuments()
           },
           error: (err) => {
-                alert("error delete Document")
-          },
-     });
-  }
+                this.notificationService.show({
+                  content: "Error occurred while deleting document",
+                  animation: {
+                    type: "slide",
+                    duration: 500,
+                  },
+                  type: { style: "error" },
+                });
+              }, 
+              });
+         }
   getNotes() {
     this.api.getById("Note/Assignment", this.id).subscribe({
       next: (res) => {
         this.notes = res },
       error: (err) => {
-        alert("error get notes")
-      },
+
+       this.notificationService.show({
+          content: "Error occurred while geeting notes",
+          animation: {
+            type: "slide",
+            duration: 500,
+          },
+          type: { style: "error" },
+        });
+        },
     });
   }
  close(){ this.openedDelete=false }

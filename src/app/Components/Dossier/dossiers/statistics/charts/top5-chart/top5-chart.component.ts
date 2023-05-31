@@ -18,7 +18,6 @@ export class Top5ChartComponent implements OnInit {
           this.top5 =res;
           this.dossierList= res.map((item:any) => item.dossierNumber);
           this.progress= res.map((item:any) => item.creationPeriode != null? item.creationPeriode :0 );
-          console.log(res);
         },
         error: (err) => {
   

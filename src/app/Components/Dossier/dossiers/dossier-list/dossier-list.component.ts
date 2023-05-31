@@ -4,6 +4,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonFillMode } from '@progress/kendo-angular-buttons';
 import { DialogAnimation } from '@progress/kendo-angular-dialog';
+import { NotificationService } from '@progress/kendo-angular-notification';
 import { plusIcon } from '@progress/kendo-svg-icons';
 import { DossierService } from 'src/app/services/dossier.service';
 import { GenericService } from 'src/app/services/generic.service';
@@ -32,7 +33,7 @@ export class DossierListComponent implements OnInit {
     };
     public fillMode: ButtonFillMode = "flat";
 
-  constructor(private _snackBar: MatSnackBar ,private dossierService : DossierService, private api : GenericService , private router :Router , private route : ActivatedRoute , private fb : FormBuilder, private auth :UserStoreService){}
+  constructor(private notificationService :NotificationService,private _snackBar: MatSnackBar ,private dossierService : DossierService, private api : GenericService , private router :Router , private route : ActivatedRoute , private fb : FormBuilder, private auth :UserStoreService){}
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message);
   }
@@ -40,7 +41,6 @@ export class DossierListComponent implements OnInit {
     this.dossierForm.get('CreatedById')?.setValue(this.auth.getId());
     this.api.add("Dossier/Add",this.dossierForm.value).subscribe({
     next: (res) => {
-      alert('Dossier added successfully')
       this._snackBar.open("Dossier added successfully",'',{ 
         duration: 3000
     })
@@ -60,7 +60,6 @@ export class DossierListComponent implements OnInit {
     this.api.getList("Dossier/List").subscribe({
       next: (res) => {
         this.gridData =res;
-        console.log(res);
       },
       error: (err) => {
         this._snackBar.open("Error while getting the dossiers",'',{ 
@@ -113,11 +112,16 @@ export class DossierListComponent implements OnInit {
   {
     this.dossierService.ActivateDos(this.SelectedDossier.id).subscribe({
       next: (res) => {
-        alert("dossier activated successfully")
         this.getDossiers()
         this.activateDos=false
-        this._snackBar.open("Dossier Activated successfully","",this.snackbarConfig)
-
+        this.notificationService.show({
+          content: "Dossier Activated successfully",
+          animation: { 
+            type:"slide",
+            duration:500,
+          },
+          type: { style: "success" },
+        });    
       },
       error: (err) => {
         this.getDossiers()
@@ -137,10 +141,10 @@ export class DossierListComponent implements OnInit {
   {
     this.dossierService.UpdateStatus(this.SelectedDossier,this.StatusForm.get('dossierStatus')?.value).subscribe({
       next: (res) => {
-        alert("dossier updated successfully")
         this.getDossiers()
         this.openedStatus=false
         this._snackBar.open("Dossier status updated successfully","",this.snackbarConfig)
+        
 
       },
       error: (err) => {

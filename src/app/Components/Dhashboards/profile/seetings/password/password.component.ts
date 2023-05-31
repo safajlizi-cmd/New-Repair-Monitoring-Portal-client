@@ -32,15 +32,6 @@ export class PasswordComponent  implements  OnInit{
     else this.passwordsMatch = true;
   }
   submit() {
-   /* let userId = this.tokenStorage.getUser().id;
-    this.api.resetPassword(userId, this.passwordResetForm.value).subscribe(
-      () => {
-        this.message = 'Succesful!';
-      },
-      (err) => {
-        console.log(err);
-        this.message = err.message;
-      }
-    );*/
+  
   }
 }

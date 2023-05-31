@@ -20,6 +20,7 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { IconsModule } from '@progress/kendo-angular-icons';
 import { saveAs, encodeBase64 } from '@progress/kendo-file-saver';
 import { DosHistoryComponent } from 'src/app/Components/Dossier/dossiers/dos-history/dos-history.component';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { DosHistoryComponent } from 'src/app/Components/Dossier/dossiers/dos-his
     EditorModule ,
     GridModule ,
     IconsModule,
+    DropDownsModule
     
   ]
 })

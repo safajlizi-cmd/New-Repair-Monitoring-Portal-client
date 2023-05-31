@@ -65,7 +65,7 @@
                 </kendo-combobox-column>
             </kendo-multicolumncombobox>
         </div>
-        <div class="form-group form-check">
+        <div class="form-group form-check" *ngIf=" role == 'Coordinator'">
             <input type="checkbox" class="form-check-input" id="Assigned" formControlName="Assigned">
             <label class="form-check-label" for="Assigned"> Assign task to yourself?</label>
         </div>

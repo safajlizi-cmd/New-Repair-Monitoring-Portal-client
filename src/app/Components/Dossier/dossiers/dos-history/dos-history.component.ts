@@ -18,12 +18,9 @@ export class DosHistoryComponent implements OnInit {
     getHistory()
     {   this.api.getById("History/GetById",this.id).subscribe({
         next: (res) => {
-         console.log(res)
           this.history =res;
-          console.log(this.history)
         },
         error: (err) => {
-          alert("error")
         },
       });
     }

@@ -22,7 +22,7 @@
       <kendo-appbar-section>
         <kendo-dropdownbutton [data]="data"  [fillMode]="fillMode" [popupSettings]="{ align: 'left'}" >
           <kendo-avatar fillMode="outline" class="avatar">
-            <span style="font-size:14px;">{{initials}}</span>
+            <span style="font-size:14px;">{{fullName}}</span>
           </kendo-avatar>  
           <ng-template kendoDropDownButtonItemTemplate let-dataItem >
             <div style="padding:15px;padding-right: 40px;" (click)="logout(dataItem.text)" >

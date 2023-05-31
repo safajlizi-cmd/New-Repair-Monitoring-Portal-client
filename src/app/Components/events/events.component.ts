@@ -62,10 +62,8 @@ export class EventsComponent implements OnInit {
     }    
       )
       );
-      console.log(this.Events)
       },
       error: (err) => {
-        alert("error get events")
       },
     });
   }
@@ -80,9 +78,7 @@ export class EventsComponent implements OnInit {
       end: ['', Validators.required],
       userId : ['']})
     this.id = this.auth.getId()
-    this.getEvent()
-    console.log(this.events)
- 
+    this.getEvent() 
   }
   onSubmit() {
     this.eventForm.get('userId')?.setValue(this.id);
@@ -91,10 +87,8 @@ export class EventsComponent implements OnInit {
         this.eventForm.reset(); 
         this.opened = false; 
         this.getEvent()
-        alert("event added successfuly")
       },
       error: (err) => {
-        alert("error adding ")
       },
     });
   }

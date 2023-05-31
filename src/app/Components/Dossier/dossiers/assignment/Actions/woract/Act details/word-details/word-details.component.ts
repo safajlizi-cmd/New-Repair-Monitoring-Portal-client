@@ -23,7 +23,6 @@ export class WordDetailsComponent implements OnInit{
     this.api.getList("Location/List").subscribe({
       next: (res) => {
         this.Locations = res;
-        console.log(res);
       },
       error: (err) => {
       },
@@ -33,7 +32,6 @@ export class WordDetailsComponent implements OnInit{
     this.api.getList("Material/List").subscribe({
       next: (res) => {
         this.Materials = res;
-        console.log(res);
       },
       error: (err) => {
       },
@@ -43,7 +41,6 @@ export class WordDetailsComponent implements OnInit{
     this.api.getList("DamageType/List").subscribe({
       next: (res) => {
         this.damageTypes = res;
-        console.log(res);
       },
       error: (err) => {
       },
@@ -52,9 +49,7 @@ export class WordDetailsComponent implements OnInit{
    getWORD(){
     this.api.getById("WorkingOrder/GetById",this.id).subscribe({
       next: (res) => {
-       console.log(res)
         this.workingOrder =res.assignment;
-        console.log(this.workingOrder)
       },
       error: (err) => {
         this._snackBar.open('Error while getting working order','',{ 
@@ -99,7 +94,6 @@ export class WordDetailsComponent implements OnInit{
         this.opened = false;
       },
       error: (err) => {
-        alert("error")
       },
     });
   }  

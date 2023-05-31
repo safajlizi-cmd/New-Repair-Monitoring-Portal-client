@@ -10,10 +10,6 @@ export const tabs = [
     {
       disabled: false,
       city: "Notes"
-    },
-    {
-      disabled: false,
-      city: "Email"
     }
    
   ];

@@ -10,6 +10,7 @@ import { GenericService } from 'src/app/services/generic.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { tabs } from '../../tabs';
 import { clockIcon } from '@progress/kendo-svg-icons';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Component({
   selector: 'app-woract',
@@ -90,7 +91,6 @@ export class WORActComponent {
                 this.fileInfos = res;
            },
           error: (err) => {
-                alert("error get Documents")
            },
           });
      }
@@ -103,25 +103,31 @@ export class WORActComponent {
         next: (res) => {
           this.notes = res },
         error: (err) => {
-          alert("error get notes")
         },
       });
     }
   deleteDocument() {
          this.uploadService.delete( this.deleteID).subscribe({
          next: (res) => {  
-               alert("file deleted successfully")
+               this.notificationService.show({
+                content: "file deleted successfully",
+                animation: { 
+                  type:"slide",
+                  duration:500,
+                },
+                type: { style: "success" },
+              });    
                this.openedDelete=false
                this.getDocuments()
           },
           error: (err) => {
-                alert("error delete Document")
           },
      });
   }
   constructor(private route:ActivatedRoute,
               private uploadService:DocumentService,
               private userStore:UserStoreService ,
+              private notificationService :NotificationService,
               private api:GenericService){}
   close(){
     this.openedDelete=false

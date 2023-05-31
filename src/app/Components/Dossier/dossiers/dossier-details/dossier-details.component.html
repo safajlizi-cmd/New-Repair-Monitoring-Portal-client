@@ -9,7 +9,7 @@
         <div class="split2">
            Created By : <span class="date"><kendo-avatar fillMode="outline" class="avatar"
                  *ngIf="dossier?.createdBy?.userName != null ">
-                 <span style="font-size:9px;">{{ dossier?.createdBy?.firstName[0] }}{{dossier?.createdBy?.lastName[0] }}</span>
+                 <span style="font-size:15px;">{{ dossier?.createdBy?.firstName[0] }}{{dossier?.createdBy?.lastName[0] }}</span>
               </kendo-avatar> {{ dossier?.createdBy?.userName }}</span>
         </div>
      </div>
@@ -22,7 +22,7 @@
        <li>
          <div class="treeview__level" data-level="D">
            <span class="level-title" routerLinkActive="active" routerLink="./Overview"
-           [routerLinkActiveOptions] ="{exact:true}" >{{dossier.dossierNumber}} DN: Safa Jlizi </span>
+           [routerLinkActiveOptions] ="{exact:true}" >{{dossier.dossierNumber}} DN: {{dossier?.dupedName}} </span>
            <div class="treeview__level-btns">
               <span kendoTooltip title="Add Assignment">
              <div class="btn btn-default btn-sm level-add" (click)="open()"><span class="k-icon k-i-plus-circle"></span></div></span>
@@ -77,15 +77,29 @@
         </div>
      </div>
   </div>
-  <div class="form-group">
-     <label for="title">Cause:</label>
-     <input type="text" class="form-control" id="cause" formControlName="cause" placeholder="Cause">
-     <div
-        *ngIf="AssignForm.controls['cause'].invalid && (AssignForm.controls['cause'].dirty || AssignForm.controls['cause'].touched)"
-        class="alert alert-danger">
-        <div *ngIf="AssignForm.hasError('required','cause')">Cause Number is required.</div>
-     </div>
-  </div>
+  
+  <table style="width:100% " cellspacing="0">
+   <tr>
+      <td style="width:50% ">
+         <div class="form-group">
+            <label for="²e">Cause:</label>
+            <select class="form-control" id="cause" formControlName="cause">
+               <option *ngFor="let item of causes" [value]=" item.longName">{{ item.longName }}
+               </option>
+            </select>
+         </div>
+      </td>
+      <td style="width:50% ">
+         <div class="form-group">
+            <label for="Building type">Building type:</label>
+            <select class="form-control" id="buildingType" formControlName="buildingType">
+               <option *ngFor="let  item of bts" [value]=" item.longName">{{ item.longName }}
+               </option>
+            </select>
+         </div>
+      </td>
+   </tr>
+</table>
   <kendo-dialog-actions style="border:none;margin-top: 20px;">
      <button kendoButton (click)="close('no')">Cancel</button>
      <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"

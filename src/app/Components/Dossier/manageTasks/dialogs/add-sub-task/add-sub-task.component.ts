@@ -35,8 +35,7 @@ export class AddSubTaskComponent extends DialogContentBase  implements OnInit {
         this.assignments.forEach((assignment: any) => {
           this.word.push(...assignment.workingOrdersC);
         });
-        console.log("this.word");
-        console.log(this.word);
+      
       },
       error: (err) => {
         this._snackBar.open("Error get Assignments", '', this.snackbarConfig)

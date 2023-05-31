@@ -11,6 +11,7 @@ import { AddTaskComponent } from '../add-task/add-task.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialItemClickEvent } from '@progress/kendo-angular-buttons';
 import { UserStoreService } from 'src/app/services/user-store.service';
+import { NotificationService } from '@progress/kendo-angular-notification';
 @Component({
   selector: 'app-collaborator-tasks',
   templateUrl: './collaborator-tasks.component.html',
@@ -42,14 +43,13 @@ public actionsLayout: ActionsLayout = "end";
 public icons = { trash: clockIcon };
 popupService: any;
 
-constructor(private fb:FormBuilder,private task: TaskService, private auth: UserStoreService, private dialogService: DialogService, private api: GenericService, private apiTask: TaskService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
+constructor(private notificationService :NotificationService, private fb:FormBuilder,private task: TaskService, private auth: UserStoreService, private dialogService: DialogService, private api: GenericService, private apiTask: TaskService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 getTaskByStautsAndAss(status: any, assign: any) {
   this.apiTask.getListByStatusAndAssy(status, assign).subscribe({
     next: (res) => {
       if (status == "inprog") { this.inprogress = res; }
       else if (status == "todo") { this.todo = res; }
       else if (status == "done") { this.done = res; }
-      console.log(res);
     },
     error: (err) => {
     },
@@ -59,7 +59,6 @@ getTaskByStautsAndAss(status: any, assign: any) {
 details(id: any) {
 this.taskId = id
 this.opened2=true
- // this.router.navigate(["Details/", id], { relativeTo: this.route });
 }
 dossierNav(id: any) {
   this.router.navigate(['/Dossiers/List/Details', id]);
@@ -68,7 +67,6 @@ getDossiers(){
   this.api.getList("Dossier/List").subscribe({
     next: (res) => {
       this.dossiers =res;
-      console.log(res);
     },
     error: (err) => {
     },
@@ -97,7 +95,6 @@ onSelectTask(event: any) {
       this.inprogress = res;
     },
     error: (err) => {
-      alert(err)
     },
   });
   this.apiTask.getListByTask("todo", this.userId, event.title).subscribe({
@@ -121,7 +118,6 @@ onActionButtonClick(event: any) {
       this.inprogress = res;
     },
     error: (err) => {
-      alert(err)
     },
   });
   this.apiTask.getListByDossier("todo", this.userId, event.id).subscribe({
@@ -140,7 +136,6 @@ onActionButtonClick(event: any) {
   });
 }
 close(status: string): void {
-  console.log(`Dialog result: ${status}`);
   this.opened = false;
   this.openedAssign = false
   this.opened2=false
@@ -150,8 +145,14 @@ addAssign() {
     next: (res) => {
       this.getTasks()
       this.openedAssign = false
-      console.log(res);
-    },
+      this.notificationService.show({
+        content: "Task assigned to yourself successfully",
+        animation: { 
+          type:"slide",
+          duration:500,
+        },
+        type: { style: "success" },
+      });        },
     error: (err) => {
       this.openedAssign = false
       this.getTasks()

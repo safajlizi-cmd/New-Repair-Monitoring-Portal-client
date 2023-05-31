@@ -31,7 +31,7 @@ onLogin(){
                   this.user.storeUser(res.user)
                   this.user.storeRole(res.user.role)
                   this.user.storeId(res.user.id)
-                  this.user.storeUserName(res.user.userName)
+                  this.user.storeUserName(res.user.firstName[0]+res.user.lastName[0])
                   this.loginForm.reset();
                   this.userStore.setFullNameForStore(res.user.userName);
                   this.userStore.setRoleForStore(res.user.role)
@@ -45,7 +45,6 @@ onLogin(){
                   });            
                 },
                 error:(err)=>{
-                  console.log(err.response)
                   this.loginForm.reset()
                   this.errorMessage="User not found. Please double-check the information and try again."
                     

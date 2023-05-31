@@ -2,3 +2,16 @@
     color: #ffffff;
     background-color: #3899DD;
 }
+a{
+    color:#3987be
+}
+kendo-combobox {
+    font-weight: bold;
+    border-color: #303131;
+    color: #303131;
+  }
+  .title{
+    color:#7e807a;font-size: 1.2rem;font-weight: bold;  
+     text-align: left;
+     margin-top:18px;
+   }

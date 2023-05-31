@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { NotificationService } from '@progress/kendo-angular-notification';
 import { GenericService } from 'src/app/services/generic.service';
 
 @Component({
@@ -16,17 +17,14 @@ id :any;
   getAssignment(){
     this.api.getById("Assignment/GetById",this.id).subscribe({
       next: (res) => {
-       console.log(res)
         this.assignment =res.assignment;
-        console.log(this.assignment)
       },
       error: (err) => {
-        alert("error")
       },
     });
   }
   AssignForm!: FormGroup;
-  constructor(private api :GenericService,private fb: FormBuilder,private route:ActivatedRoute,private _snackBar: MatSnackBar){}
+  constructor(private api :GenericService,private notificationService :NotificationService,private fb: FormBuilder,private route:ActivatedRoute,private _snackBar: MatSnackBar){}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -54,9 +52,15 @@ id :any;
         this.getAssignment();
         this.AssignForm.reset();  
         this.opened = false;
-        this._snackBar.open('Assignment updated successfully','',{ 
-          duration: 3000
-      })
+        this.notificationService.show({
+          content: "Assignment updated successfully",
+          animation: { 
+            type:"slide",
+            duration:500,
+          },
+          type: { style: "success" },
+        });    
+       
 
       },
       error: (err) => {

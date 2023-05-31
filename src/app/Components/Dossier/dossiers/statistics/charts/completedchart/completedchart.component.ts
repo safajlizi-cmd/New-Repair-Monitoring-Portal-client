@@ -16,7 +16,6 @@ export class CompletedchartComponent implements OnInit {
   getDossiers(){
     this.api.getList("Dossier/completed").subscribe({
       next: (res) => {
-        console.log(res);
         this.ChartList =res
         this.dossierList= res.map((item:any) => item.dossierNumber);
         this.progress= res.map((item:any) => item.creationPeriode);
@@ -26,7 +25,6 @@ export class CompletedchartComponent implements OnInit {
     });
   }
   navigateToDossier(event: any) {
-    alert("aaaaa")
     // Get the index of the clicked bar
     const index = event.category;
 

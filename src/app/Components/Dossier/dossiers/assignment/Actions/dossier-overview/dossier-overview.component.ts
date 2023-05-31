@@ -12,6 +12,7 @@ import { DocumentService } from 'src/app/services/document.service';
 import { GenericService } from 'src/app/services/generic.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { tabs } from '../../tabs';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Component({
   selector: 'app-dossier-overview',
@@ -91,7 +92,6 @@ export class DossierOverviewComponent {
                 this.fileInfos = res;
            },
           error: (err) => {
-                alert("error get Documents")
            },
           });
      }
@@ -102,15 +102,33 @@ export class DossierOverviewComponent {
   deleteDocument() {
          this.uploadService.delete( this.deleteID).subscribe({
          next: (res) => {  
-               alert("file deleted successfully")
                this.getDocuments()
-          },
+               this.notificationService.show({
+                content: "file deleted successfully",
+                animation: {
+                  type: "slide",
+                  duration: 500,
+                },
+                type: { style: "error" },
+              });
+              },
           error: (err) => {
-                alert("error delete Document")
+                this.notificationService.show({
+                  content: "Error occurred while deleting document",
+                  animation: {
+                    type: "slide",
+                    duration: 500,
+                  },
+                  type: { style: "error" },
+                });
+                
           },
      });
   }
   public items =[...tabs, {
+    disabled: false,
+    city: "Emails"
+  },{
     disabled: false,
     city: "History"
   }]
@@ -119,6 +137,7 @@ export class DossierOverviewComponent {
   constructor(private route: ActivatedRoute,
               private api: GenericService, 
               private userStore: UserStoreService,
+              private notificationService :NotificationService,
               private fb: FormBuilder,
                private uploadService: DocumentService) {
   }
@@ -130,7 +149,6 @@ export class DossierOverviewComponent {
       next: (res) => {
         this.notes = res },
       error: (err) => {
-        alert("error get notes")
       },
     });
   }
@@ -138,11 +156,9 @@ export class DossierOverviewComponent {
     this.api.getById("Dossier/GetById", this.id).subscribe({
       next: (res) => {
         this.dossier = res.dossier;
-        console.log("this.dossier");
         this.openedDelete=false
       },
       error: (err) => {
-        alert("errordetDossier")
       },
     });
   }

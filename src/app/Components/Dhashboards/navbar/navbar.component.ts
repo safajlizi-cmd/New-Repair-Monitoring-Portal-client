@@ -8,6 +8,7 @@ import { ButtonFillMode } from "@progress/kendo-angular-buttons";
 import { environment } from "src/environments/environment";
 import { HubConnection, HubConnectionBuilder } from "@aspnet/signalr";
 import { HttpClient } from "@angular/common/http";
+import { NotificationService } from "@progress/kendo-angular-notification";
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -62,16 +63,24 @@ export class NavbarComponent implements OnInit {
              ,private zone: NgZone
              , private router :Router 
              , private auth :UserStoreService
+             , private notificationService :NotificationService
              , private api :GenericService
              , private http : HttpClient ) {}
   geNotifications(){
     this.api.getList("Notification/List?id="+this.auth.getId()).subscribe({
       next: (res) => {
         this.signalData = res;
-        console.log(res);
       },
       error: (err) => {
-      alert("error get notifications")
+        this.notificationService.show({
+          content: "error get notifications",
+          animation: { 
+            type:"slide",
+            duration:500,
+          },
+          type: { style: "error" },
+        });            
+      
       },
     });
   }
@@ -79,9 +88,6 @@ export class NavbarComponent implements OnInit {
       this.role= this.auth.getRole()
       this.fullName = this.auth.getUserName()
       this.geNotifications()
-      const names = this.name.split(' ');
-      this.initials = names[0].charAt(0) + names[names.length - 1].charAt(0);
-
       //signalR
       this._hubConnection = new HubConnectionBuilder().withUrl(this.apiUrl+'/notify').build();
       this._hubConnection.start()

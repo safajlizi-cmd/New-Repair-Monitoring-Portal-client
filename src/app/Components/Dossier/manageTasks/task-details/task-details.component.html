@@ -44,6 +44,9 @@
     <button  kendoButton (click)="open('note')" class="bt" 
       [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon>Add
      Note</button>
+     <div class="box row" *ngIf="notes.length == 0">
+      No notes available ..
+    </div>
      <div class="box row" *ngFor="let item of notes ; let i =index" >
       <div class="col-lg-6"> <b>Title : {{item.title}} </b></div>
       <div class="col-lg-6 date"> Related to :{{item!.optionName}} </div>
@@ -177,4 +180,3 @@
   </form>
 
 </kendo-dialog>
-<div kendoDialogContainer></div>

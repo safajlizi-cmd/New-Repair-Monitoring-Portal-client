@@ -12,7 +12,6 @@ import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GridModule } from '@progress/kendo-angular-grid';
-import { ListViewModule } from '@progress/kendo-angular-listview';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { TaskListComponent} from 'src/app/Components/Dossier/manageTasks/task-list/task-list.component';
@@ -65,6 +64,7 @@ import { EventsComponent } from 'src/app/Components/events/events.component';
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import { SchedulerModule } from '@progress/kendo-angular-scheduler';
 import { DosHistoryComponent } from 'src/app/Components/Dossier/dossiers/dos-history/dos-history.component';
+import { ListViewModule } from '@progress/kendo-angular-listview';
 
 
 @NgModule({
@@ -141,7 +141,8 @@ import { DosHistoryComponent } from 'src/app/Components/Dossier/dossiers/dos-his
     ChartsModule,
     MatMenuModule,
     ScheduleModule,
-    SchedulerModule
+    SchedulerModule,
+    ListViewModule
 
    ],
    providers: [Location,],

@@ -11,6 +11,7 @@ import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener, MatTreeNestedDataSource } from '@angular/material/tree';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Component({
   selector: 'app-dossier-details',
@@ -27,6 +28,8 @@ export class DossierDetailsComponent implements OnInit {
   selectedAct: any
   Assignments: any[] = [];
   Words: any[] = [];
+  bts: any[] = [];
+  causes: any[] = [];
   dossier !: any
   selectedItemId: any;
    Materials: any
@@ -35,7 +38,7 @@ export class DossierDetailsComponent implements OnInit {
   showAct: any
   public filterTerm = "";
   public icons = { plus: plusIcon, trash: clockIcon, delete: trashIcon, edite: pencilIcon };
-  constructor(private _snackBar: MatSnackBar,private route : ActivatedRoute, private api: GenericService, private fb: FormBuilder, private router: Router , private userStore:UserStoreService) {
+  constructor(private notificationService :NotificationService,private _snackBar: MatSnackBar,private route : ActivatedRoute, private api: GenericService, private fb: FormBuilder, private router: Router , private userStore:UserStoreService) {
   }
   getDossier() {
     this.api.getById("Dossier/GetById", this.id).subscribe({
@@ -43,7 +46,6 @@ export class DossierDetailsComponent implements OnInit {
         this.dossier = res.dossier;
       },
       error: (err) => {
-        alert("error get dossier")
       },
     });
   }
@@ -74,6 +76,24 @@ export class DossierDetailsComponent implements OnInit {
       },
     });
   }
+  getCauses() {
+    this.api.getList("Cause").subscribe({
+      next: (res) => {
+        this.causes = res;
+       
+      },
+      error: (err) => {   },
+    });
+  }
+  getBuildingtypes() {
+    this.api.getList("Building").subscribe({
+      next: (res) => {
+        this.bts = res;
+       
+      },
+      error: (err) => {   },
+    });
+  }
   getAssignments() {
     this.api.getList("Assignment/List/" + this.id).subscribe({
       next: (res) => {
@@ -85,7 +105,7 @@ export class DossierDetailsComponent implements OnInit {
           }
         });
       },
-      error: (err) => { alert("error get Assignments") },
+      error: (err) => {  },
     });
   }
   ngOnInit() {
@@ -98,6 +118,7 @@ export class DossierDetailsComponent implements OnInit {
     this.AssignForm = this.fb.group({
       product: ['', Validators.required],
       cause: ['', Validators.required],
+      buildingType: ['', Validators.required],
       dossierId: ['']
     });
     this.route.params.subscribe(params => {
@@ -109,6 +130,8 @@ export class DossierDetailsComponent implements OnInit {
     this.getDamageTypes();
     this.getLocations();
     this.getMaterials();
+    this.getBuildingtypes();
+    this.getCauses();
   }
   public nodeHasChildren(node: any): boolean {
     return node.children && node.children.length > 0;
@@ -138,12 +161,18 @@ export class DossierDetailsComponent implements OnInit {
         this.AssignForm.reset(); // reset the task object after submitting the form
         this.getAssignments();  
         this.openedassy = false; 
-        this._snackBar.open('Assignment added successfully','',{ 
-          duration: 3000
-      })
+    
+      this.notificationService.show({
+        content: "Assignment added successfully",
+        animation: { 
+          type:"slide",
+          duration:500,
+        },
+        type: { style: "success" },
+      });    
       },
       error: (err) => {
-        alert("error adding ")
+           
       },
     });
   }
@@ -154,13 +183,19 @@ export class DossierDetailsComponent implements OnInit {
         this.WOForm.reset(); 
         this.opened = false;  
         this.getAssignments()
-        this._snackBar.open('Working Order added successfully','',{ 
-          duration: 3000
-      })
+    
+      this.notificationService.show({
+        content: 'Working Order added successfully',
+        animation: { 
+          type:"slide",
+          duration:500,
+        },
+        type: { style: "success" },
+      });    
 
       },
       error: (err) => {
-        alert("error adding ")
+         
       },
     });
   }
