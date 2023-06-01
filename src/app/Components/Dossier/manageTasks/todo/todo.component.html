@@ -237,7 +237,7 @@
         </div>
 
         <kendo-dialog-actions style="border:none;margin-top: 20px;">
-          <button kendoButton (click)="close('no')">Cancel</button>
+          <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
           <button kendoButton (click)="onSubmit()" class="bt" [disabled]="taskForm.invalid"> 
            Update Task
           </button>

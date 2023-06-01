@@ -9,6 +9,8 @@
 .header{
   display: flex; justify-content: space-between;
 }
+.bt{background-color: #3899DD;color: #fff;}
+  .cancel{background-color: #c5c9cd;color:  #303131; border:solid 1px #303131;}
 .split1{flex-basis:10%; flex-grow: 1;color:#86BC35; font-weight: bold; }
 .split2{flex-basis:20%; flex-grow: 1;}
 kendo-tabstrip p {
@@ -65,7 +67,10 @@ kendo-textbox {
   align-items: center;
   padding: 8px;
 }
-
+.buttom
+{
+  overflow-y: auto;
+}
 .mat-tree-node__padding {
   flex-grow: 1;
 }
@@ -73,8 +78,9 @@ body {
   margin-bottom: 6em;
 }
 
+
 $border-color: #e3e5ef;
-$primary-color: #48494a;
+$primary-color: #0a7beb;
 
 .treeview {
   //Variables
@@ -146,7 +152,7 @@ $primary-color: #48494a;
         height: $_treeview-level-size + 5;
         width: $_treeview-level-size + 5;
         top: -9.5px;
-        background-color: #48494a;
+        background-color: #0a7beb;
         border: 7.5px solid #d5e9f6;
         font-size: 22px;
       }

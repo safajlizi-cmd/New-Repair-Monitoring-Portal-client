@@ -58,6 +58,11 @@ export class CreateDossierComponent implements OnInit {
    }
    addDossier(){
     this.dossierForm.get('CreatedById')?.setValue(this.auth.getId());
+    if(this.role == 'Manager' && this.slectedUser != null)
+    {
+      this.dossierForm.get('CreatedById')?.setValue(this.slectedUser.id);
+      this.dossierForm.get('Assigned')?.setValue(true);
+    }
     this.api.add("Dossier/Add",this.dossierForm.value).subscribe({
     next: (res) => {
       this.notificationService.show({

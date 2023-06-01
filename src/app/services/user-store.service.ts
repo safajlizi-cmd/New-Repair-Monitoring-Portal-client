@@ -29,9 +29,22 @@ export class UserStoreService {
      return     localStorage.getItem('dossierId')
 
   }
+  public setEmail(value :any){
+    localStorage.setItem('email',value)
+  }
+
+  public getEmail(){
+     return     localStorage.getItem('email')
+
+  }
    public setFullNameForStore(fullName : string){
-     this.fullName$.next(fullName)
+     localStorage.setItem('fullname', fullName)
+
    }
+   public getFullNameForStore(){
+     return localStorage.getItem('fullname')
+
+  }
    storeUserName(Value: string) {
     localStorage.setItem('username', Value)
   }

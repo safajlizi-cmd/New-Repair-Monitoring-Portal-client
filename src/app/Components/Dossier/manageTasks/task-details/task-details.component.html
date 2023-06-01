@@ -11,6 +11,9 @@
           <td style="width:33%;">
             Created By :<br><b>{{task.createdByC?.userName }}</b>
           </td>
+          <td style="width:33%;" *ngIf="task!.title =='Send Email'">
+            <button  kendoButton (click)="open('email')" class="btt" 
+            >Send Email</button></td>
       </tr>
   </table>
   </div>
@@ -112,8 +115,8 @@
       <input type="checkbox" class="form-check-input" id="emergency" formControlName="emergency">
       <label class="form-check-label" for="emergency">IsEmergency</label>
     </div>
-    <kendo-dialog-actions>
-      <button kendoButton (click)="close('no')">Cancel</button>
+    <kendo-dialog-actions style="border:none;margin-top: 20px;">
+      <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
       <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
         [disabled]="taskForm.invalid">
         Add Task
@@ -170,8 +173,8 @@
       <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
     </div>
   
-    <kendo-dialog-actions>
-      <button kendoButton (click)="close('no')">Cancel</button>
+    <kendo-dialog-actions style="border:none;margin-top: 20px;">
+      <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
       <button kendoButton (click)="addNote()" style="background-color: #3899DD;color: #fff;"
         [disabled]="noteForm.invalid">
         Add Task
@@ -179,4 +182,65 @@
     </kendo-dialog-actions>
   </form>
 
+</kendo-dialog>
+<kendo-dialog title="Send Email" *ngIf="openedEmail" (close)="close('cancel')" [minWidth]="250" [width]="450"
+  [themeColor]="'dark'" class="dialog">
+  <form [formGroup]="note2Form">
+      <div class="form-group">
+        <label for="title">Name :</label>
+        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name">
+        <div
+          *ngIf="note2Form.controls['name'].invalid && (note2Form.controls['name'].dirty || note2Form.controls['name'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="note2Form.hasError('required','name')">name is required.</div>
+        </div>
+      </div>
+       <div class="form-group">
+        <label for="title">Related to :</label>
+        <label> <input type="radio" value="dossier" formControlName="option">  Dossier</label>
+        <label> <input type="radio" value="assignment" formControlName="option"> Assignment </label>
+        <label>  <input type="radio" value="workingOrder" formControlName="option"> Working Order</label>
+        <div *ngIf="note2Form.get('option')!.value === 'assignment'">
+          <div *ngIf="assignments.length ==0"> <b class="small"> No Assignment available!</b> </div>
+          <div *ngIf="assignments.length >0">
+                     <label for="title">Select Assignment :</label>
+                  
+                       <select class="form-control" id="optionId" formControlName="optionName">
+                        <option *ngFor="let  item of assignments" [value]=" item.assignmentNumber">{{ item.assignmentNumber }}
+                        </option>
+                     </select>
+          </div>
+        </div>
+        <div *ngIf="note2Form.get('option')!.value === 'workingOrder'">
+             <div *ngIf="word.length ==0"> <b class="small"> No working order available!</b></div>
+             <div *ngIf="word.length >0">
+                       <label for="title">Select WorkingOrder :</label>
+                      <select class="form-control" id="optionId" formControlName="optionName">
+                        <option *ngFor="let  item of word" [value]=" item.woNumber">{{ item.woNumber }}
+                        </option>
+                     </select>
+            </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email :</label>
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="email">Subject :</label>
+        <input type="text" class="form-control" id="Subject" formControlName="subject" placeholder="Email Subject">
+      </div>
+      <div class="form-group">
+        <label for="message">Message :</label>
+        <textarea class="form-control" id="description" rows="3" formControlName="message"></textarea>
+      </div> 
+    
+      <kendo-dialog-actions style="border:none;margin-top: 20px;">
+        <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
+        <button kendoButton (click)="sendEmail()" style="background-color: #3899DD;color: #fff;"
+          [disabled]="note2Form.invalid">
+          Add Task
+        </button>
+      </kendo-dialog-actions>
+    </form>
 </kendo-dialog>

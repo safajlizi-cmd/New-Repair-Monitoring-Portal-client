@@ -46,6 +46,11 @@ table {
   height: 19px;
   margin-right: 4px;
 }
+.btt{
+  color: #3899DD;
+  border-color: #3899DD;
+  background-color: #fff;
+}
 .box {
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;
@@ -139,3 +144,4 @@ table {
  .bt{
   width:150px;background-color: #3899DD;color:#fff ; margin:10px;margin-left: 70%;
  }
+  .cancel{background-color: #c5c9cd;color:  #303131; border:solid 1px #303131;}

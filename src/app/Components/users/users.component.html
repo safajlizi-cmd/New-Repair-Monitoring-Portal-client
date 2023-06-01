@@ -93,10 +93,10 @@
                 </div>
                 </div>
              </div>
-            <div class="flex">
+            <kendo-dialog-actions style="border:none;margin-top: 20px;">
                 <button kendoButton (click)="close()" class="cancel">Cancel</button>
-                <button kendoButton (click)="addUser()"  [disabled]="UserForm.invalid" class="submit">Submit</button>
-            </div>
+                <button kendoButton  class="bt" (click)="addUser()"  [disabled]="UserForm.invalid" class="submit">Submit</button>
+            </kendo-dialog-actions>
         </form>
     </kendo-dialog>
    

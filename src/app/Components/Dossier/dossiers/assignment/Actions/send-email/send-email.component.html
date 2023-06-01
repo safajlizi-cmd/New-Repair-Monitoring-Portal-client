@@ -79,9 +79,9 @@
         <textarea class="form-control" id="description" rows="3" formControlName="message"></textarea>
       </div> 
     
-      <kendo-dialog-actions>
-        <button kendoButton (click)="close()">Cancel</button>
-        <button kendoButton (click)="sendEmail()" style="background-color: #3899DD;color: #fff;"
+      <kendo-dialog-actions style="border:none;margin-top: 20px;">
+        <button kendoButton (click)="close()" class="cancel">Cancel</button>
+        <button kendoButton (click)="sendEmail()"class="bt"
           [disabled]="noteForm.invalid">
           Add Task
         </button>

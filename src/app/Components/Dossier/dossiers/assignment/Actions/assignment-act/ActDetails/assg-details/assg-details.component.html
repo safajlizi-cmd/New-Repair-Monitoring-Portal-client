@@ -34,8 +34,8 @@
           </div>
       </div>
       <kendo-dialog-actions style="border:none;margin-top: 20px;">
-          <button kendoButton (click)="close('no')">Cancel</button>
-          <button kendoButton (click)="OnSubmit()" style="background-color: #3899DD;color: #fff;"
+          <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
+          <button kendoButton (click)="OnSubmit()" class="bt"
               [disabled]="AssignForm.invalid">
               Add Assignment
           </button>

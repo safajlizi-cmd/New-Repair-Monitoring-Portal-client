@@ -4,7 +4,9 @@
     text-align: left;
   }
   kendo-tabstrip-tab{
-padding: 10px;  }
+padding: 10px;  
+
+}
   .card{
     color:#7e807a;font-size: 0.7rem;
     width: 100%;
@@ -15,10 +17,7 @@ padding: 10px;  }
 .body{
     text-align: left;
 }
-.bt{
-    color: #3899DD;
-    border-color: #3899DD;
-}
+
 .box {
   padding: 10px 10px;
   border-bottom: solid 1px #ccc;
@@ -50,3 +49,10 @@ span{
 .date{
   color:#545554;font-size: 0.7rem;font-weight: bold;
 }
+.btt{
+  color: #3899DD;
+  border-color: #3899DD;
+  background-color: #fff;
+}
+.bt{background-color: #3899DD;color: #fff;}
+  .cancel{background-color: #c5c9cd;color:  #303131; border:solid 1px #303131;}

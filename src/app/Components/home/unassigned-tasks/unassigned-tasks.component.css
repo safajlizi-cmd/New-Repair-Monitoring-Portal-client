@@ -9,7 +9,7 @@
 .avatar{
     background-color:#3899DD; color: #fff; width: 18px; height: 18px;
   }
- .bt{background-color: #3899DD;color: #fff;}
+ 
   ::ng-deep .custom-snackbar {
      background-color: #ff9800; 
   }
@@ -28,3 +28,5 @@
     flex: 1;
     overflow-y: auto; 
     }
+    .bt{background-color: #3899DD;color: #fff;}
+  .cancel{background-color: #c5c9cd;color:  #303131; border:solid 1px #303131;}

@@ -1,5 +1,5 @@
 
-  <button class="bt" kendoButton (click)="open()" >Add Event</button>
+  <button class="bt2" kendoButton (click)="open()" >Add Event</button>
 
   <kendo-scheduler
   [kendoSchedulerBinding]="Events"
@@ -17,7 +17,8 @@
         
       </ng-template>
   <kendo-scheduler-month-view [eventHeight]="50" >
-  </kendo-scheduler-month-view>     
+  </kendo-scheduler-month-view>   
+  <kendo-scheduler-week-view> </kendo-scheduler-week-view>
   <kendo-scheduler-agenda-view > </kendo-scheduler-agenda-view>
 
 </kendo-scheduler>
@@ -36,7 +37,7 @@
         </div>
         <div class="form-group">
             <label for="deadline">Start:</label>
-            <input type="date" class="form-control" id="start" formControlName="start">
+            <input type="datetime-local" class="form-control" id="start" formControlName="start">
             <div
               *ngIf="eventForm.controls['start'].invalid && (eventForm.controls['start'].dirty || eventForm.controls['start'].touched)"
               class="alert alert-danger">
@@ -45,14 +46,14 @@
           </div>     
         <div class="form-group">
             <label for="deadline">End:</label>
-            <input type="date" class="form-control" id="end" formControlName="end">
+            <input type="datetime-local" class="form-control" id="end" formControlName="end">
             <div
               *ngIf="eventForm.controls['end'].invalid && (eventForm.controls['end'].dirty || eventForm.controls['end'].touched)"
               class="alert alert-danger">
               <div *ngIf="eventForm.hasError('required','end')">End day is required.</div>
             </div>
           </div>
-       
+
         <div class="form-group">
           <label for="description">Description:</label>
           <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
@@ -63,10 +64,10 @@
           </div>
         </div>
 
-        <kendo-dialog-actions style="border:none;margin-top: 20px;">
-          <button kendoButton (click)="close()">Cancel</button>
+    <kendo-dialog-actions style="border:none;margin-top: 20px;">
+          <button kendoButton (click)="close()" class="cancel">Cancel</button>
           <button kendoButton (click)="onSubmit()" class="bt" [disabled]="eventForm.invalid"> 
-          Add event
+            Add event
           </button>
         </kendo-dialog-actions>
         </form>

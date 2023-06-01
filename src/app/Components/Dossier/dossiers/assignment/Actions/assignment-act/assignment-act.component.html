@@ -88,8 +88,8 @@ class="dialog"
 <p style="margin: 30px; text-align: center;">
   Are you sure you want to Delete a file?
 </p>
-<kendo-dialog-actions>
-  <button kendoButton (click)="close()">No</button>
+<kendo-dialog-actions style="border:none;margin-top: 20px;">
+  <button kendoButton (click)="close()" class="cancel">No</button>
   <button kendoButton (click)="deleteDocument()" class="bt">
     Yes
   </button>

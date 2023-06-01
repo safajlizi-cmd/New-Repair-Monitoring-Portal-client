@@ -62,6 +62,7 @@ export class EventsComponent implements OnInit {
     }    
       )
       );
+      console.log(this.Events)
       },
       error: (err) => {
       },

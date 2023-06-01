@@ -51,7 +51,7 @@
 </div>
 </div>
 
-<kendo-dialog title="Assign Task to" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450" [themeColor]="'dark'" >
+<kendo-dialog title="Assign Task to" *ngIf="opened" style="background-color:rgba(0,0,0,0.2)" (close)="close('cancel')" [minWidth]="250" [width]="450" [themeColor]="'dark'" >
     <form [formGroup]="AssigForm" >
         <div class="form-group form-check">
             <kendo-multicolumncombobox [data]="data" textField="userName" class="my-combobox" valueField="id"
@@ -71,7 +71,7 @@
         </div>
 
         <kendo-dialog-actions style="border:none;margin-top: 20px;">
-            <button kendoButton (click)="close('no')">Cancel</button>
+            <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
             <button kendoButton (click)="addAssign()" class="bt" [disabled]="AssigForm.invalid">
                 Assign task
             </button>

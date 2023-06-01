@@ -32,9 +32,10 @@ onLogin(){
                   this.user.storeRole(res.user.role)
                   this.user.storeId(res.user.id)
                   this.user.storeUserName(res.user.firstName[0]+res.user.lastName[0])
-                  this.loginForm.reset();
                   this.userStore.setFullNameForStore(res.user.userName);
-                  this.userStore.setRoleForStore(res.user.role)
+                  this.userStore.setRoleForStore(res.user.role);
+                  this.userStore.setEmail(res.user.email);         
+                 this.loginForm.reset();
                   this.notificationService.show({
                     content: res.message,
                     animation: { 

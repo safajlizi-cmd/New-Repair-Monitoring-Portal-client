@@ -9,7 +9,6 @@ import { WORActComponent } from 'src/app/Components/Dossier/dossiers/assignment/
 import { DossierDetailsComponent } from 'src/app/Components/Dossier/dossiers/dossier-details/dossier-details.component';
 import { DossierListComponent } from 'src/app/Components/Dossier/dossiers/dossier-list/dossier-list.component';
 import { StatisticsComponent } from 'src/app/Components/Dossier/dossiers/statistics/statistics.component';
-import { DashboardTasksComponent } from 'src/app/Components/Dossier/manageTasks/dashboard-tasks/dashboard-tasks.component';
 import { TaskDetailsComponent } from 'src/app/Components/Dossier/manageTasks/task-details/task-details.component';
 import { TaskComponent } from 'src/app/Components/Dossier/manageTasks/task/task.component';
 import { GuideHomeComponent } from 'src/app/Components/home/guide-home/guide-home.component';

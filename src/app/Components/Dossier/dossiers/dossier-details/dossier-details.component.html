@@ -58,7 +58,7 @@
      </ul>
    </div>
 </div>
-<div class="col-lg-8" style="overflow-y: auto;">  
+<div class="col-lg-8 buttom" style="overflow-y: auto;">  
    
   <router-outlet></router-outlet>
 </div>
@@ -101,8 +101,8 @@
    </tr>
 </table>
   <kendo-dialog-actions style="border:none;margin-top: 20px;">
-     <button kendoButton (click)="close('no')">Cancel</button>
-     <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
+     <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
+     <button kendoButton (click)="onSubmit()" class="bt"
         [disabled]="AssignForm.invalid">
         Add Assignment
      </button>
@@ -144,8 +144,8 @@
  </div>
 
  <kendo-dialog-actions style="border:none;margin-top: 20px;">
-    <button kendoButton (click)="close('no')">Cancel</button>
-    <button kendoButton (click)="AddWorkingOrder()" style="background-color: #3899DD;color: #fff;"
+    <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
+    <button kendoButton (click)="AddWorkingOrder()" class="bt"
        [disabled]="WOForm.invalid">
        Add Working Order
     </button>

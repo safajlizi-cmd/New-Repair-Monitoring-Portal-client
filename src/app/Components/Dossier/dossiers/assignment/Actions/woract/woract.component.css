@@ -24,3 +24,5 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     max-width: 600px;
   }
+  .bt{background-color: #3899DD;color: #fff;}
+  .cancel{background-color: #c5c9cd;color:  #303131; border:solid 1px #303131;}

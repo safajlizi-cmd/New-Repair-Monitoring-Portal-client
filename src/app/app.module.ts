@@ -25,7 +25,6 @@ import { PagerModule } from '@progress/kendo-angular-pager';
 import { Dashboard2Component } from 'src/app/Components/Dhashboards/dashboard2/dashboard2.component';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ManageProfileComponent } from './Components/Profile/manage-profile/manage-profile.component';
 import { GuideListComponent } from './Components/home/guide-list/guide-list.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NotificationModule } from '@progress/kendo-angular-notification';
@@ -53,7 +52,6 @@ import { SigninComponent } from './Components/Login/signin/signin.component';
     GuideComponent,
     SideNavComponent,
     Dashboard2Component,
-    ManageProfileComponent,
     GuideListComponent,
     GuideItemComponent,
     NavbarGuideComponent,

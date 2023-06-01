@@ -8,8 +8,6 @@ import { Location } from '@angular/common';
 import { SelectAllCheckboxDirective } from '@progress/kendo-angular-grid';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { DialogService,DialogRef,DialogCloseResult} from "@progress/kendo-angular-dialog";
-import {AddNoteComponent} from  'src/app/Components/Dossier/manageTasks/dialogs/add-note/add-note.component';
-import { AddSubTaskComponent } from '../dialogs/add-sub-task/add-sub-task.component';
 import { take } from 'rxjs';
 import { NotificationService } from '@progress/kendo-angular-notification';
 
@@ -21,10 +19,12 @@ import { NotificationService } from '@progress/kendo-angular-notification';
 export class TaskDetailsComponent implements OnInit , OnDestroy {
   opened = false;
   openedNo = false;
+  openedEmail = false;
   public animation: boolean | DialogAnimation = {};
   public dialogThemeColor: any = "primary";
   taskForm!: FormGroup;
   noteForm!: FormGroup;
+  note2Form!: FormGroup;
   option: any
   clicked = false
   notes: any[] = []
@@ -107,6 +107,15 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
       optionName: [''],
       dossierId: [''],
     });
+    this.note2Form = this.fb.group({
+      name: ['', Validators.required],
+      message: ['',Validators.required],
+      email: ['', Validators.required],
+      subject: ['', Validators.required],
+      option: ['dossier'],
+      optionName: [''],
+      dossierId: [''],
+    });
   }
   ngOnDestroy(): void {
     if (this.subscription) {
@@ -129,11 +138,14 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
   public close(status: string): void {
     this.opened = false;
     this.openedNo = false;
-    this
+    this.openedEmail = false
   }
   public open(status: any): void {
     if (status == 'note') { this.openedNo = true; this.noteForm.reset }
-    else {
+   
+    else if( status =='email'){
+      this.openedEmail = true
+    } else {
       this.opened = true;
     }
   }
@@ -215,23 +227,37 @@ export class TaskDetailsComponent implements OnInit , OnDestroy {
     });
   }
   public result:any;
-  addSubTask(){
-    const dialog: DialogRef = this.dialogService.open({
-      content:AddSubTaskComponent ,
-      width: 450,
-      minWidth: 250,
-    });
-    const addSubTask = dialog.content.instance as AddSubTaskComponent;
-    addSubTask.task = this.task;
-    dialog.result.pipe(take(1)).subscribe((r) => {
-     if (!(r instanceof DialogCloseResult)) {
-       if (addSubTask.taskForm.valid) {
-        
+     sendEmail(){
+      this.note2Form.get('dossierId')?.setValue(this.task.dossierId);
+      if (this.note2Form.get('option')?.value == 'dossier') {
+        this.note2Form.get('optionName')?.setValue('dossier');
       }
- }
-                  
-      })
-
+    
+      this.api.add("Email", this.note2Form.value).subscribe({
+        next: (res) => {     
+          this.openedEmail = false;
+          this.note2Form.reset();
+          this.notificationService.show({
+            content: "Email added successfully",
+            animation: { 
+              type:"slide",
+              duration:500,
+            },
+            type: { style: "success" },
+          });    
+        },
+        error: (err) => {
+          this.openedEmail =false
+          this.notificationService.show({
+            content: "Error while sending Email",
+            animation: { 
+              type:"slide",
+              duration:500,
+            },
+            type: { style: "error" },
+          });    
+        },
+      });
     }
   }
   

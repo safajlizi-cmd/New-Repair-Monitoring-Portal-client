@@ -7,7 +7,6 @@ import { GenericService } from 'src/app/services/generic.service';
 import { TaskService } from 'src/app/services/task.service';
 import { DialogAnimation, DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { TaskDetailsComponent } from '../task-details/task-details.component';
-import { AddTaskComponent } from '../add-task/add-task.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialItemClickEvent } from '@progress/kendo-angular-buttons';
 import { UserStoreService } from 'src/app/services/user-store.service';
