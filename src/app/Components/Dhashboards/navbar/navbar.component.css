@@ -15,7 +15,7 @@ kendo-appbar{
   img{
     height: auto;
     width: 90px;
-    margin-left: 10px;
+    margin-left: 90px;
   }
  
   .k-appbar-section {
@@ -95,19 +95,19 @@ kendo-appbar{
   display: block;
 }
 .box {
-  padding: 10px 10px;
+  padding: 5px;
   color: #303131;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  font-size: 15x;
-  font: weight 300px;
-  width: 100%;
+  font-size: 10x;
+  font: weight 200px;
 }
 .contain{
   background-color: #303131;
 }
+
 .sbt{
   border: none;
   padding: 0;

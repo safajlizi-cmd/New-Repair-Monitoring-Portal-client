@@ -88,6 +88,7 @@ ngOnInit(): void {
   this.getTasks()
   this.getDossiers()
 }
+
 onSelectTask(event: any) {
   this.apiTask.getListByTask("inprog", this.userId, event.title).subscribe({
     next: (res) => {
@@ -154,8 +155,14 @@ addAssign() {
       });        },
     error: (err) => {
       this.openedAssign = false
-      this.getTasks()
-
+      this.notificationService.show({
+        content: "Task assigned to yourself successfully",
+        animation: { 
+          type:"slide",
+          duration:500,
+        },
+        type: { style: "error" },
+      }); 
     },
   });
 }

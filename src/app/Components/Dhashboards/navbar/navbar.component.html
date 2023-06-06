@@ -1,24 +1,25 @@
 <kendo-appbar position="top">
   <kendo-appbar-spacer></kendo-appbar-spacer>
-  <kendo-appbar-section class="search-section">
-    <p class="role"> {{role}}</p>
-  </kendo-appbar-section>
+ 
  
   <kendo-appbar-section class="user-actions" >
     <kendo-dropdownbutton [data]="signalData" [fillMode]="fillMode">
       <kendo-badge-container class="sbt">
-          <kendo-icon name="bell"></kendo-icon>
-        <kendo-badge themeColor="info" size="small">{{signalData.length}}</kendo-badge>
+          <kendo-icon name="bell" ></kendo-icon>
+        <kendo-badge themeColor="info" size="small" style="background-color: #3899DD">{{signalData.length}}</kendo-badge>
       </kendo-badge-container >
       <ng-template kendoDropDownButtonItemTemplate let-dataItem  *ngIf="signalData.length == 0">
         <div *ngIf="signalData.length == 0" class="box">No new notifications.</div>
       </ng-template>
       <ng-template kendoDropDownButtonItemTemplate let-dataItem   style="  width: 250px;background-color: #d1d8d8; " >
-        <span class="box"><b> {{ dataItem.description}}<br> <span style="color:brown">{{ dataItem.days}} days</span></b></span>
+        <p class="box"><b> {{ dataItem.description}}<br> <span style="color:brown">{{ dataItem.days}} days</span></b></p>
       </ng-template>
     </kendo-dropdownbutton>
   </kendo-appbar-section>
-      <span class="k-appbar-separator"></span>
+      <span class="k-appbar-separator"></span> 
+  <kendo-appbar-section class="search-section">
+    <p class="role"> {{role}}</p>
+  </kendo-appbar-section>
       <kendo-appbar-section>
         <kendo-dropdownbutton [data]="data"  [fillMode]="fillMode" [popupSettings]="{ align: 'left'}" >
           <kendo-avatar fillMode="outline" class="avatar">

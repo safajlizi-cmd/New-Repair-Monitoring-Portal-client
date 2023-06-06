@@ -14,7 +14,7 @@
             routerLinkActive="active" *ngIf="(data.role !='C' && role=='Manager') || (data.role!='M' && role=='Coordinator') "
             [routerLinkActiveOptions] ="{exact:true}" 
           >
-              <span class="sidenav-link-icon" [class]="data.icon">  <kendo-badge themeColor="info" rounded="large" *ngIf="data.icon == 'k-icon k-i-saturation'"></kendo-badge></span> 
+              <span class="sidenav-link-icon" [class]="data.icon">  <kendo-badge themeColor="inherit" rounded="large" *ngIf="data.icon == 'k-icon k-i-saturation'" style="background-color: #fff;border:solid 1px #3899DD"></kendo-badge></span> 
 
               <span class="sidenav-link-text"   *ngIf="collapsed">{{data.label}}</span>
           </a>

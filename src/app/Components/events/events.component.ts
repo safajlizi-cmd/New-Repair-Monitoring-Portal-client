@@ -43,26 +43,24 @@ export class EventsComponent implements OnInit {
   getEvent(){
     this.api.getById("Event", this.id).subscribe({
       next: (res) => {
-        var i=0
         this.Events =res.map((dataItem:any, index: number) =>(
            <SchedulerEvent> {
             id: index+1,
             start: this.parseAdjust(dataItem.start),
             startTimezone: dataItem.startTimezone,
             end: this.parseAdjust(dataItem.end),
-           endTimezone: dataItem.endTimezone,
-           isAllDay: false,
-          title: dataItem.title,
-        description: dataItem.description,
-        recurrenceRule: "",
-        recurrenceId: dataItem!.idf,
-        recurrenceException: dataItem.RecurrenceException,
-        roomId: dataItem.RoomID,
-        ownerID: index+1
+            endTimezone: dataItem.endTimezone,
+            isAllDay: false,
+            title: dataItem.title,
+            description: dataItem.description,
+            recurrenceRule: "",
+            recurrenceId: dataItem!.idf,
+            recurrenceException: dataItem.RecurrenceException,
+            roomId: dataItem.RoomID,
+            ownerID: index+1
     }    
       )
       );
-      console.log(this.Events)
       },
       error: (err) => {
       },

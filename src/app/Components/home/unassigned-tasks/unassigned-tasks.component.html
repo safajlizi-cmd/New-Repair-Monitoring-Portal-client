@@ -56,7 +56,7 @@
         <div class="form-group form-check">
             <kendo-multicolumncombobox [data]="data" textField="userName" class="my-combobox" valueField="id"
                 placeholder="Assign task to ..." [filterable]="true" (filterChange)="handleFilterChange($event)"
-                (valueChange)="onSelectedUser($event)" id>
+                (valueChange)="onSelectedUser($event)" >
                 <kendo-combobox-column field="email" title="email" [width]="150">
                 </kendo-combobox-column>
                 <kendo-combobox-column field="firstName" title="Name" [width]="90">
