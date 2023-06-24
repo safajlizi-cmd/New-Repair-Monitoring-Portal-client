@@ -84,7 +84,7 @@
     .radio-tile-group .input-container {
       position: relative;
       height: 80px;
-      width: 80px;
+      width: 130px;
       margin: 0.5rem;
     }
     
@@ -161,7 +161,4 @@
       border: solid 1px #e6e1e1;
       height: 40px;
     } 
-    .option{
-      padding: 10px;
-    
-    }
+   

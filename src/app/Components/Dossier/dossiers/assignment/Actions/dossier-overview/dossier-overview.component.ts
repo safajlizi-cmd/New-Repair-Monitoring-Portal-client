@@ -22,19 +22,22 @@ import { NotificationService } from '@progress/kendo-angular-notification';
 export class DossierOverviewComponent {
   id: any
   dossier: any;
+  duped :any
   notes: any[] = []
   openedDelete=false
-  public selected = 1;
+  public selected = 0;
   public icons = { trash: clockIcon }
-  selectedFiles?: FileList;
+  selectedFiles?: File;
   currentFile?: File;
   deleteID:any
   progress = 0;
   message = '';
+  myForm!:FormGroup
   public fillMode: ButtonFillMode = "flat";
   fileInfos?: any;
+  
   selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
+    this.selectedFiles = this.myForm.value.files[0];
   }
   openfile(item:any){
          var src = "data:application/" + item.documentType + ";base64," + item.fileContent;
@@ -64,12 +67,13 @@ export class DossierOverviewComponent {
   }
   upload(): void {
           if (this.selectedFiles) {
-                   const file: File | null = this.selectedFiles.item(0);
+                   const file: File | null = this.selectedFiles;
                   if (file) {
                        this.currentFile = file;
                        this.uploadService.addDocument("Documents/upload",this.currentFile,'dossier',this.id,this.id).subscribe({
                   next: (event: any) => {
                         this.getDocuments()
+                        this.myForm.reset()
                         this.message = "documment added successfully"
                   },
                   error: (err: any) => {
@@ -103,13 +107,14 @@ export class DossierOverviewComponent {
          this.uploadService.delete( this.deleteID).subscribe({
          next: (res) => {  
                this.getDocuments()
+               this.openedDelete =false
                this.notificationService.show({
                 content: "file deleted successfully",
                 animation: {
                   type: "slide",
                   duration: 500,
                 },
-                type: { style: "error" },
+                type: { style: "success" },
               });
               },
           error: (err) => {
@@ -157,12 +162,18 @@ export class DossierOverviewComponent {
       next: (res) => {
         this.dossier = res.dossier;
         this.openedDelete=false
+        this.duped = res.dossier.involvedPart
+        console.log("duper")
+        console.log(this.duped)
       },
       error: (err) => {
       },
     });
   }
   ngOnInit(): void {
+    this.myForm = this.fb.group({
+      files: [,Validators.required],
+    });
     this.id = this.userStore.getDossierId()
     this.getDocuments()
     this.getDossier();

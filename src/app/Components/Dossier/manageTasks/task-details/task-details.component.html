@@ -41,7 +41,6 @@
              </tr>
         </table>
     </div>
-   
   </div>
   <div class="col-lg-6 card ">
     <button  kendoButton (click)="open('note')" class="bt" 
@@ -101,7 +100,6 @@
         </div>
       </div>
     </div>
-
     <div class="form-group">
       <label for="deadline">Deadline:</label>
       <input type="date" class="form-control" id="deadline" formControlName="deadline">
@@ -119,7 +117,7 @@
       <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
       <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
         [disabled]="taskForm.invalid">
-        Add Task
+        Add sub-Task
       </button>
     </kendo-dialog-actions>
   </form>
@@ -177,7 +175,7 @@
       <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
       <button kendoButton (click)="addNote()" style="background-color: #3899DD;color: #fff;"
         [disabled]="noteForm.invalid">
-        Add Task
+        Add note
       </button>
     </kendo-dialog-actions>
   </form>
@@ -239,7 +237,7 @@
         <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
         <button kendoButton (click)="sendEmail()" style="background-color: #3899DD;color: #fff;"
           [disabled]="note2Form.invalid">
-          Add Task
+          Send Email
         </button>
       </kendo-dialog-actions>
     </form>

@@ -25,6 +25,7 @@ export class DocumentService {
   getByWorkingOrder(id:any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/Documents/Work?id=${id}`,this.prepareHeader()).pipe(map(res => res as any)); 
   }
+
   delete(id:any): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/Document?id=${id}`, this.prepareHeader()).pipe(map(res => res as any));
    }

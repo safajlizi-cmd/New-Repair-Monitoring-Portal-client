@@ -157,7 +157,7 @@ export class TodoComponent implements OnInit {
     this.id = this.auth.getId()
     this.taskForm = this.formBuilder.group({
       id: [],
-      title: ['', Validators.required],
+      title: [''],
       deadline: [''],
       description: [''],
       emergency: [false, Validators.required]

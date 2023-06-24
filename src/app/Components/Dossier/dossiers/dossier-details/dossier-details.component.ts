@@ -34,6 +34,8 @@ export class DossierDetailsComponent implements OnInit {
   selectedItemId: any;
    Materials: any
    Locations: any
+   Objects:any
+   Products :any
    damageTypes: any
   showAct: any
   public filterTerm = "";
@@ -104,15 +106,38 @@ export class DossierDetailsComponent implements OnInit {
             assignment.workingOrdersC = [{ woNumber: 'No working orders...' }];
           }
         });
+        console.log(this.Assignments)
       },
       error: (err) => {  },
     });
   }
+  getObjects() {
+    this.api.getList("Object" ).subscribe({
+      next: (res) => {
+        this.Objects = res;
+      },
+      error: (err) => {
+      },
+    });
+  }
+  getProducts() {
+    this.api.getList("Product").subscribe({
+      next: (res) => {
+        this.Products = res;
+        console.log("Products : ")
+        console.log(res)
+      },
+      error: (err) => {
+      },
+    });
+  }
+ 
   ngOnInit() {
     this.WOForm = this.fb.group({
       locationId: ['', Validators.required],
       materialId: ['', Validators.required],
       damageTypeId: ['', Validators.required],
+      objectId: ['', Validators.required],
       assignmentId: ['']
     });
     this.AssignForm = this.fb.group({
@@ -132,6 +157,8 @@ export class DossierDetailsComponent implements OnInit {
     this.getMaterials();
     this.getBuildingtypes();
     this.getCauses();
+    this.getObjects();
+    this.getProducts();
   }
   public nodeHasChildren(node: any): boolean {
     return node.children && node.children.length > 0;

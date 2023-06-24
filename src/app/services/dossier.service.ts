@@ -19,4 +19,9 @@ export class DossierService {
   }
   ActivateDos( id:any ): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/dossier/Active?dossierId=${id}` ,this.prepareHeader()).pipe(map(res => res as any));}
+
+  addDossier(data:any): Observable<any> {
+     
+      return this.http.post<any>(`${this.apiUrl}/addDossier` ,data, this.prepareHeader()).pipe(map(res => res as any));
+     }
 }

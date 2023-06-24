@@ -15,6 +15,7 @@ export class WordDetailsComponent implements OnInit{
   Materials: any
   Locations: any
   damageTypes: any
+  Objects :any
   opened =false
 
   WOForm!: FormGroup;
@@ -50,11 +51,22 @@ export class WordDetailsComponent implements OnInit{
     this.api.getById("WorkingOrder/GetById",this.id).subscribe({
       next: (res) => {
         this.workingOrder =res.assignment;
+        console.log("eee")
+        console.log(res)
       },
       error: (err) => {
         this._snackBar.open('Error while getting working order','',{ 
           duration: 3000
       })
+      },
+    });
+  }
+  getObjects() {
+    this.api.getList("Object" ).subscribe({
+      next: (res) => {
+        this.Objects = res;
+      },
+      error: (err) => {
       },
     });
   }
@@ -64,6 +76,8 @@ export class WordDetailsComponent implements OnInit{
       locationId: ['', Validators.required],
       materialId: ['', Validators.required],
       damageTypeId: ['', Validators.required],
+      objectId: ['', Validators.required],
+
       id: ['']
     });
     this.route.params.subscribe(params => {
@@ -73,6 +87,7 @@ export class WordDetailsComponent implements OnInit{
     this.getDamageTypes();
     this.getLocations();
     this.getMaterials();
+    this.getObjects();
   }
   
  
@@ -81,6 +96,8 @@ export class WordDetailsComponent implements OnInit{
     this.WOForm.controls['locationId'].setValue(this.workingOrder.locationId);
     this.WOForm.controls['materialId'].setValue(this.workingOrder.materialId);
     this.WOForm.controls['damageTypeId'].setValue(this.workingOrder.damageTypeId);
+    this.WOForm.controls['objectId'].setValue(this.workingOrder.objectId);
+
 
     this.opened = true;
   }

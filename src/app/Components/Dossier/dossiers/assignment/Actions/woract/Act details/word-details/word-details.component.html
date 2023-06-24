@@ -4,11 +4,12 @@
         <button kendoButton (click)="onEdit()" class="btt">Edit</button>
     </kendo-card-header>
     <kendo-card-body  class="body">
-        <p> Working Order number:<br><span>{{ workingOrder.woNumber}}</span>  </p>
+        <p> Working Order number:<br><span>{{ workingOrder?.woNumber}}</span>  </p>
       <div >
-        <p>Location: <br><span>{{ workingOrder.locationc.longName }}</span></p>
-        <p>Damage Type:<br><span> {{ workingOrder.damageTypec.longName }}</span></p>
-        <p>Material:<br><span> {{ workingOrder. materialc.longName}}</span></p>
+        <p>Location: <br><span>{{ workingOrder?.locationc.longName }}</span></p>
+        <p>Damage Type:<br><span> {{ workingOrder?.damageTypec.longName }}</span></p>
+        <p>Object:<br><span> {{ workingOrder?.objectc?.longName }}</span></p>
+        <p>Material:<br><span> {{ workingOrder?.materialc.longName}}</span></p>
       </div>
     </kendo-card-body>
   </kendo-card>
@@ -28,29 +29,46 @@
               </div>
            </td>
            <td style="width:50% ">
-              <div class="form-group">
-                 <label for="Material">Material:</label>
-                 <select class="form-control" id="materialId" formControlName="materialId">
-                    <option *ngFor="let  item of Materials" [value]=" item.id">{{ item.longName }}
-                    </option>
-                 </select>
-              </div>
+            <div class="form-group">
+               <label for="dossier">Location:</label>
+               <select class="form-control" id="locationId" formControlName="locationId">
+                  <option *ngFor="let  item of Locations" [value]=" item.id">{{ item.longName }}
+                  </option>
+               </select>
+            </div>
            </td>
         </tr>
      </table>
-     <div class="form-group">
-        <label for="dossier">Location:</label>
-        <select class="form-control" id="locationId" formControlName="locationId">
-           <option *ngFor="let  item of Locations" [value]=" item.id">{{ item.longName }}
-           </option>
-        </select>
-     </div>
+     
+     <table style="width:100% " cellspacing="0">
+      <tr>
+         <td style="width:50% ">  <div class="form-group">
+            <label for="Material">Material:</label>
+            <select class="form-control" id="materialId" formControlName="materialId">
+               <option *ngFor="let  item of Materials" [value]=" item.id">{{ item.longName }}
+               </option>
+            </select>
+         </div></td>
+     <td style="width:50% ">
+      <div class="form-group">
+         <label for="dossier">Object:</label>
+         <select class="form-control" id="objectId" formControlName="objectId">
+            <option *ngFor="let  item of Objects" [value]=" item.id">{{ item.longName }}
+            </option>
+         </select>
+      </div>
+     </td>
+   </tr>
+   </table>
+
+     
+     
 
      <kendo-dialog-actions style="border:none;margin-top: 20px;">
         <button kendoButton (click)="close('no')">Cancel</button>
         <button kendoButton (click)="OnSubmit()" style="background-color: #3899DD;color: #fff;"
            [disabled]="WOForm.invalid">
-           Add Working Order
+          Update Working Order
         </button>
      </kendo-dialog-actions>
   </form>

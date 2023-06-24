@@ -7,6 +7,7 @@ import { DialogAnimation } from '@progress/kendo-angular-dialog';
 import { StepperComponent } from '@progress/kendo-angular-layout';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { plusIcon } from '@progress/kendo-svg-icons';
+import ValidateForm from 'src/app/Components/Login/helpers/validateform';
 import { DossierService } from 'src/app/services/dossier.service';
 import { GenericService } from 'src/app/services/generic.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
@@ -73,6 +74,8 @@ export class DossierListComponent implements OnInit {
        this.getMainCauses()
        this.getClient()
        this.getUsers()
+       this.getProducts()
+       this.getCauses()
       }
 
     onButtonClick(id :any){
@@ -142,15 +145,21 @@ export class DossierListComponent implements OnInit {
         return this.getGroupAt(this.currentStep);
     }        
   next() {
-    if (this.currentGroup.valid && this.currentStep !== this.steps.length) {
-          this.currentStep += 1;
-           return;
+    if( this.currentStep ==0 )
+    { this.currentStep += 1;
+      return;    }
+    if (this.currentStep !== this.steps.length) {
+          if(this.involvedPartyForm.invalid)
+          {  ValidateForm.validateAllFormFields(this.involvedPartyForm) }
+         else{ this.currentStep += 1;
+           return;}
       }
     this.currentGroup.markAllAsTouched();
-    this.stepper.validateSteps();
   }
   prev(): void {   this.currentStep -= 1;}
   submit() { 
+    if(this.dossierForm.valid && this.AssignForm.valid && this.WOForm.valid && this.involvedPartyForm.valid)
+    {
     console.log("111111111111")
      console.log(this.AssignForm.value)
      console.log("22222222222")
@@ -158,7 +167,35 @@ export class DossierListComponent implements OnInit {
      console.log("33333333333")
      console.log(this.dossierForm.value)
      console.log("44444444444444")
+     let form2 = new FormGroup({ "dossier" : this.dossierForm,
+     "assignment" : this.AssignForm,
+     "workorder" : this.WOForm,
+     "involvedParty" : this.involvedPartyForm})
+     this.api.add("addDossier",form2.value).subscribe({
+     next: (res) => {
+      console.log(res)
+       this._snackBar.open("Dossier added successfully",'',{ 
+         duration: 3000
+     })
+       this.getDossiers();
+       this.dossierForm.reset();  
+       this.opened = false;
+     },
+     error: (err) => {
+      console.log(err)
+       this._snackBar.open("Error while adding dossier",'',{ 
+         duration: 3000
+     })
 
+     },
+   });
+  }
+  else {
+    ValidateForm.validateAllFormFields(this.involvedPartyForm)
+    ValidateForm.validateAllFormFields(this.dossierForm)
+    ValidateForm.validateAllFormFields(this.WOForm)
+    ValidateForm.validateAllFormFields(this.AssignForm)  
+  }
   }  
   //************Dialogs**************/
   close(status: string): void {
@@ -173,15 +210,14 @@ export class DossierListComponent implements OnInit {
     }
   } 
   onSelectedclient(event:any){
-    var clientId = event.selectedRows![0].dataItem.id;
+    var clientId = event.id;
     this.dossierForm.get('clientId')?.setValue(clientId);
-    this.getProducts(clientId)
   }
   handleFilterChangeclient(event:any){
   }
   onselectMainCause(value:any){
    
-    this.getCauses(value);
+    this.getCauses();
   }
   onSelectedUser(event:any){}
   //***********Dossier Actions ******/
@@ -237,8 +273,8 @@ export class DossierListComponent implements OnInit {
         this._snackBar.open("Error while getting the dossiers",'',{ 
           duration: 3000 }) },  });
   }
-  getProducts(id:any) {
-    this.api.getById("Product",id).subscribe({
+  getProducts() {
+    this.api.getList("Product").subscribe({
       next: (res) => {
         this.Products = res;
         console.log("Products : ")
@@ -248,8 +284,8 @@ export class DossierListComponent implements OnInit {
       },
     });
   }
-  getCauses(id:any) {
-    this.api.getById("Cause",id).subscribe({
+  getCauses() {
+    this.api.getList("Cause").subscribe({
       next: (res) => {
         this.causes = res  
       },
@@ -340,11 +376,9 @@ export class DossierListComponent implements OnInit {
    }  
    AssignmentForm(){
     this.AssignForm = this.fb.group({
-      product: ['', Validators.required],
-      subCauseId: ['', Validators.required],
+      cause: ['', Validators.required],
       buildingType: ['', Validators.required],
-      productId: ['', Validators.required],
-      dossierId: ['']
+      product: ['', Validators.required],
     });
    } 
    DossierForm(){
@@ -355,7 +389,7 @@ export class DossierListComponent implements OnInit {
       clientId: ['', Validators.required],
       isEmergency: [false, Validators.required],
       Assigned: [false],
-      CreatedById :['']
+      CreatedById :[this.auth.getId()]
     });
    } 
   InvPartyForm(){
@@ -369,7 +403,6 @@ export class DossierListComponent implements OnInit {
       HouseNumber: [0, Validators.required],
       StreetName: ['', Validators.required],
       City: ['', Validators.required],
-      CreatedById :['']
     });
    } 
 }

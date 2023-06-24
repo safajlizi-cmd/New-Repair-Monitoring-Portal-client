@@ -13,6 +13,8 @@ import { GenericService } from 'src/app/services/generic.service';
 export class AssgDetailsComponent implements OnInit {
 id :any;
   assignment:any
+  causes :any
+  bts:any
   opened =false
   getAssignment(){
     this.api.getById("Assignment/GetById",this.id).subscribe({
@@ -23,6 +25,24 @@ id :any;
       },
     });
   }
+  getCauses() {
+    this.api.getList("Cause").subscribe({
+      next: (res) => {
+        this.causes = res;
+       
+      },
+      error: (err) => {   },
+    });
+  }
+  getBuildingtypes() {
+    this.api.getList("Building").subscribe({
+      next: (res) => {
+        this.bts = res;
+       
+      },
+      error: (err) => {   },
+    });
+  }
   AssignForm!: FormGroup;
   constructor(private api :GenericService,private notificationService :NotificationService,private fb: FormBuilder,private route:ActivatedRoute,private _snackBar: MatSnackBar){}
 
@@ -30,18 +50,22 @@ id :any;
     this.route.params.subscribe(params => {
       this.id = params['Id'];
       this.getAssignment() 
+      this.getBuildingtypes()
+      this.getCauses()
     }); 
     this.AssignForm = this.fb.group({
-      product: ['', Validators.required],
+  
       cause: ['', Validators.required],
+      buildingType: ['', Validators.required],
       id: []
     });
   }
  
   onEdit() {
     this.AssignForm.controls['id'].setValue(this.assignment.id);
-    this.AssignForm.controls['product'].setValue(this.assignment.productName);
+    this.AssignForm.controls['buildingType'].setValue(this.assignment.buildingType);
     this.AssignForm.controls['cause'].setValue(this.assignment.cause);
+
     this.opened = true;
   }
   public close(status: string): void {

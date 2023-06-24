@@ -14,14 +14,23 @@ export class GuideListComponent {
       cards:[{
         description:
           "Overview",
-          des:"Dossier Creation Overview ",
+          des:"Dossier Overview ",
         actionButtons: [{ text: "View details!", flat: true, primary: true }],
         actionsLayout: "start",
         videoSrc: this.sanitizer.bypassSecurityTrustResourceUrl(
-          "https://www.youtube.com/embed/tgbNymZ7vqY"
+          "https://www.youtube.com/embed/HL4jX2CaCgo"
         ),
       },
-     
+      {
+        description:
+          "Dossier InTake",
+          des:"Dossier Creation  ",
+        actionButtons: [{ text: "View details!", flat: true, primary: true }],
+        actionsLayout: "start",
+        videoSrc: this.sanitizer.bypassSecurityTrustResourceUrl(
+          "https://www.youtube.com/embed/3OcbvT1bhoA"
+        ),
+      }
     ]
     },
     {
@@ -34,7 +43,7 @@ export class GuideListComponent {
           actionButtons: [{ text: "View details!", flat: true, primary: true }],
           actionsLayout: "start",
           videoSrc: this.sanitizer.bypassSecurityTrustResourceUrl(
-            "https://www.youtube.com/embed/tgbNymZ7vqY"
+            "https://www.youtube.com/embed/YSTZLe22jhM"
           ),
         },
         {
@@ -45,7 +54,7 @@ export class GuideListComponent {
         actionButtons: [{ text: "View details!", flat: true, primary: true }],
         actionsLayout: "start",
         videoSrc: this.sanitizer.bypassSecurityTrustResourceUrl(
-          "https://www.youtube.com/embed/tgbNymZ7vqY"
+          "https://www.youtube.com/embed/WGxEGb_xDB8"
         ),
       },
       {
@@ -56,7 +65,7 @@ export class GuideListComponent {
         actionButtons: [{ text: "View details!", flat: true, primary: true }],
         actionsLayout: "start",
         videoSrc: this.sanitizer.bypassSecurityTrustResourceUrl(
-          "https://www.youtube.com/embed/tgbNymZ7vqY"
+          "https://www.youtube.com/embed/QO1sdv8rpaI"
         ),
       },
       {
@@ -67,7 +76,7 @@ export class GuideListComponent {
         actionButtons: [{ text: "View details!", flat: true, primary: true }],
         actionsLayout: "start",
         videoSrc: this.sanitizer.bypassSecurityTrustResourceUrl(
-          "https://www.youtube.com/embed/tgbNymZ7vqY"
+          "https://www.youtube.com/embed/QO1sdv8rpaI"
         ),
       },
       {
@@ -78,7 +87,7 @@ export class GuideListComponent {
         actionButtons: [{ text: "View details!", flat: true, primary: true }],
         actionsLayout: "start",
         videoSrc: this.sanitizer.bypassSecurityTrustResourceUrl(
-          "https://www.youtube.com/embed/tgbNymZ7vqY"
+          "https://www.youtube.com/embed/15UDob7Pt68"
         ),
       },
       {
@@ -89,7 +98,7 @@ export class GuideListComponent {
         actionButtons: [{ text: "View details!", flat: true, primary: true }],
         actionsLayout: "start",
         videoSrc: this.sanitizer.bypassSecurityTrustResourceUrl(
-          "https://www.youtube.com/embed/tgbNymZ7vqY"
+          "https://www.youtube.com/embed/F13NGaf41Eo"
         ),
       },
     ]
@@ -105,7 +114,7 @@ export class GuideListComponent {
         actionButtons: [{ text: "View details!", flat: true, primary: true }],
         actionsLayout: "start",
         videoSrc: this.sanitizer.bypassSecurityTrustResourceUrl(
-          "https://www.youtube.com/embed/tgbNymZ7vqY"
+          "https://www.youtube.com/embed/QO1sdv8rpaI"
         ),
       },
      ]

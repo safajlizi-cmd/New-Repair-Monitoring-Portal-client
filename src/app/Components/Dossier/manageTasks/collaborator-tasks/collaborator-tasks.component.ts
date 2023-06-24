@@ -154,6 +154,7 @@ addAssign() {
         type: { style: "success" },
       });        },
     error: (err) => {
+      this.getTasks()
       this.openedAssign = false
       this.notificationService.show({
         content: "Task assigned to yourself successfully",
@@ -161,9 +162,8 @@ addAssign() {
           type:"slide",
           duration:500,
         },
-        type: { style: "error" },
-      }); 
-    },
+        type: { style: "success" },
+      });        },
   });
 }
 openAssign(id: any) {

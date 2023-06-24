@@ -74,6 +74,7 @@
             </kendo-grid-column>
         </kendo-grid>
     </div>
+    </div>
     <kendo-dialog title="Add Dossier" [animation]="animation" *ngIf="opened" (close)="close('cancel')" 
         [themeColor]="'dark'" style="background-color:rgba(0,0,0,0.2)" [minWidth]="490" [maxWidth]="900"[maxHeight]="700">
         <div class="example">
@@ -86,16 +87,13 @@
 
                     <div class="form-group mt-5">
                         <label for="title">Client*</label>
-                        <kendo-multicolumncombobox [data]="usersList" textField="id" class="my-combobox" valueField="userName"
+                        <kendo-multicolumncombobox [data]="Clients" textField="longName" class="my-combobox" valueField="id"
                             placeholder="Selected Client ..." [filterable]="true" 
                             (filterChange)="handleFilterChangeclient($event)" (valueChange)="onSelectedclient($event)" 
                             >
-                            <kendo-combobox-column field="email" title="email" [width]="150">
+                            <kendo-combobox-column field="longName" title="Client Name" [width]="150">
                             </kendo-combobox-column>
-                            <kendo-combobox-column field="firstName" title="Name" [width]="90">
-                            </kendo-combobox-column>
-                            <kendo-combobox-column field="lastName" title="Title" [width]="90">
-                            </kendo-combobox-column>
+                           
                         </kendo-multicolumncombobox> 
                     </div>
                     <div class="form-group m-3">
@@ -108,29 +106,19 @@
                         <label for="title">Activity*</label>
                         <div class="container">
                             <div class="radio-tile-group">
-                                <div class="input-container">
-                                    <input id="walk" class="radio-button" type="radio" name="radio">
+                                <div class="input-container" *ngFor="let item of Products">
+                                    <input id="walk" class="radio-button" type="radio" name="product" [value]="item.longName"  formControlName="product">
                                     <div class="radio-tile">
-                                        <label for="walk" class="radio-tile-label">Walk</label>
+                                        <label for="walk" class="radio-tile-label">{{ item.longName }}</label>
                                     </div>
                                 </div>
 
-                                <div class="input-container">
-                                    <input id="bike" class="radio-button" type="radio" name="radio">
-                                    <div class="radio-tile">
-                                        <label for="bike" class="radio-tile-label">Bike</label>
-                                    </div>
-                                </div>
-
-                                <div class="input-container">
-                                    <input id="drive" class="radio-button" type="radio" name="radio">
-                                    <div class="radio-tile">
-                                        <label for="drive" class="radio-tile-label">Drive</label>
-                                    </div>
-                                </div>
+                
                             </div>
                         </div>
                       </div>
+                      <small *ngIf="AssignForm.controls['product'].dirty && AssignForm.hasError('required','product')" class="text-danger">*Product name is required</small>
+
                    </form>
                    <form  class="k-form" [formGroup]="dossierForm">
                     <div class="form-group form-check" *ngIf="role =='Coordinator'">
@@ -162,6 +150,7 @@
                                         placeholder="Postal Code">
 
                                 </div>
+                                <small *ngIf="involvedPartyForm.controls['PostalCode'].dirty && involvedPartyForm.hasError('required','PostalCode')" class="text-danger">*PostalCode is required</small>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-8">
@@ -169,6 +158,7 @@
                                             <input type="number" class="form-control" id="start" formControlName="HouseNumber"
                                                 placeholder="House Number">
                                         </div>
+                                        <small *ngIf="involvedPartyForm.controls['HouseNumber'].dirty && involvedPartyForm.hasError('required','HouseNumber')" class="text-danger">*HouseNumber is required</small>
                                         <div class="col-lg-4">
                                         <label for="deadline">Addition</label>
                                         <input type="number" class="form-control" id="start" 
@@ -180,12 +170,14 @@
                                     <input type="text" class="form-control" id="end" formControlName="StreetName"
                                         placeholder="Street Name">
                                 </div>
+                                <small *ngIf="involvedPartyForm.controls['StreetName'].dirty && involvedPartyForm.hasError('required','StreetName')" class="text-danger">*StreetName is required</small>
                                 <div class="form-group">
                                     <label for="deadline">City</label>
                                     <input type="text" class="form-control" id="end" formControlName="City"
                                         placeholder="City">
                                 </div>
-                            
+                                <small *ngIf="involvedPartyForm.controls['City'].dirty && involvedPartyForm.hasError('required','City')" class="text-danger">*City is required</small>
+
                         </div>
                         <div class="col-lg-6 border">
                             <p class="titlle"> Personal info </p>
@@ -196,6 +188,8 @@
                                         placeholder="Surname duped">
 
                                 </div>
+                                <small *ngIf="involvedPartyForm.controls['FullName'].dirty && involvedPartyForm.hasError('required','FullName')" class="text-danger">*FullName is required</small>
+
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -203,22 +197,29 @@
                                             <input type="text" class="form-control" id="start" formControlName="FirstName"
                                                 placeholder="First name">
                                         </div>
+                                        <small *ngIf="involvedPartyForm.controls['FirstName'].dirty && involvedPartyForm.hasError('required','FirstName')" class="text-danger">*FirstName is required</small>
                                         <div class="col-lg-6">
                                         <label for="deadline">Last name*</label>
                                         <input type="text" class="form-control" id="start" formControlName="LastName"
                                             placeholder="Last name"></div>
+                                            <small *ngIf="involvedPartyForm.controls['LastName'].dirty && involvedPartyForm.hasError('required','LastName')" class="text-danger">*LastName is required</small>
+
                                     </div>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="deadline">Email</label>
                                     <input type="email" class="form-control" id="end" formControlName="Email"
                                         placeholder="Email">
                                 </div>
+                                <small *ngIf="involvedPartyForm.controls['Email'].dirty && involvedPartyForm.hasError('required','Email')" class="text-danger">*Email is required</small>
                                 <div class="form-group">
                                     <label for="deadline">Phone Number</label>
                                     <input type="number" class="form-control" id="end" formControlName="PhoneNumber"
                                         placeholder="Phone Number">
                                 </div>
+                                <small *ngIf="involvedPartyForm.controls['PhoneNumber'].dirty && involvedPartyForm.hasError('required','PhoneNumber')" class="text-danger">*PhoneNumber is required</small>
+
                         </div>
                     </div>
                     </form>
@@ -231,11 +232,12 @@
                         <div class="col-lg-4">
                             <label for="DossierNumber">Dossier Number:</label>
                             <input type="text" class="form-control" id="DossierNumber" formControlName="dossierNumber" placeholder="Dossier Number">
-      
+                            <small *ngIf="dossierForm.controls['dossierNumber'].dirty && dossierForm.hasError('required','dossierNumber')" class="text-danger">*dossierNumber is required</small>
                         </div>
                         <div class="col-lg-4">
                             <label for="deadline">Date of occurance </label>
                             <input type="date" class="form-control" id="start" formControlName="dateOfOccurance">
+                            <small *ngIf="dossierForm.controls['dateOfOccurance'].dirty && dossierForm.hasError('required','dateOfOccurance')" class="text-danger">*dateOfOccurance is required</small>
                           </div>
                         <div class="col-lg-4">
                                 <div class="form-group">
@@ -243,8 +245,11 @@
                                     <select class="form-control" id="locationId" formControlName="mainCauseId"  onchange="onselectMainCause(this.value)" >
                                        <option *ngFor="let  item of MainCauses" [value]=" item.id"  ><span class="option">{{ item.longName }}</span>
                                        </option>
-                                    </select>
+                                    </select>  
+                                        <small *ngIf="dossierForm.controls['mainCauseId'].dirty && dossierForm.hasError('required','mainCauseId')" class="text-danger">*mainCause is required</small>
+
                                  </div>
+
                         </div>
                     </div>
                     </form>
@@ -255,21 +260,24 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="dossier">Cause</label>
-                                <select class="form-control" id="locationId" formControlName="subCauseId">
-                                   <option *ngFor="let  item of causes" [value]=" item.id"   ><span class="option">{{ item.longName }}</span>
+                                <select class="form-control" id="cause" formControlName="cause">
+                                   <option *ngFor="let  item of causes" [value]=" item.longName"   ><span class="option">{{ item.longName }}</span>
                                    </option>
                                 </select>
-                             </div>
+                             </div>         <small *ngIf="AssignForm.controls['cause'].dirty && AssignForm.hasError('required','cause')" class="text-danger">*SubCause is required</small>
+
                         </div>
+
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="dossier"> Building type</label>
                                 <select class="form-control" id="buildingType" formControlName="buildingType">
-                                   <option *ngFor="let  item of bts" [value]=" item.id"  ><span class="option">{{ item.longName }}</span>
+                                   <option *ngFor="let  item of bts" [value]=" item.longName"  ><span class="option">{{ item.longName }}</span>
                                    </option>
                                 </select>
                              </div>
                         </div>
+                        <small *ngIf="AssignForm.controls['buildingType'].dirty && AssignForm.hasError('required','buildingType')" class="text-danger">*buildingType is required</small>
                     </div>
                     </form>
                     <!--*******************niveau working order**************-->
@@ -287,6 +295,7 @@
                                        </option>
                                     </select>
                                  </div>
+                                 <small *ngIf="WOForm.controls['damageTypeId'].dirty && WOForm.hasError('required','damageTypeId')" class="text-danger">*damageType name is required</small>
                               </td>
                               <td style="width:50% ">
                                 <div class="form-group">
@@ -296,6 +305,7 @@
                                        </option>
                                     </select>
                                  </div>
+                                 <small *ngIf="WOForm.controls['locationId'].dirty && WOForm.hasError('required','locationId')" class="text-danger">*location is required</small>
                               </td>
                            </tr>
                         </table>
@@ -310,6 +320,7 @@
                                         </option>
                                      </select>
                                   </div>
+                                  <small *ngIf="WOForm.controls['objectId'].dirty && WOForm.hasError('required','objectId')" class="text-danger">*object name is required</small>
                                </td>
                                <td style="width:50% ">
                                   <div class="form-group">
@@ -319,6 +330,7 @@
                                         </option>
                                      </select>
                                   </div>
+                                  <small *ngIf="WOForm.controls['materialId'].dirty && WOForm.hasError('required','materialId')" class="text-danger">*material name is required</small>
                                </td>
                             </tr>
                          </table>
@@ -345,7 +357,7 @@
     <kendo-dialog title="Please confirm" *ngIf="activateDos" (close)="close('cancel')" [minWidth]="250" [width]="450"
         [themeColor]="'dark'" class="dialog">
         <p style="margin: 30px; text-align: center;">
-            Are you sure you want to {{SelectedDossier.active == true ? 'Activate' :'Deactivate'}} a dossier?
+            Are you sure you want to {{SelectedDossier.active == false ? 'Activate' :'Deactivate'}} a dossier?
         </p>
         <kendo-dialog-actions>
             <button kendoButton (click)="close('cancel')">No</button>

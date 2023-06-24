@@ -22,16 +22,17 @@ export class AssignmentActComponent implements OnInit {
    id :any;
    public alignment: TabAlignment = "start";
    public icons = { trash: clockIcon }
-   public selected = 1;
+   public selected = 0;
    notes:any
   public items = tabs;
   public fillMode: ButtonFillMode = "flat";
   fileInfos?: any;
-  selectedFiles?: FileList;
+  selectedFiles?: File;
   currentFile?: File;
   deleteID:any
   progress = 0;
   message = '';
+  myForm !:FormGroup
   openedDelete=false 
 
    constructor(private route:ActivatedRoute 
@@ -43,7 +44,7 @@ export class AssignmentActComponent implements OnInit {
 
 
   selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
+    this.selectedFiles = this.myForm.value.files[0];
   }
 
   openfile(item:any){
@@ -76,7 +77,7 @@ export class AssignmentActComponent implements OnInit {
 
   upload(): void {
           if (this.selectedFiles) {
-                   const file: File | null = this.selectedFiles.item(0);
+                   const file: File | null = this.selectedFiles;
                   if (file) {
                        this.currentFile = file;
                        this.uploadService.addDocument("Documents/upload",this.currentFile,'assignment',this.id,this.userStore.getDossierId()).subscribe({
@@ -120,18 +121,18 @@ export class AssignmentActComponent implements OnInit {
   deleteDocument() {
          this.uploadService.delete( this.deleteID).subscribe({
          next: (res) => {  
-                this.notificationService.show({
-          content:"file deleted successfully",
-          animation: {
-            type: "slide",
-            duration: 500,
-          },
-          type: { style: "success" },
-        });
-  
-               this.openedDelete =false
+              
                this.getDocuments()
-          },
+               this.openedDelete =false
+               this.notificationService.show({
+                content: "file deleted successfully",
+                animation: {
+                  type: "slide",
+                  duration: 500,
+                },
+                type: { style: "success" },
+              });
+              },
           error: (err) => {
                 this.notificationService.show({
                   content: "Error occurred while deleting document",
@@ -167,6 +168,9 @@ export class AssignmentActComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['Id'];
     }); 
+    this.myForm = this.fb.group({
+      files: [,Validators.required],
+    });
     this.getDocuments() ;
     this.getNotes();
   }

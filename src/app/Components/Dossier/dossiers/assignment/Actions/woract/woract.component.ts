@@ -11,6 +11,7 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 import { tabs } from '../../tabs';
 import { clockIcon } from '@progress/kendo-svg-icons';
 import { NotificationService } from '@progress/kendo-angular-notification';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-woract',
@@ -19,21 +20,22 @@ import { NotificationService } from '@progress/kendo-angular-notification';
 })
 export class WORActComponent {
    id :any;
-  public selected = 1;
+  public selected = 0;
   openedDelete=false
   public items = tabs
   public alignment: TabAlignment = "start";
-  selectedFiles?: FileList;
+  selectedFiles?: File;
   currentFile?: File;
   progress = 0;
   deleteID :any
   message = '';
   notes:any;
   fileInfos?:any;
+  myForm !:FormGroup
   public icons = { trash: clockIcon }
   public fillMode: ButtonFillMode = "flat";
   selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
+    this.selectedFiles = this.myForm.value.files[0];
   }
   openfile(item:any){
          var src = "data:application/" + item.documentType + ";base64," + item.fileContent;
@@ -63,7 +65,7 @@ export class WORActComponent {
   }
   upload(): void {
           if (this.selectedFiles) {
-                   const file: File | null = this.selectedFiles.item(0);
+                   const file: File | null = this.selectedFiles;
                   if (file) {
                        this.currentFile = file;
                        this.uploadService.addDocument("Documents/upload",this.currentFile,'workingOrder',this.id,this.userStore.getDossierId()).subscribe({
@@ -109,16 +111,17 @@ export class WORActComponent {
   deleteDocument() {
          this.uploadService.delete( this.deleteID).subscribe({
          next: (res) => {  
-               this.notificationService.show({
-                content: "file deleted successfully",
-                animation: { 
-                  type:"slide",
-                  duration:500,
-                },
-                type: { style: "success" },
-              });    
-               this.openedDelete=false
-               this.getDocuments()
+          this.getDocuments()
+          this.openedDelete =false
+          this.notificationService.show({
+           content: "file deleted successfully",
+           animation: {
+             type: "slide",
+             duration: 500,
+           },
+           type: { style: "success" },
+         });
+         
           },
           error: (err) => {
           },
@@ -127,6 +130,7 @@ export class WORActComponent {
   constructor(private route:ActivatedRoute,
               private uploadService:DocumentService,
               private userStore:UserStoreService ,
+              private fb :FormBuilder,
               private notificationService :NotificationService,
               private api:GenericService){}
   close(){
@@ -136,6 +140,9 @@ export class WORActComponent {
     this.route.params.subscribe(params => {
       this.id = params['Id'];
     });   
+    this.myForm = this.fb.group({
+      files: [,Validators.required],
+    });
     this.getDocuments();
     this.getNotes()
   }
