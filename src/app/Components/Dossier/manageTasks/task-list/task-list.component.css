@@ -1,0 +1,19 @@
+.k-listview {
+  font-family: sans-serif;
+  height: 100%;
+}
+.product {
+  width: 100%;
+}
+.header {
+  display: flex;
+  padding: 12px;
+}
+.title {
+  flex: 1;
+  font-size: 22px;
+  font-weight: bold;
+}
+.filter-input {
+  width: 20%;
+}

@@ -1,5 +1,9 @@
 kendo-appbar{
   height: 3.5rem;
+  background-color: #ffffff;
+}
+::ng-deep .k-overlay {
+  display: none;
 }
 .title {
     font-size: 18px;
@@ -11,34 +15,15 @@ kendo-appbar{
   img{
     height: auto;
     width: 90px;
-    margin-left: 10px;
+    margin-left: 90px;
   }
-  ul {
-    font-size: 14px;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-  }
-  li {
-    margin: 0 9px;
-  }
-  li:hover {
-    color: #ffc000;
-    cursor: pointer;
-  }
+ 
   .k-appbar-section {
     display: flex;
   }
-  .content li {
-    margin: 0;
-    padding: 6px 5px;
-  }
-  .content ul {
-    display: block;
-  }
-  .content {
-    padding: 4px;
+
+  .avatar{
+    background-color:#3899DD; color: #fff; 
   }
   @media only screen and (max-width: 600px) {
     .search-section {
@@ -55,3 +40,84 @@ kendo-appbar{
     .search {
       display: block;
     }}
+    .dialog{
+      position: absolute; top:11.0rem; left: 35%;
+      border-radius: 12px !important;
+    }
+    
+   .k-dialog-wrapper {
+      border-radius: 12px;
+    }
+    .first {
+      height:31%;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+    }
+    .bt{
+      width: 100%;  
+      height:60%;
+      background-color: rgba(206, 210, 211,0.4);
+      border-bottom-left-radius: 12px;border-bottom-right-radius: 12px; padding: 15px
+    }
+    .avatar1{
+      margin-left: 10px;
+      background-color:#3899DD; color: #fff; 
+      width: 60px;
+      height: 60px;
+    }
+
+    ul {
+    font-size: 14px;
+    list-style-type: none;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 6px;
+
+  }
+  
+  li {
+    margin-left: 0;
+    box-sizing: border-box;
+    padding: 20px;
+    margin:5px
+  }
+  
+  li:hover {
+    background-color: rgba(206, 210, 211,0.4);
+    cursor: pointer;
+  }
+
+.content li {
+  margin: 0;
+  padding: 6px 5px;
+}
+.content ul {
+  display: block;
+}
+.box {
+  padding: 5px;
+  color: #303131;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  font-size: 10x;
+  font: weight 200px;
+}
+.contain{
+  background-color: #303131;
+}
+
+.sbt{
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.bb{
+  border: none;
+  color: #fff;
+  background-color: #fff;
+  border-radius: 12px;}
+  .my-popup-class .k-list-container {
+    margin-right: 10px;
+  }

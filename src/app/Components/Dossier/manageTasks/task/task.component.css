@@ -1,0 +1,78 @@
+kendo-tabstrip p {
+  margin: 0;
+  padding: 8px;
+}
+
+.restore-button {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
+.split {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 3.5rem);
+
+}
+
+.top {
+  margin-top: 0.5rem;
+  padding: 0 10px 10px;
+  height: 30px;
+}
+
+.bottom {
+  margin: 20px;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+}
+
+.scrollable {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.a {
+  margin: 10px;
+  height: 100%;
+  padding: 10px;
+  position: fixed;
+  width: 90%;
+
+}
+
+.tab {
+  background-color: #3899DD
+}
+
+.tabT {
+  background-color: #3899DD
+}
+
+.titlle {
+  letter-spacing: 4px;
+  color: rgb(73, 72, 72);
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+kendo-multicolumncombobox {
+  width: 300px;
+  font-weight: bold;
+  border-color: #303131;
+  color: #303131;
+}
+
+.avatar {
+  background-color: #3899DD;
+  color: #fff;
+}
+
+.tabstrip-container {
+  align-items: center;
+  width:100%
+}

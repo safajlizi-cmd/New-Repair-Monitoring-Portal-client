@@ -1,0 +1,244 @@
+<div class="row">
+  <div class="row">
+    <table >
+      <tr>
+          <td style="width:33%;"> 
+            Description :  <br><b> {{task?.description != null ?task?.description : "no Description.."}}</b>
+          </td>
+          <td style="width:33%;">
+            Expiration at :<br><b>{{task?.deadline != null ?task.deadline : "deadline no defined.."}}</b>
+          </td>
+          <td style="width:33%;">
+            Created By :<br><b>{{task.createdByC?.userName }}</b>
+          </td>
+          <td style="width:33%;" *ngIf="task!.title =='Send Email'">
+            <button  kendoButton (click)="open('email')" class="btt" 
+            >Send Email</button></td>
+      </tr>
+  </table>
+  </div>
+  <div class="row mt-4 bottom">
+  <div class="col-lg-6 ">
+         <button  kendoButton (click)="open('addSubtask')"   class="bt"
+           [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon>Add
+          Sub-Task</button>
+
+       <div class="box " *ngIf="task.subTasksC.length == 0">
+               No sub-tasks available ..
+       </div>
+      <div *ngFor="let item of task.subTasksC ; let i =index" [ngClass]="item.emergency ==true ? 'Emergency':'box'">
+        <b>{{item!.title}} </b>
+        <span style="color:#dc5b1b"><kendo-svg-icon [icon]="icons.trash" class="blue"></kendo-svg-icon>  {{item!.deadline| date: 'MM/dd/yyyy' }} </span>
+        <span class="blue"*ngIf="item!.option"> {{item!.option}} :{{item!.optionName}}</span>
+        <table>
+              <tr> 
+                 <td> <button kendoButton (click)="onDelete(i)" style="background-color:#fff; "><kendo-svg-icon
+                  [icon]="icons.edite"class="blue"> </kendo-svg-icon></button>
+                </td>
+                <td>
+                    <button kendoButton (click)="onDelete(i)"><kendo-svg-icon [icon]="icons.delete" class="blue"></kendo-svg-icon></button>
+                </td>
+             </tr>
+        </table>
+    </div>
+  </div>
+  <div class="col-lg-6 card ">
+    <button  kendoButton (click)="open('note')" class="bt" 
+      [disabled]="task?.status?.code == 'done'"><kendo-svg-icon [icon]="icons.trashh"></kendo-svg-icon>Add
+     Note</button>
+     <div class="box row" *ngIf="notes.length == 0">
+      No notes available ..
+    </div>
+     <div class="box row" *ngFor="let item of notes ; let i =index" >
+      <div class="col-lg-6"> <b>Title : {{item.title}} </b></div>
+      <div class="col-lg-6 date"> Related to :{{item!.optionName}} </div>
+       <div class="des"> {{item.description}} </div>
+   </div>
+</div>
+
+</div>
+</div>
+
+
+<kendo-dialog title="Add sub-Task" [animation]="animation" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [themeColor]="'dark'" [width]="450" class="diag">
+  <form [formGroup]="taskForm">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
+      <div *ngIf="taskForm.controls['title'].invalid && (taskForm.controls['title'].dirty || taskForm.controls['title'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="taskForm.hasError('required','title')">Title is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="title">Related to :</label>
+      <label> <input type="radio" value="dossier" formControlName="option">  Dossier</label>
+      <label> <input type="radio" value="assignment" formControlName="option"> Assignment </label>
+      <label>  <input type="radio" value="workingOrder" formControlName="option"> Working Order</label>
+      <div *ngIf="taskForm.get('option')!.value === 'assignment'">
+        <div *ngIf="assignments.length ==0"> <b class="small"> No Assignment available!</b> </div>
+        <div *ngIf="assignments.length >0">
+                   <label for="title">Select Assignment :</label>
+                   <kendo-multicolumncombobox class="kendo" [data]="assignments" textField="assignmentNumber" class="my-combobox"
+                      valueField="id" placeholder="Select AssignmentNumber ..." formControlName="optionId" [filterable]="true"
+                     (valueChange)="onSelected($event)">
+                                <kendo-combobox-column field="assignmentNumber" title="Assignment Number" [width]="150">
+                                </kendo-combobox-column>
+                    </kendo-multicolumncombobox>
+        </div>
+      </div>
+      <div *ngIf="taskForm.get('option')!.value === 'workingOrder'">
+           <div *ngIf="word.length ==0"> <b class="small"> No working order available!</b></div>
+           <div *ngIf="word.length >0">
+                     <label for="title">Select WorkingOrder :</label>
+                     <kendo-multicolumncombobox class="kendo" [data]="word" textField="woNumber" class="my-combobox"
+                         valueField="id" placeholder="Select WorkingOrder Number ..." formControlName="optionId" [filterable]="true"
+                         (valueChange)="onSelected($event)">
+                         <kendo-combobox-column field="woNumber" title="WorkingOrder Number" [width]="150">
+                         </kendo-combobox-column>
+                      </kendo-multicolumncombobox>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="deadline">Deadline:</label>
+      <input type="date" class="form-control" id="deadline" formControlName="deadline">
+      <div
+        *ngIf="taskForm.controls['deadline'].invalid && (taskForm.controls['deadline'].dirty || taskForm.controls['deadline'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="taskForm.hasError('required','deadline')">Deadline is required.</div>
+      </div>
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="emergency" formControlName="emergency">
+      <label class="form-check-label" for="emergency">IsEmergency</label>
+    </div>
+    <kendo-dialog-actions style="border:none;margin-top: 20px;">
+      <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
+      <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
+        [disabled]="taskForm.invalid">
+        Add sub-Task
+      </button>
+    </kendo-dialog-actions>
+  </form>
+</kendo-dialog>
+
+<kendo-dialog title="Add note" [animation]="animation" *ngIf="openedNo" (close)="close('cancel')" [minWidth]="250"
+  class="diag" [themeColor]="'dark'" [width]="450" class="diag">
+  <form [formGroup]="noteForm">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title">
+      <div
+        *ngIf="noteForm.controls['title'].invalid && (noteForm.controls['title'].dirty || noteForm.controls['title'].touched)"
+        class="alert alert-danger">
+        <div *ngIf="noteForm.hasError('required','title')">Title is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="title">Related to :</label>
+      <label> <input type="radio" value="dossier" formControlName="option">  Dossier</label>
+      <label> <input type="radio" value="assignment" formControlName="option"> Assignment </label>
+      <label>  <input type="radio" value="workingOrder" formControlName="option"> Working Order</label>
+      <div *ngIf="noteForm.get('option')!.value === 'assignment'">
+        <div *ngIf="assignments.length ==0"> <b class="small"> No Assignment available!</b> </div>
+        <div *ngIf="assignments.length >0">
+                   <label for="title">Select Assignment :</label>
+                   <kendo-multicolumncombobox class="kendo" [data]="assignments" textField="assignmentNumber" class="my-combobox"
+                      valueField="id" placeholder="Select AssignmentNumber ..." formControlName="optionId" [filterable]="true"
+                     (valueChange)="onSelected($event)">
+                                <kendo-combobox-column field="assignmentNumber" title="Assignment Number" [width]="150">
+                                </kendo-combobox-column>
+                    </kendo-multicolumncombobox>
+        </div>
+      </div>
+      <div *ngIf="noteForm.get('option')!.value === 'workingOrder'">
+           <div *ngIf="word.length ==0"> <b class="small"> No working order available!</b></div>
+           <div *ngIf="word.length >0">
+                     <label for="title">Select WorkingOrder :</label>
+                     <kendo-multicolumncombobox class="kendo" [data]="word" textField="woNumber" class="my-combobox"
+                         valueField="id" placeholder="Select WorkingOrder Number ..." formControlName="optionId" [filterable]="true"
+                         (valueChange)="onSelected($event)">
+                         <kendo-combobox-column field="woNumber" title="WorkingOrder Number" [width]="150">
+                         </kendo-combobox-column>
+                      </kendo-multicolumncombobox>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+    </div>
+  
+    <kendo-dialog-actions style="border:none;margin-top: 20px;">
+      <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
+      <button kendoButton (click)="addNote()" style="background-color: #3899DD;color: #fff;"
+        [disabled]="noteForm.invalid">
+        Add note
+      </button>
+    </kendo-dialog-actions>
+  </form>
+
+</kendo-dialog>
+<kendo-dialog title="Send Email" *ngIf="openedEmail" (close)="close('cancel')" [minWidth]="250" [width]="450"
+  [themeColor]="'dark'" class="dialog">
+  <form [formGroup]="note2Form">
+      <div class="form-group">
+        <label for="title">Name :</label>
+        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name">
+        <div
+          *ngIf="note2Form.controls['name'].invalid && (note2Form.controls['name'].dirty || note2Form.controls['name'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="note2Form.hasError('required','name')">name is required.</div>
+        </div>
+      </div>
+       <div class="form-group">
+        <label for="title">Related to :</label>
+        <label> <input type="radio" value="dossier" formControlName="option">  Dossier</label>
+        <label> <input type="radio" value="assignment" formControlName="option"> Assignment </label>
+        <label>  <input type="radio" value="workingOrder" formControlName="option"> Working Order</label>
+        <div *ngIf="note2Form.get('option')!.value === 'assignment'">
+          <div *ngIf="assignments.length ==0"> <b class="small"> No Assignment available!</b> </div>
+          <div *ngIf="assignments.length >0">
+                     <label for="title">Select Assignment :</label>
+                  
+                       <select class="form-control" id="optionId" formControlName="optionName">
+                        <option *ngFor="let  item of assignments" [value]=" item.assignmentNumber">{{ item.assignmentNumber }}
+                        </option>
+                     </select>
+          </div>
+        </div>
+        <div *ngIf="note2Form.get('option')!.value === 'workingOrder'">
+             <div *ngIf="word.length ==0"> <b class="small"> No working order available!</b></div>
+             <div *ngIf="word.length >0">
+                       <label for="title">Select WorkingOrder :</label>
+                      <select class="form-control" id="optionId" formControlName="optionName">
+                        <option *ngFor="let  item of word" [value]=" item.woNumber">{{ item.woNumber }}
+                        </option>
+                     </select>
+            </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email :</label>
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="email">Subject :</label>
+        <input type="text" class="form-control" id="Subject" formControlName="subject" placeholder="Email Subject">
+      </div>
+      <div class="form-group">
+        <label for="message">Message :</label>
+        <textarea class="form-control" id="description" rows="3" formControlName="message"></textarea>
+      </div> 
+    
+      <kendo-dialog-actions style="border:none;margin-top: 20px;">
+        <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
+        <button kendoButton (click)="sendEmail()" style="background-color: #3899DD;color: #fff;"
+          [disabled]="note2Form.invalid">
+          Send Email
+        </button>
+      </kendo-dialog-actions>
+    </form>
+</kendo-dialog>

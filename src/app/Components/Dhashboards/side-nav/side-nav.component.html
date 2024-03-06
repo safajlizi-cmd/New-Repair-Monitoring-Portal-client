@@ -1,0 +1,24 @@
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed':''">
+  <div class="logo-container">
+      <button class="logo" (click)="toggleCollapse()"> <img src="../../../../assets/images/logos/logo2-removebg-preview22.png" alt="CED logo">
+      </button>
+      <div class="logo-text"  *ngIf="collapsed"></div>
+      <button class="btn-close "@rotate *ngIf="collapsed" (click)="CloseSidenav()">
+        <span class="k-icon k-i-close"></span> 
+      </button>
+  </div>
+  <!-- *ngIf="(data.role !='C' && role=='Manager') || (data.role!='M' && role=='Coordinator') "-->
+  <ul class="sidenav-nav">
+      <li class="sidenav-nav-item" *ngFor="let data of navData">
+          <a href="" class="sidenav-nav-link" [routerLink]="[data.routeLink]"  
+            routerLinkActive="active" *ngIf="(data.role !='C' && role=='Manager') || (data.role!='M' && role=='Coordinator') "
+            [routerLinkActiveOptions] ="{exact:true}" 
+          >
+              <span class="sidenav-link-icon" [class]="data.icon">  <kendo-badge themeColor="inherit" rounded="large" *ngIf="data.icon == 'k-icon k-i-saturation'" style="background-color: #fff;border:solid 1px #3899DD"></kendo-badge></span> 
+
+              <span class="sidenav-link-text"   *ngIf="collapsed">{{data.label}}</span>
+          </a>
+      </li>
+  </ul>
+ 
+</div>

@@ -1,0 +1,97 @@
+<div class="split">
+    <div class=" top">
+        <h1 class="titlle ">Users List</h1>
+        <button class="bt" kendoButton (click)="open()" style="margin-left:90%">Add User</button>
+    </div>
+    <div class="bottom">
+        <kendo-grid [kendoGridBinding]="gridData" filterable="menu" style=" background: rgb(45, 43, 43); border: none;"
+            [height]="550">
+            <kendo-grid-column field="userName" title="UserName" >
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <p >
+                        {{ dataItem.userName}}</p>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="firstName" title="FirstName" >
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <p >
+                        {{ dataItem.firstName}}</p>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="lastName" title="LastName" >
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <p >
+                        {{ dataItem.lastName}}</p>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="email" title="Email" >
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <p >
+                        {{ dataItem.email}}</p>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="createdDate" title="Created Date">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}
+                </ng-template>
+            </kendo-grid-column>
+           
+        </kendo-grid>
+    </div>
+       <kendo-dialog title="AddUser" [animation]="animation" *ngIf="opened" (close)="close()" [minWidth]="250"
+       [themeColor]="'dark'" style="background-color:rgba(0,0,0,0.2)" [width]="500">
+       <form [formGroup]="UserForm" >
+            <table style="width:100% " cellspacing="0">
+               <tr>
+                  <td style="width:50% ">
+                     <div class="form-group">
+                        <label for="DamageType">FirstName :</label>
+                        <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="FirstName">
+                        <div
+                           *ngIf="UserForm.controls['firstName'].invalid && (UserForm.controls['firstName'].dirty || UserForm.controls['firstName'].touched)"
+                           class="alert alert-danger">
+                           <div *ngIf="UserForm.hasError('required','firstName')">FirstName is required.</div>
+                        </div>
+                     </div>
+                  </td>
+                  <td style="width:50% ">
+                    <div class="form-group">
+                        <label for="DamageType">LastName :</label>
+                        <input type="text" class="form-control" id="LastName" formControlName="lastName" placeholder="LastName">
+                        <div
+                           *ngIf="UserForm.controls['lastName'].invalid && (UserForm.controls['lastName'].dirty || UserForm.controls['lastName'].touched)"
+                           class="alert alert-danger">
+                           <div *ngIf="UserForm.hasError('required','lastName')">LastName is required.</div>
+                        </div>
+                     </div>
+                  </td>
+               </tr>
+            </table>
+            <div class="form-group">
+                <label for="DamageType">UserName :</label>
+                <input type="text" class="form-control" id="userName" formControlName="userName" placeholder="UserName">
+                <div
+                   *ngIf="UserForm.controls['userName'].invalid && (UserForm.controls['userName'].dirty || UserForm.controls['userName'].touched)"
+                   class="alert alert-danger">
+                   <div *ngIf="UserForm.hasError('required','userName')">UserName is required.</div>
+                </div>
+             </div>
+             <div class="form-group">
+                <label for="DamageType">EmailName :</label>
+                <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email" pattern="[a-z0-9._%+-]+@ced\.group$"> 
+                <div
+                   *ngIf="UserForm.controls['email'].invalid && (UserForm.controls['email'].dirty || UserForm.controls['email'].touched)"
+                   class="alert alert-danger">
+                   <div *ngIf="UserForm.hasError('required','email')">Email is required.</div>
+                   <div [hidden]="UserForm.controls['email'].errors?.['pattern'].invalid">
+                    Email should be in the form xxxx@ced.group
+                </div>
+                </div>
+             </div>
+            <kendo-dialog-actions style="border:none;margin-top: 20px;">
+                <button kendoButton (click)="close()" class="cancel">Cancel</button>
+                <button kendoButton  class="bt" (click)="addUser()"  [disabled]="UserForm.invalid" class="submit">Submit</button>
+            </kendo-dialog-actions>
+        </form>
+    </kendo-dialog>
+   

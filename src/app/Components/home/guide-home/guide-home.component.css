@@ -1,0 +1,38 @@
+.split {
+  display: flex;
+ flex-direction: column;
+  height: calc(100vh - 3.5rem);
+
+}
+
+.top {
+  margin-top:0.5rem;
+  padding: 0 10px 10px;
+  height: 100px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.bottom {
+  margin: 20px;
+  flex: 1;
+  overflow-y: auto; 
+  }
+
+.button {
+  background-color: #3899DD;
+  color: #fff;
+  width: 50px;
+  margin-left: 90%;
+  border: none;
+  border-radius: 12px;
+  font-size: 19px;
+  font-weight: 400;
+}
+
+p {
+  color: rgb(109, 107, 107);
+  font-size: 19px;
+  font-weight: 600;
+  align-items: center;
+  flex-basis: 100%; /* add this */
+}

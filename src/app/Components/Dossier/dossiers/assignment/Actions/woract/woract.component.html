@@ -1,0 +1,103 @@
+<kendo-tabstrip [ngStyle]="{ width: '100%' ,height:'100%'}"[tabAlignment]="alignment"
+>
+   <kendo-tabstrip-tab
+      *ngFor="let item of items; let i = index"
+      [selected]="i === selected"
+      [disabled]="item.disabled"
+    >
+    <ng-template kendoTabTitle ><p [ngClass]="i === selected ? 'primary':'date'" (click)="selected = i" class="p" > {{item.city}}</p></ng-template>
+
+      <ng-template kendoTabContent>
+        <div  *ngIf="item.city=='Informations'" >
+          <app-word-details  *ngIf="item.city=='Informations'" ></app-word-details > 
+        </div>
+        <div *ngIf="item.city=='Documents'" class="row" >
+          <span style=" color:#7e807a;font-size: 0.7rem;"> Add Document :</span>
+          <form
+      [formGroup]="myForm">
+        
+          <div class="row">
+            <div class="col-8">
+             <kendo-fileselect formControlName="files" (change)="selectFile($event)" [multiple]="false">
+          </kendo-fileselect>
+            </div>
+            <div class="col-4">
+              <button class="btt" kendoButton [disabled]="this.myForm.invalid" (click)="upload()">
+                Upload
+              </button>
+            </div>
+          </div>
+        </form>
+         <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
+         <p class="title" >List of Files : </p>
+         
+         <kendo-grid [kendoGridBinding]="fileInfos" filterable="menu" 
+         [height]="550">
+         <kendo-grid-column field="fileName" title="FileName" [width]="220" >
+             <ng-template kendoGridCellTemplate let-dataItem>
+                     {{ dataItem.fileName}}
+             </ng-template>
+         </kendo-grid-column>
+         <kendo-grid-column field="createdDate" title="Created Date"[width]="220" >
+             <ng-template kendoGridCellTemplate let-dataItem>
+                 {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}
+             </ng-template>
+         </kendo-grid-column>
+         <kendo-grid-column field="documentType" title="Document Type"[width]="220" >
+             <ng-template kendoGridCellTemplate let-dataItem>
+                 {{ dataItem.documentType }}
+             </ng-template>
+         </kendo-grid-column>
+         <kendo-grid-column title=" " filter="date" [width]="250">
+             <ng-template kendoGridCellTemplate let-dataItem>
+               <span kendoTooltip title="Download file">
+                 <button kendoButton (click)="saveByteArray(dataItem)" [fillMode]="fillMode">
+                        <span class="k-icon k-i-upload"></span></button>
+               </span>
+               <span kendoTooltip title="Open file">         
+                 <button kendoButton (click)="openfile(dataItem)" [fillMode]="fillMode">  <span
+                           class="k-icon k-i-hyperlink-open"></span></button>
+               </span>
+               <span kendoTooltip title="Delete file">         
+                 <button kendoButton (click)="delete(dataItem.id)"[fillMode]="fillMode" class="delete" >  <span
+                           class="k-icon k-i-delete"></span></button>
+               </span>
+             </ng-template>
+         </kendo-grid-column>
+     </kendo-grid>
+   </div>
+   <div *ngIf="item.city=='Notes'" class="row" >
+    <p class="title" > Notes List : </p>
+
+    <div class="box row" *ngIf="notes.length == 0" >
+      No notes available ..
+    </div>
+    <div class="box row" *ngFor="let item of notes ; let i =index" >
+         <div class="col-lg-7"> <b>Title : {{item.title}} </b></div>
+         <div class="col-lg-5 date">   Created at : <kendo-svg-icon [icon]="icons.trash"></kendo-svg-icon> {{item?.createdDate|date: 'MM/dd/yyyy' }}</div>
+          <div class="des"> {{item.description}} </div>
+      </div>
+      </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+  </kendo-tabstrip>
+
+  <kendo-dialog
+title="Please confirm"
+*ngIf="openedDelete"
+(close)="close()"
+[minWidth]="250"
+[width]="450"
+[themeColor]="'dark'"
+class="dialog"
+>
+<p style="margin: 30px; text-align: center;">
+  Are you sure you want to Delete a file?
+</p>
+<kendo-dialog-actions style="border:none;margin-top: 20px;">
+  <button kendoButton (click)="close()" class="cancel">No</button>
+  <button kendoButton (click)="deleteDocument()" class="bt">
+    Yes
+  </button>
+</kendo-dialog-actions>
+</kendo-dialog>

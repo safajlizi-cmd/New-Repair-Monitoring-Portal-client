@@ -1,0 +1,147 @@
+kendo-multicolumncombobox {
+  width: 300px;
+  font-weight: bold;
+  border-color: #303131;
+  color: #303131;
+}
+.kendo{
+  width: 300px;
+  font-weight: bold;
+  border-color: #303131;
+  color: #303131;
+}
+.titlle {
+  padding-top: 10px;
+  letter-spacing: 4px;
+  color: rgb(7, 7, 7);
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.container {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  padding: 25px;
+}
+table {
+  padding: 20px;
+}
+.titl {
+  width: 25%;
+  color: rgb(53, 52, 52);
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding-top: 15px;
+}
+
+.bottom {
+  margin: 10px;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+.avatar {
+  background-color: #3899DD;
+  color: #fff;
+  width: 19px;
+  height: 19px;
+  margin-right: 4px;
+}
+.btt{
+  color: #3899DD;
+  border-color: #3899DD;
+  background-color: #fff;
+}
+.box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(19, 18, 18, 0.87);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  font-size: 14px;
+  margin: 5px;
+  font: weight 300px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.Emergency {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(19, 18, 18, 0.87);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  font-size: 14px;
+  margin-top: 10px;
+  font: weight 300px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: red;
+  background-color: rgba(246, 9, 9, 0.2);
+}
+.blue{
+  color:#3899DD
+}
+.diag{
+  background-color: rgba(30, 29, 29, 0.2)
+}
+.dossierF{
+  border-radius: 12px;
+  color:#303131;width: 100%; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+} 
+.bb{
+  color: rgba(19, 18, 18, 0.87);
+  justify-content: space-between;
+  background-color:(19, 18, 18, 0.2) ;
+  font-size: 16px;
+  margin-bottom: 10px;
+  font: weight 300px;
+  height: 55px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  width: 100%;
+
+}
+.childs{
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
+  max-width: 400px;
+}
+.panelbar-wrapper {
+  border: none;
+  max-width: 400px;
+
+}
+.teamMate {
+  font-size: 0.7em;
+  font-weight: normal;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.border-right {
+  border-right: 1px solid #ccc;
+  height: 100%;
+}
+.small{
+  font-size: 0.8rem;
+  color: #303131;
+  padding: 10px;
+  width: bold;
+}
+.note{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    background-color: yellow; 
+    height: 100%;
+}
+
+.bottom{
+  height: 320px;
+  overflow-y: auto;
+}
+
+ .bt{
+  width:150px;background-color: #3899DD;color:#fff ; margin:10px;margin-left: 70%;
+ }
+  .cancel{background-color: #c5c9cd;color:  #303131; border:solid 1px #303131;}

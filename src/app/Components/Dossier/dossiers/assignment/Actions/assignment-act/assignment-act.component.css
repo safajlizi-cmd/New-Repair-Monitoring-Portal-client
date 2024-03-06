@@ -1,0 +1,32 @@
+.weather {
+    margin: 30px;
+    text-align: left;
+}
+.bt{background-color: #3899DD;color: #fff;}
+  .cancel{background-color: #c5c9cd;color:  #303131; border:solid 1px #303131;}
+::ng-deep .k-tabstrip .k-item.k-state-active > .k-link,
+::ng-deep .k-tabstrip .k-item > .k-link {
+    color: #48494a;
+    font-weight: bold;
+}
+.box {
+    padding: 10px 10px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(19, 18, 18, 0.87);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-size: 15x;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font: weight 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+  }
+  .btt{
+    color: #3899DD;
+    border-color: #3899DD;
+    background-color: #fff;
+  }

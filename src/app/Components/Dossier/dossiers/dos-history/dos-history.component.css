@@ -1,0 +1,47 @@
+mat-toolbar{
+    background-color: white;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .example-full-width {
+    width: 100%;
+  }
+  .history{
+
+    height: 70px;
+    margin-top: 8px;
+  }
+  .history .top{
+    height: 30px;
+    padding-top: 5px;
+    font-size: 1em;
+    background-color: rgba(53, 53, 54, 0.7);
+    border-radius: 5px 5px 0  0;
+    color: #fff;
+    padding-left: 25px;
+
+
+  }
+ h6{
+  color: white;
+ }
+  .history .buttom{
+    height: 40px;
+    background-color: rgba(190, 181, 181,0.2);
+    border-radius:  0  0 5px 5px;
+    padding-left: 25px;
+
+    padding-top: 5px;
+
+  }
+  .vide{
+    background-color:rgba(116, 114, 114,0.7);
+    border-radius:   10px;
+     padding-left: 15px;
+     padding-top: 25px;
+     height: 80px;
+     margin-top: 8px;
+     font-size: 1.1em;
+     color: #fff;
+   }

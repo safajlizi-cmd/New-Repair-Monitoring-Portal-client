@@ -1,0 +1,16 @@
+::ng-deep .k-chart-tooltip {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 12px;
+  }
+  .title{
+    margin: 10px;
+    color:#787975;font-size: 1.6rem;font-weight: 200px;font-family: system-ui;  
+    text-align: left; letter-spacing: 2px;
+  }
+  ::ng-deep .k-tabstrip .k-item.k-state-active > .k-link,
+  ::ng-deep .k-tabstrip .k-item > .k-link {
+    color: #48494a;
+    font-weight: bold;
+}

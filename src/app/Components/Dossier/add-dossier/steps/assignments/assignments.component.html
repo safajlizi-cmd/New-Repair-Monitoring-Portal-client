@@ -1,0 +1,42 @@
+<form [formGroup]="AssignForm">
+    <div class="form-group">
+       <label for="title">Product Name:</label>
+       <input type="text" class="form-control" id="product" formControlName="product"
+          placeholder="Title">
+       <div
+          *ngIf="AssignForm.controls['product'].invalid && (AssignForm.controls['product'].dirty || AssignForm.controls['product'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="AssignForm.hasError('required','product')">ProductName is required.
+          </div>
+       </div>
+    </div>
+    
+    <table style="width:100% " cellspacing="0">
+     <tr>
+        <td style="width:50% ">
+           <div class="form-group">
+              <label for="²e">Cause:</label>
+              <select class="form-control" id="cause" formControlName="cause">
+                 <option *ngFor="let item of causes" [value]=" item.longName">{{ item.longName }}
+                 </option>
+              </select>
+           </div>
+        </td>
+        <td style="width:50% ">
+           <div class="form-group">
+              <label for="Building type">Building type:</label>
+              <select class="form-control" id="buildingType" formControlName="buildingType">
+                 <option *ngFor="let  item of bts" [value]=" item.longName">{{ item.longName }}
+                 </option>
+              </select>
+           </div>
+        </td>
+     </tr>
+  </table>
+    <kendo-dialog-actions style="border:none;margin-top: 20px;">
+       <button kendoButton (click)="onSubmit()" style="background-color: #3899DD;color: #fff;"
+          [disabled]="AssignForm.invalid">
+          Add Assignment
+       </button>
+    </kendo-dialog-actions>
+  </form>

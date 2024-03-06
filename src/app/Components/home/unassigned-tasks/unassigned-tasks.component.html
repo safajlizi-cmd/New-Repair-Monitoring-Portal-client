@@ -1,0 +1,80 @@
+<div class="split">
+    <div class=" top">
+        <h1 class="titlle ">
+            Unassigned tasks</h1>
+            <div style="margin-left:90%">
+                <span kendoTooltip title="Confirm  the tasks you want to assigned to yourself">
+                <button kendoButton class="bt" (click)="confirmSelection()" >Confirm  Selection</button></span>
+      </div>  </div>
+<div class="bottom">
+<kendo-grid [data]="tasks" [selectable]="selectableSettings" filterable="menu" [navigable]="true" [height]="700"   (selectionChange)="onSelectionChange($event)">
+    <kendo-grid-checkbox-column title="Select Tasks">
+        <ng-template kendoGridHeaderTemplate>
+           
+        </ng-template>
+    </kendo-grid-checkbox-column>
+    <kendo-grid-column field="taskNumber" title="Task number">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <p class="primary">
+                {{ dataItem.taskNumber}}</p>
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="dossierC.dossierNumber" title="Dossier number">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <p class="inprog">
+                {{ dataItem.dossierC.dossierNumber}}</p>
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="title" title="Task title">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <p  class="date">
+                {{ dataItem.title }}
+            </p>
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="createdDate" title="Created Date">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <p  class="date">
+                {{ dataItem.createdDate | date: 'MM/dd/yyyy' }}
+            </p>
+        </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="createdBy?.userName" title="CreatedBy">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <kendo-avatar fillMode="outline" class="avatar" *ngIf="dataItem.createdBy?.userName != null ">
+                <span style="font-size:7px;">{{ dataItem.createdBy?.firstName[0] }}{{ dataItem.createdBy?.lastName[0]
+                    }}</span>
+            </kendo-avatar> {{ dataItem.createdBy?.userName }}
+        </ng-template>
+    </kendo-grid-column>
+</kendo-grid>
+</div>
+</div>
+
+<kendo-dialog title="Assign Task to" *ngIf="opened" style="background-color:rgba(0,0,0,0.2)" (close)="close('cancel')" [minWidth]="250" [width]="450" [themeColor]="'dark'" >
+    <form [formGroup]="AssigForm" >
+        <div class="form-group form-check">
+            <kendo-multicolumncombobox [data]="data" textField="userName" class="my-combobox" valueField="id"
+                placeholder="Assign task to ..." [filterable]="true" (filterChange)="handleFilterChange($event)"
+                (valueChange)="onSelectedUser($event)" >
+                <kendo-combobox-column field="email" title="email" [width]="150">
+                </kendo-combobox-column>
+                <kendo-combobox-column field="firstName" title="Name" [width]="90">
+                </kendo-combobox-column>
+                <kendo-combobox-column field="lastName" title="Title" [width]="90">
+                </kendo-combobox-column>
+            </kendo-multicolumncombobox>
+        </div>
+        <div class="form-group form-check" *ngIf=" role == 'Coordinator'">
+            <input type="checkbox" class="form-check-input" id="Assigned" formControlName="Assigned">
+            <label class="form-check-label" for="Assigned"> Assign task to yourself?</label>
+        </div>
+
+        <kendo-dialog-actions style="border:none;margin-top: 20px;">
+            <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
+            <button kendoButton (click)="addAssign()" class="bt" [disabled]="AssigForm.invalid">
+                Assign task
+            </button>
+        </kendo-dialog-actions>
+    </form>
+</kendo-dialog>

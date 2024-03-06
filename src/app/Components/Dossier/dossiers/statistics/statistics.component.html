@@ -1,0 +1,47 @@
+    <div class="row">
+      <h1 class="title mt-1">Dossiers Progresses</h1>
+      <kendo-tabstrip [ngStyle]="{ width: '100%' ,height:'100%'}"[tabAlignment]="alignment">
+   <kendo-tabstrip-tab
+      *ngFor="let item of items; let i = index"
+      [selected]="i === selected"
+      [disabled]="item.disabled"
+    >
+    <ng-template kendoTabTitle ><p [ngClass]="i === selected ? 'primary':'date'" (click)="selected = i" class="p" > {{item.city}}</p></ng-template>
+      <ng-template kendoTabContent>
+        <div class="weather">
+          <div *ngIf="item.city=='InExecution'">
+             <app-tasks-chart></app-tasks-chart>
+          </div>
+          <div *ngIf="item.city=='Completed'">
+             <app-completedchart></app-completedchart>
+          </div>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+  </kendo-tabstrip>
+    </div> 
+    <div class="row mt-5">
+      <h1 class="title mt-1">Top 5 Dossiers </h1>
+       <kendo-tabstrip [ngStyle]="{ width: '100%' ,height:'100%'}"[tabAlignment]="alignment">
+   <kendo-tabstrip-tab
+      *ngFor="let item of top5; let i = index"
+      [selected]="i === selected2"
+      [disabled]="item.disabled"
+    >
+    <ng-template kendoTabTitle ><p [ngClass]="i === selected ? 'primary':'date'" (click)="selected = i" class="p" > {{item.city}}</p></ng-template>
+      <ng-template kendoTabContent>
+        <div class="weather">
+          <div *ngIf="item.city=='Longest Creation Period'">
+            <app-top5-chart></app-top5-chart>
+          </div>
+          <div *ngIf="item.city=='Lowest Creation Period'">
+            <app-lowest-dossier></app-lowest-dossier>
+          </div>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+  </kendo-tabstrip>
+    </div> 
+
+
+

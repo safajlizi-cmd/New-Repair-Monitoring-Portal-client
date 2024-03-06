@@ -1,0 +1,19 @@
+<app-navbar-guide></app-navbar-guide>
+<div class="bottom">
+<div *ngFor="let category of categories">
+    <div class="container">
+        <h2 class="title2">{{ category.title }}</h2>
+        <mat-grid-list cols="4" rowHeight="467">
+            <mat-grid-tile *ngFor="let card of category.cards">
+                <kendo-card>
+                    <iframe *ngIf="card.videoSrc" kendoCardMedia height="267" [src]="card.videoSrc"></iframe>
+                    <kendo-card-body>
+                        <div style="font-weight:bold;">{{ card.description }}</div>
+                        <p style="font-size: 10px;">{{ card.des }}</p>
+                    </kendo-card-body>
+                    <kendo-card-actions [actions]="card.actionButtons" (click)="goto()" [layout]="'start'"></kendo-card-actions>
+                </kendo-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div></div>

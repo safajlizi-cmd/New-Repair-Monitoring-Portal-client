@@ -1,0 +1,26 @@
+.card{
+    color:#7e807a;font-size: 0.7rem;
+    width: 100%;
+}
+.header{
+    text-align: right;
+}
+
+.body{
+    text-align: left;
+}
+.btt{
+    color: #3899DD;
+    border-color: #3899DD;
+    text-align: right;
+}
+.title{
+    color:#343532;font-size: 1.2rem;font-weight: bold;  
+    text-align: left;
+}
+span{
+    font-weight: bold;
+}
+.diag{
+    background-color: rgba(30, 29, 29, 0.2)
+  }

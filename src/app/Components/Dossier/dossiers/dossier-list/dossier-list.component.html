@@ -1,0 +1,368 @@
+<div class="split">
+    <div class=" top">
+        <h1 class="titlle ">Dossiers List</h1>
+        <button class="bt" kendoButton (click)="open('dossier')" style="margin-left:90%">Add new dossier</button>
+    </div>
+    <div class="bottom">
+        <kendo-grid [kendoGridBinding]="gridData" filterable="menu" style=" background: rgb(45, 43, 43); border: none;"
+            [height]="700">
+            <kendo-grid-column field="dossierNumber" title="Dossier Number" [width]="220">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <a routerLink="./Details/{{dataItem.id}}" [ngClass]="dataItem.active == true ? 'primary':'grey'">
+                        {{ dataItem.dossierNumber}}</a>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="createdDate" title="Created Date">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span [ngClass]="dataItem.active == true ? 'date':'grey'"> {{ dataItem.createdDate | date:
+                        'MM/dd/yyyy' }}</span>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="createdBy." title="CreatedBy">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <kendo-avatar fillMode="outline" [ngClass]="dataItem.active == true ?'avatar':'avatarComp'"
+                        *ngIf="dataItem.createdBy?.userName != null ">
+                        <span style="font-size:9px;">{{ dataItem.createdBy?.firstName[0] }}{{
+                            dataItem.createdBy?.lastName[0] }}</span>
+                    </kendo-avatar> {{ dataItem.createdBy?.userName }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="tasks" title="Progress">
+                <ng-template kendoGridCellTemplate let-dataItem style="background: rgb(45, 43, 43); border: none;">
+                    <div class="project-progress pull-left">
+                        <span class="task-title" style="width: auto;">Have created:
+                            <span class="percentage">{{dataItem.progress | number}}%</span>
+                        </span>
+                    </div>
+                    <br>
+                    <div class="progress">
+                        <div [ngClass]="dataItem.active == true ?'analytics-line':'analytics-lineComp'"
+                            role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                            [style.width.%]="dataItem.progress"></div>
+                    </div>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="dossierStatus.longName" title="Dossier Status">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <div *ngIf="dataItem.active == true" style="display: flex; justify-content: space-between;">
+                        <span
+                            [ngClass]="dataItem?.dossierStatus?.longName=='InPreparation' ? 'primary':dataItem?.dossierStatus?.longName=='Completed'?'done2':'inprog'"
+                            style="flex-basis: 99%; flex-grow: 1;">
+                            {{dataItem?.dossierStatus?.longName}}
+                        </span>
+                        <span kendoTooltip title="Deactivate dossier">
+                            <button kendoButton (click)="activateDossier( dataItem)" [fillMode]="fillMode" class="date "
+                                *ngIf="dataItem?.dossierStatus?.longName=='Completed'"> <span
+                                    class="k-icon k-i-non-recurrence"></span>
+                            </button>
+                        </span>
+
+                    </div>
+                    <div *ngIf="dataItem.active == false" style="display: flex; justify-content: space-between;">
+                        <span style="flex-basis: 99%; flex-grow: 1;" class="inactive">Inactive</span>
+                        <span kendoTooltip title="Activate dossier">
+                            <button kendoButton (click)="activateDossier( dataItem)" [fillMode]="fillMode" class="date">
+                                <span class="k-icon k-i-reset"></span></button> </span>
+                    </div>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column title=" " filter="date" [width]="150">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <button kendoButton (click)="onButtonClick( dataItem.id)" [fillMode]="fillMode" class="date">View
+                        Details <span class="k-icon k-i-hyperlink-open-sm"></span></button>
+                </ng-template>
+            </kendo-grid-column>
+        </kendo-grid>
+    </div>
+    </div>
+    <kendo-dialog title="Add Dossier" [animation]="animation" *ngIf="opened" (close)="close('cancel')" 
+        [themeColor]="'dark'" style="background-color:rgba(0,0,0,0.2)" [minWidth]="490" [maxWidth]="900"[maxHeight]="700">
+        <div class="example">
+            <kendo-stepper #stepper [steps]="steps" stepType="full" [(currentStep)]="currentStep"
+                [style.color]="'#000000'" [class]="'custom-stepper'">
+            </kendo-stepper>
+                <div *ngIf="currentStep === 0">
+                    <p class="titlle "> General details</p>
+                    <form  class="k-form" [formGroup]="dossierForm">
+
+                    <div class="form-group mt-5">
+                        <label for="title">Client*</label>
+                        <kendo-multicolumncombobox [data]="Clients" textField="longName" class="my-combobox" valueField="id"
+                            placeholder="Selected Client ..." [filterable]="true" 
+                            (filterChange)="handleFilterChangeclient($event)" (valueChange)="onSelectedclient($event)" 
+                            >
+                            <kendo-combobox-column field="longName" title="Client Name" [width]="150">
+                            </kendo-combobox-column>
+                           
+                        </kendo-multicolumncombobox> 
+                    </div>
+                    <div class="form-group m-3">
+                        <input type="checkbox" class="form-check-input" id="Assigned" formControlName="isEmergency">
+                        <label class="form-check-label" for="Assigned"> Emergency</label>
+                    </div>
+                    </form>
+                    <form [formGroup]="AssignForm">
+                    <div class="form-group mt-3">
+                        <label for="title">Activity*</label>
+                        <div class="container">
+                            <div class="radio-tile-group">
+                                <div class="input-container" *ngFor="let item of Products">
+                                    <input id="walk" class="radio-button" type="radio" name="product" [value]="item.longName"  formControlName="product">
+                                    <div class="radio-tile">
+                                        <label for="walk" class="radio-tile-label">{{ item.longName }}</label>
+                                    </div>
+                                </div>
+
+                
+                            </div>
+                        </div>
+                      </div>
+                      <small *ngIf="AssignForm.controls['product'].dirty && AssignForm.hasError('required','product')" class="text-danger">*Product name is required</small>
+
+                   </form>
+                   <form  class="k-form" [formGroup]="dossierForm">
+                    <div class="form-group form-check" *ngIf="role =='Coordinator'">
+                        <input type="checkbox" class="form-check-input" id="Assigned" formControlName="Assigned">
+                        <label class="form-check-label" for="Assigned"> Would you like to assign all tasks to yourself?</label>
+                    </div>
+                    <div class="form-group form-check" *ngIf="role !='Coordinator'">
+                      <kendo-multicolumncombobox [data]="usersList" textField="userName" class="my-combobox" valueField="id"
+                            placeholder="Assign task to ..." [filterable]="true" 
+                            (valueChange)="onSelectedUser($event)">
+                            <kendo-combobox-column field="email" title="email" [width]="150">
+                            </kendo-combobox-column>
+                            <kendo-combobox-column field="firstName" title="Name" [width]="90">
+                            </kendo-combobox-column>
+                            <kendo-combobox-column field="lastName" title="Title" [width]="90">
+                            </kendo-combobox-column>
+                        </kendo-multicolumncombobox> 
+                    </div>
+                    </form>
+                </div>
+                <div *ngIf="currentStep === 1">
+                    <form [formGroup]="involvedPartyForm">
+                    <div class="row mb-4">
+                        <div class="col-lg-6 border">
+                            <p class="titlle"> Address info </p>
+                                <div class="form-group">
+                                    <label for="title">Postal Code*</label>
+                                    <input type="number" class="form-control" id="title" formControlName="PostalCode"
+                                        placeholder="Postal Code">
+
+                                </div>
+                                <small *ngIf="involvedPartyForm.controls['PostalCode'].dirty && involvedPartyForm.hasError('required','PostalCode')" class="text-danger">*PostalCode is required</small>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <label for="deadline">House Number*</label>
+                                            <input type="number" class="form-control" id="start" formControlName="HouseNumber"
+                                                placeholder="House Number">
+                                        </div>
+                                        <small *ngIf="involvedPartyForm.controls['HouseNumber'].dirty && involvedPartyForm.hasError('required','HouseNumber')" class="text-danger">*HouseNumber is required</small>
+                                        <div class="col-lg-4">
+                                        <label for="deadline">Addition</label>
+                                        <input type="number" class="form-control" id="start" 
+                                            placeholder="Addition"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="deadline">Street Name</label>
+                                    <input type="text" class="form-control" id="end" formControlName="StreetName"
+                                        placeholder="Street Name">
+                                </div>
+                                <small *ngIf="involvedPartyForm.controls['StreetName'].dirty && involvedPartyForm.hasError('required','StreetName')" class="text-danger">*StreetName is required</small>
+                                <div class="form-group">
+                                    <label for="deadline">City</label>
+                                    <input type="text" class="form-control" id="end" formControlName="City"
+                                        placeholder="City">
+                                </div>
+                                <small *ngIf="involvedPartyForm.controls['City'].dirty && involvedPartyForm.hasError('required','City')" class="text-danger">*City is required</small>
+
+                        </div>
+                        <div class="col-lg-6 border">
+                            <p class="titlle"> Personal info </p>
+                        
+                                <div class="form-group">
+                                    <label for="title">Surname duped*</label>
+                                    <input type="text" class="form-control" id="title" formControlName="FullName"
+                                        placeholder="Surname duped">
+
+                                </div>
+                                <small *ngIf="involvedPartyForm.controls['FullName'].dirty && involvedPartyForm.hasError('required','FullName')" class="text-danger">*FullName is required</small>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label for="deadline">First name*</label>
+                                            <input type="text" class="form-control" id="start" formControlName="FirstName"
+                                                placeholder="First name">
+                                        </div>
+                                        <small *ngIf="involvedPartyForm.controls['FirstName'].dirty && involvedPartyForm.hasError('required','FirstName')" class="text-danger">*FirstName is required</small>
+                                        <div class="col-lg-6">
+                                        <label for="deadline">Last name*</label>
+                                        <input type="text" class="form-control" id="start" formControlName="LastName"
+                                            placeholder="Last name"></div>
+                                            <small *ngIf="involvedPartyForm.controls['LastName'].dirty && involvedPartyForm.hasError('required','LastName')" class="text-danger">*LastName is required</small>
+
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="deadline">Email</label>
+                                    <input type="email" class="form-control" id="end" formControlName="Email"
+                                        placeholder="Email">
+                                </div>
+                                <small *ngIf="involvedPartyForm.controls['Email'].dirty && involvedPartyForm.hasError('required','Email')" class="text-danger">*Email is required</small>
+                                <div class="form-group">
+                                    <label for="deadline">Phone Number</label>
+                                    <input type="number" class="form-control" id="end" formControlName="PhoneNumber"
+                                        placeholder="Phone Number">
+                                </div>
+                                <small *ngIf="involvedPartyForm.controls['PhoneNumber'].dirty && involvedPartyForm.hasError('required','PhoneNumber')" class="text-danger">*PhoneNumber is required</small>
+
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div *ngIf="currentStep === 2">
+                    <!--******************niveau dossier***************-->
+                    <p class="titlle "> Dossier detials</p>
+                    <form  class="k-form" [formGroup]="dossierForm">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="DossierNumber">Dossier Number:</label>
+                            <input type="text" class="form-control" id="DossierNumber" formControlName="dossierNumber" placeholder="Dossier Number">
+                            <small *ngIf="dossierForm.controls['dossierNumber'].dirty && dossierForm.hasError('required','dossierNumber')" class="text-danger">*dossierNumber is required</small>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="deadline">Date of occurance </label>
+                            <input type="date" class="form-control" id="start" formControlName="dateOfOccurance">
+                            <small *ngIf="dossierForm.controls['dateOfOccurance'].dirty && dossierForm.hasError('required','dateOfOccurance')" class="text-danger">*dateOfOccurance is required</small>
+                          </div>
+                        <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="dossier">Main cause</label>
+                                    <select class="form-control" id="locationId" formControlName="mainCauseId"  onchange="onselectMainCause(this.value)" >
+                                       <option *ngFor="let  item of MainCauses" [value]=" item.id"  ><span class="option">{{ item.longName }}</span>
+                                       </option>
+                                    </select>  
+                                        <small *ngIf="dossierForm.controls['mainCauseId'].dirty && dossierForm.hasError('required','mainCauseId')" class="text-danger">*mainCause is required</small>
+
+                                 </div>
+
+                        </div>
+                    </div>
+                    </form>
+                    <!--*******************niveau assignment**************-->
+                    <p class="titlle  ">Damage info </p>
+                    <form [formGroup]="AssignForm">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="dossier">Cause</label>
+                                <select class="form-control" id="cause" formControlName="cause">
+                                   <option *ngFor="let  item of causes" [value]=" item.longName"   ><span class="option">{{ item.longName }}</span>
+                                   </option>
+                                </select>
+                             </div>         <small *ngIf="AssignForm.controls['cause'].dirty && AssignForm.hasError('required','cause')" class="text-danger">*SubCause is required</small>
+
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="dossier"> Building type</label>
+                                <select class="form-control" id="buildingType" formControlName="buildingType">
+                                   <option *ngFor="let  item of bts" [value]=" item.longName"  ><span class="option">{{ item.longName }}</span>
+                                   </option>
+                                </select>
+                             </div>
+                        </div>
+                        <small *ngIf="AssignForm.controls['buildingType'].dirty && AssignForm.hasError('required','buildingType')" class="text-danger">*buildingType is required</small>
+                    </div>
+                    </form>
+                    <!--*******************niveau working order**************-->
+                  
+                    <p class="titlle"> Damage situation </p>
+
+                    <form [formGroup]="WOForm">    
+                        <table style="width:100% " cellspacing="0">
+                           <tr>
+                              <td style="width:50% ">
+                                 <div class="form-group">
+                                    <label for="DamageType">DamageType</label>
+                                    <select class="form-control" id="damageTypeId" formControlName="damageTypeId">
+                                       <option *ngFor="let item of damageTypes" [value]=" item.id" ><span class="option">{{ item.longName }}</span>
+                                       </option>
+                                    </select>
+                                 </div>
+                                 <small *ngIf="WOForm.controls['damageTypeId'].dirty && WOForm.hasError('required','damageTypeId')" class="text-danger">*damageType name is required</small>
+                              </td>
+                              <td style="width:50% ">
+                                <div class="form-group">
+                                    <label for="dossier">Location</label>
+                                    <select class="form-control" id="locationId" formControlName="locationId">
+                                       <option *ngFor="let  item of Locations" [value]=" item.id"  ><span class="option">{{ item.longName }}</span>
+                                       </option>
+                                    </select>
+                                 </div>
+                                 <small *ngIf="WOForm.controls['locationId'].dirty && WOForm.hasError('required','locationId')" class="text-danger">*location is required</small>
+                              </td>
+                           </tr>
+                        </table>
+                        
+                        <table style="width:100% " cellspacing="0">
+                            <tr>
+                               <td style="width:50% ">
+                                  <div class="form-group">
+                                     <label for="DamageType">Object</label>
+                                     <select class="form-control" id="damageTypeId" formControlName="objectId">
+                                        <option *ngFor="let item of Objects" [value]=" item.id"  ><span class="option">{{ item.longName }}</span>
+                                        </option>
+                                     </select>
+                                  </div>
+                                  <small *ngIf="WOForm.controls['objectId'].dirty && WOForm.hasError('required','objectId')" class="text-danger">*object name is required</small>
+                               </td>
+                               <td style="width:50% ">
+                                  <div class="form-group">
+                                     <label for="Material">Material</label>
+                                     <select class="form-control" id="materialId" formControlName="materialId">
+                                        <option *ngFor="let  item of Materials" [value]=" item.id"  ><span class="option">{{ item.longName }}</span>
+                                        </option>
+                                     </select>
+                                  </div>
+                                  <small *ngIf="WOForm.controls['materialId'].dirty && WOForm.hasError('required','materialId')" class="text-danger">*material name is required</small>
+                               </td>
+                            </tr>
+                         </table>
+                       </form>
+                </div>
+                <span class="k-form-separator "></span>
+                <div class="k-form-buttons k-buttons-end ">
+                    <span class="page">Step {{ currentStep + 1 }} of 3</span>
+                    <div>
+                        <button class="k-button prev" kendoButton *ngIf="currentStep !== 0" (click)="prev()">
+                            Previous
+                        </button>
+                        <button class="k-button k-primary ml-2 mr-2" kendoButton (click)="next()"
+                            *ngIf="currentStep !== 2">
+                            Next
+                        </button>
+                        <button class="k-button k-primary" kendoButton (click)="submit()" *ngIf="currentStep === 2">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+        </div>
+    </kendo-dialog>
+    <kendo-dialog title="Please confirm" *ngIf="activateDos" (close)="close('cancel')" [minWidth]="250" [width]="450"
+        [themeColor]="'dark'" class="dialog">
+        <p style="margin: 30px; text-align: center;">
+            Are you sure you want to {{SelectedDossier.active == false ? 'Activate' :'Deactivate'}} a dossier?
+        </p>
+        <kendo-dialog-actions>
+            <button kendoButton (click)="close('cancel')">No</button>
+            <button kendoButton (click)="Activate()" class="bt">
+                Yes
+            </button>
+        </kendo-dialog-actions>
+    </kendo-dialog>

@@ -1,0 +1,39 @@
+<form  [formGroup]="dossierForm" >
+    <div class="form-group">
+        <label for="DossierNumber">Dossier Number:</label>
+        <input type="text" class="form-control" id="DossierNumber" formControlName="DossierNumber" placeholder="Dossier Number">
+        <div *ngIf="dossierForm.controls['DossierNumber'].invalid && (dossierForm.controls['DossierNumber'].dirty || dossierForm.controls['DossierNumber'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="dossierForm.hasError('required','DossierNumber')">DossierNumber is required.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="dupedName">Duped Name:</label>
+        <input type="text" class="form-control" id="dupedName" formControlName="dupedName" placeholder="DupedName">
+        <div *ngIf="dossierForm.controls['dupedName'].invalid && (dossierForm.controls['dupedName'].dirty || dossierForm.controls['dupedName'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="dossierForm.hasError('required','dupedName')">DupedName is required.</div>
+        </div>
+    </div>
+    <div class="form-group form-check" *ngIf="role =='Coordinator'">
+        <input type="checkbox" class="form-check-input" id="Assigned" formControlName="Assigned">
+        <label class="form-check-label" for="Assigned"> Would you like to assign all tasks to yourself?</label>
+    </div>
+    <div class="form-group form-check" *ngIf="role !='Coordinator'">
+        <kendo-multicolumncombobox [data]="data" textField="userName" class="my-combobox" valueField="id"
+            placeholder="Assign task to ..." [filterable]="true" (filterChange)="handleFilterChange($event)"
+            (valueChange)="onSelectedUser($event)" >
+            <kendo-combobox-column field="email" title="email" [width]="150">
+            </kendo-combobox-column>
+            <kendo-combobox-column field="firstName" title="Name" [width]="90">
+            </kendo-combobox-column>
+            <kendo-combobox-column field="lastName" title="Title" [width]="90">
+            </kendo-combobox-column>
+        </kendo-multicolumncombobox>
+    </div>
+    <div style="border:none;margin-top: 20px;">
+        <button kendoButton (click)="addDossier()" class="bt" [disabled]="dossierForm.invalid">
+            Add dossier
+        </button>
+    </div>
+    </form>

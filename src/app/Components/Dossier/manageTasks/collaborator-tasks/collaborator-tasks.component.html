@@ -1,0 +1,199 @@
+<div class="container">
+    <table style="margin-top:10px;margin-bottom:10px;margin-left:30%;">
+        <tr>
+            <td style="width:60%;">      
+            </td>
+            <td style="width:20%;"> 
+                Filter By taskName :   
+                <span kendoTooltip title="Filter By Task Name">
+                    <kendo-dropdownlist [data]="tasks" [textField]="'title'" [valueField]="'title'"
+                        class="dossierF2" placeholder="Select a dossier" (valueChange)="onSelectTask($event)">
+                    </kendo-dropdownlist>
+                </span>
+            </td>
+            <td style="width:30%;">
+                Filter By dossierNumber :   
+                <span kendoTooltip title="Filter By DossierNumber">
+                    <kendo-dropdownlist [data]="dossiers" [textField]="'dossierNumber'" [valueField]="'dossierNumber'"
+                        class="dossierF" placeholder="Select a dossier" (valueChange)="onActionButtonClick($event)">
+                    </kendo-dropdownlist>
+                </span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div cdkDropListGroup>
+    <div class="row">
+        <div class="col-md-4 colonne">
+            <!-- todo-->
+            <div class="example-container">
+                <h2 class="head-title">To do<span *ngIf="todo!.length >0"> {{todo!.length}} </span></h2>
+
+                <div cdkDropList [cdkDropListData]="todo" class="example-list" cdkDropListId="cdk-drop-list-todo"
+                    id="todo" >
+                    <div *ngFor="let item of todo ; let i =index"  
+                        [ngStyle]="{ border: item.emergency == true ? '1px solid red' : 'none' }" class="example-box">
+                        <div class="headerBox" class="title" style="display: flex; justify-content: space-between;">
+                            <div style="flex-basis: 99%; flex-grow: 1;">
+                                {{item!.title}} <br>[{{item!.taskNumber}} ]
+                            </div>
+                            <div style="flex-basis:1%; flex-grow: 1;">
+                                <button kendoButton (click)="openAssign(item.id)"
+                                style="background-color: #fff;border: none;" *ngIf="id != item.assignedToId">
+                                <span class="k-icon k-i-reset-sm" style="color:#303131"></span>
+                            </button>
+                          
+                            </div>
+
+                        </div>
+                        <div class="contentBox">
+                            {{item.description}}<br>
+                            To Do
+
+                        </div>
+                        <div class="footerBox2" style="display: flex; justify-content: space-between;">
+                            <div style="flex-basis: 33%; flex-grow: 1;">
+                                <span class="createdBy"><kendo-avatar fillMode="outline" class="avatar" *ngIf="item.createdByC?.userName != null ">
+                                    <span style="font-size:7px;">{{ item.createdByC?.firstName[0] }}{{ item.createdByC?.lastName[0] }}</span>
+                                  </kendo-avatar>  {{ item.createdByC?.userName }} </span>
+                            </div>
+
+                            <div style="flex-basis:33%; flex-grow: 1;">
+                                <span *ngIf="item!.deadline != null" class="date"><kendo-svg-icon [icon]="icons.trash"
+                                   ></kendo-svg-icon>
+                                {{item!.deadline| date: 'MM/dd/yyyy' }}</span>
+                            </div>
+                            <div style="flex-basis: 33%; flex-grow: 1;">
+                                <button kendoButton (click)="dossierNav(item.dossierId)" class="navButton"><span
+                                        class="k-icon k-i-hyperlink-open"></span> Dossier details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 colonne">
+            <!--inprogress-->
+            <div class="example-container">
+                <h2 class="head-title">In Progress <span *ngIf="inprogress!.length >0">({{inprogress!.length}})</span>
+                </h2>
+                <div cdkDropList [cdkDropListData]="inprogress " class="example-list"
+                    cdkDropListId="cdk-drop-list-inprog" id="inprog" >
+                    <div *ngFor="let item of inprogress ;let i =index" 
+                        [ngStyle]="{ border: item.emergency == true ? '1px solid red' : 'none' }" class="example-box">
+                        <div class="headerBox" class="title" style="display: flex; justify-content: space-between;">
+                            <div style="flex-basis: 99%; flex-grow: 1;">
+                                {{item!.title}} <br>[{{item!.taskNumber}} ]
+                            </div>
+                            <div style="flex-basis:1%; flex-grow: 1;">
+                                <button kendoButton (click)="openAssign(item.id)"
+                                    style="background-color: #fff;border: none;" *ngIf="id != item.assignedToId">
+                                    <span class="k-icon k-i-reset-sm" style="color:#303131"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="contentBox">
+                            {{item.description}}<br>
+                            InProgress
+
+                        </div>
+                        <div class="footerBox2" style="display: flex; justify-content: space-between;">
+                            <div style="flex-basis: 33%; flex-grow: 1;">
+                                <span  class="createdBy"><kendo-avatar fillMode="outline" class="avatar" *ngIf="item.createdByC?.userName != null ">
+                                    <span style="font-size:7px;">{{ item.createdByC?.firstName[0] }}{{ item.createdByC?.lastName[0] }}</span>
+                                  </kendo-avatar>  {{ item.createdByC?.userName }}</span>
+                            </div>
+
+                            <div style="flex-basis:33%; flex-grow: 1;">
+                                <span *ngIf="item!.deadline != null" class="date"><kendo-svg-icon [icon]="icons.trash"
+                                       ></kendo-svg-icon>
+                                    {{item!.deadline| date: 'MM/dd/yyyy' }}
+                                </span>
+                            </div>
+                            <div style="flex-basis: 33%; flex-grow: 1;">
+                                <button kendoButton (click)="dossierNav(item.dossierId)" class="navButton"><span
+                                        class="k-icon k-i-hyperlink-open"></span> Dossier details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 colonne">
+            <!--done-->
+            <div class="example-container">
+                <h2 class="head-title">Done<span *ngIf="done!.length >0">({{done!.length}})</span> </h2>
+
+                <div cdkDropList [cdkDropListData]="done" class="example-list" cdkDropListId="cdk-drop-list-done"
+                    id="done" >
+                    <div *ngFor="let item of done; let i =index" cdkDrag [cdkDragData]="item"
+                        [ngStyle]="{ border: item.emergency == true ? '1px solid red' : 'none' }" class="example-box">
+                        <div class="headerBox" class="title" style="display: flex; justify-content: space-between;">
+                            <div style="flex-basis: 99%; flex-grow: 1;">
+                                {{item!.title}} <br>[{{item!.taskNumber}} ]
+                            </div>
+                            <div style="flex-basis:1%; flex-grow: 1;">
+                                <button kendoButton (click)="openAssign(item.id)"
+                                style="background-color: #fff;border: none;" *ngIf="id != item.assignedToId">
+                                <span class="k-icon k-i-reset-sm" style="color:#303131"></span>
+                            </button>
+                            </div>
+                        </div>
+                        <div class="contentBox">
+                            {{item.description}}<br>
+                            Done
+                        </div>
+                        <div class="footerBox2" style="display: flex; justify-content: space-between;">
+                            <div style="flex-basis: 33%; flex-grow: 1;">
+                                <span  class="createdBy"><kendo-avatar fillMode="outline" class="avatar" *ngIf="item.createdByC?.userName != null ">
+                                    <span style="font-size:7px;">{{ item.createdByC?.firstName[0] }}{{ item.createdByC?.lastName[0] }}</span>
+                                  </kendo-avatar>  {{ item.createdByC?.userName }} </span>
+                            </div>
+
+                            <div style="flex-basis:33%; flex-grow: 1;">
+                                <span *ngIf="item!.deadline != null"  class="date"><kendo-svg-icon [icon]="icons.trash" ></kendo-svg-icon>
+                                    {{item!.deadline| date: 'MM/dd/yyyy' }}
+                                </span>
+                            </div>
+                            <div style="flex-basis: 33%; flex-grow: 1;">
+                                <button kendoButton (click)="dossierNav(item.dossierId)" class="navButton"><span
+                                        class="k-icon k-i-hyperlink-open"></span> Dossier details
+                                </button>
+                            </div>
+                            <div style="flex-basis: 1%; flex-grow: 1;">
+                                <kendo-icon name="check" style="color:green;padding-top: 12px;"></kendo-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <kendo-dialog
+      title="Please confirm"
+      *ngIf="openedAssign"
+      (close)="close('cancel')"
+      [minWidth]="250"
+      [width]="450"
+      [themeColor]="'dark'"
+      style="background-color:rgba(0,0,0,0.2)"
+    >
+      <p style="margin: 30px; text-align: center;">
+        Are you sure you want to Assign a task to yoursel?
+      </p>
+      <kendo-dialog-actions>
+        <button kendoButton (click)="close('no')">No</button>
+        <button kendoButton (click)="addAssign()" class="bt">
+          Yes
+        </button>
+      </kendo-dialog-actions>
+    </kendo-dialog>
+    <kendo-dialog title="Task Details" [animation]="animation" *ngIf="opened2" (close)="close('cancel')" [width]="800" [height]="600" [themeColor]="'dark'"
+>
+  <app-task-details [TaskId]="taskId"></app-task-details>
+</kendo-dialog>
+   

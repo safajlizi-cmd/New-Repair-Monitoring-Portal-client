@@ -1,0 +1,50 @@
+<p class="title" > Assignment details </p>
+<kendo-card class="card">
+    <kendo-card-header class="header">
+        <button kendoButton (click)="onEdit()" class="btt">Edit</button>
+    </kendo-card-header>
+    <kendo-card-body  class="body">
+        <p> Assignment number:<br><span>{{ assignment?.assignmentNumber }}</span></p>
+      <div>
+        <p>ProductName :<br><span> {{ assignment?.product }}</span></p>
+        <p>Cause: <br><span>{{ assignment?.cause }}</span></p>
+        <p>Building Type:<br><span> {{ assignment?.buildingType }}</span></p>
+      </div>
+    </kendo-card-body>
+  </kendo-card>
+  <kendo-dialog title="Update Assignment" *ngIf="opened" (close)="close('cancel')" [themeColor]="'dark'" class="diag"
+  [minWidth]="250" [width]="450">
+  <form [formGroup]="AssignForm">
+    <table style="width:100% " cellspacing="0">
+        <tr>
+           <td style="width:50% ">
+              <div class="form-group">
+                 <label for="²e">Cause:</label>
+                 <select class="form-control" id="cause" formControlName="cause">
+                    <option *ngFor="let item of causes" [value]=" item.longName">{{ item.longName }}
+                    </option>
+                 </select>
+              </div>
+           </td>
+           <td style="width:50% ">
+              <div class="form-group">
+                 <label for="Building type">Building type:</label>
+                 <select class="form-control" id="buildingType" formControlName="buildingType">
+                    <option *ngFor="let  item of bts" [value]=" item.longName">{{ item.longName }}
+                    </option>
+                 </select>
+              </div>
+           </td>
+        </tr>
+     </table>
+      <kendo-dialog-actions style="border:none;margin-top: 20px;">
+          <button kendoButton (click)="close('no')" class="cancel">Cancel</button>
+          <button kendoButton (click)="OnSubmit()" class="bt"
+              [disabled]="AssignForm.invalid">
+             Update Assignment
+          </button>
+      </kendo-dialog-actions>
+  </form>
+
+</kendo-dialog>
+  
